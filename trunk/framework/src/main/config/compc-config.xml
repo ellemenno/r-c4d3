@@ -1,0 +1,84 @@
+
+<flex-config>
+	
+	<!-- output: the filename of the SWC library to create-->
+	<!-- (relative to this file's location)-->
+	<output>../../../target/r-c4d3.swc</output>
+	
+	<!-- include-sources: a list of directories and source files to include in the output SWC-->
+	<!-- !! (relative to the directory compc is invoked from)-->
+	<include-sources>
+		<path-element>./src/main/actionscript</path-element>
+	</include-sources>
+	
+	<!-- link-report: Output a XML-formatted report of all definitions linked into the application.-->
+	<!-- (relative to this file's location)-->
+	<link-report>../../../target/docs/r-c4d3-links.xml</link-report>
+	
+	<metadata>
+		<!-- metadata.title: The default title to store in the SWF metadata-->
+		<title>R-C4D3 Framework for ActionScript3</title>
+		
+		<!-- metadata.date: The creation date to store in the SWF metadata-->
+		<!-- metadata.date usage:
+		<date>text</date>
+		-->
+		
+		<!-- metadata.description: The default description to store in the SWF metadata-->
+		<!-- metadata.description usage:
+		<description>http://www.adobe.com/products/flex</description>
+		-->
+		
+		<!-- metadata.language: The language to store in the SWF metadata (i.e. EN, FR)-->
+		<language>EN</language>
+		
+		<!-- metadata.creator: A creator's name to store in the SWF metadata-->
+		<creator>pixeldroid</creator>
+		
+		<!-- metadata.publisher: A publisher's name to store in the SWF metadata-->
+		<publisher>pixeldroid.com</publisher>
+	</metadata>
+	
+	<!-- target-player: specifies the version of the player the application is targeting. Features requiring a later version will not be compiled into the application. The minimum value supported is "9.0.0".-->
+	<target-player>9.0.124</target-player>
+	
+	<!-- use-network: toggle whether the SWF is flagged for access to network resources-->
+	<use-network>true</use-network>
+
+	<!-- benchmark: output performance benchmark-->
+	<benchmark>true</benchmark>
+	
+	<!-- version: display the build version of the program-->
+	<version>true</version>
+	
+	<!-- warnings: toggle the display of warnings-->
+	<warnings>true</warnings>
+	
+	<compiler>
+		<!-- compiler.debug: generates a movie that is suitable for debugging-->
+		<debug>false</debug>
+	
+		<!-- compiler.verbose-stacktraces: save callstack information to the SWF for debugging-->
+		<verbose-stacktraces>false</verbose-stacktraces>
+		
+		<!-- compiler.optimize: Enable post-link SWF optimization-->
+		<optimize>true</optimize>
+		
+		<!-- compiler.library-path: list of SWC files or directories that contain SWC files
+		<library-path>
+			<path-element>libs</path-element>
+			<path-element>libs/player</path-element>
+			<path-element>libs/player/{targetPlayerMajorVersion}</path-element>
+			<path-element>locale/{locale}</path-element>
+		</library-path>
+		-->
+		
+		<!-- compiler.source-path: list of path elements that form the roots of ActionScript class hierarchies-->
+		<!-- (relative to this file's location)-->
+		<source-path>
+			<path-element>../actionscript</path-element>
+		</source-path>
+	</compiler>
+	
+</flex-config>
+

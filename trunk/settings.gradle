@@ -1,0 +1,5 @@
+
+println '[r-c4d3] settings.gradle - build initialization phase...'
+
+// include sub projects, by comma delimited folder name
+include 'framework', 'romloader', 'roms'

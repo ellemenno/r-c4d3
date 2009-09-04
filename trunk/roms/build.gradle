@@ -1,0 +1,53 @@
+
+/*
+Gradle build script for R-C4D3 roms projects
+
+TODO:  add subprojects, make the following tasks for allProjects
+*/
+
+version = '001'
+defaultTasks 'checkFramework', 'hi', 'clean', 'copy', 'compile', 'bye'
+
+task checkFramework << {
+	Task task ->
+	println("[romloader] framework swc detected at ${frameworkSwcPath()}")
+	announceEnd(task.name)
+}
+// if no framework swc exists yet, overwrite with new task dependent on framework compile
+announceBegin('checkFramework')
+if (!(new File(frameworkSwcPath()).exists())) {
+	println('[romloader] framework needs rebuilding...')
+	tasks.add(name: 'checkFramework', dependsOn: ':framework:compile', overwrite: true) << {
+		Task task ->
+		announceEnd(task.name)
+	}
+}
+
+task hi << {
+	Task task ->
+	announceBegin(task.project.name +" v$version")
+}
+
+task clean << {
+	Task task ->
+	announceBegin(task.name)
+	def targetDir = cleanTarget(task.project, 'controltest')
+}
+
+task copy << {
+	Task task ->
+	announceBegin(task.name)
+	ant.copy(todir:'target/controltest') { fileset(dir:'src/main-controltest/site') }
+}
+
+task compile << {
+	Task task ->
+	announceBegin(task.name)
+	compileMxmlc(task.project, 'mxmlc-config.xml', 'ControlTest.as', 'src/main-controltest')
+}
+
+task bye << {
+	Task task ->
+	announceEnd(task.project.name)
+}
+
