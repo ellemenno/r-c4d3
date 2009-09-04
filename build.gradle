@@ -1,0 +1,110 @@
+
+/*
+main build file for r-c4d3 multiproject
+
+includes utility methods for use across subprojects
+*/
+
+// note to gradle that projects included by settings.gradle need things from this file
+childrenDependOnMe()
+
+version = '001'
+announceBegin("[r-c4d3] v.$version")
+println('- subprojects:')
+allprojects { println "- $name from '$path'" }
+println('- - - - - - - - - - - - - - -')
+
+
+
+/*
+reusable utility methods for sub-projects
+*/
+
+def announceBegin(title) {
+println"""
+- - - - - - - - - - - - - - -
+- $title\
+"""
+}
+
+def announceEnd(title) {
+println"""
+- $title done
+- - - - - - - - - - - - - - -\
+"""
+}
+
+def env() {
+	println "[r-c4d3] System properties known to Gradle:"
+	System.properties.each { println it }
+}
+
+def sysDelim () {
+	return File.separator
+}
+
+def sysPath(path) {
+	path.replace('/', File.separator)
+}
+def frameworkSwcPath() {
+	return rootProject.projectDir.path +sysPath("/framework/target/r-c4d3.swc")
+}
+
+def exec (project, command) {
+	// execute command and wait for result
+	println "exec() command: '${command}'"
+	def proc = command.execute(null, project.projectDir) // execute from project directory so relative pathing is sensible
+	// obtain status and output
+	println "exec.stdout:\n${proc.in.text.trim()}" // *out* from the external program is *in* for groovy
+	println "exec.return-code: ${proc.exitValue()}"
+	if (proc.exitValue() != 0) {
+		println "exec.stderr: ${proc.err.text.trim()}"
+		throw new RuntimeException('command execution failed')
+	}
+	else println "exec.success"
+}
+
+def cleanTarget (project, subPath='') {
+	def targetDir = project.projectDir.path +sysPath("/target/$subPath")
+	println "- cleanTarget(${project.name}) - removing and recreating $targetDir"
+	ant.delete(dir: targetDir)
+	ant.mkdir(dir: targetDir)
+	return targetDir
+}
+
+def compileMxmlc (project, config, main, mainPath='src/main') {
+	def input = project.projectDir.path +sysPath("/$mainPath/actionscript/$main")
+	input += " -load-config+=${project.projectDir.path}" +sysPath("/$mainPath/config/$config")
+	println "- compileMxmlc(${project.name}, $main) - compiling $main"
+	exec(project, "mxmlc ${input}")
+}
+
+def compileAsdoc (project, config, mainPath='src/main') {
+	def input = "-load-config+=${project.projectDir.path}" +sysPath("/$mainPath/config/$config")
+	println "- compileAsdoc(${project.name}, $config) - loading config from $config"
+	exec(project, "asdoc ${input}")
+}
+
+def compileCompc (project, config, mainPath='src/main') {
+	def input = "-load-config+=${project.projectDir.path}" +sysPath("/$mainPath/config/$config")
+	println "- compileCompc(${project.name}, $config) - loading config from $config"
+	exec(project, "compc ${input}")
+}
+
+def createHxClasses (project, lib) {
+	def D = sysDelim()
+	def targetRoot = project.projectDir.path +D +"target"
+	def hxclasses = targetRoot +D +"hxclasses"
+	def zipSrc = targetRoot +D +lib
+	def zipDst = hxclasses +D +lib
+	def swf = hxclasses +D +"library.swf"
+	
+	println "- createHxClasses(${project.name}, $lib) - extracting hxclasses from $lib"
+	println "TODO: copy $zipSrc into $zipDst"
+	println "TODO: unzip $zipDst"
+	println "TODO: exec haxe --gen-hx-classes $swf"
+	println "TODO: delete $swf"
+	println "TODO: delete $zipDst"
+	println "TODO: delete any other left over files"
+}
+

@@ -1,0 +1,60 @@
+
+/*
+Gradle build script for R-C4D3 romloader project (actionscript)
+*/
+
+version = '001'
+defaultTasks 'checkFramework', 'hi', 'clean', 'copy', 'compile', 'docs', 'bye'
+
+task checkFramework << {
+	Task task ->
+	println("[romloader] framework swc detected at ${frameworkSwcPath()}")
+	announceEnd(task.name)
+}
+// if no framework swc exists yet, overwrite with new task dependent on framework compile
+announceBegin('checkFramework')
+if (!(new File(frameworkSwcPath()).exists())) {
+	println('[romloader] framework needs rebuilding...')
+	tasks.add(name: 'checkFramework', dependsOn: ':framework:compile', overwrite: true) << {
+		Task task ->
+		announceEnd(task.name)
+	}
+}
+
+task hi << {
+	Task task ->
+	announceBegin(task.project.name +" v$version")
+}
+
+task clean << {
+	Task task ->
+	announceBegin(task.name)
+	def targetDir = cleanTarget(task.project)
+	ant.mkdir(dir: targetDir +sysDelim() +'docs')
+}
+
+task copy << {
+	Task task ->
+	announceBegin(task.name)
+	ant.copy(file:'src/main/resources/rom.swf', todir:'target')
+	ant.copy(file:'src/main/resources/romloader-config.xml', todir:'target')
+}
+
+task compile << {
+	Task task ->
+	announceBegin(task.name)
+	compileMxmlc(task.project, 'mxmlc-config_desktopRomLoader.xml', 'DesktopRomLoaderForKeyboard.as')
+	compileMxmlc(task.project, 'mxmlc-config_r-c4d3RomLoader.xml', 'WebRomLoaderForRC4D3.as')
+}
+
+task docs << {
+	Task task ->
+	announceBegin(task.name)
+	compileAsdoc(task.project, "asdoc-config.xml")
+}
+
+task bye << {
+	Task task ->
+	announceEnd(task.project.name)
+}
+
