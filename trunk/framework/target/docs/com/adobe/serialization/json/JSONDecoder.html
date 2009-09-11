@@ -53,7 +53,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#JSONDecoder()">JSONDecoder</a>(s:String)</div>
+<a class="signatureLink" href="#JSONDecoder()">JSONDecoder</a>(s:String, strict:Boolean)</div>
 <div class="summaryTableDescription">
    Constructs a new JSONDecoder to parse a JSON string 
    into a native object.</div>
@@ -84,7 +84,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function JSONDecoder(s:String)</code><p>
+<code>public function JSONDecoder(s:String, strict:Boolean)</code><p>
    Constructs a new JSONDecoder to parse a JSON string 
    into a native object.
       </p><span class="label">Parameters</span>
@@ -92,6 +92,14 @@ showHideInherited();
 <tr>
 <td width="20px"></td><td><code><span class="label">s</span>:String</code> &mdash; The JSON string to be converted
     into a native object
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">strict</span>:Boolean</code> &mdash; Flag indicating if the JSON string needs to
+     strictly match the JSON standard or not.
    </td>
 </tr>
 </table>
