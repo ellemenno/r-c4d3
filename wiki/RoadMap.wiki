@@ -18,7 +18,7 @@ The following is what we have on the drawing board.
   * *romloader* add ui for runtime configuration of keymapping
   * *roms* add screenshots and trailers list fields to meta-data
   * *roms* add instructions field to meta-data
-  * *roms* adopt *http://www.tigrs.org/?page=pubinfo TIGRS rating system* - http://www.tigrs.org/?page=generate
+  * *roms* adopt [http://www.tigrs.org/?page=pubinfo TIGRS rating system] - http://www.tigrs.org/?page=generate
   * *roms* add task to generate about page for game from meta xml, e.g. http://www.us.playstation.com/PS3/Games/LittleBigPlanet
   * *server* refactor scoreserver component to more general _server_ and add php script to auto-gen the romslist json
 
