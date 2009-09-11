@@ -16,6 +16,7 @@ All of the following web technologies can be used to create games for the R-C4D3
   ActionScript / Flash / Flex
   Javascript / HTML canvas
   Java / Processing
+  Silverlight
   O3d
   X3d
   3dVia / virtools
