@@ -4,10 +4,10 @@
 The following is what we have on the drawing board.
 
 == Phase 001 ==
-  * <s>create an ohloh account</s>
-  * <s>improve project description and integrate ohloh widgets</s>
-  * <s>*framework* update mime-type for asdoc and link from project summary page</s>
-  * *framework* add hx-classes task to build scripts
+  * ~~create an ohloh account~~
+  * ~~improve project description and integrate ohloh widgets~~
+  * ~~*framework* update mime-type for asdoc and link from project summary page~~ (r3),(r4)
+  * ~~*framework* add hx-classes task to build scripts~~ (r10)
   * *installation* fill in the missing files to have a useable install
   * *menushell* validate that the source code compiles after being transferred from cold storage
   * *framework* add trackball to joystick types for mouse support
@@ -16,6 +16,7 @@ The following is what we have on the drawing board.
     * about
     * romlist url
   * *romloader* add ui for runtime configuration of keymapping
+  * *roms* add full-featured example(s), using control and score proxies
   * *roms* add screenshots and trailers list fields to meta-data
   * *roms* add instructions field to meta-data
   * *roms* adopt [http://www.tigrs.org/?page=pubinfo TIGRS rating system] - http://www.tigrs.org/?page=generate
