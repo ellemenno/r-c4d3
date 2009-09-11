@@ -1,45 +1,44 @@
 #summary TODOs for the project components.
 
-= TODO =
 
 The following is what we have on the drawing board.
 
 == Phase 001 ==
   * <s>create an ohloh account</s>
   * <s>improve project description and integrate ohloh widgets</s>
-  * [framework] <s>update mime-type for asdoc and link from project summary page</s>
-  * [framework] add hx-classes task to build scripts
-  * [installation] fill in the missing files to have a useable install
-  * [menushell] validate that the source code compiles after being transferred from cold storage
-  * [framework] add trackball to joystick types for mouse support
-  * [menu] update to as3 and framework swc
-  * [menu] add admin panel
+  * <s>*framework* update mime-type for asdoc and link from project summary page</s>
+  * *framework* add hx-classes task to build scripts
+  * *installation* fill in the missing files to have a useable install
+  * *menushell* validate that the source code compiles after being transferred from cold storage
+  * *framework* add trackball to joystick types for mouse support
+  * *menu* update to as3 and framework swc
+  * *menu* add admin panel
     * about
     * romlist url
-  * [romloader] add ui for runtime configuration of keymapping
-  * [roms] add screenshots and trailers list fields to meta-data
-  * [roms] add instructions field to meta-data
-  * [roms] adopt [http://www.tigrs.org/?page=pubinfo TIGRS rating system] - http://www.tigrs.org/?page=generate
-  * [roms] add task to generate about page for game from meta xml, e.g. http://www.us.playstation.com/PS3/Games/LittleBigPlanet
-  * [server] refactor scoreserver component to more general _server_ and add php script to auto-gen the romslist json
+  * *romloader* add ui for runtime configuration of keymapping
+  * *roms* add screenshots and trailers list fields to meta-data
+  * *roms* add instructions field to meta-data
+  * *roms* adopt *http://www.tigrs.org/?page=pubinfo TIGRS rating system* - http://www.tigrs.org/?page=generate
+  * *roms* add task to generate about page for game from meta xml, e.g. http://www.us.playstation.com/PS3/Games/LittleBigPlanet
+  * *server* refactor scoreserver component to more general _server_ and add php script to auto-gen the romslist json
 
 == Phase 002 ==
-  * [shell] add method to clear cache
-  * [framework] add ga snippet to docs (? necessary, or does top level ga code handle doc browsing?)
-  * [roms] performance score rom
-  * [roms] add minimum performance score metabata
-  * [roms] add device icons (MO - mouse only, KO - keys only, MK - mouse+keys, GP - usb gamepad, CB - chumby); wii == MO; ps3 =? MK
-  * [menushell] set device mode (MO,KO,MK,GP), in config and in UI to control romloaders selected for game loading
-  * [installation] re-org to support core device-type romloaders from include, php-gen the index.html
-  * [menu] improve admin functionality:
+  * *shell* add method to clear cache
+  * *framework* add ga snippet to docs (? necessary, or does top level ga code handle doc browsing?)
+  * *roms* performance score rom
+  * *roms* add minimum performance score metabata
+  * *roms* add device icons (MO - mouse only, KO - keys only, MK - mouse+keys, GP - usb gamepad, CB - chumby); wii == MO; ps3 =? MK
+  * *menushell* set device mode (MO,KO,MK,GP), in config and in UI to control romloaders selected for game loading
+  * *installation* re-org to support core device-type romloaders from include, php-gen the index.html
+  * *menu* improve admin functionality:
     * support list of game portals to aggregate romlists from
     * rom sorting options
 
 == Phase 00Later ==
   * continuous integration and unit testing
-  * [menushell] chumby target (fp8-flash lite 3.0) - 320x240 (will scaling handle it?)
-  * [menushell] ps3 target (fp9)
-  * [menushell] wii target (fp7)
-  * [roms] add device icons for new targets (CB - chumby, wii == MO, ps3 =? MK)
-  * [installation] seat on frameworky? - http://code.google.com/p/frameworky/
-  * [roms] more excamples in more languages (esp. haxe, canvas, java)
+  * *menushell* chumby target (fp8-flash lite 3.0) - 320x240 (will scaling handle it?)
+  * *menushell* ps3 target (fp9)
+  * *menushell* wii target (fp7)
+  * *roms* add device icons for new targets (CB - chumby, wii == MO, ps3 =? MK)
+  * *installation* seat on frameworky? - http://code.google.com/p/frameworky/
+  * *roms* more excamples in more languages (esp. haxe, canvas, java)
