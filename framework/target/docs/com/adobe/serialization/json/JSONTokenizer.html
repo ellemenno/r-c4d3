@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="JSONTokenizer,com.adobe.serialization.json.JSONTokenizer,getNextToken,parseError" name="keywords">
+<meta content="JSONTokenizer,com.adobe.serialization.json.JSONTokenizer,getNextToken,parseError,unescapeString" name="keywords">
 <title>com.adobe.serialization.json.JSONTokenizer</title>
 </head>
 <body>
@@ -53,7 +53,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#JSONTokenizer()">JSONTokenizer</a>(s:String)</div>
+<a class="signatureLink" href="#JSONTokenizer()">JSONTokenizer</a>(s:String, strict:Boolean)</div>
 <div class="summaryTableDescription">
    Constructs a new JSONDecoder to parse a JSON string 
    into a native object.</div>
@@ -79,6 +79,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    on the error location and the original string.</div>
 </td><td class="summaryTableOwnerCol">JSONTokenizer</td>
 </tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#unescapeString()">unescapeString</a>(input:String):String</div>
+<div class="summaryTableDescription">
+   Convert all JavaScript escape characters into normal characters
+      </div>
+</td><td class="summaryTableOwnerCol">JSONTokenizer</td>
+</tr>
 </table>
 </div>
 <script type="text/javascript" language="javascript">
@@ -95,7 +104,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function JSONTokenizer(s:String)</code><p>
+<code>public function JSONTokenizer(s:String, strict:Boolean)</code><p>
    Constructs a new JSONDecoder to parse a JSON string 
    into a native object.
       </p><span class="label">Parameters</span>
@@ -104,6 +113,12 @@ showHideInherited();
 <td width="20px"></td><td><code><span class="label">s</span>:String</code> &mdash; The JSON string to be converted
     into a native object
    </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">strict</span>:Boolean</code></td>
 </tr>
 </table>
 </div>
@@ -141,6 +156,31 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">message</span>:String</code> &mdash; The message indicating why the error occurred
+   </td>
+</tr>
+</table>
+</div>
+<a name="unescapeString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">unescapeString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function unescapeString(input:String):String</code><p>
+   Convert all JavaScript escape characters into normal characters
+      </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">input</span>:String</code> &mdash; The input string to convert
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code> &mdash; Original string with escape characters replaced by real characters
    </td>
 </tr>
 </table>

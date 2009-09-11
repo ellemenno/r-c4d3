@@ -3,6 +3,7 @@
 main build file for r-c4d3 multiproject
 
 includes utility methods for use across subprojects
+subprojects are denoted in settings.gradle (same directory as this file)
 */
 
 // note to gradle that projects included by settings.gradle need things from this file
@@ -50,10 +51,20 @@ def frameworkSwcPath() {
 	return rootProject.projectDir.path +sysPath("/framework/target/r-c4d3.swc")
 }
 
-def exec (project, command) {
-	// execute command and wait for result
+def exec (project, command, subPath='') {
+	// compose command and execution directory
 	println "exec() command: '${command}'"
-	def proc = command.execute(null, project.projectDir) // execute from project directory so relative pathing is sensible
+	subPath = (subPath == '') ? subPath : sysPath("/$subPath")
+	def execDir = new File(project.projectDir.path +subPath)
+	println "- from $execDir"
+	
+	// execute command and wait for result
+	outStream = new StringBuffer()
+	errStream = new StringBuffer()
+	def proc = command.execute(null, execDir) // execute from project directory so relative pathing is sensible
+	proc.consumeProcessOutput(outStream, errStream)  // Groovy way of preventing waitFor() hang
+	proc.waitFor()
+
 	// obtain status and output
 	println "exec.stdout:\n${proc.in.text.trim()}" // *out* from the external program is *in* for groovy
 	println "exec.return-code: ${proc.exitValue()}"
@@ -94,17 +105,20 @@ def compileCompc (project, config, mainPath='src/main') {
 def createHxClasses (project, lib) {
 	def D = sysDelim()
 	def targetRoot = project.projectDir.path +D +"target"
-	def hxclasses = targetRoot +D +"hxclasses"
+	def haxe = targetRoot +D +"haxe"
 	def zipSrc = targetRoot +D +lib
-	def zipDst = hxclasses +D +lib
-	def swf = hxclasses +D +"library.swf"
+	def temp = haxe +D +"temp"
+	def swfName = "library.swf"
+	def command = "haxe --gen-hx-classes $haxe$D$swfName"
 	
 	println "- createHxClasses(${project.name}, $lib) - extracting hxclasses from $lib"
-	println "TODO: copy $zipSrc into $zipDst"
-	println "TODO: unzip $zipDst"
-	println "TODO: exec haxe --gen-hx-classes $swf"
-	println "TODO: delete $swf"
-	println "TODO: delete $zipDst"
-	println "TODO: delete any other left over files"
+	println "- unzipping $zipSrc into $temp"
+	ant.unzip(src:zipSrc, dest:temp)
+	println "- moving $temp$D$swfName into $haxe"
+	ant.move(file:temp+D+swfName, todir:haxe)
+	println "- exec $command"
+	exec(project, command, "target/haxe")
+	println "- deleting $temp"
+	ant.delete(dir:temp)
 }
 
