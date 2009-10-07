@@ -37,7 +37,7 @@
 	<target-player>9.0.124</target-player>
 	
 	<!-- use-network: toggle whether the SWF is flagged for access to network resources-->
-	<use-network>true</use-network>
+	<use-network>false</use-network>
 
 	<!-- benchmark: output performance benchmark-->
 	<benchmark>true</benchmark>
