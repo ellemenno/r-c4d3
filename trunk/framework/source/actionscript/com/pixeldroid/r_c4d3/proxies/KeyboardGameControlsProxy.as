@@ -121,8 +121,8 @@ package com.pixeldroid.r_c4d3.proxies
 		/** @inheritdoc */
 		public function joystickEventState(state:String, gameStage:Stage):String
 		{
-			C.out(this, "joystickEventState: " +state);
-			C.out(this, "joystickEventState, state == JoyEventStateEnum.ENABLE ? " +(state == JoyEventStateEnum.ENABLE));
+			//C.out(this, "joystickEventState: " +state);
+			//C.out(this, "joystickEventState, state == JoyEventStateEnum.ENABLE ? " +(state == JoyEventStateEnum.ENABLE));
 			switch (state)
 			{
 				case JoyEventStateEnum.QUERY :
@@ -358,7 +358,7 @@ package com.pixeldroid.r_c4d3.proxies
 		*/
 		public function setKeys(playerIndex:uint, u:uint, r:uint, d:uint, l:uint, x:uint, a:uint, b:uint, c:uint):void
 		{
-			C.out(this, "setKeys for p" +playerIndex +": " +[u,r,d,l,x,a,b,c]);
+			//C.out(this, "setKeys for p" +playerIndex +": " +[u,r,d,l,x,a,b,c]);
 			switch (playerIndex)
 			{
 				case 0 :
