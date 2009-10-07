@@ -2,8 +2,9 @@
 <flex-config>
 	
 	<!-- output: the filename of the SWC library to create-->
-	<!-- (relative to this file's location)-->
+	<!-- (relative to this file's location)
 	<output>../target/r-c4d3.swc</output>
+	-->
 	
 	<!-- include-sources: a list of directories and source files to include in the output SWC-->
 	<!-- !! (relative to the directory compc is invoked from)-->

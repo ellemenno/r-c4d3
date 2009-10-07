@@ -2,8 +2,9 @@
 <flex-config>
 	
 	<!-- output: the filename of the SWC library to create-->
-	<!-- (relative to this file's location)-->
+	<!-- (relative to this file's location)
 	<output>../target/docs</output>
+	-->
 	
 	<!-- include-sources: a list of directories and source files to include in the output SWC-->
 	<!-- !! relative to the directory asdoc is invoked from-->
@@ -13,7 +14,7 @@
 	
 	<main-title>R-C4D3 Framework Library</main-title>
 	<left-frameset-width>300</left-frameset-width>
-	<footer>Copyleft 2009 Pixeldroid</footer>
+	<!-- <footer>Copyleft Pixeldroid</footer>-->
 	
 	<!-- templates-path: folder to find custom style sheets for doc generation-->
 	<!-- !! relative to the directory asdoc is invoked from-->
