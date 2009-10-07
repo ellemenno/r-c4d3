@@ -10,10 +10,20 @@ subprojects are denoted in settings.gradle (same directory as this file)
 childrenDependOnMe()
 
 version = '001'
-announceBegin("[r-c4d3] v.$version")
-println('- subprojects:')
-allprojects { println "- $name from '$path'" }
-println('- - - - - - - - - - - - - - -')
+dependsOn(':framework')
+defaultTasks 'build'
+
+//announceBegin("[r-c4d3] v.$version")
+//println('- subprojects:')
+//allprojects { println "- $name from '$path'" }
+//println('- - - - - - - - - - - - - - -')
+
+
+
+task build << {
+	Task task ->
+	announceBegin("[r-c4d3] v.$version")
+}
 
 
 
