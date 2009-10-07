@@ -3,12 +3,12 @@
 	
 	<!-- output: the filename of the SWC library to create-->
 	<!-- (relative to this file's location)-->
-	<output>../../../target/docs</output>
+	<output>../target/docs</output>
 	
 	<!-- include-sources: a list of directories and source files to include in the output SWC-->
 	<!-- !! relative to the directory asdoc is invoked from-->
 	<doc-sources>
-		<path-element>./src/main/actionscript</path-element>
+		<path-element>./source/actionscript</path-element>
 	</doc-sources>
 	
 	<main-title>R-C4D3 Framework Library</main-title>
@@ -80,7 +80,7 @@
 		<!-- compiler.source-path: list of path elements that form the roots of ActionScript class hierarchies-->
 		<!-- (relative to this file's location)-->
 		<source-path>
-			<path-element>../actionscript</path-element>
+			<path-element>../source/actionscript</path-element>
 		</source-path>
 	</compiler>
 	
