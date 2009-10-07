@@ -13,6 +13,9 @@
 	<property name="dir.config" value="${basedir}/config"/>
 	<property name="dir.target" value="${basedir}/target"/>
 	
+	<property name="dir.documentation" value="${basedir}/../_documentation/framework-api"/>
+	<property name="dir.releases" value="${basedir}/../_releases"/>
+	
 	<property file="build.properties"/>
 	
 	<fail unless="FLEX_HOME" message="please set the FLEX_HOME property in 'build.properties' to a valid path to the Flex SDK on your machine" />
@@ -25,7 +28,7 @@
 	
 	
 	
-    <target name="default" depends="compile, docs"/>
+    <target name="default" depends="compile, haxe, document, release"/>
 	
 	<target name="clean">
 		<delete failonerror="false" includeemptydirs="true">
@@ -35,14 +38,46 @@
 	
     <target name="compile" depends="clean">
     	<exec executable="${flex.compc}">
+			<arg line="-output=${dir.target}/r-c4d3.swc"/>
 			<arg line="-load-config+=${dir.config}/compc-config.xml"/>
 		</exec>
 	</target>
 	
-    <target name="docs" depends="clean">
+    <target name="haxe" depends="clean, compile">
+		<mkdir dir="${dir.target}/temp"/>
+		<unzip src="${dir.target}/r-c4d3.swc" dest="${dir.target}/temp"/>
+    	<exec executable="${haxe.exe}" dir="${dir.target}">
+			<arg line="--gen-hx-classes ${dir.target}/temp/library.swf"/>
+		</exec>
+		<delete dir="${dir.target}/temp"/>
+		<zip destfile="${dir.target}/hxclasses.zip" basedir="${dir.target}/hxclasses"/>
+	</target>
+	
+    <target name="document" depends="clean">
+		<mkdir dir="${dir.target}/docs"/>
+		<tstamp>
+			<format property="date.year" pattern="yyyy"/>
+		</tstamp>
     	<exec executable="${flex.asdoc}">
+			<arg line="-output=${dir.target}/asdoc"/>
+			<arg line="-footer='Copyleft ${date.year} Pixeldroid'"/>
 			<arg line="-load-config+=${dir.config}/asdoc-config.xml"/>
 		</exec>
+		<zip destfile="${dir.target}/framework-api.zip" basedir="${dir.target}/asdoc"/>
+		<copy todir="${dir.documentation}" failonerror="false">
+			<fileset dir="${dir.target}/asdoc">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="release">
+		<copy todir="${dir.releases}" failonerror="false">
+			<fileset dir="${dir.target}">
+				<include name="**/*.swc"/>
+				<include name="**/*.zip"/>
+			</fileset>
+		</copy>
 	</target>
 
 </project>
