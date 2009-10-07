@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3 framework api (as3)" default="default" basedir="./">
+	
+	<condition property="exe" value=".exe">
+		<os family="windows"/>
+	</condition>
+	<condition property="exe" value="">
+		<os family="unix"/>
+	</condition>
+	
+	<property name="dir.source" value="${basedir}/source"/>
+	<property name="dir.config" value="${basedir}/config"/>
+	<property name="dir.target" value="${basedir}/target"/>
+	
+	<property file="build.properties"/>
+	
+	<fail unless="FLEX_HOME" message="please set the FLEX_HOME property in 'build.properties' to a valid path to the Flex SDK on your machine" />
+	<fail unless="flex.frameworks"/>
+	<fail unless="flex.bin"/>
+	<fail unless="flex.libs"/>
+	<fail unless="flex.compc"/>
+	<fail unless="flex.mxmlc"/>
+	<fail unless="flex.asdoc"/>
+	
+	
+	
+    <target name="default" depends="compile, docs"/>
+	
+	<target name="clean">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${dir.target}" includes="**/*"/>
+		</delete>
+	</target>
+	
+    <target name="compile" depends="clean">
+    	<exec executable="${flex.compc}">
+			<arg line="-load-config+=${dir.config}/compc-config.xml"/>
+		</exec>
+	</target>
+	
+    <target name="docs" depends="clean">
+    	<exec executable="${flex.asdoc}">
+			<arg line="-load-config+=${dir.config}/asdoc-config.xml"/>
+		</exec>
+	</target>
+
+</project>
+

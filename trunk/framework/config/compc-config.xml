@@ -12,8 +12,9 @@
 	</include-sources>
 	
 	<!-- link-report: Output a XML-formatted report of all definitions linked into the application.-->
-	<!-- (relative to this file's location)-->
+	<!-- (relative to this file's location)
 	<link-report>../target/docs/r-c4d3-links.xml</link-report>
+	-->
 	
 	<metadata>
 		<!-- metadata.title: The default title to store in the SWF metadata-->
