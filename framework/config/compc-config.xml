@@ -3,17 +3,17 @@
 	
 	<!-- output: the filename of the SWC library to create-->
 	<!-- (relative to this file's location)-->
-	<output>../../../target/r-c4d3.swc</output>
+	<output>../target/r-c4d3.swc</output>
 	
 	<!-- include-sources: a list of directories and source files to include in the output SWC-->
 	<!-- !! (relative to the directory compc is invoked from)-->
 	<include-sources>
-		<path-element>./src/main/actionscript</path-element>
+		<path-element>./source/actionscript</path-element>
 	</include-sources>
 	
 	<!-- link-report: Output a XML-formatted report of all definitions linked into the application.-->
 	<!-- (relative to this file's location)-->
-	<link-report>../../../target/docs/r-c4d3-links.xml</link-report>
+	<link-report>../target/docs/r-c4d3-links.xml</link-report>
 	
 	<metadata>
 		<!-- metadata.title: The default title to store in the SWF metadata-->
@@ -76,7 +76,7 @@
 		<!-- compiler.source-path: list of path elements that form the roots of ActionScript class hierarchies-->
 		<!-- (relative to this file's location)-->
 		<source-path>
-			<path-element>../actionscript</path-element>
+			<path-element>../source/actionscript</path-element>
 		</source-path>
 	</compiler>
 	
