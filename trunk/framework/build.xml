@@ -50,7 +50,7 @@
 			<arg line="--gen-hx-classes ${dir.target}/temp/library.swf"/>
 		</exec>
 		<delete dir="${dir.target}/temp"/>
-		<zip destfile="${dir.target}/hxclasses.zip" basedir="${dir.target}/hxclasses"/>
+		<zip destfile="${dir.target}/framework-hxclasses.zip" basedir="${dir.target}/hxclasses"/>
 	</target>
 	
     <target name="document" depends="clean">
