@@ -2,16 +2,18 @@
 <flex-config>
 	
 	<!-- output: the filename of the SWC library to create-->
-	<!-- (relative to this file's location)-->
-	<output>../../../target/desktopRomLoader.swf</output>
+	<!-- (relative to this file's location)
+	<output>../target/romloader-desktop.swf</output>
+	-->
 	
 	<!-- link-report: Output a XML-formatted report of all definitions linked into the application.-->
-	<!-- (relative to this file's location)-->
-	<link-report>../../../target/docs/desktopRomLoader-links.xml</link-report>
+	<!-- (relative to this file's location)
+	<link-report>../target/docs/desktop-links.xml</link-report>
+	-->
 	
 	<metadata>
 		<!-- metadata.title: The default title to store in the SWF metadata-->
-		<title>R-C4D3 Framework for ActionScript3</title>
+		<title>R-C4D3 Tools for ActionScript3 - RomLoader Desktop</title>
 		
 		<!-- metadata.date: The creation date to store in the SWF metadata-->
 		<!-- metadata.date usage:
@@ -19,9 +21,7 @@
 		-->
 		
 		<!-- metadata.description: The default description to store in the SWF metadata-->
-		<!-- metadata.description usage:
-		<description>http://www.adobe.com/products/flex</description>
-		-->
+		<description>http://code.google.com/p/r-c4d3/</description>
 		
 		<!-- metadata.language: The language to store in the SWF metadata (i.e. EN, FR)-->
 		<language>EN</language>
@@ -61,13 +61,13 @@
 		<!-- compiler.library-path: list of SWC files or directories that contain SWC files-->
 		<!-- (relative to this file's location)-->
 		<library-path>
-			<path-element>../../../../framework/target/r-c4d3.swc</path-element>
+			<path-element>../../_releases/r-c4d3.swc</path-element>
 		</library-path>
 		
 		<!-- compiler.source-path: list of path elements that form the roots of ActionScript class hierarchies-->
 		<!-- (relative to this file's location)-->
 		<source-path>
-			<path-element>../actionscript</path-element>
+			<path-element>../source/actionscript</path-element>
 		</source-path>
 	</compiler>
 	

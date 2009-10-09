@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3 tools: romloader (as3)" default="default" basedir="./">
+	
+	<condition property="exe" value=".exe">
+		<os family="windows"/>
+	</condition>
+	<condition property="exe" value="">
+		<os family="unix"/>
+	</condition>
+	
+	<property name="dir.source" value="${basedir}/source"/>
+	<property name="dir.config" value="${basedir}/config"/>
+	<property name="dir.target" value="${basedir}/target"/>
+	
+	<property name="dir.documentation" value="${basedir}/../_documentation/romloader-api"/>
+	<property name="dir.releases" value="${basedir}/../_releases"/>
+	
+	<property file="build.properties"/>
+	
+	<fail unless="FLEX_HOME" message="please set the FLEX_HOME property in 'build.properties' to a valid path to the Flex SDK on your machine" />
+	<fail unless="flex.frameworks"/>
+	<fail unless="flex.bin"/>
+	<fail unless="flex.libs"/>
+	<fail unless="flex.compc"/>
+	<fail unless="flex.mxmlc"/>
+	<fail unless="flex.asdoc"/>
+	
+	
+	
+    <target name="default" depends="compile, document, package, release"/>
+	
+	<target name="clean">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${dir.target}" includes="**/*"/>
+		</delete>
+	</target>
+	
+    <target name="compile" depends="compile-desktop, compile-web"/>
+	
+    <target name="compile-desktop" depends="clean">
+    	<exec executable="${flex.mxmlc}" failonerror="true">
+			<arg line="${dir.source}/actionscript/DesktopRomLoaderForKeyboard.as"/>
+			<arg line="-output=${dir.target}/romloader-desktop.swf"/>
+			<arg line="-load-config+=${dir.config}/mxmlc-config_desktop.xml"/>
+		</exec>
+	</target>
+	
+    <target name="compile-web" depends="clean">
+    	<exec executable="${flex.mxmlc}" failonerror="true">
+			<arg line="${dir.source}/actionscript/WebRomLoaderForRC4D3.as"/>
+			<arg line="-output=${dir.target}/romloader-web.swf"/>
+			<arg line="-load-config+=${dir.config}/mxmlc-config_web.xml"/>
+		</exec>
+	</target>
+	
+    <target name="document" depends="clean">
+		<mkdir dir="${dir.target}/asdoc"/>
+		<tstamp>
+			<format property="date.year" pattern="yyyy"/>
+		</tstamp>
+    	<exec executable="${flex.asdoc}">
+			<arg line="-output=${dir.target}/asdoc"/>
+			<arg line="-footer='Copyleft ${date.year} Pixeldroid'"/>
+			<arg line="-load-config+=${dir.config}/asdoc-config.xml"/>
+		</exec>
+		<zip destfile="${dir.target}/romloader-api.zip" basedir="${dir.target}/asdoc"/>
+		<copy todir="${dir.documentation}" failonerror="false">
+			<fileset dir="${dir.target}/asdoc">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	</target>
+	
+    <target name="package" depends="package-desktop, package-web"/>
+	
+    <target name="package-desktop">
+		<mkdir dir="${dir.target}/temp-desktop"/>
+		<copy file="${dir.source}/resources/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop/romloader-config.xml"/>
+		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-desktop"/>
+		<copy file="${dir.target}/romloader-desktop.swf" todir="${dir.target}/temp-desktop"/>
+		<zip destfile="${dir.target}/romloader-desktop.zip" basedir="${dir.target}/temp-desktop"/>
+	</target>
+	
+    <target name="package-web">
+		<mkdir dir="${dir.target}/temp-web"/>
+		<copy file="${dir.source}/resources/romloader-config-web.xml" tofile="${dir.target}/temp-web/romloader-config.xml"/>
+		<copy file="${dir.source}/resources/index-web.html" todir="${dir.target}/temp-web"/>
+		<copy file="${dir.target}/romloader-web.swf" todir="${dir.target}/temp-web"/>
+		<zip destfile="${dir.target}/romloader-web.zip" basedir="${dir.target}/temp-web"/>
+	</target>
+	
+	<target name="release">
+		<copy todir="${dir.releases}" failonerror="false">
+			<fileset dir="${dir.target}">
+				<include name="**/*.zip"/>
+			</fileset>
+		</copy>
+	</target>
+
+</project>
+
