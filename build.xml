@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3 components" default="default" basedir="./">
+	
+	<target name="default">
+		<echo message="framework"/>
+		<ant
+			antfile="${basedir}/framework/build.xml"
+			dir="${basedir}/framework"
+			inheritall="false"
+			inheritrefs="false"
+			target="default"
+			/>
+			
+		<echo message="romloader"/>
+		<ant
+			antfile="${basedir}/romloader/build.xml"
+			dir="${basedir}/romloader"
+			inheritall="false"
+			inheritrefs="false"
+			target="default"
+			/>
+	</target>
+
+</project>
+
