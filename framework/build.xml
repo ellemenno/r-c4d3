@@ -37,7 +37,7 @@
 	</target>
 	
     <target name="compile" depends="clean">
-    	<exec executable="${flex.compc}">
+    	<exec executable="${flex.compc}" failonerror="true">
 			<arg line="-output=${dir.target}/r-c4d3.swc"/>
 			<arg line="-load-config+=${dir.config}/compc-config.xml"/>
 		</exec>
@@ -46,7 +46,7 @@
     <target name="haxe" depends="clean, compile">
 		<mkdir dir="${dir.target}/temp"/>
 		<unzip src="${dir.target}/r-c4d3.swc" dest="${dir.target}/temp"/>
-    	<exec executable="${haxe.exe}" dir="${dir.target}">
+    	<exec executable="${haxe.exe}" dir="${dir.target}" failonerror="true">
 			<arg line="--gen-hx-classes ${dir.target}/temp/library.swf"/>
 		</exec>
 		<delete dir="${dir.target}/temp"/>
@@ -54,7 +54,7 @@
 	</target>
 	
     <target name="document" depends="clean">
-		<mkdir dir="${dir.target}/docs"/>
+		<mkdir dir="${dir.target}/asdoc"/>
 		<tstamp>
 			<format property="date.year" pattern="yyyy"/>
 		</tstamp>
