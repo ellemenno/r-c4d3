@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3 roms" default="-usage" basedir="./">
+
+<description>
+Top level build file for all r-c4d3 roms.
+</description>
+	
+	
+	<target name="-usage" description="ant &lt;target&gt;">
+		<java classname="org.apache.tools.ant.Main">
+			<arg value="-projecthelp" />
+		</java>
+	</target>
+	
+    <target name="build" depends="controltest-as3" 
+		description="&gt; this is the main task: controltest-as3"/>
+	
+		
+	<target name="controltest-as3" description="calls the build task of ${basedir}/ControlTest-as/build.xml">
+		<ant
+			antfile="${basedir}/ControlTest-as/build.xml"
+			dir="${basedir}/ControlTest-as"
+			inheritall="false"
+			inheritrefs="false"
+			target="build"
+			/>
+	</target>
+
+</project>
+
