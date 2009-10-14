@@ -1,24 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="r-c4d3 components" default="default" basedir="./">
+<project name="r-c4d3 components" default="-usage" basedir="./">
+
+<description>
+Top level build file for all components of the r-c4d3 platform.
+</description>
 	
-	<target name="default">
-		<echo message="framework"/>
+	
+	<target name="-usage" description="ant &lt;target&gt;">
+		<java classname="org.apache.tools.ant.Main">
+			<arg value="-projecthelp" />
+		</java>
+	</target>
+	
+    <target name="build" depends="framework, romloader, roms" 
+		description="&gt; this is the main task: framework, romloader, roms (more to come online)"/>
+	
+		
+	<target name="framework" description="calls the build task of ${basedir}/framework/build.xml">
 		<ant
 			antfile="${basedir}/framework/build.xml"
 			dir="${basedir}/framework"
 			inheritall="false"
 			inheritrefs="false"
-			target="default"
+			target="build"
 			/>
+	</target>
 			
-		<echo message="romloader"/>
+	<target name="romloader" description="calls the build task of ${basedir}/romloader/build.xml">
 		<ant
 			antfile="${basedir}/romloader/build.xml"
 			dir="${basedir}/romloader"
 			inheritall="false"
 			inheritrefs="false"
-			target="default"
+			target="build"
+			/>
+	</target>
+			
+	<target name="roms" description="calls the build task of ${basedir}/roms/build.xml">
+		<ant
+			antfile="${basedir}/roms/build.xml"
+			dir="${basedir}/roms"
+			inheritall="false"
+			inheritrefs="false"
+			target="build"
 			/>
 	</target>
 
