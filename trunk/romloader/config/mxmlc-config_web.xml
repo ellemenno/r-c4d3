@@ -6,6 +6,18 @@
 	<output>../target/romloader-web.swf</output>
 	-->
 	
+	<!-- default-background-color: default background color (may be overridden by the application code)-->
+	<default-background-color>0x000000</default-background-color>
+	
+	<!-- default-frame-rate: default frame rate to be used in the SWF.-->
+	<default-frame-rate>60</default-frame-rate>
+	
+	<!-- default-size: default application size (may be overridden by root attributes in the application)-->
+	<default-size>
+		<width>800</width>
+		<height>600</height>
+	</default-size>
+	
 	<!-- link-report: Output a XML-formatted report of all definitions linked into the application.-->
 	<!-- (relative to this file's location)
 	<link-report>../target/docs/desktop-links.xml</link-report>
