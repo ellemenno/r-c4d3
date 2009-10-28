@@ -1,7 +1,8 @@
-﻿
+
 package 
 {
 
+	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Graphics;
 	import flash.display.Loader;
@@ -18,54 +19,26 @@ package
 	import com.pixeldroid.r_c4d3.interfaces.HaxeSideDoor;
 	import com.pixeldroid.r_c4d3.interfaces.IGameRom;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
-	import com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy;
-	import com.pixeldroid.r_c4d3.scores.LocalHighScores;
+	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	
 	import ConfigDataProxy;
 
 	
 	
 	/**
+	Base rom loader implementation.
+	
+	<p>
 	Loads a valid IGameRom SWF and provides access to an IGameControlsProxy
 	and an IGameScoresProxy. 
-	
-	<p>
-	The IGameRom SWF url to load is defined in a companion xml file that must 
+	</p>
+	Configuration values are defined in a companion xml file that must 
 	live in the same folder as the 	DesktopRomLoaderForKeyboard SWF and be
-	named <code>romloader-config.xml</code>.
+	named <code>romloader-config.xml</code> (subclasses can override the 
+	configFile getter to e.g. get url from flashVars). See ConfigDataProxy for 
+	the xml format expected.
 	</p>
 	
-	<p>
-	Game control events are triggered by keyboard events. The particular keys 
-	are defined in a companion xml file that must live in the same folder as the 
-	DesktopRomLoaderForKeyboard SWF and be named <code>romloader-config.xml</code>.
-	</p>
-	
-	@example Sample <code>romloader-config.xml</code>:
-	<listing version="3.0">
-    &lt;configuration&gt;
-        &lt;!-- trace logging on when true --&gt;
-        &lt;logging enabled="true" /&gt;
-
-        &lt;!-- rom to load --&gt;
-        &lt;rom file="../controls/ControlTestGameRom.swf" /&gt;
-
-        &lt;!-- key mappings, player numbers start at 1 --&gt;
-        &lt;keymappings&gt;
-            &lt;joystick playerNumber="1"&gt;
-				&lt;hatUp    keyCode="38" /&gt;
-				&lt;hatRight keyCode="39" /&gt;
-				&lt;hatLeft  keyCode="37" /&gt;
-				&lt;hatDown  keyCode="40" /&gt;
-				&lt;buttonY  keyCode="17" /&gt;
-				&lt;buttonR  keyCode="46" /&gt;
-				&lt;buttonG  keyCode="35" /&gt;
-				&lt;buttonB  keyCode="34" /&gt;
-            &lt;/joystick&gt;
-        &lt;/keymappings&gt;
-    &lt;/configuration&gt;
-	</listing>
-
 	<p>Note: <i>
 	Due to the way HaXe inserts top-level classes when compiling a SWF,
 	HaXe users must use the HaxeSideDoor to declare IGameRom compliance.
@@ -73,17 +46,16 @@ package
 	
 	@see com.pixeldroid.interfaces.IGameControlsProxy
 	@see com.pixeldroid.interfaces.IGameScoresProxy
+	@see ConfigDataProxy
 	@see HaxeSideDoor
 	*/
-	public class DesktopRomLoaderForKeyboard extends Sprite
+	public class RomLoader extends Sprite
 	{
 		protected var romLoader:Loader;
 		protected var xmlLoader:URLLoader;
 		protected var configData:ConfigDataProxy;
-		protected var controlsProxy:KeyboardGameControlsProxy;
+		protected var controlsProxy:IGameControlsProxy;
 		protected var highScoresProxy:IGameScoresProxy;
-		
-		protected const configUrl:String = "romloader-config.xml";
 		
 		protected var preloaderContainer:Sprite;
 		protected var swfBytesLoaded:int;
@@ -97,12 +69,8 @@ package
 
 		/**
 		Constructor.
-		
-		<p>
-		Creates a rom loader designed to interpret keyboard events as game control events.
-		</p>
 		*/
-		public function DesktopRomLoaderForKeyboard()
+		public function RomLoader()
 		{
 			super();
 			
@@ -119,6 +87,7 @@ package
 			openPreloader();
 		}
 
+		
 		protected function addChildren(container:DisplayObjectContainer):void
 		{
 			// to be overridden
@@ -310,6 +279,80 @@ package
 			onPreloadProgress(e);
 		}
 
+
+		/*
+			Retrieves the url of the rom loader config file.
+		*/
+		protected function get configUrl():String
+		{
+			return "romloader-config.xml";
+		}
+
+		
+		/*
+			Casts the loaded content into a game rom instance.
+			Looks for Haxe games through the side door.
+		*/
+		protected function extractGameRom(romLoadeContent:DisplayObject):IGameRom
+		{
+			var gameRom:IGameRom;
+			
+			if (romLoadeContent is IGameRom) gameRom = IGameRom(romLoadeContent);
+			else if (getQualifiedClassName(romLoadeContent) == "flash::Boot")
+			{
+				if (HaxeSideDoor.romInstance && HaxeSideDoor.romInstance is IGameRom) gameRom = IGameRom(HaxeSideDoor.romInstance);
+			}
+			else trace("extractGameRom() - Error: content is not a valid rom (" +getQualifiedClassName(extractGameRom) +")");
+			
+			return gameRom;
+		}
+
+		
+		/*
+			Provides the game controls proxy instance.
+			Broken out for easy override.
+		*/
+		protected function createControlsProxy():IGameControlsProxy
+		{
+			// to be overridden
+			// base implementation does nothing.
+			return null;
+		}
+		
+		/*
+			Applies loaded configuration to controls proxy.
+			Broken out for easy override.
+		*/
+		protected function applyControlsConfig(c:IGameControlsProxy, d:ConfigDataProxy):void
+		{
+			// to be overridden
+			// base implementation does nothing.
+		}
+
+		
+		/*
+			Provides the game scores proxy instance.
+			Broken out for easy override.
+		*/
+		protected function createScoresProxy():IGameScoresProxy
+		{
+			// to be overridden
+			// base implementation does nothing.
+			return null;
+		}
+
+		
+		/*
+			Applies loaded configuration to scores proxy.
+			Broken out for easy override.
+		*/
+		protected function applyScoresConfig(s:IGameScoresProxy, d:ConfigDataProxy):void
+		{
+			// to be overridden
+			// base implementation does nothing.
+		}
+		
+		
 		/*
 			Triggered by onPreloaderClosed.
 		*/
@@ -321,29 +364,17 @@ package
 			
 			if (romLoader.content)
 			{
-				var gameRom:IGameRom;
-				
-				if (romLoader.content is IGameRom) gameRom = IGameRom(romLoader.content);
-				else if (getQualifiedClassName(romLoader.content) == "flash::Boot")
-				{
-					if (HaxeSideDoor.romInstance && HaxeSideDoor.romInstance is IGameRom) gameRom = IGameRom(HaxeSideDoor.romInstance);
-				}
-				else trace("finalizeLoad() - Error: content is not a valid rom (" +getQualifiedClassName(romLoader.content) +")");
-				
+				var gameRom:IGameRom = extractGameRom(romLoader.content);
 				if (gameRom)
 				{
 					C.out(this, "finalizeLoad() - valid game rom found, sending over controls proxy and scores proxy")
 					
 					// provide access to game controls and high scores
-					controlsProxy = new KeyboardGameControlsProxy();
+					controlsProxy = createControlsProxy();
+					if (controlsProxy) applyControlsConfig(controlsProxy, configData);
 					
-					var k:ConfigDataProxy = configData;
-					if (k.p1HasKeys) controlsProxy.setKeys(0, k.p1U, k.p1R, k.p1D, k.p1L, k.p1X, k.p1A, k.p1B, k.p1C); else C.out(this, "no keys for p1");
-					if (k.p2HasKeys) controlsProxy.setKeys(1, k.p2U, k.p2R, k.p2D, k.p2L, k.p2X, k.p2A, k.p2B, k.p2C); else C.out(this, "no keys for p2");
-					if (k.p3HasKeys) controlsProxy.setKeys(2, k.p3U, k.p3R, k.p3D, k.p3L, k.p3X, k.p3A, k.p3B, k.p3C); else C.out(this, "no keys for p3");
-					if (k.p4HasKeys) controlsProxy.setKeys(3, k.p4U, k.p4R, k.p4D, k.p4L, k.p4X, k.p4A, k.p4B, k.p4C); else C.out(this, "no keys for p4");
-					
-					highScoresProxy = new LocalHighScores();
+					highScoresProxy = createScoresProxy();
+					if (highScoresProxy) applyScoresConfig(highScoresProxy, configData);
 					
 					romLoader.visible = true; // reveal container
 					
