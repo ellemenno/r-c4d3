@@ -52,7 +52,7 @@ Tasks to build and package the r-c4d3 romloaders.
 	
     <target name="compile-desktop" depends="clean" description="compile the desktop romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="${dir.source}/actionscript/DesktopRomLoaderForKeyboard.as"/>
+			<arg line="${dir.source}/actionscript/DesktopRomLoader.as"/>
 			<arg line="-output=${dir.target}/romloader-desktop.swf"/>
 			<arg line="-load-config+=${dir.config}/mxmlc-config_desktop.xml"/>
 		</exec>
@@ -60,7 +60,7 @@ Tasks to build and package the r-c4d3 romloaders.
 	
     <target name="compile-web" depends="clean" description="compile the web-based romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="${dir.source}/actionscript/WebRomLoaderForRC4D3.as"/>
+			<arg line="${dir.source}/actionscript/RC4D3RomLoader.as"/>
 			<arg line="-output=${dir.target}/romloader-web.swf"/>
 			<arg line="-load-config+=${dir.config}/mxmlc-config_web.xml"/>
 		</exec>
