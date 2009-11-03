@@ -2,6 +2,8 @@
 package 
 {
 
+	import flash.events.Event;
+	
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
 	import com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy;
@@ -33,7 +35,12 @@ package
 			super();
 		}
 		
-		
+		override protected function onPreloaderClosed(e:Event):void
+		{
+			stage.fullScreenSourceRect = romLoader.getBounds(this);
+			super.onPreloaderClosed(e);
+		}
+
 		override protected function createControlsProxy():IGameControlsProxy
 		{
 			return new KeyboardGameControlsProxy();
