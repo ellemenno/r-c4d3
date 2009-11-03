@@ -138,10 +138,10 @@ package
 			g.drawRect(0, 0, stage.stageWidth-1, 4);
 		}
 
-		protected function closePreloader():void
+		protected function closePreloader(errorOccured:Boolean=false):void
 		{
 			// to be overridden
-			onPreloaderClosed(null);
+			if (errorOccured == false) onPreloaderClosed(null);
 		}
 
 
@@ -185,7 +185,7 @@ package
 		/*
 			Triggered when all xml bytes are loaded.
 
-			Calls closePreloader() if all swf bytes are also loaded.
+			Initiates load of swf.
 		*/
 		protected function onXmlComplete(e:Event):void
 		{
