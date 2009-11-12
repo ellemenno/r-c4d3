@@ -6,12 +6,7 @@
 Tasks to build and package the AS3 Control Test rom.
 </description>
 	
-	<condition property="exe" value=".exe">
-		<os family="windows"/>
-	</condition>
-	<condition property="exe" value="">
-		<os family="unix"/>
-	</condition>
+	<import file="../../build_init.xml"/>
 	
 	<property name="dir.source" value="${basedir}/source"/>
 	<property name="dir.config" value="${basedir}/config"/>
@@ -20,15 +15,6 @@ Tasks to build and package the AS3 Control Test rom.
 	<property name="dir.releases" value="${basedir}/../../_releases"/>
 	
 	<property file="build.properties"/>
-	
-	<fail unless="FLEX_HOME" message="please set the FLEX_HOME property in 'build.properties' to a valid path to the Flex SDK on your machine" />
-	<fail unless="flex.frameworks"/>
-	<fail unless="flex.bin"/>
-	<fail unless="flex.libs"/>
-	<fail unless="flex.compc"/>
-	<fail unless="flex.mxmlc"/>
-	<fail unless="flex.asdoc"/>
-	
 	
 	
 	<target name="-usage" description="ant &lt;target&gt;">
