@@ -5,7 +5,8 @@
 <description>
 Top level build file for all r-c4d3 roms.
 </description>
-	
+
+	<import file="../build_init.xml"/>
 	
 	<target name="-usage" description="ant &lt;target&gt;">
 		<java classname="org.apache.tools.ant.Main">

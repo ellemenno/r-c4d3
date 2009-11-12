@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="init" default="init" basedir="./">
+
+<description>
+Initialization code common to all build files.
+</description>
+
+	<target name="init"/> <!-- This never gets called. -->
+
+	<condition property="exe" value=".exe">
+		<os family="windows"/>
+	</condition>
+	<condition property="exe" value="">
+		<os family="unix"/>
+	</condition>
+	
+	<!-- Look for .properties files in some convenient locations. -->
+	<property file="${user.home}/${project.name}.properties"/>
+	<property file="${user.home}/build.properties"/>
+	<property name="config.filename" value="${user.name}.properties"/>
+	<property file="config/${config.filename}"/>
+	<property file="build.properties"/>
+	
+	<!-- Derive some properties from FLEX_HOME -->
+	<property name="flex.bin" value="${FLEX_HOME}/bin"/>
+	<property name="flex.libs" value="${FLEX_HOME}/lib"/>
+	<property name="flex.compc" value="${flex.bin}/compc${exe}"/>
+	<property name="flex.mxmlc" value="${flex.bin}/mxmlc${exe}"/>
+	<property name="flex.asdoc" value="${flex.bin}/asdoc${exe}"/>
+	<property name="flex.frameworks" value="${FLEX_HOME}/frameworks"/>
+	
+	<fail unless="FLEX_HOME">.
+
+Please set the FLEX_HOME property to a valid path for the Flex SDK on your machine.
+
+Properties can be defined in any of these places:
+	- ${user.home}/${project.name}.properties
+	- ${user.home}/build.properties
+	- config/${config.filename}
+	- ${basedir}/build.properties
+
+Properties are defined in those files by using lines like these:
+FLEX_HOME=/usr/local/share/flexsdk
+(or in Windows)
+FLEX_HOME=C:/Program Files/flex
+
+Paths in properties files always use forward slashs (/), even on Windows.
+	</fail>
+	<fail unless="flex.frameworks"/>
+	<fail unless="flex.bin"/>
+	<fail unless="flex.libs"/>
+	<fail unless="flex.compc"/>
+	<fail unless="flex.mxmlc"/>
+	<fail unless="flex.asdoc"/>
+	
+	<!-- HACK: -->
+	<!-- Ant doesn't support conditional echoing. -->
+	<!-- As a result, we need some hacks and magic to make it happen. -->
+	<!-- echo's will typically not display if they are on the debug level. -->
+	<!-- So if we don't want to echo, we set its level to debug. -->
+	<condition property="haxe_not_found" value="debug" else="warning">
+		<isset property="haxe.exe"/>
+	</condition>
+	
+	<echo level="${haxe_not_found}">
+The haxe.exe property was not set.
+haXe targets will NOT be built.
+To build haXe targets, this property must be set to the path for the haXe compiler's executable.
+
+Properties can be defined in any of these places:
+	- ${user.home}/${project.name}.properties
+	- ${user.home}/build.properties
+	- config/${config.filename}
+
+Properties are defined in those files by using lines like these:
+haxe.exe=/usr/bin/haxe
+(or in Windows)
+haxe.exe=C:/Program Files/Motion-Twin/haxe/haxe.exe
+
+Paths in properties files always use forward slashs (/), even on Windows.		
+	</echo>
+	<echo level="debug">
+The above message may or may not be true.
+Run in a non-debug level to find out for sure.
+This is a hack.  See build_init.xml for details.
+	</echo>
+
+</project>
