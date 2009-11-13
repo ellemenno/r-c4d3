@@ -1,4 +1,4 @@
-
+﻿
 package com.pixeldroid.r_c4d3.proxies
 {
 
@@ -56,8 +56,8 @@ package com.pixeldroid.r_c4d3.proxies
 		public static const HAT_L:int = 3;
 
 		
-		
 		protected var joysticks:Array;
+		protected var joysticksDefined:Array;
 		protected var gameStage:Stage;
 		protected var _joystickEventState:String;
 		
@@ -134,6 +134,7 @@ package com.pixeldroid.r_c4d3.proxies
 			
 			_joystickEventState = JoyEventStateEnum.IGNORE;
 			joysticks = [null, null, null, null];
+			joysticksDefined = [false, false, false];
 		}
 		
 		/** @inheritdoc */
@@ -345,6 +346,7 @@ package com.pixeldroid.r_c4d3.proxies
 		/** @inheritdoc */
 		public function joystickOpen(index:int):IJoystick
 		{
+			checkJoystickIndex(index);
 			var j:IJoystick;
 			
 			switch (index)
@@ -364,12 +366,61 @@ package com.pixeldroid.r_c4d3.proxies
 		/** @inheritdoc */
 		public function joystickOpened(index:int):Boolean
 		{
+			checkJoystickIndex(index);
 			return joysticks[index] != null;
 		}
 		
 		/** @inheritdoc */
 		public function numJoysticks():int { return 4; }
 		
+		
+		/**
+		Determines whether keys have been defined for a specific joystick.
+		@param index A zero-based index selecting the joystick to check
+		*/
+		public function joystickKeysDefined(index:int):Boolean
+		{
+			checkJoystickIndex(index);
+			return joysticksDefined[index];
+		}
+
+		
+		/**
+		Provide custom key code assignment for a specific hat direction.
+		@param playerIndex zero based index indicating which player joystick to set codes for.
+		@param hat A KeyboardGameControlsProxy constant (<code>HAT_*</code>) 
+		representing the hat direction to get the keycode value for.
+		@param keyCode Keycode for hat direction
+		*/
+		public function setHatKey(playerIndex:uint, hat:int, keyCode:uint):void
+		{
+			switch (hat)
+			{
+				case HAT_U : setKeys(playerIndex, keyCode,0,0,0, 0,0,0,0); break;
+				case HAT_R : setKeys(playerIndex, 0,keyCode,0,0, 0,0,0,0); break;
+				case HAT_D : setKeys(playerIndex, 0,0,keyCode,0, 0,0,0,0); break;
+				case HAT_L : setKeys(playerIndex, 0,0,0,keyCode, 0,0,0,0); break;
+			}
+		}
+		
+		/**
+		Provide custom key code assignment for a specific button.
+		@param playerIndex zero based index indicating which player joystick to set codes for.
+		@param button A KeyboardGameControlsProxy constant (<code>BTN_*</code>) 
+		representing the button to get the keycode value for.
+		@param keyCode Keycode for button
+		*/
+		public function setButtonKey(playerIndex:uint, button:int, keyCode:uint):void
+		{
+			switch (button)
+			{
+				case BTN_X : setKeys(playerIndex, 0,0,0,0, keyCode,0,0,0); break;
+				case BTN_A : setKeys(playerIndex, 0,0,0,0, 0,keyCode,0,0); break;
+				case BTN_B : setKeys(playerIndex, 0,0,0,0, 0,0,keyCode,0); break;
+				case BTN_C : setKeys(playerIndex, 0,0,0,0, 0,0,0,keyCode); break;
+			}
+		}
+
 		/**
 		Provide custom key code assignments for hat directions and buttons.
 		@param playerIndex zero based index indicating which player joystick to set codes for.
@@ -385,6 +436,9 @@ package com.pixeldroid.r_c4d3.proxies
 		public function setKeys(playerIndex:uint, u:uint, r:uint, d:uint, l:uint, x:uint, a:uint, b:uint, c:uint):void
 		{
 			//C.out(this, "setKeys for p" +playerIndex +": " +[u,r,d,l,x,a,b,c]);
+			
+			checkJoystickIndex(playerIndex);
+			
 			switch (playerIndex)
 			{
 				case 0 :
@@ -431,6 +485,7 @@ package com.pixeldroid.r_c4d3.proxies
 					P4_C = c || P4_C;
 				break;              
 			}
+			joysticksDefined[playerIndex] = true;
 		}
 		
 		override public function toString():String
@@ -473,6 +528,11 @@ package com.pixeldroid.r_c4d3.proxies
 			s += "\n  Blue (B): " +P4_B +" (" +KeyLabels.getLabel(P4_B) +")";
 			s += "\n  Green (C): " +P4_C +" (" +KeyLabels.getLabel(P4_C) +")";
 			return s;
+		}
+
+		protected function checkJoystickIndex(index:int):void
+		{
+			if (index < 0 || index >= numJoysticks()) throw new Error("index " +index +" invalid. Must be in range [0," +(numJoysticks()-1) +"]");
 		}
 
 		protected function sendHatPress(j:IJoystick, eventMask:int):void
