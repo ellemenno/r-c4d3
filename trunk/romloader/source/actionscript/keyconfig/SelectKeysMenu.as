@@ -433,6 +433,12 @@ package keyconfig
 			selections[keyId].text = getGivenKeyLabel(playerIndex, keyId);
 			invalidateText();
 			
+			/*
+			TODO:
+			if (keyId < 4) controlsProxy.setHatKey(playerIndex, keyId, keyCode);
+			else           controlsProxy.setButtonKey(playerIndex, keyId-4, keyCode);
+			*/
+			
 			// This is a bit silly, but it should work.
 			var args : Array = new Array();
 			var i : int;
