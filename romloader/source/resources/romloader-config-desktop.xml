@@ -8,6 +8,13 @@
 
 	<!-- rom to load -->
 	<rom file="./rom.swf" />
+	
+	<!-- custom properties go here, e.g.
+		<properties>
+			<property name="myProperty">value of myProperty</property>
+		</properties>
+	-->
+	<properties />
 
 	<!-- not defining key mappings, using default values from romloader -->
 	<keymappings />

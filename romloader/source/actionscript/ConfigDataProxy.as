@@ -107,6 +107,16 @@ package
 		/** Key code for player 4 Button B (blue) */   public function get p4B():uint { return parseInt(xmlData..keymappings.joystick.(@playerNumber==4).buttonB.@keyCode.toString()) as uint; }
 		/** Key code for player 4 Button C (green) */  public function get p4C():uint { return parseInt(xmlData..keymappings.joystick.(@playerNumber==4).buttonC.@keyCode.toString()) as uint; }
 
+		
+		/** 
+			Arbitrary property request 
+			@param propertyName - name attribute value of property node to retrieve
+		*/
+		public function getPropertyValue(propertyName:String):String
+		{
+			return xmlData..properties.(attribute("name") == propertyName).toString();
+		}
+
 		/**
 			Source of loaded xml
 			@param value - xml source string
