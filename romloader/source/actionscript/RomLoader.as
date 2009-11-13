@@ -16,6 +16,8 @@ package
 	import flash.net.URLRequest;
 	import flash.utils.getQualifiedClassName;
 	
+	import keyconfig.KeyConfigGui;
+	
 	import com.pixeldroid.r_c4d3.interfaces.HaxeSideDoor;
 	import com.pixeldroid.r_c4d3.interfaces.IGameRom;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
@@ -53,6 +55,7 @@ package
 	{
 		protected var romLoader:Loader;
 		protected var xmlLoader:URLLoader;
+		protected var splashScreen : KeyConfigGui;
 		protected var configData:ConfigDataProxy;
 		protected var controlsProxy:IGameControlsProxy;
 		protected var highScoresProxy:IGameScoresProxy;
@@ -64,6 +67,7 @@ package
 		protected var xmlBytesLoaded:int;
 		protected var xmlBytesTotal:int;
 		protected var xmlLoaded:Boolean;
+		protected var splashDone:Boolean;
 
 
 
@@ -114,11 +118,25 @@ package
 		{
 			// to be overridden
 			// base implementation draws a thin rectangle across the screen
+			
+			var progressBar:Shape = Shape(preloaderContainer.getChildAt(0));
+			var progressBarOutline:Shape = Shape(preloaderContainer.getChildAt(1));
+			
+			// When the xml is done loading, the key config gui will spawn.
+			// This check will avoid trying to draw a progress bar under or
+			//   over the key config gui, which is now responsible for
+			//   informating the player(s) of loading progress.
+			if ( xmlLoaded && !splashDone )
+			{
+				progressBar.graphics.clear();
+				progressBarOutline.graphics.clear();
+				return;
+			}
+			
 			var progress:Number = (e.bytesTotal > 0) ? (e.bytesLoaded / e.bytesTotal) : 0;
 			var w:int = Math.round(progress * stage.stageWidth);
 			var g:Graphics;
 
-			var progressBar:Shape = Shape(preloaderContainer.getChildAt(0));
 			progressBar.x = 0;
 			progressBar.y = stage.stageHeight * .5 - 2;
 
@@ -128,7 +146,6 @@ package
 			g.drawRect(0, 0, w, 4);
 			g.endFill();
 
-			var progressBarOutline:Shape = Shape(preloaderContainer.getChildAt(1));
 			progressBarOutline.x = 0;
 			progressBarOutline.y = progressBar.y;
 
@@ -162,12 +179,33 @@ package
 		/*
 			Triggered when all swf bytes are loaded.
 
-			Calls closePreloader() if all xml bytes are also loaded.
+			Calls closePreloader() if all xml bytes are also loaded and the
+			splash screen is done.
 		*/
 		protected function onSwfComplete(e:Event):void
 		{
 			swfLoaded = true;
-			closePreloader();
+			
+			if ( splashDone )
+				closePreloader();
+		}
+
+		/*
+			Triggered when the splash screen is done (ex: players are done 
+			customizing the game settings).
+			
+			Calls closePreloader() if all xml bytes and swf bytes are also
+			loaded.
+		*/
+		protected function onSplashComplete() : void
+		{
+			splashDone = true;
+
+			removeChild(splashScreen);
+			splashScreen.finalize();
+			
+			if ( swfLoaded )
+				closePreloader();
 		}
 
 		/*
@@ -193,6 +231,23 @@ package
 			configData = new ConfigDataProxy(xmlLoader.data);
 
 			loadSwf();
+			
+			// This must be done before the splash screen is loaded.
+			controlsProxy = createControlsProxy();
+			if (controlsProxy) applyControlsConfig(controlsProxy, configData);
+			else throw "Couldn't load controls proxy."; // TODO: what a vague error!
+			
+			splashScreen = createSplashScreen();
+			if ( splashScreen != null )
+			{
+				splashScreen.onConfigComplete = onSplashComplete;
+				addChild(splashScreen);
+				splashScreen.activate();
+			}
+			else
+			{
+				splashDone = true;
+			}
 		}
 
 		/*
@@ -312,6 +367,17 @@ package
 			Provides the game controls proxy instance.
 			Broken out for easy override.
 		*/
+		protected function createSplashScreen():KeyConfigGui
+		{
+			// to be overridden
+			// base implementation does nothing.
+			return null;
+		}
+		
+		/*
+			Provides the game controls proxy instance.
+			Broken out for easy override.
+		*/
 		protected function createControlsProxy():IGameControlsProxy
 		{
 			// to be overridden
@@ -370,9 +436,6 @@ package
 					C.out(this, "finalizeLoad() - valid game rom found, sending over controls proxy and scores proxy")
 					
 					// provide access to game controls and high scores
-					controlsProxy = createControlsProxy();
-					if (controlsProxy) applyControlsConfig(controlsProxy, configData);
-					
 					highScoresProxy = createScoresProxy();
 					if (highScoresProxy) applyScoresConfig(highScoresProxy, configData);
 					
