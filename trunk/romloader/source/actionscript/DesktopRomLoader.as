@@ -1,4 +1,4 @@
-﻿
+
 package 
 {
 
@@ -8,6 +8,8 @@ package
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
 	import com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy;
 	import com.pixeldroid.r_c4d3.scores.LocalHighScores;
+	
+	import keyconfig.KeyConfigGui;
 
 	import ConfigDataProxy;
 	import RomLoader;
@@ -49,6 +51,11 @@ package
 		override protected function createScoresProxy():IGameScoresProxy
 		{
 			return new LocalHighScores();
+		}
+		
+		protected override function createSplashScreen():KeyConfigGui
+		{
+			return new KeyConfigGui(this.stage, KeyboardGameControlsProxy(controlsProxy));
 		}
 		
 		override protected function applyControlsConfig(c:IGameControlsProxy, d:ConfigDataProxy):void
