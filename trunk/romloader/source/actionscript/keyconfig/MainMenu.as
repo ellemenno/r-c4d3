@@ -37,6 +37,9 @@ package keyconfig
 		{
 			super(rootStage);
 			
+			if ( controlsProxy == null )
+				throw "controlsProxy is null!";
+			
 			this.changeHeader = changeHeader;
 			
 			playerButtons = new Array();
@@ -54,7 +57,11 @@ package keyconfig
 			playerButtons[3].addEventListener(MouseEvent.CLICK, p4config);
 			
 			for ( var i : int = 0; i < playerButtons.length; i++ )
-				addChild(playerButtons[i]);
+			{
+				// TODO: This doesn't work.
+				// if ( controlsProxy.joystickKeysDefined(i) )
+					addChild(playerButtons[i]);
+			}
 			
 			playButton = new Button("Play!");
 			playButton.addEventListener(MouseEvent.CLICK, onPlay);

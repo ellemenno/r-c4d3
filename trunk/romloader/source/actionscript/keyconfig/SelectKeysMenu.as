@@ -25,6 +25,13 @@ package keyconfig
 		public var header : String = "Please select this character's controls.";
 		public function getHeader() : String { return header; }
 		
+		// Types of (digital) controls.
+		private const BUTTON : int = -1;
+		private const HAT : int = -2;
+		
+		private const nPlayers : int = 4;
+		private const nKeysPerPlayer : int = 8;
+		
 		private var currentPlayer : int = -1;
 		private var descriptions : Array /* of TextFields */;
 		private var selections : Array /* of KeyFields */;
@@ -36,6 +43,8 @@ package keyconfig
 		private var controlsProxy : KeyboardGameControlsProxy;
 		private var controlDefaults : KeyboardGameControlsProxy;
 		
+		/*private var conflicts : Array;
+		*/
 		// TODO
 		private var debugFmt : TextFormat;
 		private var debugTxt : TextField;
@@ -64,6 +73,9 @@ package keyconfig
 		{
 			super(rootStage);
 			
+			if ( controlsProxy == null )
+				throw "controlsProxy is null!";
+			
 			this.controlsProxy = controlsProxy;
 			this.changeHeader = changeHeader;
 			
@@ -76,7 +88,7 @@ package keyconfig
 			descriptions = new Array();
 			conflictMsgs = new Array();
 			
-			for ( i = 0; i < 8; i++ )
+			for ( i = 0; i < nKeysPerPlayer; i++ )
 			{
 				var tf : TextField;
 				
@@ -120,11 +132,11 @@ package keyconfig
 			doneButton.addEventListener(MouseEvent.CLICK,onDone);
 			defaultsButton.addEventListener(MouseEvent.CLICK,onDefault);
 			cancelButton.addEventListener(MouseEvent.CLICK,onCancel);
-			
+
 			addChild(doneButton);
 			addChild(defaultsButton);
 			addChild(cancelButton);
-			
+
 			debugFmt = new TextFormat();
 			debugFmt.font = "Times New Roman";
 			debugFmt.align = TextFormatAlign.LEFT;
@@ -134,26 +146,36 @@ package keyconfig
 
 			debugTxt = new TextField();
 			debugTxt.x = 10;
-			debugTxt.y = 10;
+			debugTxt.y = 50;
 			debugTxt.width = 500;
 			debugTxt.height = 100;
 			debugTxt.text = "shared object = ";
 			debugTxt.setTextFormat(debugFmt);
 			//addChild(debugTxt);
+			
+			
+			// All keys must be loaded so that conflict detection will work
+			//   correctly before the players have attempted to configure
+			//   things.
+			for ( i = 0; i < nPlayers; i++ )
+				loadKeyConfigData(i);
 
 			/*
 			usedKeyCodes = new Array();
 
-			for ( i = 0; i < 4; i++ )
+			for ( i = 0; i < nPlayers; i++ )
 			{
 				usedKeyCodes[i] = new Array();
 
 				var j : int;
-				for ( j = 0; j < 8; j++ )
-					usedKeyCodes[i][j] = getGivenKeyCode(i,j);
+				for ( j = 0; j < nKeysPerPlayer; j++ )
+					usedKeyCodes[i][j] = getLatestKeyCode(i,j);
 			}*/
 
-			//conflicts = new Array();
+			/*
+			conflicts = new Array();
+			conflicts[nPlayers * nKeysPerPlayer - 1] = new Array();
+			*/
 			
 			onResize();
 		}
@@ -162,9 +184,8 @@ package keyconfig
 		{
 			var result : KeyboardGameControlsProxy = new KeyboardGameControlsProxy();
 			var i : int;
-			for ( i = 0; i < 4; i++ )
+			for ( i = 0; i < nPlayers; i++ )
 			{
-				
 				copyControls(source,result,i);
 			}
 			return result;
@@ -172,27 +193,37 @@ package keyconfig
 
 		private function invalidateText() : void
 		{
-			var format : TextFormat = new TextFormat();
-			format.font = "Times New Roman";
-			format.align = TextFormatAlign.CENTER;
-			format.bold = true;
-			format.color = 0xffffff;
-			format.size = 28;
-			
 			var i : int;
+			var format : TextFormat;
 			
-			for ( i = 0; i < 8; i++ )
+			format = new TextFormat();
+			format.font = "Times New Roman";
+			format.align = TextFormatAlign.RIGHT;
+			format.bold = true;
+			
+			format.color = 0xffffff;
+			format.size = 18;
+			
+			for ( i = 0; i < nKeysPerPlayer; i++ )
 				descriptions[i].setTextFormat(format);
 			
-			format.size = 32;
+			format.align = TextFormatAlign.LEFT;
+			format.size = 22;
 			
-			for ( i = 0; i < 8; i++ )
+			for ( i = 0; i < nKeysPerPlayer; i++ )
 			{
 				selections[i].setTextFormat(format);
 				selections[i].defaultTextFormat = format;
 			}
 			
-			for ( i = 0; i < 8; i++ )
+			//format = new TextFormat();
+			format.font = "Courier New";
+			format.align = TextFormatAlign.CENTER;
+			format.bold = true;
+			format.color = 0xff0000;
+			format.size = 14;
+			
+			for ( i = 0; i < nKeysPerPlayer; i++ )
 				conflictMsgs[i].setTextFormat(format);
 		}
 		
@@ -220,7 +251,7 @@ package keyconfig
 			//rootStage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			
 			var i : int;
-			for ( i = 0; i < 8; i++ )
+			for ( i = 0; i < nKeysPerPlayer; i++ )
 				selections[i].activate();
 			
 			rootStage.addEventListener(KeyboardEvent.KEY_UP,   onKeyUp);
@@ -234,7 +265,7 @@ package keyconfig
 			//rootStage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			
 			var i : int;
-			for ( i = 0; i < 8; i++ )
+			for ( i = 0; i < nKeysPerPlayer; i++ )
 				selections[i].deactivate();
 			
 			rootStage.removeEventListener(KeyboardEvent.KEY_UP,   onKeyUp);
@@ -249,7 +280,7 @@ package keyconfig
 			var _h : Number;
 			
 			// Key configuration grid.
-			for ( var i : int = 0; i < 8; i++ )
+			for ( var i : int = 0; i < nKeysPerPlayer; i++ )
 			{
 				var tf : TextField;
 				_y = fractionalY(70 + 50*i, 600);
@@ -257,19 +288,19 @@ package keyconfig
 				tf = descriptions[i];
 				tf.x = fractionalX(10, 800);
 				tf.y = _y;
-				tf.width = fractionalX(180, 800);
+				tf.width = fractionalX(360, 800);
 				tf.height = fractionalY(40, 600);
 				
 				tf = selections[i];
-				tf.x = fractionalX(300, 800);
+				tf.x = fractionalX(400, 800);
 				tf.y = _y;
-				tf.width = fractionalX(280, 800);
+				tf.width = fractionalX(380, 800);
 				tf.height = fractionalY(40, 600);
 				
 				tf = conflictMsgs[i];
-				tf.x = fractionalX(600, 800);
-				tf.y = _y;
-				tf.width = fractionalX(180, 800);
+				tf.x = fractionalX(10, 800);
+				tf.y = _y + fractionalY(30,800);
+				tf.width = fractionalX(780, 800);
 				tf.height = fractionalY(40, 600);
 			}
 			
@@ -336,29 +367,8 @@ package keyconfig
 		
 		private function onDefault( e : MouseEvent ) : void
 		{
-			//var d : KeyboardGameControlsProxy = controlDefaults;
-			//trace("onDefault call copyControls");
 			copyControls(controlDefaults, controlsProxy, currentPlayer);
-				/*
-			switch ( currentPlayer )
-			{
-				case 0: controlsProxy.setKeys
-					(0, d.p1U, d.p1R, d.p1D, d.p1L, d.p1X, d.p1A, d.p1B, d.p1C);
-					break;
-					
-				case 1: controlsProxy.setKeys
-					(1, d.p2U, d.p2R, d.p2D, d.p2L, d.p2X, d.p2A, d.p2B, d.p2C);
-					break;
-					
-				case 2: controlsProxy.setKeys
-					(2, d.p3U, d.p3R, d.p3D, d.p3L, d.p3X, d.p3A, d.p3B, d.p3C);
-					break;
-					
-				case 3: controlsProxy.setKeys
-					(3, d.p4U, d.p4R, d.p4D, d.p4L, d.p4X, d.p4A, d.p4B, d.p4C);
-					break;
-			}*/
-			loadKeyConfigData(currentPlayer);
+			invalidateKeyConfigData(currentPlayer);
 		}
 		
 		public final function setPlayer( playerIndex : int ) : void
@@ -371,68 +381,114 @@ package keyconfig
 
 			copyControls(controlsProxy,controlsBackup,currentPlayer);
 			
-			loadKeyConfigData(currentPlayer);
+			invalidateKeyConfigData(currentPlayer);
+		}
+		
+		private function invalidateKeyConfigData( playerIndex : int ) : void
+		{
+			loadKeyConfigData(playerIndex);
+			checkConflicts();
+			//invalidateText(); //handled by checkConflicts().
 		}
 		
 		private function loadKeyConfigData( playerIndex : int ) : void
 		{
-			var i : int;
-			for ( i = 0; i < 8; i++ )
-				_assignKeyCode(getSavedKeyCode(playerIndex, i), playerIndex, i);
+			var k : int;
+			for ( k = 0; k < nKeysPerPlayer; k++ )
+				_assignKeyCode(getKeyCode(k, playerIndex, false), playerIndex, k);
+		}
+		
+		// Checks all of the currently assigned keys for conflicts, updating
+		//   conflict messages as necessary.
+		private function checkConflicts() : void
+		{
+			var k : int;
 			
-			// TODO: check conflicts
+			for ( k = 0; k < nKeysPerPlayer; k++ )
+			{
+				var keyCode : uint = getKeyCode(k, currentPlayer, true);
+				var conflict : Conflict = checkConflict(keyCode, currentPlayer, k);
+				
+				// These must get cleared or the text will persist into config
+				//   screens for other players.
+				conflictMsgs[k].text = "";
+				
+				if ( conflict == null )
+					continue;
+				
+				if ( currentPlayer == conflict.player )
+				{
+					conflictMsgs[k].text =
+						"Conflict with "+descriptions[conflict.keyId].text;
+				}
+				else
+				{
+					conflictMsgs[k].text = 
+						"Conflict with player "+(conflict.player+1)+"'s "+
+						"key for "+descriptions[conflict.keyId].text;
+				}
+			}
 			
 			invalidateText();
 		}
 
-		/*
-		// Returns player it conflicts with.
-		private function checkConflict( keyCode : uint, keyId : int ) : int
+		// Returns null if there is no conflict.
+		private function checkConflict( keyCode : uint, player : int, keyId : int ) : Conflict
 		{
-			var i : int;
-			var j : int;
+			var p : int;
+			var k : int;
 			
-			for ( i = 0; i < 4; i++ )
+			for ( p = 0; p < nPlayers; p++ )
 			{
-				for ( j = 0; j < 8; j++ )
+				for ( k = 0; k < nKeysPerPlayer; k++ )
 				{
-					var otherCode : uint = getGivenKeyCode(i,j);
+					// Of course a key will conflict with itself.
+					// But we don't care about that.
+					if ( player == p && keyId == k )
+						continue;
+					
+					// Now we check for the meaningful conflicts.
+					var otherCode : uint = getKeyCode(k,p,true);
 					if ( otherCode == keyCode )
 					{
 						var conflict : Conflict = new Conflict();
-						conflict.keyCode = keyCode;
-						conflict.player1 = i;
-						conflict.player2 = currentPlayer;
-						conflict.keyId1 = j;
-						conflict.keyId2 = keyId;
-						conflicts[conflicts.length] = conflict;
-						
+						conflict.player = p;
+						conflict.keyId = k;
+						return conflict;
 					}
 				}
 			}
+			
+			return null;
 		}
 
+		/*
 		private function isConflictNoted(  ) : Boolean
 		{
 		}
 		*/
 		
 		// Only call this when the user is assigning a key.
+		// Conflict checking is done for valid assignments.
 		private function assignKeyCode( keyCode : uint, keyId : int ) : void
 		{
 			//trace("assignKeyCode");
 			if ( !fromButtons ) // Discard tab events bringing focus to the control fields.
+			{
 				_assignKeyCode( keyCode, currentPlayer, keyId );
-			//getNextFocus(); // Only do this for the player.
+				checkConflicts();
+			}
 		}
 		
 		// This may be called by the machine to assign a key (ex: for defaults).
+		// No conflict checking is done.
 		private function _assignKeyCode( keyCode : uint, playerIndex: int, keyId : int ) : void
 		{
-			selections[keyId].keyCode = keyCode;
-			selections[keyId].text = getGivenKeyLabel(playerIndex, keyId);
-			invalidateText();
-			
+			//trace("_assignKeyCode");
+			if ( keyId >= nKeysPerPlayer )
+				throw "keyId >= "+nKeysPerPlayer+", but there are only "+nKeysPerPlayer+" valid keys.";
+
+
 			/*
 			TODO:
 			if (keyId < 4) controlsProxy.setHatKey(playerIndex, keyId, keyCode);
@@ -442,33 +498,44 @@ package keyconfig
 			// This is a bit silly, but it should work.
 			var args : Array = new Array();
 			var i : int;
-			for ( i = 0; i < 8; i++ )
+			for ( i = 0; i < nKeysPerPlayer; i++ )
 			{
 				if ( keyId == i )
 					args[i] = keyCode;
 				else
 					args[i] = 0; // Zero does no keycode assignment.
 			}
-			
+
 			// write out the args and swizzle them into the right order.
 			controlsProxy.setKeys(playerIndex,
 				args[0], args[3], args[1], args[2],
 				args[4], args[5], args[6], args[7]);
+				
+			// update the text that the player sees
+			selections[keyId].text = getKeyLabel(keyId, playerIndex, true);
+			invalidateText();
+
+			// update state on the user's harddrive.
+			var data : Object = getLocalKeyData( keyId, playerIndex );
+			if ( data != null )
+				data.keyCode = keyCode;
 		}
 		
-		private function getGivenKeyLabel( playerIndex : int, keyId : int ) : String
+		/*
+		private function getLatestKeyLabel( playerIndex : int, keyId : int ) : String
 		{
-			return humanReadable( getGivenKeyCode(playerIndex, keyId) );
+			return humanReadable( getLatestKeyCode(playerIndex, keyId) );
 		}
 		
-		private function getGivenKeyCode( playerIndex : int, keyId : int ) : uint
+		private function getLatestKeyCode( playerIndex : int, keyId : int ) : uint
 		{
 			if ( selections[keyId].assigned )
 				return selections[keyId].keyCode;
 			
-			return getSavedKeyCode(playerIndex,keyId);
-		}
+			return getKeyCode(keyId,playerIndex,true);
+		}*/
 		
+		/*
 		private function getSavedKeyCode( playerIndex : int, keyId : int ) : uint
 		{
 			var kgcp : Class = KeyboardGameControlsProxy;
@@ -487,26 +554,146 @@ package keyconfig
 			
 			return 0;
 		}
+		*/
 		
-		private function getDirKeyCode( dirId : int, playerIndex : int ) : uint
+		private function keyIdToSubId( keyId : int ) : int
 		{
-			var local : SharedObject = SharedObject.getLocal(
-				"GameControlsDirKey"+dirId+"x"+playerIndex);
+			var kgcp : Class = KeyboardGameControlsProxy;
+			var subId : int = -1;
 			
-			trace("local.data.keyCode = "+local.data.keyCode);
-			debugTxt.text = "local.data.keyCode = "+local.data.keyCode;
-			debugTxt.setTextFormat(debugFmt);
+			switch ( keyId )
+			{
+				case 0: subId = kgcp.HAT_U; break;
+				case 1: subId = kgcp.HAT_D; break;
+				case 2: subId = kgcp.HAT_L; break;
+				case 3: subId = kgcp.HAT_R; break;
+				case 4: subId = kgcp.BTN_X; break;
+				case 5: subId = kgcp.BTN_A; break;
+				case 6: subId = kgcp.BTN_B; break;
+				case 7: subId = kgcp.BTN_C; break;
+				default: throw "Invalid keyId: "+keyId+". "+
+					"It must be between 0 and "+(nKeysPerPlayer-1)+" inclusive.";
+			}
+			
+			return subId;
+		}
+		
+		// Returns either BUTTON or HAT.
+		private function keyIdToControlType( keyId : int ) : int
+		{
+			var controlType : int;
+			
+			switch ( keyId )
+			{
+				case 0: controlType = HAT; break;
+				case 1: controlType = HAT; break;
+				case 2: controlType = HAT; break;
+				case 3: controlType = HAT; break;
+				case 4: controlType = BUTTON; break;
+				case 5: controlType = BUTTON; break;
+				case 6: controlType = BUTTON; break;
+				case 7: controlType = BUTTON; break;
+				default: throw "Invalid keyId: "+keyId+". "+
+					"It must be between 0 and "+(nKeysPerPlayer-1)+" inclusive.";
+			}
+			
+			return controlType;
+		}
+
+		// Don't call this.  Call getKeyCode with fromMem=true instead.
+		private function getKeyCodeFromMem( keyId : int, playerIndex : int ) : uint
+		{
+			var kgcp : Class = KeyboardGameControlsProxy;
+			var subId : int = keyIdToSubId(keyId);
+			var controlType : int = keyIdToControlType(keyId);
 			
 			var stick : IJoystick = controlsProxy.joystickOpen(playerIndex);
-			return controlsProxy.joystickGetHatKey(stick,dirId);
+			var result : uint;
+			
+			switch ( controlType )
+			{
+				case HAT:
+					result = controlsProxy.joystickGetHatKey(stick,subId);
+					break;
+				
+				case BUTTON:
+					result = controlsProxy.joystickGetButtonKey(stick,subId);
+					break;
+			}
+			
+			return result;
+		}
+		
+		// Grab the current saved key code given by dirId and playerIndex.
+		// 
+		// If fromMem is true, then the value will be retreived from random
+		//   access memory using the controlsProxy object.
+		// The upside is that this is fast.
+		// The downside is that this may be out of sync if the values haven't
+		//   already been loaded from the hard drive.
+		// 
+		// If fromMem is false, This will first try to retreive the value stored on the hard drive
+		//   (or similar non-volatile storage device).
+		// If there is no value on the hard drive, it will use the value loaded
+		//   into random access memory (in controlsProxy) as a default.
+		private function getKeyCode( keyId : int, playerIndex : int, fromMem : Boolean ) : uint
+		{
+			// Check this first before hitting the slow harddrive.
+			if ( fromMem )
+				return getKeyCodeFromMem(keyId,playerIndex);
+			
+			// Attempt to gather the value from the harddrive.
+			var data : Object = getLocalKeyData(keyId,playerIndex);
+			
+			if ( data == null || data.keyCode == undefined )
+			{
+				return getKeyCodeFromMem(keyId,playerIndex);
+			}
+			else
+			{
+				return data.keyCode;
+			}
+		}
+		
+		/*
+		private function getDirKeyCode( dirId : int, playerIndex : int, fromMem : Boolean ) : uint
+		{
+			var data : Object = getLocalDirKeyData(dirId,playerIndex);
+			
+			if ( data == null || data.keyCode == undefined )
+			{
+				return getDirKeyCodeFromMem(dirId,playerIndex);
+			}
+			else
+			{
+				return data.keyCode;
+			}
 		}
 		
 		private function getBtnKeyCode( buttonId : int, playerIndex : int ) : uint
 		{
-			var stick : IJoystick = controlsProxy.joystickOpen(playerIndex);
-			return controlsProxy.joystickGetButtonKey(stick,buttonId);
+			var data : Object = getLocalBtnKeyData(buttonId,playerIndex);
+
+			if ( data == null || data.keyCode == undefined )
+			{
+				var stick : IJoystick = controlsProxy.joystickOpen(playerIndex);
+				return controlsProxy.joystickGetButtonKey(stick,buttonId);
+			}
+			else
+			{
+				return data.keyCode;
+			}
+		}
+		*/
+		
+		// Same as getKeyCode, but returns a human readable description of what
+		//   the key code represents instead of the key code itself.
+		private function getKeyLabel( keyId : int, playerIndex : int, fromMem : Boolean = true ) : String
+		{
+			return humanReadable(getKeyCode(keyId,playerIndex,fromMem));
 		}
 		
+		/*
 		private function getDirKeyLabel( dirId : int, playerIndex : int ) : String
 		{
 			return humanReadable(getDirKeyCode(dirId, playerIndex));
@@ -516,6 +703,7 @@ package keyconfig
 		{
 			return humanReadable(getBtnKeyCode(buttonId, playerIndex));
 		}
+		*/
 		
 		private function humanReadable( keyCode : uint ) : String
 		{
@@ -526,6 +714,50 @@ package keyconfig
 				label = "KeyCode = " + String(keyCode);
 			
 			return label;
+		}
+		
+		/*
+		// Grabs the "data" from a SharedObject representing the directional
+		//   control given by dirId and playerIndex.
+		private function getLocalDirKeyData( dirId : int, playerIndex : int ) : Object
+		{
+			return getLocalKeyData("Dir", dirId, playerIndex);
+		}
+		
+		// Grabs the "data" from a SharedObject representing the button
+		//   control given by buttonId and playerIndex.
+		private function getLocalBtnKeyData( buttonId : int, playerIndex : int ) : Object
+		{
+			return getLocalKeyData("Btn", buttonId, playerIndex);
+		}
+		
+		// This is the guts for getLocalDirKeyData and getLocalBtnKeyData.
+		// It is supposed to be called from those functions only.
+		*/
+		
+		// Grabs the "data" from a SharedObject representing the button
+		//   control given by buttonId and playerIndex.
+		private function getLocalKeyData( keyId : int, playerIndex : int ) : Object
+		{
+			var result : Object = null;
+			var BtnOrDir : String = null;
+			var subId : int = keyIdToSubId(keyId);
+			var controlType : int = keyIdToControlType(keyId);
+			
+			if ( controlType == BUTTON )
+				BtnOrDir = "Btn";
+			else if ( controlType == HAT )
+				BtnOrDir = "Hat";
+			
+			try
+			{
+				var local : SharedObject = SharedObject.getLocal(
+					"GameControls"+BtnOrDir+"Key"+subId+"x"+playerIndex);
+				result = local.data;
+			}
+			catch (e:*) {}
+			
+			return result;
 		}
 		
 		private function onKeyDown( e : KeyboardEvent ) : void
@@ -597,7 +829,7 @@ package keyconfig
 			//trace("SelectKeysMenu.onFocusChange");
 			var i : int;
 			
-			for ( i = 0; i < 8; i++ )
+			for ( i = 0; i < nKeysPerPlayer; i++ )
 			{
 				if ( selections[i] == focus )
 					selections[i].border = true;
@@ -610,7 +842,7 @@ package keyconfig
 		{
 			var i : int;
 			var isConfigFocus : Boolean = false;
-			for ( i = 0; i < 8; i++ )
+			for ( i = 0; i < nKeysPerPlayer; i++ )
 				if ( selections[i].hasFocus )
 					isConfigFocus = true;
 			return isConfigFocus;
@@ -637,7 +869,7 @@ import keyconfig.ICanFocus;
 {
 	public var hasFocus : Boolean = false;
 	public var assigned : Boolean = false;
-	public var keyCode : uint;
+	//public var keyCode : uint;
 	private var rootStage : Stage;
 	private var assignKeyCode : Function;
 	private var id : int;
@@ -724,22 +956,17 @@ import keyconfig.ICanFocus;
 		
 		// This bit actually does key assignment, and only gets executed when
 		//   the onKeyUp is NOT fired from a focus entrance event.
-		this.keyCode = e.keyCode;
+		//this.keyCode = e.keyCode;
 		assigned = true;
-		assignKeyCode( keyCode, id );
+		assignKeyCode( e.keyCode, id );
 	}
 }
 
 
 /* private */ class Conflict
 {
-	public var keyCode : uint;
-	
-	public var player1 : int;
-	public var player2 : int;
-
-	public var keyId1 : int;
-	public var keyId2 : int;
+	public var player : int;
+	public var keyId : int;
 
 	public function Conflict()
 	{
