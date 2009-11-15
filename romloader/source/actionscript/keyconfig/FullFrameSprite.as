@@ -79,6 +79,9 @@ package keyconfig
 			focusRect = false;
 			_rootStage = rootStage;
 			
+			if ( rootStage == null )
+				throw "rootStage is null!";
+			
 
 			// Since these don't affect global operation, they don't need
 			//   to be under the jurisdiction of activate/deactivate.

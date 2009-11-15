@@ -85,6 +85,9 @@ package keyconfig
 		{
 			super(rootStage);
 			
+			if ( controlsProxy == null )
+				throw "controlsProxy is null!";
+			
 			mainMenu = new MainMenu(rootStage, controlsProxy, onHeaderChange);
 			mainMenu.gotoConfig = gotoConfig;
 			mainMenu.gotoDone = gotoDone;
