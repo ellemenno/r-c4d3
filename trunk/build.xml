@@ -14,7 +14,7 @@ Top level build file for all components of the r-c4d3 platform.
 	</target>
 	
     <target name="build" depends="framework, romloader, roms" 
-		description="&gt; this is the main task: framework, romloader, roms (more to come online)"/>
+		description="&gt; this is the main task: framework, romloader, roms"/>
 	
 		
 	<target name="framework" description="calls the build task of ${basedir}/framework/build.xml">
