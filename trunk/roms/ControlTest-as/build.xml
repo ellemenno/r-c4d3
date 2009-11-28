@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="r-c4d3 roms: Control Test (as3)" default="-usage" basedir="./">
+<project name="r-c4d3.roms.ControlTest-as3" default="-usage" basedir="./">
 
 <description>
 Tasks to build and package the AS3 Control Test rom.
