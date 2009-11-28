@@ -3,11 +3,12 @@
 <project name="init" default="init" basedir="./">
 
 <description>
-Initialization code common to all build files.
+Looks for and sets common properties used by all the build files in the r-c4d3 project.
 </description>
 
-	<target name="init"/> <!-- This never gets called. -->
+	<target name="init"/> <!-- This is never called from this file, but is set as the default target. -->
 
+	<!-- Set convenience suffixes for executables across platforms. -->
 	<condition property="exe" value=".exe">
 		<os family="windows"/>
 	</condition>
@@ -15,75 +16,86 @@ Initialization code common to all build files.
 		<os family="unix"/>
 	</condition>
 	
+	
 	<!-- Look for .properties files in some convenient locations. -->
-	<property file="${user.home}/${project.name}.properties"/>
-	<property file="${user.home}/build.properties"/>
-	<property name="config.filename" value="${user.name}.properties"/>
-	<property file="config/${config.filename}"/>
-	<property file="build.properties"/>
+	<property name="dir.trunk" value="${basedir}."/>
 	
-	<!-- Derive some properties from FLEX_HOME -->
-	<property name="flex.bin" value="${FLEX_HOME}/bin"/>
-	<property name="flex.libs" value="${FLEX_HOME}/lib"/>
-	<property name="flex.compc" value="${flex.bin}/compc${exe}"/>
-	<property name="flex.mxmlc" value="${flex.bin}/mxmlc${exe}"/>
-	<property name="flex.asdoc" value="${flex.bin}/asdoc${exe}"/>
-	<property name="flex.frameworks" value="${FLEX_HOME}/frameworks"/>
+	<property name="props.loc01" value="${user.home}/${ant.project.name}.properties"/>
+	<property name="props.loc02" value="${user.home}/build.properties"/>
+	<property name="props.loc03" value="config/${user.name}.properties"/>
+	<property name="props.loc04" value="${dir.trunk}/build.properties"/>
+	<property name="props.loc05" value="${basedir}/build.properties"/>
 	
-	<fail unless="FLEX_HOME">.
-
+	<property file="${props.loc01}"/>
+	<property file="${props.loc02}"/>
+	<property file="${props.loc03}"/>
+	<property file="${props.loc04}"/>
+	<property file="${props.loc05}"/>
+	
+	<property name="NL" value="${line.separator}" />
+	<property name="msg.props.01" value="${NL}Property files can be defined in any of these places (and are checked in this order):" />
+	<property name="msg.props.02" value="	1) ${props.loc01}" />
+	<property name="msg.props.03" value="	2) ${props.loc02}" />
+	<property name="msg.props.04" value="	3) ${props.loc03}" />
+	<property name="msg.props.05" value="	4) ${props.loc04} (in the trunk of r-c4d3)" />
+	<property name="msg.props.06" value="	5) ${props.loc05}" />
+	<property name="msg.props.07" value="${NL}Properties are defined in those files by using lines like the following:" />
+	<property name="msg.props.08" value="${NL}e.g. Windows:${NL}${NL}FLEX_HOME=C:/Program Files/flex" />
+	<property name="msg.props.09" value="${NL}e.g. OS X / Linux:${NL}${NL}FLEX_HOME=/usr/local/share/flexsdk" />
+	<property name="msg.props.10" value="${NL}Paths in properties files should always use forward slashs (/), even on Windows." />
+	<property name="msg.props" value="${msg.props.01}${NL}${msg.props.02}${NL}${msg.props.03}${NL}${msg.props.04}${NL}${msg.props.05}${NL}${msg.props.06}${NL}${msg.props.07}${NL}${msg.props.08}${NL}${msg.props.09}${NL}${msg.props.10}${NL}" />
+	
+	
+	<!-- Fail when FLEX_HOME isn't set -->
+	<fail unless="FLEX_HOME">${NL}
 Please set the FLEX_HOME property to a valid path for the Flex SDK on your machine.
-
-Properties can be defined in any of these places:
-	- ${user.home}/${project.name}.properties
-	- ${user.home}/build.properties
-	- config/${config.filename}
-	- ${basedir}/build.properties
-
-Properties are defined in those files by using lines like these:
-FLEX_HOME=/usr/local/share/flexsdk
-(or in Windows)
-FLEX_HOME=C:/Program Files/flex
-
-Paths in properties files always use forward slashs (/), even on Windows.
+${msg.props}
 	</fail>
-	<fail unless="flex.frameworks"/>
-	<fail unless="flex.bin"/>
-	<fail unless="flex.libs"/>
-	<fail unless="flex.compc"/>
-	<fail unless="flex.mxmlc"/>
-	<fail unless="flex.asdoc"/>
 	
-	<!-- HACK: -->
-	<!-- Ant doesn't support conditional echoing. -->
-	<!-- As a result, we need some hacks and magic to make it happen. -->
-	<!-- echo's will typically not display if they are on the debug level. -->
-	<!-- So if we don't want to echo, we set its level to debug. -->
+	<!-- Otherwise derive some properties from FLEX_HOME or fail trying -->
+	<property name="flex.libs" value="${FLEX_HOME}/lib"/>
+	<fail unless="flex.libs">${FLEX_HOME}/lib could not be found</fail>
+	
+	<property name="flex.frameworks" value="${FLEX_HOME}/frameworks"/>
+	<fail unless="flex.frameworks">${FLEX_HOME}/frameworks could not be found</fail>
+	
+	<property name="flex.bin" value="${FLEX_HOME}/bin"/>
+	<fail unless="flex.bin">${FLEX_HOME}/bin could not be found</fail>
+	
+	<property name="flex.asdoc" value="${flex.bin}/asdoc${exe}"/>
+	<fail unless="flex.asdoc">asdoc{exe} could not be found in ${flex.bin}</fail>
+	
+	<property name="flex.compc" value="${flex.bin}/compc${exe}"/>
+	<fail unless="flex.compc">compc{exe} could not be found in ${flex.bin}</fail>
+	
+	<property name="flex.mxmlc" value="${flex.bin}/mxmlc${exe}"/>
+	<fail unless="flex.mxmlc">mxmlc${exe} could not be found in ${flex.bin}</fail>
+
+	
+	<property name="haxe.exe" value="${HAXE_HOME}/haxe${exe}"/>
+	<!-- Try to warn (but not fail) when haxe.exe isn't available -->
+	<!--	 HACK: -->
+	<!--	 Ant doesn't support conditional echoing. -->
+	<!--	 So we are relying on an echo level hack to make it happen: -->
+	<!--		 debug level echos will typically not display (unless running ant in debug mode). -->
+	<!--		 warning level echos typically will. -->
+	<!--	 So we choose debug when haxe.exe is available, and warning when not. -->
 	<condition property="haxe_not_found" value="debug" else="warning">
-		<isset property="haxe.exe"/>
+		<available file="${haxe.exe}"/>
 	</condition>
 	
-	<echo level="${haxe_not_found}">
-The haxe.exe property was not set.
+	<echo level="${haxe_not_found}">${NL}
+The haxe executable could not be located, possibly because the HAXE_HOME property was not set.
 haXe targets will NOT be built.
-To build haXe targets, this property must be set to the path for the haXe compiler's executable.
 
-Properties can be defined in any of these places:
-	- ${user.home}/${project.name}.properties
-	- ${user.home}/build.properties
-	- config/${config.filename}
-
-Properties are defined in those files by using lines like these:
-haxe.exe=/usr/bin/haxe
-(or in Windows)
-haxe.exe=C:/Program Files/Motion-Twin/haxe/haxe.exe
-
-Paths in properties files always use forward slashs (/), even on Windows.		
+To build haXe targets, set the HAXE_HOME property to a valid path for the haXe compiler's parent folder.
+The current value of $${HAXE_HOME} is ${HAXE_HOME}
+${msg.props}
 	</echo>
-	<echo level="debug">
-The above message may or may not be true.
-Run in a non-debug level to find out for sure.
-This is a hack.  See build_init.xml for details.
+	<echo level="debug">${NL}
+The above message about your haxe property may be a false warning if you ran Ant in debug mode.
+Run in a non-debug level to find out for sure (sorry, this is a hack so that haXe is not required for all builds).
+See ${basedir}/build_init.xml for details.
 	</echo>
 
 </project>

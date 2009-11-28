@@ -1,0 +1,10 @@
+
+## Locate the installation of your Flex SDK.
+## Use / instead of \ on Windows.
+
+FLEX_HOME=C:/flex/flex_sdk_3.4
+
+
+## Optional - locate the installation of your Haxe SDK.
+HAXE_HOME=C:/haxe/haxe-2.04-win
+
