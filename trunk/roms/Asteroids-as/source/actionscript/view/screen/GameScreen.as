@@ -2,17 +2,25 @@
 
 package view.screen
 {
+
+	import flash.display.DisplayObject;
+	
+	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
+	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
 	
 	import control.Signals;
+	import model.AsteroidsModel;
 	import util.f.Message;
-	import view.sprite.Ship;
 	import view.screen.ScreenBase;
+	import view.screen.AsteroidsScreen;
+	
 	
 	
 	public class GameScreen extends ScreenBase
 	{
 		
-		private var ship1:Ship;
+		private var gameModel:AsteroidsModel;
+		private var gameView:AsteroidsScreen;
 		
 		
 		public function GameScreen():void
@@ -24,24 +32,45 @@ package view.screen
 		
 		override public function initialize():Boolean
 		{
-			graphics.beginFill(0xaaffff);
-			graphics.drawRect(0,0, stage.stageWidth,stage.stageHeight);
-			graphics.endFill();
+			C.out(this, "initialize()");
+			gameModel = new AsteroidsModel();
+			//TODO: gameModel.initialize();
 			
-			//ship1 = addChild(new Ship) as Ship;
+			gameView = addChild(new AsteroidsScreen() as DisplayObject) as AsteroidsScreen;
+			gameView.initialize();
 			
 			return true;
 		}
 		
 		override public function shutDown():Boolean
 		{
-			//removeChild(ship1);
-			graphics.clear();
+			C.out(this, "shutDown()");
+			//TODO: gameModel.stop();
+			gameModel = null;
+			
+			gameView.shutDown();
+			removeChild(gameView);
+			gameView = null;
+			
 			return true;
 		}
 		
+		// IController interface (pass-thru)
 		override public function onFrameUpdate(dt:int):void
 		{
+			gameModel.tick(dt);
+			// poll model and update view
+			gameView.onFrameUpdate(dt);
+		}
+		
+		override public function onHatMotion(e:JoyHatEvent):void
+		{
+			// switch on e.player, then handle up/dn/lf/rg to update model
+		}
+		
+		override public function onButtonMotion(e:JoyButtonEvent):void
+		{
+			// switch on e.player, then handle x/a/b/c to update model
 		}
 		
 		

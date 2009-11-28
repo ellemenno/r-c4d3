@@ -8,11 +8,13 @@ package view.screen
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
 	
+	import control.IController;
+	import util.IDisposable;
 	import view.screen.IScreen;
 	
 	
 	
-	public class ScreenBase extends Sprite implements IScreen
+	public class ScreenBase extends Sprite implements IScreen, IController, IDisposable
 	{
 		
 		protected var _type:String;
@@ -26,7 +28,7 @@ package view.screen
 		}
 		
 		
-		
+		// IScreen interface
 		public function set type(value:String):void
 		{
 			C.out(this, "set type() - " +value);
@@ -39,6 +41,7 @@ package view.screen
 		}
 		
 		
+		// IDisposable interface
 		public function shutDown():Boolean
 		{
 			C.out(this, "shutDown()");
@@ -52,6 +55,7 @@ package view.screen
 		}
 		
 		
+		// IController interface
 		public function onHatMotion(e:JoyHatEvent):void
 		{
 			C.out(this, "onHatMotion: " +e);

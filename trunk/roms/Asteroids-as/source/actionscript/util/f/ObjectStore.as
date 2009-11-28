@@ -54,7 +54,7 @@
 //
 //
 // Contributors: Ted Patrick, Patrick Denny
-//
+// Source: http://github.com/adobeted/FDOT
 
 package util.f
 {
