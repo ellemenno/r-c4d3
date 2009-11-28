@@ -1,33 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="r-c4d3 roms: Control Test (as3)" default="-usage" basedir="./">
+<project name="r-c4d3.roms.Asteroids-as3" default="-usage" basedir="./">
 
 <description>
 Tasks to build and package the AS3 Asteroids game rom.
 </description>
 	
-	<condition property="exe" value=".exe">
-		<os family="windows"/>
-	</condition>
-	<condition property="exe" value="">
-		<os family="unix"/>
-	</condition>
+	<property name="dir.trunk" value="${basedir}/../.."/>
+	<import file="${dir.trunk}/build_init.xml"/>
 	
 	<property name="dir.source" value="${basedir}/source"/>
 	<property name="dir.config" value="${basedir}/config"/>
 	<property name="dir.target" value="${basedir}/target"/>
 	
-	<property name="dir.releases" value="${basedir}/../../_releases"/>
-	
-	<property file="build.properties"/>
-	
-	<fail unless="FLEX_HOME" message="please set the FLEX_HOME property in 'build.properties' to a valid path to the Flex SDK on your machine" />
-	<fail unless="flex.frameworks"/>
-	<fail unless="flex.bin"/>
-	<fail unless="flex.libs"/>
-	<fail unless="flex.compc"/>
-	<fail unless="flex.mxmlc"/>
-	<fail unless="flex.asdoc"/>
+	<property name="dir.releases" value="${dir.trunk}/_releases"/>
 	
 	
 	
@@ -61,10 +47,10 @@ Tasks to build and package the AS3 Asteroids game rom.
 		<mkdir dir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.source}/resources/config/romloader-config.xml" todir="${dir.target}/temp-desktop"/>
-		<copy file="${dir.releases}/romloader-desktop-fp09-debug.exe" tofile="${dir.target}/temp-desktop/Asteroids.exe"/>
+		<copy file="${dir.releases}/romloader-desktop-fp09-debug${exe}" tofile="${dir.target}/temp-desktop/Asteroids${exe}"/>
 		<zip destfile="${dir.target}/Asteroids-desktop.zip" basedir="${dir.target}/temp-desktop"/>
 		
-		<exec executable="${dir.target}/temp-desktop/Asteroids.exe" failonerror="true"/>
+		<exec executable="${dir.target}/temp-desktop/Asteroids${exe}" failonerror="false"/>
 	</target>
 	
     <target name="package-web" description="collect the web-based version and its dependencies into a zip file">

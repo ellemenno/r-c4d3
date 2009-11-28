@@ -50,7 +50,7 @@
 // 		Message.remove();  
 //
 // Contributors: Ted Patrick
-//
+// Source: http://github.com/adobeted/FDOT
 
 package util.f
 {
