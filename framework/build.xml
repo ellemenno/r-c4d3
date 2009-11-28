@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="r-c4d3 framework api (as3)" default="-usage" basedir="./">
+<project name="r-c4d3.framework-as3" default="-usage" basedir="./">
 
 <description>
 Tasks to build and package the r-c4d3 as3 framework.
