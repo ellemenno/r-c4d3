@@ -3,6 +3,12 @@
 package view.screen
 {
 	
+	import flash.text.TextField;
+	import flash.text.TextFormat;
+	import flash.text.TextFieldAutoSize;
+	
+	import FontAssets;
+	
 	import control.Signals;
 	import util.f.Message;
 	import view.screen.ScreenBase;
@@ -25,9 +31,22 @@ package view.screen
 		{
 			timeElapsed = 0;
 			
-			graphics.beginFill(0xffaaaa);
+			graphics.beginFill(0x330000);
 			graphics.drawRect(0,0, stage.stageWidth,stage.stageHeight);
 			graphics.endFill();
+			
+			var format:TextFormat = FontAssets.deLarge;
+			format.size = 120;
+			
+			var title:TextField = addChild(new TextField()) as TextField;
+			title.selectable = false;
+			title.embedFonts = true;
+			title.autoSize = TextFieldAutoSize.LEFT;
+			title.width = stage.stageWidth;
+			title.text = "ASTEROIDS";
+			title.setTextFormat(format);
+			title.x = stage.stageWidth*.5 - title.width*.5;
+			title.y = stage.stageHeight*.5 - title.height*.75;
 			
 			return true;
 		}

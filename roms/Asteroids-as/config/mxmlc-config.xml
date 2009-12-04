@@ -76,6 +76,8 @@
 		<!-- (relative to this file's location)-->
 		<source-path>
 			<path-element>../source/actionscript</path-element>
+			<path-element>../source/resources/fonts</path-element>
+			<path-element>../source/resources/graphics</path-element>
 		</source-path>
 	</compiler>
 	
