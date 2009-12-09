@@ -8,16 +8,17 @@ package view.screen
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
 	
-	import control.IController;
+	import util.IControllable;
 	import util.IDisposable;
 	import view.screen.IScreen;
 	
 	
 	
-	public class ScreenBase extends Sprite implements IScreen, IController, IDisposable
+	public class ScreenBase extends Sprite implements IScreen, IControllable, IDisposable
 	{
 		
 		protected var _type:String;
+		protected var timeElapsed:int;
 		
 		
 		
@@ -44,13 +45,17 @@ package view.screen
 		// IDisposable interface
 		public function shutDown():Boolean
 		{
-			C.out(this, "shutDown()");
+			var s:int = Math.floor(timeElapsed*.001);
+			var m:int = (s >= 60) ? Math.floor(s/60) : 0;
+			var t:String = (m > 0) ? m +"m " +(s - m*60) +"s" : s +"s";
+			C.out(this, "shutDown() " +t +" elapsed");
 			return true;
 		}
 		
 		public function initialize():Boolean
 		{
 			C.out(this, "initialize()");
+			timeElapsed = 0;
 			return true;
 		}
 		
@@ -68,6 +73,7 @@ package view.screen
 		
 		public function onFrameUpdate(dt:int):void
 		{
+			timeElapsed += dt;
 			//C.out(this, "onFrameUpdate (" +dt +"ms elapsed)");
 		}
 	}

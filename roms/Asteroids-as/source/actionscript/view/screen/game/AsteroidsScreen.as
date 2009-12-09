@@ -1,6 +1,6 @@
 
 
-package view.screen
+package view.screen.game
 {
 	
 	import view.screen.ScreenBase;
@@ -17,6 +17,11 @@ package view.screen
 			super();
 		}
 		
+		
+		override public function onFrameUpdate(dt:int):void
+		{
+			super.onFrameUpdate(dt);
+		}
 		
 	}
 }

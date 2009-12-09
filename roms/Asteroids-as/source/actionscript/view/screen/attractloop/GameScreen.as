@@ -1,6 +1,6 @@
 
 
-package view.screen
+package view.screen.attractloop
 {
 
 	import flash.display.DisplayObject;
@@ -12,7 +12,7 @@ package view.screen
 	import model.AsteroidsModel;
 	import util.f.Message;
 	import view.screen.ScreenBase;
-	import view.screen.AsteroidsScreen;
+	import view.screen.game.AsteroidsScreen;
 	
 	
 	
@@ -32,7 +32,8 @@ package view.screen
 		
 		override public function initialize():Boolean
 		{
-			C.out(this, "initialize()");
+			if (!super.initialize()) return false;
+			
 			gameModel = new AsteroidsModel();
 			//TODO: gameModel.initialize();
 			
@@ -44,7 +45,6 @@ package view.screen
 		
 		override public function shutDown():Boolean
 		{
-			C.out(this, "shutDown()");
 			//TODO: gameModel.stop();
 			gameModel = null;
 			
@@ -52,15 +52,19 @@ package view.screen
 			removeChild(gameView);
 			gameView = null;
 			
-			return true;
+			return super.shutDown();
 		}
 		
 		// IController interface (pass-thru)
 		override public function onFrameUpdate(dt:int):void
 		{
+			super.onFrameUpdate(dt);
+			
 			gameModel.tick(dt);
-			// poll model and update view
+			//TODO: poll model and update view
 			gameView.onFrameUpdate(dt);
+			
+			if (timeElapsed > 3*1000) gameOver();
 		}
 		
 		override public function onHatMotion(e:JoyHatEvent):void

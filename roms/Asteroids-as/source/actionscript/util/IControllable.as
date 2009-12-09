@@ -1,5 +1,5 @@
 
-package control
+package util
 {
 	
 	import flash.events.Event;
@@ -7,10 +7,8 @@ package control
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
 	
-	import util.IDisposable;
 	
-	
-	public interface IScreenController extends IDisposable
+	public interface IControllable
 	{
 		function onHatMotion(e:JoyHatEvent):void
 		function onButtonMotion(e:JoyButtonEvent):void
