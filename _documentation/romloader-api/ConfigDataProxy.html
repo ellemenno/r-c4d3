@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="print.css" type="text/css" media="print">
-<meta content="ConfigDataProxy,loggingEnabled,p1A,p1B,p1C,p1D,p1HasKeys,p1L,p1R,p1U,p1X,p2A,p2B,p2C,p2D,p2HasKeys,p2L,p2R,p2U,p2X,p3A,p3B,p3C,p3D,p3HasKeys,p3L,p3R,p3U,p3X,p4A,p4B,p4C,p4D,p4HasKeys,p4L,p4R,p4U,p4X,romUrl,xml,xmlString,toString" name="keywords">
+<meta content="ConfigDataProxy,loggingEnabled,p1A,p1B,p1C,p1D,p1HasKeys,p1L,p1R,p1U,p1X,p2A,p2B,p2C,p2D,p2HasKeys,p2L,p2R,p2U,p2X,p3A,p3B,p3C,p3D,p3HasKeys,p3L,p3R,p3U,p3X,p4A,p4B,p4C,p4D,p4HasKeys,p4L,p4R,p4U,p4X,romUrl,xml,xmlString,getPropertyValue,toString" name="keywords">
 <title>ConfigDataProxy</title>
 </head>
 <body>
@@ -257,6 +257,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription">
    Constructor
   </div>
+</td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getPropertyValue()">getPropertyValue</a>(propertyName:String):String</div>
+<div class="summaryTableDescription"> 
+   Arbitrary property request 
+   </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
@@ -781,10 +790,34 @@ showHideInherited();
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="getPropertyValue()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getPropertyValue</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getPropertyValue(propertyName:String):String</code><p> 
+   Arbitrary property request 
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">propertyName</span>:String</code> &mdash; - name attribute value of property node to retrieve
+  </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code></td>
+</tr>
+</table>
+</div>
 <a name="toString()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">toString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">toString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
