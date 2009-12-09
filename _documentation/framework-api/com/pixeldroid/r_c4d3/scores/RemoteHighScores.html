@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="RemoteHighScores,com.pixeldroid.r_c4d3.scores.RemoteHighScores,remoteUrl,addEventListener,closeScoresTable,dispatchEvent,hasEventListener,initialize,load,openScoresTable,removeEventListener,store,toJson,willTrigger" name="keywords">
+<meta content="RemoteHighScores,com.pixeldroid.r_c4d3.scores.RemoteHighScores,remoteUrl,closeScoresTable,initialize,load,store,toJson" name="keywords">
 <title>com.pixeldroid.r_c4d3.scores.RemoteHighScores</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
 <td align="left" class="titleTableTitle">R-C4D3 Framework Library</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?com/pixeldroid/r_c4d3/scores/RemoteHighScores.html&amp;com/pixeldroid/r_c4d3/scores/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;RemoteHighScores</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td>
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;RemoteHighScores</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
 </tr>
 <tr class="titleTableRow3">
 <td colspan="2">&nbsp;</td>
@@ -27,7 +27,7 @@
 </table>
 <script type="text/javascript" language="javascript">
 <!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class RemoteHighScores"); titleBar_setSubNav(false,true,false,false,true,false,true,false,false,false,false,false,false,false);}
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class RemoteHighScores"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
 --></script>
 <div class="MainContent">
 <table cellspacing="0" cellpadding="0" class="classHeaderTable">
@@ -40,13 +40,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr>
 <td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">RemoteHighScores <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> <a href="HighScores.html">HighScores</a></td>
 </tr>
-<tr>
-<td class="classHeaderTableLabel">Implements</td><td>flash.events.IEventDispatcher</td>
-</tr>
 </table>
 <p></p>
  <code>RemoteHighScores</code> extends the abstract HighScores base class to
- store the contents of HighScores instance to a remote server,
+ store high scores and initials on a remote server,
  using a web service that accepts the following parameters:<ul>
  <li><code>game</code> : <i>String</i> Unique game id</li>
  <li><code>format</code> : <i>String</i> "json" or "vrml"</li>
@@ -95,16 +92,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 <tr class="hideInheritedProperty">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="HighScores.html#length">length</a> : uint<div class="summaryTableDescription">
-  The total number of entries currently in the high score list.</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="HighScores.html#length">length</a> : uint<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#remoteUrl">remoteUrl</a> : String<div class="summaryTableDescription"></div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#remoteUrl">remoteUrl</a> : String<div class="summaryTableDescription">
+  Provide the high score storage webservice URL.</div>
 </td><td class="summaryTableOwnerCol">RemoteHighScores</td>
 </tr>
 <tr class="hideInheritedProperty">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="HighScores.html#totalScores">totalScores</a> : int<div class="summaryTableDescription"></div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="HighScores.html#totalScores">totalScores</a> : int<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 </table>
@@ -125,11 +122,29 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="HighScores.html#ED">ED</a> : EventDispatcher<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
+</tr>
+<tr class="hideInheritedProtectedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="HighScores.html#initials">initials</a> : Array<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 <tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="HighScores.html#MAX_SCORES">MAX_SCORES</a> : int<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="HighScores.html#retrieveEvent">retrieveEvent</a> : <a href="../scores/ScoreEvent.html">ScoreEvent</a>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
+</tr>
+<tr class="hideInheritedProtectedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="HighScores.html#scores">scores</a> : Array<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="HighScores.html#storeEvent">storeEvent</a> : <a href="../scores/ScoreEvent.html">ScoreEvent</a>
+<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 </table>
@@ -154,15 +169,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#RemoteHighScores()">RemoteHighScores</a>(id:String = null, maxScores:int = 10, accessUrl:String = null)</div>
 <div class="summaryTableDescription">
-    </div>
+  Constructor.</div>
 </td><td class="summaryTableOwnerCol">RemoteHighScores</td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#addEventListener()">addEventListener</a>(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void</div>
+<a class="signatureLink" href="HighScores.html#addEventListener()">addEventListener</a>(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void</div>
 <div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
+</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="HighScores.html#clear()">clear</a>():void</div>
+<div class="summaryTableDescription"> </div>
+</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -171,158 +193,129 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol">RemoteHighScores</td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#dispatchEvent()">dispatchEvent</a>(evt:Event):Boolean</div>
+<a class="signatureLink" href="HighScores.html#dispatchEvent()">dispatchEvent</a>(evt:Event):Boolean</div>
 <div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
+</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="HighScores.html#getAllInitials()">getAllInitials</a>():Array</div>
+<div class="summaryTableDescription"> </div>
+</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="HighScores.html#getAllScores()">getAllScores</a>():Array</div>
+<div class="summaryTableDescription"> </div>
+</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="HighScores.html#getInitials()">getInitials</a>(i:int):String</div>
-<div class="summaryTableDescription">
-  Retrieve a set of initials by zero-based rank index.</div>
+<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="HighScores.html#getScore()">getScore</a>(i:int):Number</div>
-<div class="summaryTableDescription">
-  Retrieve a score by zero-based rank index.</div>
+<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#hasEventListener()">hasEventListener</a>(type:String):Boolean</div>
+<a class="signatureLink" href="HighScores.html#hasEventListener()">hasEventListener</a>(type:String):Boolean</div>
 <div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#initialize()">initialize</a>(id:String = null):void</div>
-<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
+</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="HighScores.html#insert()">insert</a>(s:Number, i:String):Boolean</div>
-<div class="summaryTableDescription">
-  Add a score and associated initials string into the high score list,
-  possibly bumping off the lowest score.</div>
+<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="HighScores.html#isEligible()">isEligible</a>(score:Number):Boolean</div>
-<div class="summaryTableDescription">
-  A quick rejection test for candidate scores.</div>
+<a class="signatureLink" href="HighScores.html#insertAll()">insertAll</a>(s:Array, i:Array):Array</div>
+<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#load()">load</a>():void</div>
-<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#openScoresTable()">openScoresTable</a>(gameId:String):void</div>
-<div class="summaryTableDescription"> </div>
-</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#removeEventListener()">removeEventListener</a>(type:String, listener:Function, useCapture:Boolean = false):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  Retrieve the scores from the server.</div>
 </td><td class="summaryTableOwnerCol">RemoteHighScores</td>
 </tr>
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="HighScores.html#reset()">reset</a>():void</div>
-<div class="summaryTableDescription">
-  Clear the high score list, erasing all scores and initials.</div>
+<a class="signatureLink" href="HighScores.html#openScoresTable()">openScoresTable</a>(gameId:String):void</div>
+<div class="summaryTableDescription"> </div>
+</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="HighScores.html#removeEventListener()">removeEventListener</a>(type:String, listener:Function, useCapture:Boolean = false):void</div>
+<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#store()">store</a>():void</div>
-<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
-</tr>
-<tr class="hideInheritedMethod">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="HighScores.html#testInsert()">testInsert</a>(N:Array):Array</div>
 <div class="summaryTableDescription">
-  Test the insertion of multiple scores in one call.</div>
-</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
+  Submit the scores to the server.</div>
+</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#toJson()">toJson</a>():String</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+  Generates a valid JSON representation of the high scores table.</div>
 </td><td class="summaryTableOwnerCol">RemoteHighScores</td>
 </tr>
 <tr class="hideInheritedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="HighScores.html#toString()">toString</a>():String</div>
-<div class="summaryTableDescription">
-  Generate a human-readable version of the high score list.</div>
+<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#willTrigger()">willTrigger</a>(type:String):Boolean</div>
+<a class="signatureLink" href="HighScores.html#willTrigger()">willTrigger</a>(type:String):Boolean</div>
 <div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
+</td><td class="summaryTableOwnerCol"><a href="HighScores.html">HighScores</a></td>
 </tr>
 </table>
 </div>
-<a name="eventSummary"></a>
+<a name="protectedMethodSummary"></a>
 <div class="summarySection">
-<div class="summaryTableTitle">Events</div>
-<table id="summaryTableEvent" class="summaryTable " cellpadding="3" cellspacing="0">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
-<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#event:dataError">dataError</a>
-</div>
-</td><td class="summaryTableDescription summaryTableCol">
- Dispatched when the score posting or retrieval process fails.</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#event:load">load</a>
-</div>
-</td><td class="summaryTableDescription summaryTableCol">
- Dispatched when the score retrieval process has completed.</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#event:save">save</a>
-</div>
-</td><td class="summaryTableDescription summaryTableCol">
- Dispatched when the score saving process has completed.</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
+<a class="signatureLink" href="#initialize()">initialize</a>():void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">RemoteHighScores</td>
 </tr>
 </table>
 </div>
@@ -340,7 +333,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>remoteUrl:String</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<code>remoteUrl:String</code>&nbsp;&nbsp;[read-write]<p>
+  Provide the high score storage webservice URL.
+    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get remoteUrl():String</code>
 <br>
@@ -357,6 +352,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function RemoteHighScores(id:String = null, maxScores:int = 10, accessUrl:String = null)</code><p>
+  Constructor.
     </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -381,94 +377,14 @@ showHideInherited();
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
-<a name="addEventListener()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">addEventListener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void</code><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">listener</span>:Function</code></td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">useCapture</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">priority</span>:int</code> (default = <code>0</code>)<code></code></td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">useWeakReference</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
-</tr>
-</table>
-</div>
 <a name="closeScoresTable()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">closeScoresTable</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">closeScoresTable</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
 </tr>
 </table>
 <div class="detailBody">
 <code>public override function closeScoresTable():void</code><p> </p></div>
-<a name="dispatchEvent()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">dispatchEvent</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function dispatchEvent(evt:Event):Boolean</code><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">evt</span>:Event</code></td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>Boolean</code></td>
-</tr>
-</table>
-</div>
-<a name="hasEventListener()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">hasEventListener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function hasEventListener(type:String):Boolean</code><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>Boolean</code></td>
-</tr>
-</table>
-</div>
 <a name="initialize()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -476,12 +392,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public override function initialize(id:String = null):void</code><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">id</span>:String</code> (default = <code>null</code>)<code></code></td>
-</tr>
-</table>
+<code>protected override function initialize():void</code>
 </div>
 <a name="load()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -490,47 +401,15 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function load():void</code>
+<code>public override function load():void</code><p>
+  Retrieve the scores from the server.
+    </p><p>Dispatches <code>com.pixeldroid.r_c4d3.scores.ScoreEvent.LOAD</code></p>
+  <p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../scores/ScoreEvent.html" target="">com.pixeldroid.r_c4d3.scores.ScoreEvent</a>
 </div>
-<a name="openScoresTable()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">openScoresTable</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public override function openScoresTable(gameId:String):void</code><p> </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">gameId</span>:String</code></td>
-</tr>
-</table>
-</div>
-<a name="removeEventListener()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">removeEventListener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void</code><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">listener</span>:Function</code></td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">useCapture</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
-</tr>
-</table>
 </div>
 <a name="store()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -539,7 +418,15 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public override function store():void</code>
+<code>public override function store():void</code><p>
+  Submit the scores to the server.
+    </p><p>Dispatches <code>com.pixeldroid.r_c4d3.scores.ScoreEvent.SAVE</code></p>
+  <p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../scores/ScoreEvent.html" target="">com.pixeldroid.r_c4d3.scores.ScoreEvent</a>
+</div>
 </div>
 <a name="toJson()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -548,8 +435,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function toJson():String</code>
-<p></p>
+<code>public function toJson():String</code><p>
+  Generates a valid JSON representation of the high scores table.
+  </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -557,75 +445,6 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="willTrigger()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">willTrigger</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function willTrigger(type:String):Boolean</code><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>Boolean</code></td>
-</tr>
-</table>
-</div>
-<div class="detailSectionHeader">Event detail</div>
-<a name="event:dataError"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">dataError</td><td class="detailHeaderType">event&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<span class="label">Event object type: </span><a href=""><code>com.pixeldroid.data.DataEvent</code></a>
-<br>
-<p></p><p>
- Dispatched when the score posting or retrieval process fails.
- 
- </p></div>
-<a name="event:load"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">load</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<span class="label">Event object type: </span><a href="../scores/ScoreEvent.html"><code>com.pixeldroid.r_c4d3.scores.ScoreEvent</code></a>
-<br>
-<span class="label">ScoreEvent.type property = </span><a href="../scores/ScoreEvent.html#LOAD"><code>com.pixeldroid.r_c4d3.scores.ScoreEvent.LOAD</code></a>
-<br><p>
- Dispatched when the score retrieval process has completed.
- 
- </p><p>
-  Value of the <code>type</code> property of the event object for a <code>load</code> event.
-  
-  </p></div>
-<a name="event:save"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">save</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<span class="label">Event object type: </span><a href="../scores/ScoreEvent.html"><code>com.pixeldroid.r_c4d3.scores.ScoreEvent</code></a>
-<br>
-<span class="label">ScoreEvent.type property = </span><a href="../scores/ScoreEvent.html#SAVE"><code>com.pixeldroid.r_c4d3.scores.ScoreEvent.SAVE</code></a>
-<br><p>
- Dispatched when the score saving process has completed.
- 
- </p><p>
-  Value of the <code>type</code> property of the event object for a <code>save</code> event.
-  
-  </p></div>
 <br>
 <br>
 <hr>

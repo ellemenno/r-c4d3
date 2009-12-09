@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="HighScores,com.pixeldroid.r_c4d3.scores.HighScores,initials,scores,gameId,length,totalScores,closeScoresTable,getInitials,getScore,initialize,insert,isEligible,openScoresTable,reset,store,testInsert,toString" name="keywords">
+<meta content="HighScores,com.pixeldroid.r_c4d3.scores.HighScores,ED,MAX_SCORES,initials,retrieveEvent,scores,storeEvent,gameId,length,totalScores,addEventListener,clear,closeScoresTable,dispatchEvent,getAllInitials,getAllScores,getInitials,getScore,hasEventListener,initialize,insert,insertAll,load,openScoresTable,removeEventListener,store,toString,willTrigger" name="keywords">
 <title>com.pixeldroid.r_c4d3.scores.HighScores</title>
 </head>
 <body>
@@ -65,12 +65,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#length">length</a> : uint<div class="summaryTableDescription">[read-only]
-  The total number of entries currently in the high score list.</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#length">length</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#totalScores">totalScores</a> : int<div class="summaryTableDescription"></div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#totalScores">totalScores</a> : int<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 </table>
@@ -83,11 +82,29 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#ED">ED</a> : EventDispatcher<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">HighScores</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#initials">initials</a> : Array<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#MAX_SCORES">MAX_SCORES</a> : int<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">HighScores</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#retrieveEvent">retrieveEvent</a> : <a href="../scores/ScoreEvent.html">ScoreEvent</a>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">HighScores</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#scores">scores</a> : Array<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">HighScores</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#storeEvent">storeEvent</a> : <a href="../scores/ScoreEvent.html">ScoreEvent</a>
+<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 </table>
@@ -104,7 +121,21 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#HighScores()">HighScores</a>(id:String = null, maxScores:int = 10)</div>
 <div class="summaryTableDescription">
-  </div>
+  Constructor.</div>
+</td><td class="summaryTableOwnerCol">HighScores</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addEventListener()">addEventListener</a>(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">HighScores</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#clear()">clear</a>():void</div>
+<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 <tr class="">
@@ -117,23 +148,42 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#dispatchEvent()">dispatchEvent</a>(evt:Event):Boolean</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">HighScores</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getAllInitials()">getAllInitials</a>():Array</div>
+<div class="summaryTableDescription"> </div>
+</td><td class="summaryTableOwnerCol">HighScores</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getAllScores()">getAllScores</a>():Array</div>
+<div class="summaryTableDescription"> </div>
+</td><td class="summaryTableOwnerCol">HighScores</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#getInitials()">getInitials</a>(i:int):String</div>
-<div class="summaryTableDescription">
-  Retrieve a set of initials by zero-based rank index.</div>
+<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#getScore()">getScore</a>(i:int):Number</div>
-<div class="summaryTableDescription">
-  Retrieve a score by zero-based rank index.</div>
+<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#initialize()">initialize</a>(id:String = null):void</div>
+<a class="signatureLink" href="#hasEventListener()">hasEventListener</a>(type:String):Boolean</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
@@ -141,17 +191,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#insert()">insert</a>(s:Number, i:String):Boolean</div>
-<div class="summaryTableDescription">
-  Add a score and associated initials string into the high score list,
-  possibly bumping off the lowest score.</div>
+<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#isEligible()">isEligible</a>(score:Number):Boolean</div>
+<a class="signatureLink" href="#insertAll()">insertAll</a>(s:Array, i:Array):Array</div>
+<div class="summaryTableDescription"> </div>
+</td><td class="summaryTableOwnerCol">HighScores</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#load()">load</a>():void</div>
 <div class="summaryTableDescription">
-  A quick rejection test for candidate scores.</div>
+  Read the scores and initials from the storage medium.</div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 <tr class="">
@@ -164,9 +219,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#reset()">reset</a>():void</div>
-<div class="summaryTableDescription">
-  Clear the high score list, erasing all scores and initials.</div>
+<a class="signatureLink" href="#removeEventListener()">removeEventListener</a>(type:String, listener:Function, useCapture:Boolean = false):void</div>
+<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 <tr class="">
@@ -180,17 +234,31 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#testInsert()">testInsert</a>(N:Array):Array</div>
-<div class="summaryTableDescription">
-  Test the insertion of multiple scores in one call.</div>
+<a class="signatureLink" href="#toString()">toString</a>():String</div>
+<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#toString()">toString</a>():String</div>
-<div class="summaryTableDescription">
-  Generate a human-readable version of the high score list.</div>
+<a class="signatureLink" href="#willTrigger()">willTrigger</a>(type:String):Boolean</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">HighScores</td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#initialize()">initialize</a>():void</div>
+<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">HighScores</td>
 </tr>
 </table>
@@ -202,10 +270,19 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
+<a name="ED"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">ED</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var ED:EventDispatcher</code>
+</div>
 <a name="gameId"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">gameId</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">gameId</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -230,12 +307,28 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>length:uint</code>&nbsp;&nbsp;[read-only]<p>
-  The total number of entries currently in the high score list.
-  </p><span class="label">Implementation</span>
+<code>length:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get length():uint</code>
 <br>
+</div>
+<a name="MAX_SCORES"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">MAX_SCORES</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var MAX_SCORES:int</code>
+</div>
+<a name="retrieveEvent"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">retrieveEvent</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var retrieveEvent:<a href="../scores/ScoreEvent.html">ScoreEvent</a></code>
 </div>
 <a name="scores"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -246,6 +339,15 @@ showHideInherited();
 <div class="detailBody">
 <code>protected var scores:Array</code>
 </div>
+<a name="storeEvent"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">storeEvent</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var storeEvent:<a href="../scores/ScoreEvent.html">ScoreEvent</a></code>
+</div>
 <a name="totalScores"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -253,11 +355,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>totalScores:int</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<code>totalScores:int</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get totalScores():int</code>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set totalScores(value:int):void</code>
 <br>
 </div>
 <a name="constructorDetail"></a>
@@ -270,6 +370,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function HighScores(id:String = null, maxScores:int = 10)</code><p>
+  Constructor.
+  
   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -280,117 +382,78 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">maxScores</span>:int</code> (default = <code>10</code>)<code></code> &mdash; The maximum number of entries to store
+<td width="20px"></td><td><code><span class="label">maxScores</span>:int</code> (default = <code>10</code>)<code></code> &mdash; The maximum number of entries to store (up to 100)
   </td>
 </tr>
 </table>
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
-<a name="closeScoresTable()"></a>
+<a name="addEventListener()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">closeScoresTable</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">addEventListener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public function closeScoresTable():void</code><p> </p></div>
-<a name="getInitials()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">getInitials</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function getInitials(i:int):String</code><p>
-  Retrieve a set of initials by zero-based rank index.
-  
-  <em>Note:</em> Initials are stored in descending order (highest first),
-  based on the score they are associated with.
-  </p><span class="label">Parameters</span>
+<code>public function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void</code><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">i</span>:int</code> &mdash; Index of initials to retrieve. [0, MAX_SCORES)
-  </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>String</code> &mdash; The initials string matching the rank index; null if rank is invalid or no scores exist.
-  </td>
-</tr>
-</table>
-</div>
-<a name="getScore()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">getScore</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function getScore(i:int):Number</code><p>
-  Retrieve a score by zero-based rank index.
-  
-  <em>Note:</em> Scores are stored in descending order (highest first).
-  </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">i</span>:int</code> &mdash; Index of score to retrieve. [0, MAX_SCORES)
-  </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>Number</code> &mdash; The score matching the rank index; null if rank is invalid or no scores exist.
-  </td>
-</tr>
-</table>
-</div>
-<a name="initialize()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">initialize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function initialize(id:String = null):void</code><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">id</span>:String</code> (default = <code>null</code>)<code></code></td>
-</tr>
-</table>
-</div>
-<a name="insert()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">insert</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function insert(s:Number, i:String):Boolean</code><p>
-  Add a score and associated initials string into the high score list,
-  possibly bumping off the lowest score.
-  
-  The new score and initials string will be added in rank order.
-  
-  If adding the new score and initals string creates more than
-  MAX_SCORES entries, then the lowest rank score will be bumped off the list.
-  </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">s</span>:Number</code> &mdash; The score to add
-  </td>
+<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">i</span>:String</code> &mdash; The string of initials to add
-  </td>
+<td width="20px"></td><td><code><span class="label">listener</span>:Function</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">useCapture</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">priority</span>:int</code> (default = <code>0</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">useWeakReference</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+</table>
+</div>
+<a name="clear()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">clear</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function clear():void</code><p> </p></div>
+<a name="closeScoresTable()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">closeScoresTable</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function closeScoresTable():void</code><p> </p></div>
+<a name="dispatchEvent()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">dispatchEvent</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function dispatchEvent(evt:Event):Boolean</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">evt</span>:Event</code></td>
 </tr>
 </table>
 <p></p>
@@ -401,41 +464,173 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="isEligible()"></a>
+<a name="getAllInitials()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">isEligible</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">getAllInitials</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public function isEligible(score:Number):Boolean</code><p>
-  A quick rejection test for candidate scores.
-  
-  When <code>false</code> is returned, the score is definitely not eligible,
-  but when <code>true</code> is returned the score may still be ineligible if 
-  it is a duplicate of one already stored.
-  </p><span class="label">Parameters</span>
+<code>public function getAllInitials():Array</code><p> </p><p></p>
+<span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">score</span>:Number</code> &mdash; A score
-  </td>
+<td width="20"></td><td><code>Array</code></td>
+</tr>
+</table>
+</div>
+<a name="getAllScores()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getAllScores</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getAllScores():Array</code><p> </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Array</code></td>
+</tr>
+</table>
+</div>
+<a name="getInitials()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getInitials</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getInitials(i:int):String</code><p> </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">i</span>:int</code></td>
 </tr>
 </table>
 <p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if score is a candidate for inclusion, <code>false</code> if not
-  </td>
+<td width="20"></td><td><code>String</code></td>
 </tr>
 </table>
-<p>
-<span class="label">See also</span>
-</p>
-<div class="seeAlso">
-<a href="../scores/HighScores.html#insert" target="">insert</a>
 </div>
+<a name="getScore()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getScore</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getScore(i:int):Number</code><p> </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">i</span>:int</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Number</code></td>
+</tr>
+</table>
 </div>
+<a name="hasEventListener()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">hasEventListener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function hasEventListener(type:String):Boolean</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
+</tr>
+</table>
+</div>
+<a name="initialize()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">initialize</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function initialize():void</code>
+</div>
+<a name="insert()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">insert</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function insert(s:Number, i:String):Boolean</code><p> </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">s</span>:Number</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">i</span>:String</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
+</tr>
+</table>
+</div>
+<a name="insertAll()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">insertAll</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function insertAll(s:Array, i:Array):Array</code><p> </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">s</span>:Array</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">i</span>:Array</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Array</code></td>
+</tr>
+</table>
+</div>
+<a name="load()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">load</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function load():void</code><p>
+  Read the scores and initials from the storage medium.
+  <strong>To be overridden by subclasses</strong>
+  </p></div>
 <a name="openScoresTable()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -450,16 +645,32 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="reset()"></a>
+<a name="removeEventListener()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">reset</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">removeEventListener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public function reset():void</code><p>
-  Clear the high score list, erasing all scores and initials.
-  </p></div>
+<code>public function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">listener</span>:Function</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">useCapture</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+</table>
+</div>
 <a name="store()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -471,33 +682,6 @@ showHideInherited();
   Write the scores and initials to the storage medium.
   <strong>To be overridden by subclasses</strong>
   </p></div>
-<a name="testInsert()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">testInsert</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function testInsert(N:Array):Array</code><p>
-  Test the insertion of multiple scores in one call.
-  
-  </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">N</span>:Array</code> &mdash; An array of scores to test
-  </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>Array</code> &mdash; An array of Booleans, indicating whether the score at 
-  the same index would be inserted or not.
-  </td>
-</tr>
-</table>
-</div>
 <a name="toString()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -505,14 +689,32 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function toString():String</code><p>
-  Generate a human-readable version of the high score list.
-  </p><p></p>
+<code>public function toString():String</code><p> </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>String</code> &mdash; A human-readable version of the contents of the high score list.
-  </td>
+<td width="20"></td><td><code>String</code></td>
+</tr>
+</table>
+</div>
+<a name="willTrigger()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">willTrigger</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function willTrigger(type:String):Boolean</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
 </tr>
 </table>
 </div>

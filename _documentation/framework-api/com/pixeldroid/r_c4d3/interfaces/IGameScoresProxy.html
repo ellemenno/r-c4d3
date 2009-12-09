@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="IGameScoresProxy,com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy,gameId,length,totalScores,closeScoresTable,getInitials,getScore,insert,isEligible,openScoresTable,reset,store,testInsert,toString" name="keywords">
+<meta content="IGameScoresProxy,com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy,gameId,length,totalScores,clear,closeScoresTable,getAllInitials,getAllScores,getInitials,getScore,insert,insertAll,load,openScoresTable,store,toString" name="keywords">
 <title>com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
 <td align="left" class="titleTableTitle">R-C4D3 Framework Library</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html&amp;com/pixeldroid/r_c4d3/interfaces/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Interface&nbsp;IGameScoresProxy</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+<td align="left" id="subTitle" class="titleTableSubTitle">Interface&nbsp;IGameScoresProxy</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td>
 </tr>
 <tr class="titleTableRow3">
 <td colspan="2">&nbsp;</td>
@@ -27,7 +27,7 @@
 </table>
 <script type="text/javascript" language="javascript">
 <!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Interface IGameScoresProxy"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Interface IGameScoresProxy"); titleBar_setSubNav(false,true,false,false,true,false,true,false,false,false,false,false,false,false);}
 --></script>
 <div class="MainContent">
 <table cellspacing="0" cellpadding="0" class="classHeaderTable">
@@ -35,14 +35,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">com.pixeldroid.r_c4d3.interfaces</a></td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Interface</td><td class="classSignature">public interface IGameScoresProxy</td>
+<td class="classHeaderTableLabel">Interface</td><td class="classSignature">public interface IGameScoresProxy extends <a href="none">flash.events.IEventDispatcher</a></td>
 </tr>
 <tr>
 <td class="classHeaderTableLabel">Implementors</td><td><a href="../scores/HighScores.html">HighScores</a></td>
 </tr>
 </table>
 <p></p>
-<p></p>
+ Implementors provide access to high score storage and retrieval.
+ <p></p>
 <br>
 <hr>
 </div>
@@ -64,7 +65,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 </td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#totalScores">totalScores</a> : int<div class="summaryTableDescription"></div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#totalScores">totalScores</a> : int<div class="summaryTableDescription">[read-only]
+  Retrieve the total number of slots allocated for score storage (maximium of 100, default of 10)
+    <p>Read only, set via the HighScores constructor.</div>
 </td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
 </tr>
 </table>
@@ -79,9 +82,33 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#clear()">clear</a>():void</div>
+<div class="summaryTableDescription">
+  Clear the high score list, erasing all scores and initials.</div>
+</td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#closeScoresTable()">closeScoresTable</a>():void</div>
 <div class="summaryTableDescription">
-  Terminate access to  scores and clean up.</div>
+  Terminate access to scores and clean up.</div>
+</td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getAllInitials()">getAllInitials</a>():Array</div>
+<div class="summaryTableDescription">
+  Retrieve all initials.</div>
+</td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getAllScores()">getAllScores</a>():Array</div>
+<div class="summaryTableDescription">
+  Retrieve all scores.</div>
 </td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
 </tr>
 <tr class="">
@@ -105,16 +132,24 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <div class="summarySignature">
 <a class="signatureLink" href="#insert()">insert</a>(s:Number, i:String):Boolean</div>
 <div class="summaryTableDescription">
-  Add a score and associated initials string into the score list,
-  possibly bumping off the lowest score.</div>
+  Submit a score and associated initials string for inclusion into the 
+  score list, possibly bumping off the lowest score, or failing to be added.</div>
 </td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#isEligible()">isEligible</a>(score:Number):Boolean</div>
+<a class="signatureLink" href="#insertAll()">insertAll</a>(s:Array, i:Array):Array</div>
 <div class="summaryTableDescription">
-  A quick rejection test for candidate scores.</div>
+  Submit all scores and initials into the score list at once.</div>
+</td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#load()">load</a>():void</div>
+<div class="summaryTableDescription">
+  Retrieve the scores from the server.</div>
 </td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
 </tr>
 <tr class="">
@@ -128,25 +163,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#reset()">reset</a>():void</div>
-<div class="summaryTableDescription">
-  Clear the  score list, erasing all scores and initials.</div>
-</td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
 <a class="signatureLink" href="#store()">store</a>():void</div>
 <div class="summaryTableDescription">
-  Write the scores and initials to the storage medium.</div>
-</td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#testInsert()">testInsert</a>(N:Array):Array</div>
-<div class="summaryTableDescription">
-  Test the insertion of multiple scores in one call.</div>
+  Submit the scores to the server.</div>
 </td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
 </tr>
 <tr class="">
@@ -156,6 +175,39 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <div class="summaryTableDescription">
   Generate a human-readable version of the score list.</div>
 </td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
+</tr>
+</table>
+</div>
+<a name="eventSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Events</div>
+<table id="summaryTableEvent" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:ERROR">ERROR</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+ Dispatched when the score posting or retrieval process fails.</td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:LOAD">LOAD</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+ Dispatched when the score retrieval process has completed.</td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:SAVE">SAVE</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+ Dispatched when the score saving process has completed.</td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
 </tr>
 </table>
 </div>
@@ -201,26 +253,96 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>totalScores:int</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<code>totalScores:int</code>&nbsp;&nbsp;[read-only]<p>
+  Retrieve the total number of slots allocated for score storage (maximium of 100, default of 10)
+    </p><p>Read only, set via the HighScores constructor. See length for the 
+  actual number of scores currently in the high scores table</p>
+    <span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get totalScores():int</code>
 <br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set totalScores(value:int):void</code>
-<br>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../interfaces/IGameScoresProxy.html#length" target="">length</a>
+</div>
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="clear()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">clear</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function clear():void</code><p>
+  Clear the high score list, erasing all scores and initials.
+    Empty scorelist is not recorded to storage medium until <code>store</code> is called
+    </p><p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../interfaces/IGameScoresProxy.html#store" target="">store</a>
+</div>
+</div>
 <a name="closeScoresTable()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">closeScoresTable</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">closeScoresTable</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
 <code>public function closeScoresTable():void</code><p>
-  Terminate access to  scores and clean up. 
-  Calls store() to push latest scores to storage before closing.
-  </p></div>
+  Terminate access to scores and clean up.
+  
+  </p><p><em>Note:</em> Call <code>store()</code> to push latest scores to storage before closing.</p>
+    <p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../interfaces/IGameScoresProxy.html#store" target="">store</a>
+</div>
+</div>
+<a name="getAllInitials()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getAllInitials</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getAllInitials():Array</code><p>
+  Retrieve all initials.
+  
+  </p><p><em>Note:</em> Initials are stored in descending order based on the score they are associated with (largest first).</p>
+  <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Array</code></td>
+</tr>
+</table>
+</div>
+<a name="getAllScores()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getAllScores</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getAllScores():Array</code><p>
+  Retrieve all scores.
+  
+  </p><p><em>Note:</em> Scores are stored in descending order (largest first).</p>
+  <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Array</code></td>
+</tr>
+</table>
+</div>
 <a name="getInitials()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -231,9 +353,8 @@ showHideInherited();
 <code>public function getInitials(i:int):String</code><p>
   Retrieve a set of initials by zero-based rank index.
   
-  <em>Note:</em> Initials are stored in descending order,
-  based on the score they are associated with (highest first).
-  </p><span class="label">Parameters</span>
+  </p><p><em>Note:</em> Initials are stored in descending order based on the score they are associated with (largest first).</p>
+    <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">i</span>:int</code> &mdash; Index of initials to retrieve. [0, MAX_SCORES)
@@ -259,8 +380,8 @@ showHideInherited();
 <code>public function getScore(i:int):Number</code><p>
   Retrieve a score by zero-based rank index.
   
-  <em>Note:</em> Scores are stored in descending order (largest first).
-  </p><span class="label">Parameters</span>
+  </p><p><em>Note:</em> Scores are stored in descending order (largest first).</p>
+    <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">i</span>:int</code> &mdash; Index of score to retrieve. [0, MAX_SCORES)
@@ -284,14 +405,15 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function insert(s:Number, i:String):Boolean</code><p>
-  Add a score and associated initials string into the score list,
-  possibly bumping off the lowest score.
+  Submit a score and associated initials string for inclusion into the 
+  score list, possibly bumping off the lowest score, or failing to be added.
   
-  The new score and initials string will be added in rank order.
+  </p><p>The new score and initials string will be added in rank order if they qualify,
+  or not added at all if they don't.</p>
   
-  If adding the new score and initals string creates more than
-  MAX_SCORES entries, then the lowest rank score will be bumped off the list.
-  </p><span class="label">Parameters</span>
+  <p>If adding the new score and initals string creates more than
+  MAX_SCORES entries, then the lowest rank score will be bumped off the list.</p>
+    <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">s</span>:Number</code> &mdash; The score to add
@@ -314,23 +436,26 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="isEligible()"></a>
+<a name="insertAll()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">isEligible</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">insertAll</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public function isEligible(score:Number):Boolean</code><p>
-  A quick rejection test for candidate scores.
-  
-  When <code>false</code> is returned, the score is definitely not eligible,
-  but when <code>true</code> is returned the score may still be ineligible if 
-  it is a duplicate of one already stored.
-  </p><span class="label">Parameters</span>
+<code>public function insertAll(s:Array, i:Array):Array</code><p>
+  Submit all scores and initials into the score list at once.
+    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">score</span>:Number</code> &mdash; A score
+<td width="20px"></td><td><code><span class="label">s</span>:Array</code> &mdash; The score to add
+  </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">i</span>:Array</code> &mdash; The string of initials to add
   </td>
 </tr>
 </table>
@@ -338,15 +463,27 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if score is a candidate for inclusion, <code>false</code> if not
+<td width="20"></td><td><code>Array</code> &mdash; Array of Booleans matching the input order; 
+  true if the corresponding score was added, false if not
   </td>
 </tr>
 </table>
-<p>
+</div>
+<a name="load()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">load</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function load():void</code><p>
+  Retrieve the scores from the server.
+    </p><p>Dispatches <code>com.pixeldroid.r_c4d3.scores.ScoreEvent.LOAD</code></p>
+    <p>
 <span class="label">See also</span>
 </p>
 <div class="seeAlso">
-<a href="../interfaces/IGameScoresProxy.html#insert" target="">insert</a>
+<a href="../scores/ScoreEvent.html#LOAD" target="">com.pixeldroid.r_c4d3.scores.ScoreEvent.LOAD</a>
 </div>
 </div>
 <a name="openScoresTable()"></a>
@@ -358,8 +495,9 @@ showHideInherited();
 <div class="detailBody">
 <code>public function openScoresTable(gameId:String):void</code><p>
   Open an existing scores table or try to create a new one with the given game id.
-  Must be called with a valid game id before any scores transactions can take place.
-  </p><span class="label">Parameters</span>
+  </p><p>Must be called with a valid game id before any scores transactions can take place.
+  Valid game ids must be 1 - 32 lowercase alpha characters in length
+    <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">gameId</span>:String</code> &mdash; A valid game id
@@ -367,16 +505,6 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="reset()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">reset</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function reset():void</code><p>
-  Clear the  score list, erasing all scores and initials.
-  </p></div>
 <a name="store()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -385,34 +513,14 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function store():void</code><p>
-  Write the scores and initials to the storage medium.
-  </p></div>
-<a name="testInsert()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">testInsert</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function testInsert(N:Array):Array</code><p>
-  Test the insertion of multiple scores in one call.
-  
-  </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">N</span>:Array</code> &mdash; An array of scores to test
-  </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>Array</code> &mdash; An array of Booleans, indicating whether the score at 
-  the same index would be inserted or not.
-  </td>
-</tr>
-</table>
+  Submit the scores to the server.
+    </p><p>Dispatches <code>com.pixeldroid.r_c4d3.scores.ScoreEvent.SAVE</code></p>
+    <p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../scores/ScoreEvent.html#SAVE" target="">com.pixeldroid.r_c4d3.scores.ScoreEvent.SAVE</a>
+</div>
 </div>
 <a name="toString()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -432,6 +540,45 @@ showHideInherited();
 </tr>
 </table>
 </div>
+<div class="detailSectionHeader">Event detail</div>
+<a name="event:ERROR"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">ERROR</td><td class="detailHeaderType">event&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>com.pixeldroid.data.DataEvent</code></a>
+<br>
+<p></p><p>
+ Dispatched when the score posting or retrieval process fails.
+ </p></div>
+<a name="event:LOAD"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">LOAD</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../scores/ScoreEvent.html"><code>com.pixeldroid.r_c4d3.scores.ScoreEvent</code></a>
+<br>
+<span class="label">ScoreEvent.type property = </span><a href="../scores/ScoreEvent.html#LOAD"><code>com.pixeldroid.r_c4d3.scores.ScoreEvent.LOAD</code></a>
+<br><p>
+ Dispatched when the score retrieval process has completed.
+ </p></div>
+<a name="event:SAVE"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">SAVE</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="../scores/ScoreEvent.html"><code>com.pixeldroid.r_c4d3.scores.ScoreEvent</code></a>
+<br>
+<span class="label">ScoreEvent.type property = </span><a href="../scores/ScoreEvent.html#SAVE"><code>com.pixeldroid.r_c4d3.scores.ScoreEvent.SAVE</code></a>
+<br><p>
+ Dispatched when the score saving process has completed.
+ </p></div>
 <br>
 <br>
 <hr>

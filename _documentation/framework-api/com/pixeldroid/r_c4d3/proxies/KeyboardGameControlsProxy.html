@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="KeyboardGameControlsProxy,com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy,BTN_A,BTN_B,BTN_C,BTN_X,HAT_D,HAT_L,HAT_R,HAT_U,P1_A,P1_B,P1_C,P1_D,P1_L,P1_R,P1_U,P1_X,P2_A,P2_B,P2_C,P2_D,P2_L,P2_R,P2_U,P2_X,P3_A,P3_B,P3_C,P3_D,P3_L,P3_R,P3_U,P3_X,P4_A,P4_B,P4_C,P4_D,P4_L,P4_R,P4_U,P4_X,_joystickEventState,gameStage,joysticks,joystickClose,joystickEventState,joystickGetAxis,joystickGetBall,joystickGetButton,joystickGetButtonKey,joystickGetHat,joystickGetHatKey,joystickIndex,joystickName,joystickNumAxes,joystickNumBalls,joystickNumButtons,joystickNumHats,joystickOpen,joystickOpened,numJoysticks,onKeyDown,onKeyUp,sendBtnPress,sendBtnRelease,sendHatPress,sendHatRelease,setKeys,toString" name="keywords">
+<meta content="KeyboardGameControlsProxy,com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy,BTN_A,BTN_B,BTN_C,BTN_X,HAT_D,HAT_L,HAT_R,HAT_U,P1_A,P1_B,P1_C,P1_D,P1_L,P1_R,P1_U,P1_X,P2_A,P2_B,P2_C,P2_D,P2_L,P2_R,P2_U,P2_X,P3_A,P3_B,P3_C,P3_D,P3_L,P3_R,P3_U,P3_X,P4_A,P4_B,P4_C,P4_D,P4_L,P4_R,P4_U,P4_X,_joystickEventState,gameStage,joysticks,joysticksDefined,checkJoystickIndex,joystickClose,joystickEventState,joystickGetAxis,joystickGetBall,joystickGetButton,joystickGetButtonKey,joystickGetHat,joystickGetHatKey,joystickIndex,joystickKeysDefined,joystickName,joystickNumAxes,joystickNumBalls,joystickNumButtons,joystickNumHats,joystickOpen,joystickOpened,numJoysticks,onKeyDown,onKeyUp,sendBtnPress,sendBtnRelease,sendHatPress,sendHatRelease,setButtonKey,setHatKey,setKeys,toString" name="keywords">
 <title>com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy</title>
 </head>
 <body>
@@ -77,6 +77,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#joysticks">joysticks</a> : Array<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#joysticksDefined">joysticksDefined</a> : Array<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
 </tr>
 <tr class="">
@@ -293,6 +297,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#joystickKeysDefined()">joystickKeysDefined</a>(index:int):Boolean</div>
+<div class="summaryTableDescription">
+  Determines whether keys have been defined for a specific joystick.</div>
+</td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#joystickName()">joystickName</a>(joystick:<a href="../interfaces/IJoystick.html">IJoystick</a>):String</div>
 <div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
@@ -350,6 +362,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#setButtonKey()">setButtonKey</a>(playerIndex:uint, button:int, keyCode:uint):void</div>
+<div class="summaryTableDescription">
+  Provide custom key code assignment for a specific button.</div>
+</td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setHatKey()">setHatKey</a>(playerIndex:uint, hat:int, keyCode:uint):void</div>
+<div class="summaryTableDescription">
+  Provide custom key code assignment for a specific hat direction.</div>
+</td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#setKeys()">setKeys</a>(playerIndex:uint, u:uint, r:uint, d:uint, l:uint, x:uint, a:uint, b:uint, c:uint):void</div>
 <div class="summaryTableDescription">
   Provide custom key code assignments for hat directions and buttons.</div>
@@ -370,6 +398,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#checkJoystickIndex()">checkJoystickIndex</a>(index:int):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -423,35 +458,35 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Constant</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#BTN_A">BTN_A</a> : int = 1<div class="summaryTableDescription"> Constant representing the red button (button A) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#BTN_A">BTN_A</a> : int = 1<div class="summaryTableDescription">[static] Constant representing the red button (button A) </div>
 </td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#BTN_B">BTN_B</a> : int = 2<div class="summaryTableDescription"> Constant representing the blue button (button B) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#BTN_B">BTN_B</a> : int = 2<div class="summaryTableDescription">[static] Constant representing the blue button (button B) </div>
 </td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#BTN_C">BTN_C</a> : int = 3<div class="summaryTableDescription"> Constant representing the green button (button C) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#BTN_C">BTN_C</a> : int = 3<div class="summaryTableDescription">[static] Constant representing the green button (button C) </div>
 </td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#BTN_X">BTN_X</a> : int = 0<div class="summaryTableDescription"> Constant representing the yellow button (button X) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#BTN_X">BTN_X</a> : int = 0<div class="summaryTableDescription">[static] Constant representing the yellow button (button X) </div>
 </td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_D">HAT_D</a> : int = 2<div class="summaryTableDescription"> Constant representing hat down </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_D">HAT_D</a> : int = 2<div class="summaryTableDescription">[static] Constant representing hat down </div>
 </td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_L">HAT_L</a> : int = 3<div class="summaryTableDescription"> Constant representing hat left </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_L">HAT_L</a> : int = 3<div class="summaryTableDescription">[static] Constant representing hat left </div>
 </td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_R">HAT_R</a> : int = 1<div class="summaryTableDescription"> Constant representing hat right </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_R">HAT_R</a> : int = 1<div class="summaryTableDescription">[static] Constant representing hat right </div>
 </td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_U">HAT_U</a> : int = 0<div class="summaryTableDescription"> Constant representing hat up </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_U">HAT_U</a> : int = 0<div class="summaryTableDescription">[static] Constant representing hat up </div>
 </td><td class="summaryTableOwnerCol">KeyboardGameControlsProxy</td>
 </tr>
 </table>
@@ -489,6 +524,15 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>protected var joysticks:Array</code>
+</div>
+<a name="joysticksDefined"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">joysticksDefined</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var joysticksDefined:Array</code>
 </div>
 <a name="P1_A"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -792,10 +836,24 @@ showHideInherited();
   </p></div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="checkJoystickIndex()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">checkJoystickIndex</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function checkJoystickIndex(index:int):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:int</code></td>
+</tr>
+</table>
+</div>
 <a name="joystickClose()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">joystickClose</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">joystickClose</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -1029,6 +1087,30 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code>int</code></td>
+</tr>
+</table>
+</div>
+<a name="joystickKeysDefined()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">joystickKeysDefined</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function joystickKeysDefined(index:int):Boolean</code><p>
+  Determines whether keys have been defined for a specific joystick.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:int</code> &mdash; A zero-based index selecting the joystick to check
+  </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
 </tr>
 </table>
 </div>
@@ -1302,6 +1384,70 @@ showHideInherited();
 </tr>
 </table>
 </div>
+<a name="setButtonKey()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setButtonKey</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function setButtonKey(playerIndex:uint, button:int, keyCode:uint):void</code><p>
+  Provide custom key code assignment for a specific button.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">playerIndex</span>:uint</code> &mdash; zero based index indicating which player joystick to set codes for.
+  </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">button</span>:int</code> &mdash; A KeyboardGameControlsProxy constant (<code>BTN_/code>) 
+  representing the button to get the keycode value for.
+  </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">keyCode</span>:uint</code> &mdash; Keycode for button
+  </td>
+</tr>
+</table>
+</div>
+<a name="setHatKey()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setHatKey</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function setHatKey(playerIndex:uint, hat:int, keyCode:uint):void</code><p>
+  Provide custom key code assignment for a specific hat direction.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">playerIndex</span>:uint</code> &mdash; zero based index indicating which player joystick to set codes for.
+  </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">hat</span>:int</code> &mdash; A KeyboardGameControlsProxy constant (<code>HAT_/code>) 
+  representing the hat direction to get the keycode value for.
+  </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">keyCode</span>:uint</code> &mdash; Keycode for hat direction
+  </td>
+</tr>
+</table>
+</div>
 <a name="setKeys()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1400,7 +1546,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public const BTN_A:int = 1</code><p> Constant representing the red button (button A) </p></div>
+<code>public static const BTN_A:int = 1</code><p> Constant representing the red button (button A) </p></div>
 <a name="BTN_B"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1408,7 +1554,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public const BTN_B:int = 2</code><p> Constant representing the blue button (button B) </p></div>
+<code>public static const BTN_B:int = 2</code><p> Constant representing the blue button (button B) </p></div>
 <a name="BTN_C"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1416,7 +1562,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public const BTN_C:int = 3</code><p> Constant representing the green button (button C) </p></div>
+<code>public static const BTN_C:int = 3</code><p> Constant representing the green button (button C) </p></div>
 <a name="BTN_X"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1424,7 +1570,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public const BTN_X:int = 0</code><p> Constant representing the yellow button (button X) </p></div>
+<code>public static const BTN_X:int = 0</code><p> Constant representing the yellow button (button X) </p></div>
 <a name="HAT_D"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1432,7 +1578,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public const HAT_D:int = 2</code><p> Constant representing hat down </p></div>
+<code>public static const HAT_D:int = 2</code><p> Constant representing hat down </p></div>
 <a name="HAT_L"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1440,7 +1586,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public const HAT_L:int = 3</code><p> Constant representing hat left </p></div>
+<code>public static const HAT_L:int = 3</code><p> Constant representing hat left </p></div>
 <a name="HAT_R"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1448,7 +1594,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public const HAT_R:int = 1</code><p> Constant representing hat right </p></div>
+<code>public static const HAT_R:int = 1</code><p> Constant representing hat right </p></div>
 <a name="HAT_U"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1456,7 +1602,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public const HAT_U:int = 0</code><p> Constant representing hat up </p></div>
+<code>public static const HAT_U:int = 0</code><p> Constant representing hat up </p></div>
 <br>
 <br>
 <hr>
