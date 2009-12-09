@@ -2,9 +2,6 @@
 package view.screen
 {
 	
-	import util.IDisposable;
-	
-	
 	public interface IScreen
 	{
 		function set name(value:String):void;

@@ -1,20 +1,20 @@
 
 
-package view.screen
+package view.screen.attractloop
 {
+	
+	import flash.text.TextField;
 	
 	import control.Signals;
 	import util.f.Message;
 	import view.screen.ScreenBase;
 	
 	
-	public class HelpScreen extends ScreenBase
+	public class ScoresScreen extends ScreenBase
 	{
 		
-		private var timeElapsed:int;
 		
-		
-		public function HelpScreen():void
+		public function ScoresScreen():void
 		{
 			C.out(this, "constructor");
 			super();
@@ -23,11 +23,18 @@ package view.screen
 		
 		override public function initialize():Boolean
 		{
-			timeElapsed = 0;
+			if (!super.initialize()) return false;
 			
-			graphics.beginFill(0xffffaa);
-			graphics.drawRect(0,0, stage.stageWidth,stage.stageHeight);
+			var w:int = stage.stageWidth;
+			var h:int = stage.stageHeight;
+			
+			graphics.beginFill(0x555555);
+			graphics.drawRect(0,0, w,h);
 			graphics.endFill();
+			
+			var title:TextField = addChild(FontAssets.createTextField("High Scores", FontAssets.blojbytesdepa())) as TextField;
+			title.x = 15;
+			title.y = 15;
 			
 			return true;
 		}
@@ -35,12 +42,13 @@ package view.screen
 		override public function shutDown():Boolean
 		{
 			graphics.clear();
-			return true;
+			return super.shutDown();;
 		}
 		
 		override public function onFrameUpdate(dt:int):void
 		{
-			timeElapsed += dt;
+			super.onFrameUpdate(dt);
+			
 			if (timeElapsed > 3*1000) timeOut();
 		}
 		

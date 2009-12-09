@@ -12,41 +12,39 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.utils.getTimer;
+	import flash.utils.getQualifiedClassName;
 	
-
-	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
 	import com.pixeldroid.r_c4d3.controls.JoyEventStateEnum;
-	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameRom;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
-
-	import control.IController;
-	import control.ScreenController;
+	
+	import control.GameScreenController;
+	import control.StatsScreenController;
+	import control.ScoreController;
 	import control.Signals;
 	import util.IDisposable;
 	import util.f.Message;
-	import view.screen.DebugScreen;
-	import view.screen.ScreenBase;
 	
-
+	
 	public class Asteroids extends Sprite implements IGameRom, IDisposable
 	{
-
+		
 		private var controls:IGameControlsProxy;
 		private var scores:IGameScoresProxy;
-		private var screens:IController;
-		private var stats:ScreenBase;
+		private var screenManager:IDisposable;
+		private var statsManager:IDisposable;
+		private var scoreManager:IDisposable;
 		
 		private var debugLayer:Sprite;
 		private var gameLayer:Sprite;
 		private var lastTime:int
-
-
-
+		
+		
+		
 		public function Asteroids()
 		{
-			C.out(this, "Asteroids", true);
+			C.out(this, "Asteroids");
 			initialize();
 		}
 		
@@ -55,35 +53,44 @@ package
 		// IGameRom interface
 		public function setControlsProxy(value:IGameControlsProxy):void
 		{
-			C.out(this, "setControlsProxy to " +value);
+			C.out(this, "setControlsProxy to " +getQualifiedClassName(value));
+			if (!value) throw new Error("Error - expected IGameControlsProxy, got " +value);
 			
 			// store local ref to IGameControlsProxy and enable reporting (instead of actively polling)
 			controls = value;
 			controls.joystickEventState(JoyEventStateEnum.ENABLE, stage); // enable event reporting
 			
-			// activate all four players
-			controls.joystickOpen(0); // activate joystick for player 1
-			controls.joystickOpen(1); // activate joystick for player 2
-			controls.joystickOpen(2); // activate joystick for player 3
-			controls.joystickOpen(3); // activate joystick for player 4
+			// activate players
+			for (var i:int = 0; i < 4; i++) controls.joystickOpen(i); // activate joystick for players 1 - 4
 			
-			// attach listeners to proxy
-			controls.addEventListener(JoyHatEvent.JOY_HAT_MOTION, onHatMotion);
-			controls.addEventListener(JoyButtonEvent.JOY_BUTTON_MOTION, onButtonMotion);
+			// instantiate and initialize controllers
+			screenManager = new GameScreenController(controls, gameLayer) as IDisposable;
+			screenManager.initialize();
+			
+			statsManager = new StatsScreenController(controls, debugLayer) as IDisposable;
+			statsManager.initialize();
 		}
-
+		
 		public function setScoresProxy(value:IGameScoresProxy):void
 		{
-			C.out(this, "setScoresProxy - TODO");
+			C.out(this, "setScoresProxy to " +getQualifiedClassName(value));
+			if (!value) throw new Error("Error - expected IGameScoresProxy, got " +value);
 			
-			// store local ref to IGameScoresProxy
+			// store local ref to IGameScoresProxy (manager will be created in initialize)
 			scores = value;
+			
+			// activate score table for this game
+			scores.openScoresTable("r-c4d3.asteroids");
+			
+			// instantiate and initialize controllers
+			scoreManager = new ScoreController(scores) as IDisposable;
+			scoreManager.initialize();
 		}
-
+		
 		public function enterAttractLoop():void
 		{
 			C.out(this, "enterAttractLoop");
-			// pass flow to controller
+			// pass flow to game screen controller
 			Message.send(null, Signals.ATTRACT_LOOP_BEGIN);
 		}
 		
@@ -93,18 +100,19 @@ package
 		public function shutDown():Boolean
 		{
 			C.out(this, "shutDown()");
-			IDisposable(screens).shutDown();
-			stats.shutDown();
+			scoreManager.shutDown();
+			screenManager.shutDown();
+			statsManager.shutDown();
 			
-			debugLayer.removeChild(stats);
+			scoreManager = null;
+			screenManager = null;
+			statsManager = null;
+			
 			removeChild(debugLayer);
 			removeChild(gameLayer);
-			
 			removeEventListener(Event.ENTER_FRAME, onFrame);
-			controls.removeEventListener(JoyHatEvent.JOY_HAT_MOTION, onHatMotion);
-			controls.removeEventListener(JoyButtonEvent.JOY_BUTTON_MOTION, onButtonMotion);
-			controls = null;
 			
+			controls = null;
 			scores = null;
 			
 			return true;
@@ -112,15 +120,9 @@ package
 		
 		public function initialize():Boolean
 		{
-			// initialize top level containers for screens and debug stats
+			// instantiate and initialize top level containers for screens and debug stats
 			gameLayer = addChild(new Sprite()) as Sprite;
 			debugLayer = addChild(new Sprite()) as Sprite;
-			
-			screens = new ScreenController(gameLayer) as IController; // TODO: ControllerBase to implement IController and IDisposable?
-			IDisposable(screens).initialize();
-			
-			stats = debugLayer.addChild(new DebugScreen() as DisplayObject) as ScreenBase;
-			stats.initialize();
 			
 			// initialize frame event reporting and timing
 			lastTime = getTimer();
@@ -136,22 +138,9 @@ package
 			var now:int = getTimer();
 			var dt:int = now - lastTime;
 			
-			screens.onFrameUpdate(dt);
-			stats.onFrameUpdate(dt);
+			Message.send(dt, Signals.GAME_TICK);
 			
 			lastTime = now;
-		}
-		
-		private function onHatMotion(e:JoyHatEvent):void
-		{
-			screens.onHatMotion(e);
-			stats.onHatMotion(e);
-		}
-		
-		private function onButtonMotion(e:JoyButtonEvent):void
-		{
-			screens.onButtonMotion(e);
-			stats.onButtonMotion(e);
 		}
 		
 	}

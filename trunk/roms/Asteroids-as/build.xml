@@ -6,7 +6,7 @@
 Tasks to build and package the AS3 Asteroids game rom.
 </description>
 	
-	<property name="dir.trunk" value="${basedir}/../.."/>
+	<property name="dir.trunk" value="../.."/>
 	<import file="${dir.trunk}/build_init.xml"/>
 	
 	<property name="dir.source" value="${basedir}/source"/>
@@ -23,7 +23,7 @@ Tasks to build and package the AS3 Asteroids game rom.
 		</java>
 	</target>
 	
-    <target name="build" depends="compile, package, release" 
+    <target name="build" depends="compile, package, release, launch" 
 		description="&gt; this is the main task: compile, package, release"/>
 	
 	<target name="clean" description="remove the contents of ${dir.target}">
@@ -32,7 +32,7 @@ Tasks to build and package the AS3 Asteroids game rom.
 		</delete>
 	</target>
 	
-    <target name="compile" depends="clean" description="compile the rom">
+    <target name="compile" depends="clean" description="compile the Asteroids rom">
     	<exec executable="${flex.mxmlc}" failonerror="true">
 			<arg line="${dir.source}/actionscript/Asteroids.as"/>
 			<arg line="-output=${dir.target}/rom.swf"/>
@@ -47,10 +47,8 @@ Tasks to build and package the AS3 Asteroids game rom.
 		<mkdir dir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.source}/resources/config/romloader-config.xml" todir="${dir.target}/temp-desktop"/>
-		<copy file="${dir.releases}/romloader-desktop-fp09-debug${exe}" tofile="${dir.target}/temp-desktop/Asteroids${exe}"/>
+		<copy file="${romloader.projector}" tofile="${dir.target}/temp-desktop/Asteroids${exe}"/>
 		<zip destfile="${dir.target}/Asteroids-desktop.zip" basedir="${dir.target}/temp-desktop"/>
-		
-		<exec executable="${dir.target}/temp-desktop/Asteroids${exe}" failonerror="false"/>
 	</target>
 	
     <target name="package-web" description="collect the web-based version and its dependencies into a zip file">
@@ -72,6 +70,10 @@ Tasks to build and package the AS3 Asteroids game rom.
 				<include name="**/*.zip"/>
 			</fileset>
 		</copy-->
+	</target>
+	
+	<target name="launch" unless="no.rom.launches" description="launch the rom in the desktop romloader">
+		<exec executable="${dir.target}/temp-desktop/Asteroids${exe}" failonerror="false"/>
 	</target>
 
 </project>

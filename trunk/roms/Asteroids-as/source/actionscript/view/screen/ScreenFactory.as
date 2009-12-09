@@ -5,16 +5,14 @@ package view.screen
 	
 	import flash.utils.Dictionary;
 	
-	import view.screen.ScreenBase;
-	
-	import view.screen.AsteroidsScreen;
-	import view.screen.DebugScreen;
-	import view.screen.GameScreen;
-	import view.screen.HelpScreen;
 	import view.screen.NullScreen;
-	import view.screen.ScoresScreen;
-	import view.screen.SetupScreen;
-	import view.screen.TitleScreen;
+	import view.screen.ScreenBase;
+	import view.screen.attractloop.GameScreen;
+	import view.screen.attractloop.HelpScreen;
+	import view.screen.attractloop.ScoresScreen;
+	import view.screen.attractloop.SetupScreen;
+	import view.screen.attractloop.TitleScreen;
+	import view.screen.debug.DebugScreen;
 	
 	
 	
@@ -26,6 +24,8 @@ package view.screen
 		static public const SCORES:String = "SCORES";
 		static public const SETUP:String = "SETUP";
 		static public const TITLE:String = "TITLE";
+		
+		static public const DEBUG:String = "DEBUG";
 		
 		private var screens:Dictionary;
 		
@@ -71,6 +71,12 @@ package view.screen
 		{
 			C.out(ScreenFactory, "get titleScreen()");
 			return retrieveScreen(TitleScreen, TITLE);
+		}
+		
+		public function get debugScreen():ScreenBase
+		{
+			C.out(ScreenFactory, "get debugScreen()");
+			return retrieveScreen(DebugScreen, DEBUG);
 		}
 		
 		

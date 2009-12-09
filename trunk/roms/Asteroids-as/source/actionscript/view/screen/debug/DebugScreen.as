@@ -1,6 +1,6 @@
 
 
-package view.screen
+package view.screen.debug
 {
 	
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;

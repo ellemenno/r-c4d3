@@ -26,9 +26,11 @@ package
 		
 		private function addChildren():void
 		{
-			fonts.push( addChild(textField(FontAssets.blojbytesdepa)) );
-			fonts.push( addChild(textField(FontAssets.deLarge)) );
-			fonts.push( addChild(textField(FontAssets.sportrop)) );
+			var s:Number = 24;
+			var w:Number = stage.stageWidth;
+			fonts.push( addChild(FontAssets.createTextField(fontabet("blojbytesdepa"), FontAssets.blojbytesdepa(s), w)) );
+			fonts.push( addChild(FontAssets.createTextField(fontabet("deLarge"), FontAssets.deLarge(s), w)) );
+			fonts.push( addChild(FontAssets.createTextField(fontabet("sportrop"), FontAssets.sportrop(s), w)) );
 		}
 		
 		private function fitToGrid():void
@@ -45,24 +47,17 @@ package
 			}
 		}
 		
-		private function textField(format:TextFormat):TextField
+		private function fontabet(fontName:String):String
 		{
-			var t:TextField = new TextField();
-			t.selectable = false;
-			t.embedFonts = true;
-			t.multiline = true;
-			t.wordWrap = true;
-			t.autoSize = TextFieldAutoSize.LEFT;
-			t.width = stage.stageWidth;
-			t.text = fontabet;
-			t.setTextFormat(format);
-			
-			return t;
-		}
-		
-		private function get fontabet():String
-		{
-			return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+\\|[{]};:'\",<.>/?";
+			var s:String = fontName +'\n';
+			var A:Number = 'A'.charCodeAt(0);
+			var a:Number = 'a'.charCodeAt(0);
+			for (var c:int=33; c<128; c++)
+			{
+				if (c == A || c == a) s += '\n';
+				s += String.fromCharCode(c);
+			}
+			return s;
 		}
 		
 	}
