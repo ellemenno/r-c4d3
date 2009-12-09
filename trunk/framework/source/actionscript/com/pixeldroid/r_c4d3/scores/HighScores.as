@@ -3,9 +3,7 @@
 package com.pixeldroid.r_c4d3.scores 
 {
 	
-	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.events.IEventDispatcher;
 	
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
 	
@@ -17,7 +15,7 @@ package com.pixeldroid.r_c4d3.scores
 	* <li>Scores are kept in descending order (highest first)</li>
 	* <li>Ties are allowed (same score, different initials), duplicates are not</li>
 	*/
-	public class HighScores implements IGameScoresProxy
+	public class HighScores extends EventDispatcher implements IGameScoresProxy
 	{
 		
 		
@@ -28,7 +26,6 @@ package com.pixeldroid.r_c4d3.scores
 		protected var scores:Array;
 		protected var initials:Array;
 		
-		protected var ED:EventDispatcher;
 		protected var storeEvent:ScoreEvent;
 		protected var retrieveEvent:ScoreEvent;
 		
@@ -42,10 +39,11 @@ package com.pixeldroid.r_c4d3.scores
 		*/
 		public function HighScores(id:String=null, maxScores:int=10)
 		{
+			super();
+			
 			MAX_SCORES = Math.min(100, maxScores);
 			if(id) openScoresTable(id);
 			
-			ED = new EventDispatcher(this);
 			storeEvent = new ScoreEvent(ScoreEvent.SAVE);
 			retrieveEvent = new ScoreEvent(ScoreEvent.LOAD);
 			
@@ -138,7 +136,7 @@ package com.pixeldroid.r_c4d3.scores
 		
 		
 		/** @inheritdoc */
-		public function toString():String {
+		override public function toString():String {
 		
 			var hr:String = "- - - - - - - - - - - - - - - -\n";
 			var s:String = hr;
@@ -153,29 +151,6 @@ package com.pixeldroid.r_c4d3.scores
 			s += hr;
 			
 			return s;
-		}
-		
-		
-		
-		// EventDispatcher Interface
-		public function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void{
-			ED.addEventListener(type, listener, useCapture, priority);
-		}
-		  
-		public function dispatchEvent(evt:Event):Boolean{
-			return ED.dispatchEvent(evt);
-		}
-		
-		public function hasEventListener(type:String):Boolean{
-			return ED.hasEventListener(type);
-		}
-		
-		public function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void{
-			ED.removeEventListener(type, listener, useCapture);
-		}
-					 
-		public function willTrigger(type:String):Boolean {
-			return ED.willTrigger(type);
 		}
 		
 		
