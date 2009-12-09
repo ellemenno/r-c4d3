@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="print.css" type="text/css" media="print">
-<meta content="RomLoader,configData,controlsProxy,highScoresProxy,preloaderContainer,romLoader,swfBytesLoaded,swfBytesTotal,swfLoaded,xmlBytesLoaded,xmlBytesTotal,xmlLoaded,xmlLoader,configUrl,_addListeners,_removeListeners,addChildren,addListeners,applyControlsConfig,applyScoresConfig,closePreloader,createControlsProxy,createScoresProxy,extractGameRom,finalizeLoad,loadSwf,loadXml,onIoError,onPreloadProgress,onPreloaderClosed,onPreloaderOpened,onSecurityError,onSwfComplete,onSwfProgress,onXmlComplete,onXmlProgress,openPreloader,removeListeners,updateProgress" name="keywords">
+<meta content="RomLoader,configData,controlsProxy,highScoresProxy,preloaderContainer,romLoader,splashDone,splashScreen,swfBytesLoaded,swfBytesTotal,swfLoaded,xmlBytesLoaded,xmlBytesTotal,xmlLoaded,xmlLoader,configUrl,_addListeners,_removeListeners,addChildren,addListeners,applyControlsConfig,applyScoresConfig,closePreloader,createControlsProxy,createScoresProxy,createSplashScreen,extractGameRom,finalizeLoad,loadSwf,loadXml,onIoError,onPreloadProgress,onPreloaderClosed,onPreloaderOpened,onSecurityError,onSplashComplete,onSwfComplete,onSwfProgress,onXmlComplete,onXmlProgress,openPreloader,removeListeners,updateProgress" name="keywords">
 <title>RomLoader</title>
 </head>
 <body>
@@ -103,6 +103,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#romLoader">romLoader</a> : Loader<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">RomLoader</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#splashDone">splashDone</a> : Boolean<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">RomLoader</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#splashScreen">splashScreen</a> : <a href="keyconfig/keyconfig/KeyConfigGui.html">KeyConfigGui</a>
+<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">RomLoader</td>
 </tr>
 <tr class="">
@@ -205,7 +214,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#closePreloader()">closePreloader</a>():void</div>
+<a class="signatureLink" href="#closePreloader()">closePreloader</a>(errorOccured:Boolean = false):void</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">RomLoader</td>
 </tr>
@@ -220,6 +229,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#createScoresProxy()">createScoresProxy</a>():IGameScoresProxy</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">RomLoader</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#createSplashScreen()">createSplashScreen</a>():<a href="keyconfig/keyconfig/KeyConfigGui.html">KeyConfigGui</a>
+</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">RomLoader</td>
 </tr>
@@ -283,6 +300,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#onSecurityError()">onSecurityError</a>(e:SecurityErrorEvent):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">RomLoader</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#onSplashComplete()">onSplashComplete</a>():void</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">RomLoader</td>
 </tr>
@@ -401,6 +425,24 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>protected var romLoader:Loader</code>
+</div>
+<a name="splashDone"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">splashDone</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var splashDone:Boolean</code>
+</div>
+<a name="splashScreen"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">splashScreen</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var splashScreen:<a href="keyconfig/keyconfig/KeyConfigGui.html">KeyConfigGui</a></code>
 </div>
 <a name="swfBytesLoaded"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -567,7 +609,12 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function closePreloader():void</code>
+<code>protected function closePreloader(errorOccured:Boolean = false):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">errorOccured</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+</table>
 </div>
 <a name="createControlsProxy()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -598,6 +645,22 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code>IGameScoresProxy</code></td>
+</tr>
+</table>
+</div>
+<a name="createSplashScreen()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">createSplashScreen</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function createSplashScreen():<a href="keyconfig/keyconfig/KeyConfigGui.html">KeyConfigGui</a></code>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="keyconfig/keyconfig/KeyConfigGui.html">KeyConfigGui</a></code></td>
 </tr>
 </table>
 </div>
@@ -718,6 +781,15 @@ showHideInherited();
 <td width="20px"></td><td><code><span class="label">e</span>:SecurityErrorEvent</code></td>
 </tr>
 </table>
+</div>
+<a name="onSplashComplete()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">onSplashComplete</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function onSplashComplete():void</code>
 </div>
 <a name="onSwfComplete()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
