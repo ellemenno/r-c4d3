@@ -77,7 +77,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 <tr>
 <td width="20"></td><td>
  <code>RemoteHighScores</code> extends the abstract HighScores base class to
- store the contents of HighScores instance to a remote server,
+ store high scores and initials on a remote server,
  using a web service that accepts the following parameters:<ul>
  <li><code>game</code> : <i>String</i> Unique game id</li>
  <li><code>format</code> : <i>String</i> "json" or "vrml"</li>
@@ -99,33 +99,20 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-    </td>
+  Constructor.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html#remoteUrl">remoteUrl</a> &mdash; Property in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html">RemoteHighScores</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
-</tr>
-<tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html#removeEventListener()">removeEventListener</a>(type, listener, useCapture) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html">RemoteHighScores</a></td>
-</tr>
-<tr>
-<td width="20"></td><td></td>
-</tr>
-<tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html#reset()">reset</a>() &mdash; Method in interface com.pixeldroid.r_c4d3.interfaces.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html">IGameScoresProxy</a></td>
-</tr>
-<tr>
 <td width="20"></td><td>
-  Clear the  score list, erasing all scores and initials.</td>
+  Provide the high score storage webservice URL.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#reset()">reset</a>() &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#removeEventListener()">removeEventListener</a>(type, listener, useCapture) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
 </tr>
 <tr>
-<td width="20"></td><td>
-  Clear the high score list, erasing all scores and initials.</td>
+<td width="20"></td><td></td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/tools/console/class-list.html');" href="com/pixeldroid/r_c4d3/tools/console/Console.html#resume()">resume</a>() &mdash; Method in class com.pixeldroid.r_c4d3.tools.console.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/tools/console/class-list.html');" href="com/pixeldroid/r_c4d3/tools/console/Console.html">Console</a></td>
@@ -133,6 +120,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 <tr>
 <td width="20"></td><td>
   Resume the console.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#retrieveEvent">retrieveEvent</a> &mdash; Property in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/proxies/class-list.html');" href="com/pixeldroid/r_c4d3/proxies/PathConstants.html#RETURN_TO_MENU">RETURN_TO_MENU</a> &mdash; Constant static property in class com.pixeldroid.r_c4d3.proxies.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/proxies/class-list.html');" href="com/pixeldroid/r_c4d3/proxies/PathConstants.html">PathConstants</a></td>

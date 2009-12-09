@@ -57,8 +57,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("LÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#length">length</a> &mdash; Property in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
 </tr>
 <tr>
-<td width="20"></td><td>
-  The total number of entries currently in the high score list.</td>
+<td width="20"></td><td> </td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/data/class-list.html');" href="com/pixeldroid/r_c4d3/data/JsonLoader.html#load()">load</a>(request) &mdash; Method in class com.pixeldroid.r_c4d3.data.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/data/class-list.html');" href="com/pixeldroid/r_c4d3/data/JsonLoader.html">JsonLoader</a></td>
@@ -69,17 +68,39 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("LÂ
     </td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html#event:load">load</a> &mdash; Event in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html">RemoteHighScores</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html#load()">load</a>() &mdash; Method in interface com.pixeldroid.r_c4d3.interfaces.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html">IGameScoresProxy</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
- Dispatched when the score retrieval process has completed.</td>
+  Retrieve the scores from the server.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#load()">load</a>() &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  Read the scores and initials from the storage medium.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/LocalHighScores.html#load()">load</a>() &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/LocalHighScores.html">LocalHighScores</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  Retrieve the scores from local storage.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html#load()">load</a>() &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html">RemoteHighScores</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+  Retrieve the scores from the server.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html#event:LOAD">LOAD</a> &mdash; Event in interface com.pixeldroid.r_c4d3.interfaces.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html">IGameScoresProxy</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+ Dispatched when the score retrieval process has completed.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/ScoreEvent.html#LOAD">LOAD</a> &mdash; Constant static property in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/ScoreEvent.html">ScoreEvent</a></td>
@@ -94,15 +115,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("LÂ
 <tr>
 <td width="20"></td><td>
  <code>LocalHighScores</code> extends the abstract HighScores base class to
- store a set of high scores and initials on the local hard drive,
- using a local SharedObject.</td>
+ store high scores and initials on the local hard drive, using a local SharedObject.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/LocalHighScores.html#LocalHighScores()">LocalHighScores</a>(id, maxScores) &mdash; Constructor in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/LocalHighScores.html">LocalHighScores</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-  </td>
+  Constructor.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/adobe/serialization/json/class-list.html');" href="com/adobe/serialization/json/JSONParseError.html#location">location</a> &mdash; Property in class com.adobe.serialization.json.<a onclick="javascript:loadClassListFrame('com/adobe/serialization/json/class-list.html');" href="com/adobe/serialization/json/JSONParseError.html">JSONParseError</a></td>

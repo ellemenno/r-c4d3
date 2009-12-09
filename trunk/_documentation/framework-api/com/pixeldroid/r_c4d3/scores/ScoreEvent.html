@@ -42,13 +42,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
- <code>ScoreEvent</code> objects are dispatched in response to asynchronous score requests.
+ <code>ScoreEvent</code> objects are dispatched in response to load and store requests on a HighScores subclass.
  
  <p></p>
 <p>
 <span class="classHeaderTableLabel">See also</span>
 </p>
 <div class="seeAlso">
+<a href="../scores/LocalHighScores.html" target="">com.pixeldroid.r_c4d3.scores.LocalHighScores</a>
+<br>
 <a href="../scores/RemoteHighScores.html" target="">com.pixeldroid.r_c4d3.scores.RemoteHighScores</a>
 </div>
 <br>
@@ -106,12 +108,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Constant</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#LOAD">LOAD</a> : String = "load"<div class="summaryTableDescription">[static]
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#LOAD">LOAD</a> : String = "LOAD"<div class="summaryTableDescription">[static]
   Value of the <code>type</code> property of the event object for a <code>load</code> event.</div>
 </td><td class="summaryTableOwnerCol">ScoreEvent</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#SAVE">SAVE</a> : String = "save"<div class="summaryTableDescription">[static]
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#SAVE">SAVE</a> : String = "SAVE"<div class="summaryTableDescription">[static]
   Value of the <code>type</code> property of the event object for a <code>save</code> event.</div>
 </td><td class="summaryTableOwnerCol">ScoreEvent</td>
 </tr>
@@ -191,7 +193,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public static const LOAD:String = "load"</code><p>
+<code>public static const LOAD:String = "LOAD"</code><p>
   Value of the <code>type</code> property of the event object for a <code>load</code> event.
   
   </p></div>
@@ -202,7 +204,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public static const SAVE:String = "save"</code><p>
+<code>public static const SAVE:String = "SAVE"</code><p>
   Value of the <code>type</code> property of the event object for a <code>save</code> event.
   
   </p></div>

@@ -35,7 +35,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("SÂ
 <td colspan="2"><a name="S"></a><a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-A.html">A</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-B.html">B</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-C.html">C</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-D.html">D</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-E.html">E</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-F.html">F</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-G.html">G</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-H.html">H</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-I.html">I</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-J.html">J</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-K.html">K</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-L.html">L</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-M.html">M</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-N.html">N</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-O.html">O</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-P.html">P</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-Q.html">Q</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-R.html">R</a>&nbsp;&nbsp;<font style="bold" size="10px" color="black">S</font>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-T.html">T</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-U.html">U</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-V.html">V</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-W.html">W</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-X.html">X</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-Y.html">Y</a>&nbsp;&nbsp;<a onclick="javascript:loadClassListFrame('index-list.html');" href="all-index-Z.html">Z</a>&nbsp;&nbsp;</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html#event:save">save</a> &mdash; Event in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html">RemoteHighScores</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html#event:SAVE">SAVE</a> &mdash; Event in interface com.pixeldroid.r_c4d3.interfaces.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html">IGameScoresProxy</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
@@ -49,17 +49,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("SÂ
   Value of the <code>type</code> property of the event object for a <code>save</code> event.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/data/class-list.html');" href="com/pixeldroid/r_c4d3/data/CommonScoreData.html#score">score</a> &mdash; Property in class com.pixeldroid.r_c4d3.data.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/data/class-list.html');" href="com/pixeldroid/r_c4d3/data/CommonScoreData.html">CommonScoreData</a></td>
-</tr>
-<tr>
-<td width="20"></td><td></td>
-</tr>
-<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/ScoreEvent.html">ScoreEvent</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/package-detail.html">com.pixeldroid.r_c4d3.scores</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
- <code>ScoreEvent</code> objects are dispatched in response to asynchronous score requests.</td>
+ <code>ScoreEvent</code> objects are dispatched in response to load and store requests on a HighScores subclass.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/ScoreEvent.html#ScoreEvent()">ScoreEvent</a>(type) &mdash; Constructor in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/ScoreEvent.html">ScoreEvent</a></td>
@@ -126,12 +120,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("SÂ
   </td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/proxies/class-list.html');" href="com/pixeldroid/r_c4d3/proxies/KeyboardGameControlsProxy.html#setButtonKey()">setButtonKey</a>(playerIndex, button, keyCode) &mdash; Method in class com.pixeldroid.r_c4d3.proxies.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/proxies/class-list.html');" href="com/pixeldroid/r_c4d3/proxies/KeyboardGameControlsProxy.html">KeyboardGameControlsProxy</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  Provide custom key code assignment for a specific button.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameRom.html#setControlsProxy()">setControlsProxy</a>(value:<a href="com/pixeldroid/r_c4d3/interfaces/IGameControlsProxy.html" onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces./class-list.html');">com.pixeldroid.r_c4d3.interfaces:IGameControlsProxy</a>) &mdash; Method in interface com.pixeldroid.r_c4d3.interfaces.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameRom.html">IGameRom</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-  Provide a reference to the controls proxy for the GameRom to 
-  use for reading user input.</td>
+  Provide a reference to the preloaded config data for the GameRom to 
+  use for initialization.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/proxies/class-list.html');" href="com/pixeldroid/r_c4d3/proxies/RC4D3GameControlsProxy.html#setDefaultCodes()">setDefaultCodes</a>() &mdash; Method in class com.pixeldroid.r_c4d3.proxies.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/proxies/class-list.html');" href="com/pixeldroid/r_c4d3/proxies/RC4D3GameControlsProxy.html">RC4D3GameControlsProxy</a></td>
@@ -166,6 +167,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("SÂ
 <td width="20"></td><td>
   Set a bitfield representing the current state of the hat at the given index
   </td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/proxies/class-list.html');" href="com/pixeldroid/r_c4d3/proxies/KeyboardGameControlsProxy.html#setHatKey()">setHatKey</a>(playerIndex, hat, keyCode) &mdash; Method in class com.pixeldroid.r_c4d3.proxies.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/proxies/class-list.html');" href="com/pixeldroid/r_c4d3/proxies/KeyboardGameControlsProxy.html">KeyboardGameControlsProxy</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  Provide custom key code assignment for a specific hat direction.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/proxies/class-list.html');" href="com/pixeldroid/r_c4d3/proxies/KeyboardGameControlsProxy.html#setKeys()">setKeys</a>(playerIndex, u, r, d, l, x, a, b, c) &mdash; Method in class com.pixeldroid.r_c4d3.proxies.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/proxies/class-list.html');" href="com/pixeldroid/r_c4d3/proxies/KeyboardGameControlsProxy.html">KeyboardGameControlsProxy</a></td>
@@ -208,7 +216,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("SÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-  Write the scores and initials to the storage medium.</td>
+  Submit the scores to the server.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#store()">store</a>() &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
@@ -222,11 +230,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("SÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-  Commit the score entries to file
-  </td>
+  Submit the scores to local storage.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html#store()">store</a>() &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html">RemoteHighScores</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  Submit the scores to the server.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#storeEvent">storeEvent</a> &mdash; Property in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>

@@ -39,7 +39,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 </tr>
 <tr>
 <td width="20"></td><td>
- Implementaors provides system specific access to Joystick, Trackball, and Button information.</td>
+ Implementors provide system specific access to Joystick, Trackball, and Button information.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameRom.html"><i>IGameRom</i></a> &mdash; Interface in package <a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/package-detail.html">com.pixeldroid.r_c4d3.interfaces</a></td>
@@ -52,7 +52,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html"><i>IGameScoresProxy</i></a> &mdash; Interface in package <a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/package-detail.html">com.pixeldroid.r_c4d3.interfaces</a></td>
 </tr>
 <tr>
-<td width="20"></td><td></td>
+<td width="20"></td><td>
+ Implementors provide access to high score storage and retrieval.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/controls/class-list.html');" href="com/pixeldroid/r_c4d3/controls/JoyEventStateEnum.html#IGNORE">IGNORE</a> &mdash; Constant static property in class com.pixeldroid.r_c4d3.controls.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/controls/class-list.html');" href="com/pixeldroid/r_c4d3/controls/JoyEventStateEnum.html">JoyEventStateEnum</a></td>
@@ -81,25 +82,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
   Retrieve the zero-based system index for this joystick.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#initialize()">initialize</a>(id) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#initialize()">initialize</a>() &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/LocalHighScores.html#initialize()">initialize</a>(id) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/LocalHighScores.html">LocalHighScores</a></td>
-</tr>
-<tr>
-<td width="20"></td><td></td>
-</tr>
-<tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html#initialize()">initialize</a>(id) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html">RemoteHighScores</a></td>
-</tr>
-<tr>
-<td width="20"></td><td></td>
-</tr>
-<tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/data/class-list.html');" href="com/pixeldroid/r_c4d3/data/CommonScoreData.html#initials">initials</a> &mdash; Property in class com.pixeldroid.r_c4d3.data.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/data/class-list.html');" href="com/pixeldroid/r_c4d3/data/CommonScoreData.html">CommonScoreData</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html#initialize()">initialize</a>() &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html">RemoteHighScores</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
@@ -115,16 +104,27 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-  Add a score and associated initials string into the score list,
-  possibly bumping off the lowest score.</td>
+  Submit a score and associated initials string for inclusion into the 
+  score list, possibly bumping off the lowest score, or failing to be added.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#insert()">insert</a>(s, i) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
 </tr>
 <tr>
+<td width="20"></td><td> </td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html#insertAll()">insertAll</a>(s, i) &mdash; Method in interface com.pixeldroid.r_c4d3.interfaces.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html">IGameScoresProxy</a></td>
+</tr>
+<tr>
 <td width="20"></td><td>
-  Add a score and associated initials string into the high score list,
-  possibly bumping off the lowest score.</td>
+  Submit all scores and initials into the score list at once.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#insertAll()">insertAll</a>(s, i) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
+</tr>
+<tr>
+<td width="20"></td><td> </td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/controls/class-list.html');" href="com/pixeldroid/r_c4d3/controls/JoyHatEvent.html#isCentered">isCentered</a> &mdash; Property in class com.pixeldroid.r_c4d3.controls.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/controls/class-list.html');" href="com/pixeldroid/r_c4d3/controls/JoyHatEvent.html">JoyHatEvent</a></td>
@@ -133,30 +133,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 <td width="20"></td><td> <code>true</code> when joyhat is not pressed in any direction.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IScoreAdapter.html"><i>IScoreAdapter</i></a> &mdash; Interface in package <a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/package-detail.html">com.pixeldroid.r_c4d3.interfaces</a></td>
-</tr>
-<tr>
-<td width="20"></td><td></td>
-</tr>
-<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/controls/class-list.html');" href="com/pixeldroid/r_c4d3/controls/JoyHatEvent.html#isDown">isDown</a> &mdash; Property in class com.pixeldroid.r_c4d3.controls.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/controls/class-list.html');" href="com/pixeldroid/r_c4d3/controls/JoyHatEvent.html">JoyHatEvent</a></td>
 </tr>
 <tr>
 <td width="20"></td><td> <code>true</code> when joyhat is pressed any type of down (leftDown, down, or rightDown).</td>
-</tr>
-<tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html#isEligible()">isEligible</a>(score) &mdash; Method in interface com.pixeldroid.r_c4d3.interfaces.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html">IGameScoresProxy</a></td>
-</tr>
-<tr>
-<td width="20"></td><td>
-  A quick rejection test for candidate scores.</td>
-</tr>
-<tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#isEligible()">isEligible</a>(score) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
-</tr>
-<tr>
-<td width="20"></td><td>
-  A quick rejection test for candidate scores.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/controls/class-list.html');" href="com/pixeldroid/r_c4d3/controls/JoyHatEvent.html#isLeft">isLeft</a> &mdash; Property in class com.pixeldroid.r_c4d3.controls.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/controls/class-list.html');" href="com/pixeldroid/r_c4d3/controls/JoyHatEvent.html">JoyHatEvent</a></td>

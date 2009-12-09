@@ -45,13 +45,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Pa
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="LocalHighScores.html">LocalHighScores</a></td><td class="summaryTableLastCol">
  <code>LocalHighScores</code> extends the abstract HighScores base class to
- store a set of high scores and initials on the local hard drive,
- using a local SharedObject.</td>
+ store high scores and initials on the local hard drive, using a local SharedObject.</td>
 </tr>
 <tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="RemoteHighScores.html">RemoteHighScores</a></td><td class="summaryTableLastCol">
  <code>RemoteHighScores</code> extends the abstract HighScores base class to
- store the contents of HighScores instance to a remote server,
+ store high scores and initials on a remote server,
  using a web service that accepts the following parameters:<ul>
  <li><code>game</code> : <i>String</i> Unique game id</li>
  <li><code>format</code> : <i>String</i> "json" or "vrml"</li>
@@ -70,7 +69,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Pa
 </tr>
 <tr class="prow0">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="ScoreEvent.html">ScoreEvent</a></td><td class="summaryTableLastCol">
- <code>ScoreEvent</code> objects are dispatched in response to asynchronous score requests.</td>
+ <code>ScoreEvent</code> objects are dispatched in response to load and store requests on a HighScores subclass.</td>
 </tr>
 </table>
 <p></p>
