@@ -16,14 +16,14 @@ package com.pixeldroid.r_c4d3.data {
 		* 
 		* @eventType ready
 		*/
-		public static const READY:String = "ready";
+		public static const READY:String = "READY";
 		
 		/**
 		* Value of the <code>type</code> property of the event object for a <code>error</code> event.
 		* 
 		* @eventType error
 		*/
-		public static const ERROR:String = "error";
+		public static const ERROR:String = "ERROR";
 
 		/**
 		* Information payload from the event broadcaster.
