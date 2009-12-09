@@ -21,8 +21,6 @@ Top level build file for all components of the r-c4d3 platform.
 		<ant
 			antfile="${basedir}/framework/build.xml"
 			dir="${basedir}/framework"
-			inheritall="false"
-			inheritrefs="false"
 			target="build"
 			/>
 	</target>
@@ -31,8 +29,6 @@ Top level build file for all components of the r-c4d3 platform.
 		<ant
 			antfile="${basedir}/romloader/build.xml"
 			dir="${basedir}/romloader"
-			inheritall="false"
-			inheritrefs="false"
 			target="build"
 			/>
 	</target>
@@ -41,8 +37,6 @@ Top level build file for all components of the r-c4d3 platform.
 		<ant
 			antfile="${basedir}/roms/build.xml"
 			dir="${basedir}/roms"
-			inheritall="false"
-			inheritrefs="false"
 			target="build"
 			/>
 	</target>
