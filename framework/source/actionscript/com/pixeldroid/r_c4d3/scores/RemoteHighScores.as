@@ -1,10 +1,6 @@
 ﻿
 package com.pixeldroid.r_c4d3.scores {
  
-
-	import flash.events.Event;
-	import flash.events.EventDispatcher;
-	import flash.events.IEventDispatcher;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
@@ -16,29 +12,10 @@ package com.pixeldroid.r_c4d3.scores {
 	import com.pixeldroid.r_c4d3.scores.HighScores;
 	import com.pixeldroid.r_c4d3.scores.ScoreEvent;
 
-	/**
-	* Dispatched when the score saving process has completed.
-	* 
-	* @eventType com.pixeldroid.r_c4d3.scores.ScoreEvent.SAVE
-	*/
-	[Event(name="save", type="com.pixeldroid.r_c4d3.scores.ScoreEvent")]
-	/**
-	* Dispatched when the score retrieval process has completed.
-	* 
-	* @eventType com.pixeldroid.r_c4d3.scores.ScoreEvent.LOAD
-	*/
-	[Event(name="load", type="com.pixeldroid.r_c4d3.scores.ScoreEvent")]
-	/**
-	* Dispatched when the score posting or retrieval process fails.
-	* 
-	* @eventType com.pixeldroid.data.DataEvent.ERROR
-	*/
-	[Event(name="dataError", type="com.pixeldroid.data.DataEvent")]
-
 
 	/**
 	* <code>RemoteHighScores</code> extends the abstract HighScores base class to
-	* store the contents of HighScores instance to a remote server,
+	* store high scores and initials on a remote server,
 	* using a web service that accepts the following parameters:<ul>
 	* <li><code>game</code> : <i>String</i> Unique game id</li>
 	* <li><code>format</code> : <i>String</i> "json" or "vrml"</li>
@@ -58,22 +35,19 @@ package com.pixeldroid.r_c4d3.scores {
 	* @see com.adobe.serialization.json.JSON
 	* @see http://code.google.com/p/as3corelib/
 	*/
-	public class RemoteHighScores extends HighScores implements IEventDispatcher {
+	public class RemoteHighScores extends HighScores {
 		
 		private var _remoteUrl:String;
 		
 		private var storeRequest:URLRequest;
 		private var retrieveRequest:URLRequest;
-		
-		private var storeEvent:ScoreEvent;
-		private var retrieveEvent:ScoreEvent;
 	
 		private var JL:JsonLoader;
-		private var ED:EventDispatcher;
 	
 	
 	
 		/**
+		* Constructor.
 		*
 		* @param id A unique identifier for this set of scores and initials
 		* @param maxScores The maximum number of entries to store
@@ -81,22 +55,13 @@ package com.pixeldroid.r_c4d3.scores {
 		*/
 		public function RemoteHighScores(id:String=null, maxScores:int=10, accessUrl:String=null) {
 			super(id, maxScores);
-	
-			JL = new JsonLoader();
-			JL.addEventListener(DataEvent.READY, onJsonData);
-			JL.addEventListener(DataEvent.ERROR, onJsonError);
-			
-			ED = new EventDispatcher(this);
-			
-			storeEvent = new ScoreEvent(ScoreEvent.SAVE);
-			retrieveEvent = new ScoreEvent(ScoreEvent.LOAD);
-			
 			if (accessUrl) remoteUrl = accessUrl;
 		}
 	
 	
 		/**
 		* Provide the high score storage webservice URL.
+		*
 		* @param value A URL to a webservice that supports 
 		* game (string), format ('json' | 'vrml') and data (string) query params
 		*/
@@ -108,6 +73,7 @@ package com.pixeldroid.r_c4d3.scores {
 			retrieveRequest = new URLRequest(_remoteUrl);
 			retrieveRequest.method = URLRequestMethod.GET;
 		}
+		/** @private */
 		public function get remoteUrl():String { return _remoteUrl; }
 	
 		/** @inheritdoc */
@@ -118,17 +84,16 @@ package com.pixeldroid.r_c4d3.scores {
 			storeRequest = null;
 			retrieveRequest = null;
 		}
-	
-		/** @inheritdoc */
-		override public function openScoresTable(gameId:String):void
-		{
-			super.openScoresTable(gameId);
-			
-			if (gameId) load();
-		}
 		
-		public function load():void {
-			if (!retrieveRequest) return;
+		/**
+		* Retrieve the scores from the server.
+		*
+		* <p>Dispatches <code>com.pixeldroid.r_c4d3.scores.ScoreEvent.LOAD</code></p>
+		* @see com.pixeldroid.r_c4d3.scores.ScoreEvent
+		*/
+		override public function load():void {
+			if (!gameId) throw new Error("Error: openScoresTable() must be called prior to calling load");
+			if (!retrieveRequest) throw new Error("Error - remoteUrl must be set before calling load");
 			
 			var rVar:URLVariables = new URLVariables();
 			rVar.format = "json";
@@ -138,8 +103,15 @@ package com.pixeldroid.r_c4d3.scores {
 			JL.load(retrieveRequest);
 		}
 		
+		/**
+		* Submit the scores to the server.
+		*
+		* <p>Dispatches <code>com.pixeldroid.r_c4d3.scores.ScoreEvent.SAVE</code></p>
+		* @see com.pixeldroid.r_c4d3.scores.ScoreEvent
+		*/
 		override public function store():void {
-			if (!storeRequest) return;
+			if (!gameId) throw new Error("Error: openScoresTable() must be called prior to calling store");
+			if (!retrieveRequest) throw new Error("Error - remoteUrl must be set before calling store");
 			
 			var sVar:URLVariables = new URLVariables();
 			sVar.format = "json";
@@ -150,77 +122,58 @@ package com.pixeldroid.r_c4d3.scores {
 			JL.load(storeRequest);
 		}
 		
-		override public function initialize(id:String=null):void {
-			scores = [];
-			initials = [];
-		}
 		
+		/**
+		* Generates a valid JSON representation of the high scores table.
+		*/
 		public function toJson():String {
 			return JSON.encode( {scores:scores, initials:initials} );
 		}
-
 		
-		// EventDispatcher Interface
-		public function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void{
-			ED.addEventListener(type, listener, useCapture, priority);
-		}
-		  
-		public function dispatchEvent(evt:Event):Boolean{
-			return ED.dispatchEvent(evt);
-		}
 		
-		public function hasEventListener(type:String):Boolean{
-			return ED.hasEventListener(type);
-		}
 		
-		public function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void{
-			ED.removeEventListener(type, listener, useCapture);
-		}
-					 
-		public function willTrigger(type:String):Boolean {
-			return ED.willTrigger(type);
-		}
-
+		override protected function initialize():void {
+			super.initialize();
 	
-	
+			JL = new JsonLoader();
+			JL.addEventListener(DataEvent.READY, onJsonData);
+			JL.addEventListener(DataEvent.ERROR, onJsonError);
+		}
+		
+		
+		
 		private function onJsonError(e:DataEvent):void {
 			dispatchEvent(e);
 		}
 		
 		private function onJsonData(e:DataEvent):void {
-			//trace("[RemoteHighScores] - onJsonData: " +e.message);
+			//C.out(this, "onJsonData - " +e.message);
 			var serverResponse:Object = e.data;
 			switch (serverResponse.type) {
 				case ("set") :
-					if (serverResponse.success == true) {
-					}
+					if (serverResponse.success == true) /*no-op*/;
+					else C.out(this, "communication error: " +serverResponse.message, true);
 					
-					else {
-						trace("[RemoteHighScores] - communication error: " +serverResponse.message);
-					}
-	
 					storeEvent.success = serverResponse.success;
 					storeEvent.message = serverResponse.message;
 					dispatchEvent(storeEvent);
 				break;
-	
+				
 				case ("get") :
-					if ((serverResponse.success == true)) {
+					if ((serverResponse.success == true))
+					{
 						this.scores = serverResponse.data.scores;
 						this.initials = serverResponse.data.initials;
 					}
-	
-					else {
-						trace("[RemoteHighScores] - communication error: " +serverResponse.message);
-					}
-	
+					else trace(this, "communication error: " +serverResponse.message, true);
+					
 					retrieveEvent.success = serverResponse.success;
 					retrieveEvent.message = serverResponse.message;
 					dispatchEvent(retrieveEvent);
 				break;
 				
 				default:
-					trace("[RemoteHighScores] - unrecognized response type " +serverResponse.type);
+					trace(this, "unrecognized response type " +serverResponse.type, true);
 				break;
 			}
 	

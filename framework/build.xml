@@ -6,6 +6,7 @@
 Tasks to build and package the r-c4d3 as3 framework.
 </description>
 	
+	<property name="dir.trunk" value=".."/>
 	<import file="../build_init.xml"/>
 	
 	<property name="dir.source" value="${basedir}/source"/>

@@ -48,7 +48,7 @@ package com.pixeldroid.r_c4d3.interfaces
 	
 	
 	/**
-	Implementaors provides system specific access to Joystick, Trackball, and Button information.
+	Implementors provide system specific access to Joystick, Trackball, and Button information.
 	<p>
 	Modeled after SDL Joystick API.
 	</p>

@@ -4,8 +4,9 @@ package com.pixeldroid.r_c4d3.scores {
 	import flash.events.Event;
 
 	/**
-	* <code>ScoreEvent</code> objects are dispatched in response to asynchronous score requests.
+	* <code>ScoreEvent</code> objects are dispatched in response to load and store requests on a HighScores subclass.
 	* 
+	* @see com.pixeldroid.r_c4d3.scores.LocalHighScores
 	* @see com.pixeldroid.r_c4d3.scores.RemoteHighScores
 	*/
 	public class ScoreEvent extends Event {
@@ -16,14 +17,14 @@ package com.pixeldroid.r_c4d3.scores {
 		* 
 		* @eventType save
 		*/
-		public static const SAVE:String = "save";
+		public static const SAVE:String = "SAVE";
 
 		/**
 		* Value of the <code>type</code> property of the event object for a <code>load</code> event.
 		* 
 		* @eventType load
 		*/
-		public static const LOAD:String = "load";
+		public static const LOAD:String = "LOAD";
 		
 		/**
 		* <code>true</code> for operations that complete without error.
