@@ -6,7 +6,8 @@
 Tasks to build and package the AS3 Control Test rom.
 </description>
 	
-	<import file="../../build_init.xml"/>
+	<property name="dir.trunk" value="../.."/>
+	<import file="${dir.trunk}/build_init.xml"/>
 	
 	<property name="dir.source" value="${basedir}/source"/>
 	<property name="dir.config" value="${basedir}/config"/>
@@ -23,7 +24,7 @@ Tasks to build and package the AS3 Control Test rom.
 		</java>
 	</target>
 	
-    <target name="build" depends="compile, package, release" 
+    <target name="build" depends="compile, package, release, launch" 
 		description="&gt; this is the main task: compile, package, release"/>
 	
 	<target name="clean" description="remove the contents of ${dir.target}">
@@ -47,7 +48,7 @@ Tasks to build and package the AS3 Control Test rom.
 		<mkdir dir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.source}/resources/config/romloader-config.xml" todir="${dir.target}/temp-desktop"/>
-		<copy file="${dir.releases}/romloader-desktop-debug.exe" tofile="${dir.target}/temp-desktop/ControlTest.exe"/>
+		<copy file="${romloader.projector}" tofile="${dir.target}/temp-desktop/ControlTest${exe}"/>
 		<zip destfile="${dir.target}/ControlTest-desktop.zip" basedir="${dir.target}/temp-desktop"/>
 	</target>
 	
@@ -70,6 +71,10 @@ Tasks to build and package the AS3 Control Test rom.
 				<include name="**/*.zip"/>
 			</fileset>
 		</copy>
+	</target>
+	
+	<target name="launch" unless="no.rom.launches" description="launch the rom in the desktop romloader">
+		<exec executable="${dir.target}/temp-desktop/ControlTest${exe}" failonerror="false"/>
 	</target>
 
 </project>

@@ -6,6 +6,7 @@
 Tasks to build and package the r-c4d3 romloaders.
 </description>
 	
+	<property name="dir.trunk" value=".."/>
 	<import file="../build_init.xml"/>
 	
 	<property name="dir.source" value="${basedir}/source"/>
@@ -14,6 +15,7 @@ Tasks to build and package the r-c4d3 romloaders.
 	
 	<property name="dir.documentation" value="${basedir}/../_documentation/romloader-api"/>
 	<property name="dir.releases" value="${basedir}/../_releases"/>
+	<property name="no.rom.launches" value="true"/>
 	
 	<property file="build.properties"/>
 	
