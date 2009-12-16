@@ -29,6 +29,19 @@ package view.screen
 		}
 		
 		
+		
+		protected function set backgroundColor(value:uint):void
+		{
+			var w:int = stage.stageWidth;
+			var h:int = stage.stageHeight;
+			
+			graphics.clear();
+			graphics.beginFill(value);
+			graphics.drawRect(0,0, w,h);
+			graphics.endFill();
+		}
+		
+		
 		// IScreen interface
 		public function set type(value:String):void
 		{
@@ -54,7 +67,7 @@ package view.screen
 		
 		public function initialize():Boolean
 		{
-			C.out(this, "initialize()");
+			C.out(this, "base initialize()");
 			timeElapsed = 0;
 			return true;
 		}

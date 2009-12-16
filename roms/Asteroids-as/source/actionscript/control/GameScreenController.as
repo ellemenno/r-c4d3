@@ -96,6 +96,7 @@ package control
 		// message callbacks
 		private function gameTick(e:Object):void
 		{
+			C.out(this, "gameTick(" +(e as int) +")", true);
 			currentScreen.onFrameUpdate(e as int);
 		}
 		

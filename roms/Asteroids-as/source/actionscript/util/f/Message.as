@@ -71,12 +71,14 @@ package util.f
 			var target:Object;
 			if( Message.listeners == null ) return false;
 			target = Message.listeners.read( name );
-			
+			C.out(Message, "send - found target for '" +name +"'");
 			//fire one
 			if( target is Function ){
+				C.out(Message, "send - target is function; calling now");
 				target( obj );
 			//walk and fire
 			}else if( target is Dictionary ){
+				C.out(Message, "send - target is dictionary, walking");
 				Message.walkSend( target , obj );
 			}
 			return true;
@@ -87,8 +89,10 @@ package util.f
 			var i:String;
 			for( i in target ){
 				if( target[ i ] is Dictionary ){
+					C.out(Message, "walkSend - target is dictionary, walking further");
 					Message.walkSend( target[ i ] , obj );
 				}else if( target[ i ] is Function ){
+					C.out(Message, "walkSend - target is function; calling now");
 					target[ i ]( obj );
 				}
 			}
