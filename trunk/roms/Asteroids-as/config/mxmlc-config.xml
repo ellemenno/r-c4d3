@@ -78,6 +78,7 @@
 			<path-element>../source/actionscript</path-element>
 			<path-element>../source/resources/fonts</path-element>
 			<path-element>../source/resources/graphics</path-element>
+			<path-element>../source/resources/sound</path-element>
 		</source-path>
 	</compiler>
 	

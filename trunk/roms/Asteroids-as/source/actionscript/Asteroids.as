@@ -90,8 +90,13 @@ package
 		public function enterAttractLoop():void
 		{
 			C.out(this, "enterAttractLoop");
+			stage.frameRate = 10;
 			// pass flow to game screen controller
 			Message.send(null, Signals.ATTRACT_LOOP_BEGIN);
+			
+			// initialize frame event reporting and timing
+			lastTime = getTimer();
+			addEventListener(Event.ENTER_FRAME, onFrame);
 		}
 		
 		
@@ -124,10 +129,6 @@ package
 			gameLayer = addChild(new Sprite()) as Sprite;
 			debugLayer = addChild(new Sprite()) as Sprite;
 			
-			// initialize frame event reporting and timing
-			lastTime = getTimer();
-			addEventListener(Event.ENTER_FRAME, onFrame);
-			
 			return true;
 		}
 		
@@ -139,6 +140,7 @@ package
 			var dt:int = now - lastTime;
 			
 			Message.send(dt, Signals.GAME_TICK);
+			//if (now > 5000) Message.send(null, Signals.SCREEN_GO_NEXT);
 			
 			lastTime = now;
 		}

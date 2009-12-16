@@ -27,19 +27,21 @@ package view.screen.attractloop
 		override public function initialize():Boolean
 		{
 			if (!super.initialize()) return false;
+			C.out(this, "initialize");
 			
-			var w:int = stage.stageWidth;
-			var h:int = stage.stageHeight;
+			backgroundColor = 0x777777;
 			
-			graphics.beginFill(0x777777);
-			graphics.drawRect(0,0, w,h);
-			graphics.endFill();
+			var title:TextField = addChild(FontAssets.createTextField("ASTEROIDS", FontAssets.deLarge(120, 0xffffff, TextFormatAlign.CENTER), width)) as TextField;
+			title.x = width*.5 - title.width*.5;
+			title.y = height*.5 - title.height*.75;
 			
-			var title:TextField = addChild(FontAssets.createTextField("ASTEROIDS", FontAssets.deLarge(120, 0xffffff, TextFormatAlign.CENTER), w)) as TextField;
-			title.x = w*.5 - title.width*.5;
-			title.y = h*.5 - title.height*.75;
+			Message.add(gameTick, Signals.GAME_TICK);
 			
 			return true;
+		}
+		private function gameTick(e:Object):void
+		{
+			C.out(this, "gameTick(" +(e as int) +")");
 		}
 		
 		override public function shutDown():Boolean
@@ -50,6 +52,7 @@ package view.screen.attractloop
 		
 		override public function onFrameUpdate(dt:int):void
 		{
+			C.out(this, "onFrameUpdate");
 			super.onFrameUpdate(dt);
 			
 			if (timeElapsed > 3*1000) timeOut();
