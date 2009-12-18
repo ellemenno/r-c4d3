@@ -44,6 +44,8 @@ package
 		
 		public function Asteroids()
 		{
+			super();
+			
 			C.out(this, "Asteroids");
 			initialize();
 		}
