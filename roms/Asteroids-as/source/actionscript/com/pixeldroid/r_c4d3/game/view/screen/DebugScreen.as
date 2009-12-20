@@ -1,12 +1,11 @@
 
 
-package view.screen.debug
+package com.pixeldroid.r_c4d3.game.view.screen
 {
 	
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
-	
-	import view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
 	
 	
 	public class DebugScreen extends ScreenBase

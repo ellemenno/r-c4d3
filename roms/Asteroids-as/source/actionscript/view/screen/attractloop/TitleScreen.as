@@ -6,11 +6,12 @@ package view.screen.attractloop
 	import flash.text.TextField;
 	import flash.text.TextFormatAlign;
 	
+	import com.pixeldroid.r_c4d3.game.control.Signals;
+	import com.pixeldroid.r_c4d3.game.control.Notifier;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	
 	import FontAssets;
 	
-	import control.Signals;
-	import util.Notifier;
-	import view.screen.ScreenBase;
 	
 	
 	public class TitleScreen extends ScreenBase

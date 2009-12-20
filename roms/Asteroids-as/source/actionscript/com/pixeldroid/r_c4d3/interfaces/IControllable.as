@@ -1,5 +1,5 @@
 
-package util
+package com.pixeldroid.r_c4d3.interfaces
 {
 	
 	import flash.events.Event;

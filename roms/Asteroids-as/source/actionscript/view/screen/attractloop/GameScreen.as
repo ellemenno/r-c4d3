@@ -7,11 +7,11 @@ package view.screen.attractloop
 	
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
-	
-	import control.Signals;
+	import com.pixeldroid.r_c4d3.game.control.Notifier;
+	import com.pixeldroid.r_c4d3.game.control.Signals;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+
 	import model.AsteroidsModel;
-	import util.Notifier;
-	import view.screen.ScreenBase;
 	import view.screen.game.AsteroidsScreen;
 	
 	

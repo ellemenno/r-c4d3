@@ -1,6 +1,7 @@
 
-package view.screen
+package com.pixeldroid.r_c4d3.interfaces
 {
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
 	
 	public interface IGameScreenFactory
 	{

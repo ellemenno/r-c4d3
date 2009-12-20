@@ -1,6 +1,6 @@
 
 
-package control
+package com.pixeldroid.r_c4d3.game.control
 {
 
 	import flash.display.DisplayObject;
@@ -8,13 +8,12 @@ package control
 	
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
+	import com.pixeldroid.r_c4d3.game.control.Signals;
+	import com.pixeldroid.r_c4d3.game.control.Notifier;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
-	
-	import control.Signals;
-	import util.IDisposable;
-	import util.Notifier;
-	import view.screen.IGameScreenFactory;
-	import view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory;
 	
 	
 	

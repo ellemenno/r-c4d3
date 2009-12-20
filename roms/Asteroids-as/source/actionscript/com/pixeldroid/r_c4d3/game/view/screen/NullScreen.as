@@ -1,9 +1,9 @@
 
 
-package view.screen
+package com.pixeldroid.r_c4d3.game.view.screen
 {
 	
-	import view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
 	
 	
 	

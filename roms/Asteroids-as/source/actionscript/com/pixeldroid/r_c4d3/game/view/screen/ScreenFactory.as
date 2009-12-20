@@ -1,19 +1,19 @@
 
 
-package view.screen
+package com.pixeldroid.r_c4d3.game.view.screen
 {
 	
-	import util.ResourcePool;
+	import com.pixeldroid.r_c4d3.data.ResourcePool;
+	import com.pixeldroid.r_c4d3.game.view.screen.DebugScreen;
+	import com.pixeldroid.r_c4d3.game.view.screen.NullScreen;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory;
 	
-	import view.screen.IGameScreenFactory;
-	import view.screen.NullScreen;
-	import view.screen.ScreenBase;
 	import view.screen.attractloop.GameScreen;
 	import view.screen.attractloop.HelpScreen;
 	import view.screen.attractloop.ScoresScreen;
 	import view.screen.attractloop.SetupScreen;
 	import view.screen.attractloop.TitleScreen;
-	import view.screen.debug.DebugScreen;
 	
 	
 	

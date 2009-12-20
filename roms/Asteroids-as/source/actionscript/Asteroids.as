@@ -14,18 +14,17 @@ package
 	import flash.utils.getQualifiedClassName;
 	
 	import com.pixeldroid.r_c4d3.controls.JoyEventStateEnum;
+	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameRom;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
-	
-	import control.GameScreenController;
-	import control.StatsScreenController;
-	import control.ScoreController;
-	import control.Signals;
-	import util.IDisposable;
-	import util.Notifier;
-	import view.screen.IGameScreenFactory;
-	import view.screen.ScreenFactory;
+	import com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory;
+	import com.pixeldroid.r_c4d3.game.control.GameScreenController;
+	import com.pixeldroid.r_c4d3.game.control.Notifier;
+	import com.pixeldroid.r_c4d3.game.control.ScoreController;
+	import com.pixeldroid.r_c4d3.game.control.Signals;
+	import com.pixeldroid.r_c4d3.game.control.StatsScreenController;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenFactory;
 	
 	
 	public class Asteroids extends Sprite implements IGameRom, IDisposable

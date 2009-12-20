@@ -3,7 +3,7 @@
 package view.screen.game
 {
 	
-	import view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
 	
 	
 	

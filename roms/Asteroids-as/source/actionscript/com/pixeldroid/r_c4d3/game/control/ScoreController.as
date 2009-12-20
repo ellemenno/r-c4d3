@@ -1,17 +1,16 @@
 
 
-package control
+package com.pixeldroid.r_c4d3.game.control
 {
 
 	import flash.events.Event;
 
 	import com.pixeldroid.r_c4d3.data.DataEvent;
+	import com.pixeldroid.r_c4d3.game.control.Signals;
+	import com.pixeldroid.r_c4d3.game.control.Notifier;
+	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
 	import com.pixeldroid.r_c4d3.scores.ScoreEvent;
-	
-	import control.Signals;
-	import util.IDisposable;
-	import util.Notifier;
 	
 	
 	
