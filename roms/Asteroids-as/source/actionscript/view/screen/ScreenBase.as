@@ -53,6 +53,12 @@ package view.screen
 			}
 		}
 		
+		protected function onFirstScreen():void
+		{
+			// to be overridden by subclasses to draw first view on screen
+			// updates will be prompted via onScreenUpdate
+		}
+		
 		
 		// IScreen interface
 		public function set type(value:String):void
@@ -90,6 +96,7 @@ package view.screen
 		{
 			C.out(this, "base initialize()");
 			timeElapsed = 0;
+			onFirstScreen();
 			
 			return true;
 		}
@@ -106,10 +113,9 @@ package view.screen
 			C.out(this, "onButtonMotion: " +e);
 		}
 		
-		public function onFrameUpdate(dt:int):void
+		public function onScreenUpdate(dt:int):void
 		{
 			timeElapsed += dt;
-			//C.out(this, "onFrameUpdate (" +dt +"ms elapsed)");
 		}
 	}
 }

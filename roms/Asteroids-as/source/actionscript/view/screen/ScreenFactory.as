@@ -3,8 +3,9 @@
 package view.screen
 {
 	
-	import flash.utils.Dictionary;
+	import util.ResourcePool;
 	
+	import view.screen.IGameScreenFactory;
 	import view.screen.NullScreen;
 	import view.screen.ScreenBase;
 	import view.screen.attractloop.GameScreen;
@@ -16,73 +17,39 @@ package view.screen
 	
 	
 	
-	public class ScreenFactory
+	public class ScreenFactory implements IGameScreenFactory
 	{
-		static public const GAME:String = "GAME";
-		static public const HELP:String = "HELP";
-		static public const NULL:String = "NULL";
-		static public const SCORES:String = "SCORES";
-		static public const SETUP:String = "SETUP";
-		static public const TITLE:String = "TITLE";
-		static public const DEBUG:String = "DEBUG";
 		
-		static private var screens:Dictionary = new Dictionary();
+		private var screens:ResourcePool = new ResourcePool();
 		
+		public function get GAME():String { return "GAME" }
+		public function get HELP():String { return "HELP" }
+		public function get NULL():String { return "NULL" }
+		public function get SCORES():String { return "SCORES" }
+		public function get SETUP():String { return "SETUP" }
+		public function get TITLE():String { return "TITLE" }
+		public function get DEBUG():String { return "DEBUG" }
 		
-		
-		static public function get gameScreen():ScreenBase
+		public function getScreen(type:String):ScreenBase
 		{
-			C.out(ScreenFactory, "get gameScreen()");
-			return retrieveScreen(GameScreen, GAME);
-		}
-		
-		static public function get helpScreen():ScreenBase
-		{
-			C.out(ScreenFactory, "get helpScreen()");
-			return retrieveScreen(HelpScreen, HELP);
-		}
-		
-		static public function get nullScreen():ScreenBase
-		{
-			C.out(ScreenFactory, "get nullScreen()");
-			return retrieveScreen(NullScreen, NULL);
-		}
-		
-		static public function get scoresScreen():ScreenBase
-		{
-			C.out(ScreenFactory, "get scoresScreen()");
-			return retrieveScreen(ScoresScreen, SCORES);
-		}
-		
-		static public function get setupScreen():ScreenBase
-		{
-			C.out(ScreenFactory, "get setupScreen()");
-			return retrieveScreen(SetupScreen, SETUP);
-		}
-		
-		static public function get titleScreen():ScreenBase
-		{
-			C.out(ScreenFactory, "get titleScreen()");
-			return retrieveScreen(TitleScreen, TITLE);
-		}
-		
-		static public function get debugScreen():ScreenBase
-		{
-			C.out(ScreenFactory, "get debugScreen()");
-			return retrieveScreen(DebugScreen, DEBUG);
-		}
-		
-		
-		static private function retrieveScreen(screenClass:Class, name:String):ScreenBase
-		{
-			// resource pooling; only instantiate once
-			if (screens[name] == null)
+			var screen:ScreenBase;
+			switch (type)
 			{
-				var screen:IScreen = new screenClass() as ScreenBase;
-				screen.name = name;
-				screens[name] = screen;
+				case GAME   : screen = screens.retrieve(GameScreen, type) as ScreenBase; break;
+				case HELP   : screen = screens.retrieve(HelpScreen, type) as ScreenBase; break;
+				case NULL   : screen = screens.retrieve(NullScreen, type) as ScreenBase; break;
+				case SCORES : screen = screens.retrieve(ScoresScreen, type) as ScreenBase; break;
+				case SETUP  : screen = screens.retrieve(SetupScreen, type) as ScreenBase; break;
+				case TITLE  : screen = screens.retrieve(TitleScreen, type) as ScreenBase; break;
+				case DEBUG  : screen = screens.retrieve(DebugScreen, type) as ScreenBase; break;
+				
+				default: throw new Error("unsupported screen type: " +type); break;
 			}
-			return screens[name] as ScreenBase;
+			
+			screen.name = type;
+			C.out(this, "getScreen() - " +type);
+			
+			return screen;
 		}
 		
 	}

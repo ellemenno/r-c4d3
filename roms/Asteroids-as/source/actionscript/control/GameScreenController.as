@@ -13,25 +13,27 @@ package control
 	import control.Signals;
 	import util.IDisposable;
 	import util.Notifier;
+	import view.screen.IGameScreenFactory;
 	import view.screen.ScreenBase;
-	import view.screen.ScreenFactory;
 	
 	
 	
 	public class GameScreenController implements IDisposable
 	{
 		
-		private var controlsProxy:IGameControlsProxy;
-		private var screenContainer:DisplayObjectContainer;
-		private var currentScreen:ScreenBase;
+		protected var controlsProxy:IGameControlsProxy;
+		protected var screenContainer:DisplayObjectContainer;
+		protected var screenFactory:IGameScreenFactory;
+		protected var currentScreen:ScreenBase;
 		
 		
 		// Constructor
-		public function GameScreenController(controls:IGameControlsProxy, container:DisplayObjectContainer)
+		public function GameScreenController(controls:IGameControlsProxy, container:DisplayObjectContainer, factory:IGameScreenFactory)
 		{
 			C.out(this, "constructor");
 			controlsProxy = controls;
 			screenContainer = container;
+			screenFactory = factory;
 		}
 		
 		
@@ -63,7 +65,7 @@ package control
 		public function initialize():Boolean
 		{
 			C.out(this, "initialize()");
-			currentScreen = screenContainer.addChild(ScreenFactory.nullScreen as DisplayObject) as ScreenBase;
+			currentScreen = screenContainer.addChild(screenFactory.getScreen(screenFactory.NULL) as DisplayObject) as ScreenBase;
 			
 			// attach listeners to controls proxy
 			controlsProxy.addEventListener(JoyHatEvent.JOY_HAT_MOTION, onHatMotion);
@@ -81,12 +83,12 @@ package control
 		
 		
 		// event handlers
-		private function onHatMotion(e:JoyHatEvent):void
+		protected function onHatMotion(e:JoyHatEvent):void
 		{
 			currentScreen.onHatMotion(e);
 		}
 		
-		private function onButtonMotion(e:JoyButtonEvent):void
+		protected function onButtonMotion(e:JoyButtonEvent):void
 		{
 			currentScreen.onButtonMotion(e);
 		}
@@ -94,38 +96,38 @@ package control
 		
 		
 		// message callbacks
-		private function gameTick(e:Object):void
+		protected function gameTick(dt:int):void
 		{
-			currentScreen.onFrameUpdate(e as int);
+			currentScreen.onScreenUpdate(dt);
 		}
 		
-		private function nextScreen(e:Object):void
+		protected function nextScreen():void
 		{
 			C.out(this, "nextScreen()");
 			switch (currentScreen.name)
 			{
-				case ScreenFactory.NULL:
-				setCurrentScreen(ScreenFactory.titleScreen);
+				case screenFactory.NULL:
+				setCurrentScreen(screenFactory.getScreen(screenFactory.TITLE));
 				break;
 				
-				case ScreenFactory.TITLE:
-				setCurrentScreen(ScreenFactory.helpScreen);
+				case screenFactory.TITLE:
+				setCurrentScreen(screenFactory.getScreen(screenFactory.HELP));
 				break;
 				
-				case ScreenFactory.HELP:
-				setCurrentScreen(ScreenFactory.setupScreen);
+				case screenFactory.HELP:
+				setCurrentScreen(screenFactory.getScreen(screenFactory.SETUP));
 				break;
 				
-				case ScreenFactory.SETUP:
-				setCurrentScreen(ScreenFactory.gameScreen);
+				case screenFactory.SETUP:
+				setCurrentScreen(screenFactory.getScreen(screenFactory.GAME));
 				break;
 				
-				case ScreenFactory.GAME:
-				setCurrentScreen(ScreenFactory.scoresScreen);
+				case screenFactory.GAME:
+				setCurrentScreen(screenFactory.getScreen(screenFactory.SCORES));
 				break;
 				
-				case ScreenFactory.SCORES:
-				setCurrentScreen(ScreenFactory.titleScreen);
+				case screenFactory.SCORES:
+				setCurrentScreen(screenFactory.getScreen(screenFactory.TITLE));
 				break;
 				
 				default:
@@ -134,16 +136,16 @@ package control
 			}
 		}
 		
-		private function gameBegin(e:Object):void
+		protected function gameBegin():void
 		{
 			C.out(this, "gameBegin()");
-			setCurrentScreen(ScreenFactory.setupScreen);
+			setCurrentScreen(screenFactory.getScreen(screenFactory.SETUP));
 		}
 		
 		
 		
 		// utility
-		private function setCurrentScreen(screen:ScreenBase):void
+		protected function setCurrentScreen(screen:ScreenBase):void
 		{
 			var prevScreen:String = currentScreen.name;
 			

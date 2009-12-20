@@ -18,9 +18,9 @@ package view.screen.game
 		}
 		
 		
-		override public function onFrameUpdate(dt:int):void
+		override public function onScreenUpdate(dt:int):void
 		{
-			super.onFrameUpdate(dt);
+			super.onScreenUpdate(dt);
 		}
 		
 	}

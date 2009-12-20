@@ -8,7 +8,6 @@ Asteroids
 package
 {
 
-	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.utils.getTimer;
@@ -25,6 +24,8 @@ package
 	import control.Signals;
 	import util.IDisposable;
 	import util.Notifier;
+	import view.screen.IGameScreenFactory;
+	import view.screen.ScreenFactory;
 	
 	
 	public class Asteroids extends Sprite implements IGameRom, IDisposable
@@ -32,12 +33,15 @@ package
 		
 		private var controls:IGameControlsProxy;
 		private var scores:IGameScoresProxy;
+		private var screens:IGameScreenFactory;
+		
 		private var screenManager:IDisposable;
 		private var statsManager:IDisposable;
 		private var scoreManager:IDisposable;
 		
 		private var debugLayer:Sprite;
 		private var gameLayer:Sprite;
+		
 		private var lastTime:int
 		
 		
@@ -58,18 +62,18 @@ package
 			C.out(this, "setControlsProxy to " +getQualifiedClassName(value));
 			if (!value) throw new Error("Error - expected IGameControlsProxy, got " +value);
 			
-			// store local ref to IGameControlsProxy and enable reporting (instead of actively polling)
+			// store local ref to IGameControlsProxy
 			controls = value;
+			
+			// activate players and enable event reporting (instead of actively polling)
+			for (var i:int = 0; i < 4; i++) controls.joystickOpen(i); // activate joystick for players 1 - 4
 			controls.joystickEventState(JoyEventStateEnum.ENABLE, stage); // enable event reporting
 			
-			// activate players
-			for (var i:int = 0; i < 4; i++) controls.joystickOpen(i); // activate joystick for players 1 - 4
-			
-			// instantiate and initialize controllers
-			screenManager = new GameScreenController(controls, gameLayer) as IDisposable;
+			// instantiate and initialize mangers
+			screenManager = createGameScreenController(controls, gameLayer, screens);
 			screenManager.initialize();
 			
-			statsManager = new StatsScreenController(controls, debugLayer) as IDisposable;
+			statsManager = createStatsScreenController(controls, debugLayer, screens);
 			statsManager.initialize();
 		}
 		
@@ -84,7 +88,7 @@ package
 			// activate score table for this game
 			scores.openScoresTable("r-c4d3.asteroids");
 			
-			// instantiate and initialize controllers
+			// instantiate and initialize manager
 			scoreManager = new ScoreController(scores) as IDisposable;
 			scoreManager.initialize();
 		}
@@ -93,12 +97,13 @@ package
 		{
 			C.out(this, "enterAttractLoop");
 			stage.frameRate = 10;
-			// pass flow to game screen controller
-			Notifier.send(Signals.ATTRACT_LOOP_BEGIN);
 			
 			// initialize frame event reporting and timing
 			lastTime = getTimer();
 			addEventListener(Event.ENTER_FRAME, onFrame);
+			
+			// pass flow to game screen controller
+			Notifier.send(Signals.ATTRACT_LOOP_BEGIN);
 		}
 		
 		
@@ -117,32 +122,64 @@ package
 			
 			removeChild(debugLayer);
 			removeChild(gameLayer);
+			
 			removeEventListener(Event.ENTER_FRAME, onFrame);
 			
 			controls = null;
+			
+			scores.closeScoresTable();
 			scores = null;
+			
+			screens = null;
 			
 			return true;
 		}
 		
 		public function initialize():Boolean
 		{
+			// create factory for retrieving game screens
+			screens = createGameScreenFactory();
+			
 			// instantiate and initialize top level containers for screens and debug stats
 			gameLayer = addChild(new Sprite()) as Sprite;
 			debugLayer = addChild(new Sprite()) as Sprite;
+			
+			// rest of initialization happens when scores and controls proxies are set
 			
 			return true;
 		}
 		
 		
 		// event handlers
-		private function onFrame(e:Event):void
+		protected function onFrame(e:Event):void
 		{
 			var now:int = getTimer();
 			var dt:int = now - lastTime;
 			
 			Notifier.send(Signals.GAME_TICK, dt);
 			lastTime = now;
+		}
+		
+		
+		// factory methods
+		protected function createGameScreenFactory():IGameScreenFactory
+		{
+			return new ScreenFactory();
+		}
+		
+		protected function createGameScreenController(controlsProxy:IGameControlsProxy, gameLayer:Sprite, screenFactory:IGameScreenFactory):IDisposable
+		{
+			return new GameScreenController(controlsProxy, gameLayer, screenFactory) as IDisposable
+		}
+		
+		protected function createStatsScreenController(controlsProxy:IGameControlsProxy, gameLayer:Sprite, screenFactory:IGameScreenFactory):IDisposable
+		{
+			return new StatsScreenController(controlsProxy, gameLayer, screenFactory) as IDisposable
+		}
+		
+		protected function createScoreController(scoresProxy:IGameScoresProxy):IDisposable
+		{
+			return new ScoreController(scoresProxy) as IDisposable
 		}
 		
 	}
