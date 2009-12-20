@@ -17,6 +17,20 @@ package com.pixeldroid.r_c4d3.game.control
 	
 	
 	
+	/**
+	Handles game state at the attract loop level by advancing through the screens specified in IGameScreenFactory.
+	
+	<p>
+	Listens for the following signals: 
+	ATTRACT_LOOP_BEGIN (start the attract loop), 
+	SCREEN_GO_NEXT (advance to next screen in the attract loop), 
+	GAME_BEGIN (jump to the setup screen), 
+	GAME_TICK (ask the current screen to update)
+	</p>
+	
+	@see IGameScreenFactory
+	@see Signals
+	*/
 	public class GameScreenController implements IDisposable
 	{
 		
@@ -26,7 +40,9 @@ package com.pixeldroid.r_c4d3.game.control
 		protected var currentScreen:ScreenBase;
 		
 		
-		// Constructor
+		/**
+		Constructor
+		*/
 		public function GameScreenController(controls:IGameControlsProxy, container:DisplayObjectContainer, factory:IGameScreenFactory)
 		{
 			C.out(this, "constructor");
@@ -38,6 +54,7 @@ package com.pixeldroid.r_c4d3.game.control
 		
 		
 		// IDisposable interface
+		/** @inheritDoc */
 		public function shutDown():Boolean
 		{
 			C.out(this, "shutDown()");
@@ -61,6 +78,7 @@ package com.pixeldroid.r_c4d3.game.control
 			return true;
 		}
 		
+		/** @inheritDoc */
 		public function initialize():Boolean
 		{
 			C.out(this, "initialize()");
