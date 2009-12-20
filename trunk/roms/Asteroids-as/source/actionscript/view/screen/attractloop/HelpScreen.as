@@ -6,7 +6,7 @@ package view.screen.attractloop
 	import flash.text.TextField;
 	
 	import control.Signals;
-	import util.f.Message;
+	import util.Notifier;
 	import view.screen.ScreenBase;
 	
 	
@@ -25,13 +25,7 @@ package view.screen.attractloop
 		{
 			if (!super.initialize()) return false;
 			
-			var w:int = stage.stageWidth;
-			var h:int = stage.stageHeight;
-			
-			graphics.beginFill(0x555555);
-			graphics.drawRect(0,0, w,h);
-			graphics.endFill();
-			
+			backgroundColor = 0x555555;
 			var title:TextField = addChild(FontAssets.createTextField("Help Screen", FontAssets.blojbytesdepa())) as TextField;
 			title.x = 15;
 			title.y = 15;
@@ -41,7 +35,6 @@ package view.screen.attractloop
 		
 		override public function shutDown():Boolean
 		{
-			graphics.clear();
 			return super.shutDown();;
 		}
 		
@@ -56,7 +49,7 @@ package view.screen.attractloop
 		private function timeOut():void
 		{
 			C.out(this, "timeOut - sending SCREEN_GO_NEXT signal");
-			Message.send(null, Signals.SCREEN_GO_NEXT);
+			Notifier.send(Signals.SCREEN_GO_NEXT);
 		}
 		
 	}

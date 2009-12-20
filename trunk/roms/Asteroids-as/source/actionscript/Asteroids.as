@@ -24,7 +24,7 @@ package
 	import control.ScoreController;
 	import control.Signals;
 	import util.IDisposable;
-	import util.f.Message;
+	import util.Notifier;
 	
 	
 	public class Asteroids extends Sprite implements IGameRom, IDisposable
@@ -94,7 +94,7 @@ package
 			C.out(this, "enterAttractLoop");
 			stage.frameRate = 10;
 			// pass flow to game screen controller
-			Message.send(null, Signals.ATTRACT_LOOP_BEGIN);
+			Notifier.send(Signals.ATTRACT_LOOP_BEGIN);
 			
 			// initialize frame event reporting and timing
 			lastTime = getTimer();
@@ -141,9 +141,7 @@ package
 			var now:int = getTimer();
 			var dt:int = now - lastTime;
 			
-			Message.send(dt, Signals.GAME_TICK);
-			//if (now > 5000) Message.send(null, Signals.SCREEN_GO_NEXT);
-			
+			Notifier.send(Signals.GAME_TICK, dt);
 			lastTime = now;
 		}
 		

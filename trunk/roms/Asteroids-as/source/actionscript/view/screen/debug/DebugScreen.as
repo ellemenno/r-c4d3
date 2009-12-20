@@ -24,6 +24,8 @@ package view.screen.debug
 		
 		override public function initialize():Boolean
 		{
+			if (!super.initialize()) return false;
+			
 			// TODO: fps monitor
 			// TODO: epf / spf / mem graph
 			numEvents = 0;
@@ -34,11 +36,14 @@ package view.screen.debug
 		override public function shutDown():Boolean
 		{
 			while (numChildren > 0) removeChildAt(0);
-			return true;
+			
+			return super.shutDown();
 		}
 		
 		override public function onFrameUpdate(dt:int):void
 		{
+			super.onFrameUpdate(dt);
+			
 			// update graphs
 		}
 		

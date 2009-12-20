@@ -3,6 +3,7 @@
 package view.screen
 {
 	
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
@@ -41,6 +42,17 @@ package view.screen
 			graphics.endFill();
 		}
 		
+		protected function clear():void
+		{
+			graphics.clear();
+			var d:DisplayObject;
+			while (numChildren > 0)
+			{
+				d = removeChildAt(0);
+				if (d is ScreenBase) (d as ScreenBase).shutDown();
+			}
+		}
+		
 		
 		// IScreen interface
 		public function set type(value:String):void
@@ -58,10 +70,19 @@ package view.screen
 		// IDisposable interface
 		public function shutDown():Boolean
 		{
-			var s:int = Math.floor(timeElapsed*.001);
-			var m:int = (s >= 60) ? Math.floor(s/60) : 0;
-			var t:String = (m > 0) ? m +"m " +(s - m*60) +"s" : s +"s";
-			C.out(this, "shutDown() " +t +" elapsed");
+			clear();
+			var t:String;
+			
+			if (timeElapsed < 1000) t = timeElapsed +"ms";
+			else
+			{
+				var s:int = Math.floor(timeElapsed*.001);
+				var m:int = (s >= 60) ? Math.floor(s/60) : 0;
+				t = (m > 0) ? m +"m " +(s - m*60) +"s" : s +"s";
+			}
+			
+			C.out(this, "base shutDown() - lifetime was " +t);
+			
 			return true;
 		}
 		
@@ -69,6 +90,7 @@ package view.screen
 		{
 			C.out(this, "base initialize()");
 			timeElapsed = 0;
+			
 			return true;
 		}
 		
