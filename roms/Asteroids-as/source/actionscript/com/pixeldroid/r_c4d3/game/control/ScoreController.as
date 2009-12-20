@@ -14,13 +14,31 @@ package com.pixeldroid.r_c4d3.game.control
 	
 	
 	
+	/**
+	Handles communication with the IGameScoresProxy to retrieve and submit score data.
+	
+	<p>
+	Listens for the following signals: 
+	SCORES_RETRIEVE (load scores from the proxy), 
+	SCORES_SUBMIT (save scores to the proxy), 
+	</p>
+	
+	<p>
+	Sends the following signal:
+	SCORES_READY (score data retrieval has completed)
+	</p>
+	
+	@see Signals
+	*/
 	public class ScoreController implements IDisposable
 	{
 		
 		private var scoresProxy:IGameScoresProxy;
 		
 		
-		// Constructor
+		/**
+		Constructor
+		*/
 		public function ScoreController(scores:IGameScoresProxy)
 		{
 			C.out(this, "constructor");
@@ -103,6 +121,8 @@ package com.pixeldroid.r_c4d3.game.control
 			{
 				if (scoresProxy.insert(playerScores[j].score, playerScores[j].initials)) C.out(this, "player " +playerScores[j].initials +" made the score table");
 			}
+			
+			TODO: Notifier.send(Signals.SCORES_READY)
 			*/
 		}
 	}

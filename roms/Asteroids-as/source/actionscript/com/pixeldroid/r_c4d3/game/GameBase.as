@@ -27,6 +27,25 @@ package com.pixeldroid.r_c4d3.game
 	import com.pixeldroid.r_c4d3.game.view.screen.ScreenFactory;
 	
 	
+	/**
+	A basic IGameRom implementation to cover the boring stuff.
+	
+	<p>
+	Subclasses should override <code>createGameScreenFactory</code> to provide a proper set of game screens.
+	</p>
+	
+	<p>
+	The game, stats, and score controllers may be overridden as well, to provide custom implementation or disable. 
+	The game and stats controllers listen for the GAME_TICK signal to request screen updates from their screens. 
+	The score controller listens for SCORES_SUBMIT and SCORES_RETRIEVE to transfer score data to and from the storage medium.
+	</p>
+	
+	@see #createGameScreenFactory 
+	@see #createGameScreenController
+	@see #createStatsScreenController
+	@see #createScoreController
+	@see Signals#
+	*/
 	public class GameBase extends Sprite implements IGameRom, IDisposable
 	{
 		
@@ -45,6 +64,9 @@ package com.pixeldroid.r_c4d3.game
 		
 		
 		
+		/**
+		Constructor
+		*/
 		public function GameBase()
 		{
 			super();
@@ -56,6 +78,7 @@ package com.pixeldroid.r_c4d3.game
 		
 		
 		// IGameRom interface
+		/** @inheritDoc */
 		public function setControlsProxy(value:IGameControlsProxy):void
 		{
 			C.out(this, "setControlsProxy to " +getQualifiedClassName(value));
@@ -73,9 +96,10 @@ package com.pixeldroid.r_c4d3.game
 			screenManager.initialize();
 			
 			statsManager = createStatsScreenController(controls, debugLayer, screens);
-			statsManager.initialize();
+			if (statsManager) statsManager.initialize();
 		}
 		
+		/** @inheritDoc */
 		public function setScoresProxy(value:IGameScoresProxy):void
 		{
 			C.out(this, "setScoresProxy to " +getQualifiedClassName(value));
@@ -89,9 +113,10 @@ package com.pixeldroid.r_c4d3.game
 			
 			// instantiate and initialize manager
 			scoreManager = new ScoreController(scores) as IDisposable;
-			scoreManager.initialize();
+			if (scoreManager) scoreManager.initialize();
 		}
 		
+		/** @inheritDoc */
 		public function enterAttractLoop():void
 		{
 			C.out(this, "enterAttractLoop");
@@ -108,12 +133,13 @@ package com.pixeldroid.r_c4d3.game
 		
 		
 		// IDisposable interface
+		/** @inheritDoc */
 		public function shutDown():Boolean
 		{
 			C.out(this, "shutDown()");
-			scoreManager.shutDown();
+			if (scoreManager) scoreManager.shutDown();
+			if (statsManager) statsManager.shutDown();
 			screenManager.shutDown();
-			statsManager.shutDown();
 			
 			scoreManager = null;
 			screenManager = null;
@@ -134,6 +160,7 @@ package com.pixeldroid.r_c4d3.game
 			return true;
 		}
 		
+		/** @inheritDoc */
 		public function initialize():Boolean
 		{
 			// create factory for retrieving game screens
@@ -161,26 +188,47 @@ package com.pixeldroid.r_c4d3.game
 		
 		
 		// factory methods - override in subclasses
+		
+		/**
+		Override to introduce your own set of game screens
+		
+		@see ScreenFactory
+		*/
 		protected function createGameScreenFactory():IGameScreenFactory
 		{
 			return new ScreenFactory();
 		}
 		
+		/**
+		Override to insert your own game screen controller
+		
+		@see GameScreenController
+		*/
 		protected function createGameScreenController(controlsProxy:IGameControlsProxy, gameLayer:Sprite, screenFactory:IGameScreenFactory):IDisposable
 		{
 			return new GameScreenController(controlsProxy, gameLayer, screenFactory) as IDisposable
 		}
 		
+		/**
+		Override to insert your own stats screen controller, or return null
+		
+		@see StatsScreenController
+		*/
 		protected function createStatsScreenController(controlsProxy:IGameControlsProxy, gameLayer:Sprite, screenFactory:IGameScreenFactory):IDisposable
 		{
 			return new StatsScreenController(controlsProxy, gameLayer, screenFactory) as IDisposable
 		}
 		
+		/**
+		Override to insert your own score controller, or return null
+		
+		@see ScoreController
+		*/
 		protected function createScoreController(scoresProxy:IGameScoresProxy):IDisposable
 		{
 			return new ScoreController(scoresProxy) as IDisposable
 		}
-		
+
 	}
 
 }

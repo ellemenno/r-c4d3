@@ -17,6 +17,18 @@ package com.pixeldroid.r_c4d3.game.control
 	
 	
 	
+	/**
+	Handles collection and processing of game status information.
+	Uses the debug screen of the IGameScreenFactory for display
+	
+	<p>
+	Listens for the following signals: 
+	GAME_TICK (ask the current screen to update)
+	</p>
+	
+	@see IGameScreenFactory
+	@see Signals
+	*/
 	public class StatsScreenController implements IDisposable
 	{
 		
@@ -26,7 +38,9 @@ package com.pixeldroid.r_c4d3.game.control
 		protected var stats:ScreenBase;
 		
 		
-		// Constructor
+		/**
+		Constructor
+		*/
 		public function StatsScreenController(controls:IGameControlsProxy, container:DisplayObjectContainer, factory:IGameScreenFactory)
 		{
 			C.out(this, "constructor");
@@ -38,6 +52,8 @@ package com.pixeldroid.r_c4d3.game.control
 		
 		
 		// IDisposable interface
+		
+		/** @inheritDoc*/
 		public function shutDown():Boolean
 		{
 			C.out(this, "shutDown()");
@@ -58,6 +74,7 @@ package com.pixeldroid.r_c4d3.game.control
 			return true;
 		}
 		
+		/** @inheritDoc*/
 		public function initialize():Boolean
 		{
 			C.out(this, "initialize()");
