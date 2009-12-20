@@ -10,7 +10,7 @@ package view.screen.attractloop
 	
 	import control.Signals;
 	import model.AsteroidsModel;
-	import util.f.Message;
+	import util.Notifier;
 	import view.screen.ScreenBase;
 	import view.screen.game.AsteroidsScreen;
 	
@@ -47,10 +47,11 @@ package view.screen.attractloop
 		{
 			//TODO: gameModel.stop();
 			gameModel = null;
-			
+			/*
 			gameView.shutDown();
 			removeChild(gameView);
 			gameView = null;
+			*/
 			
 			return super.shutDown();
 		}
@@ -81,7 +82,7 @@ package view.screen.attractloop
 		private function gameOver():void
 		{
 			C.out(this, "gameOver - sending SCREEN_GO_NEXT signal");
-			Message.send(null, Signals.SCREEN_GO_NEXT);
+			Notifier.send(Signals.SCREEN_GO_NEXT);
 		}
 		
 	}

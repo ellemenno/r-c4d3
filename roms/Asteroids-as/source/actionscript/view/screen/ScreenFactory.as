@@ -24,63 +24,56 @@ package view.screen
 		static public const SCORES:String = "SCORES";
 		static public const SETUP:String = "SETUP";
 		static public const TITLE:String = "TITLE";
-		
 		static public const DEBUG:String = "DEBUG";
 		
-		private var screens:Dictionary;
-		
-		
-		public function ScreenFactory():void
-		{
-			screens = new Dictionary();
-		}
+		static private var screens:Dictionary = new Dictionary();
 		
 		
 		
-		public function get gameScreen():ScreenBase
+		static public function get gameScreen():ScreenBase
 		{
 			C.out(ScreenFactory, "get gameScreen()");
 			return retrieveScreen(GameScreen, GAME);
 		}
 		
-		public function get helpScreen():ScreenBase
+		static public function get helpScreen():ScreenBase
 		{
 			C.out(ScreenFactory, "get helpScreen()");
 			return retrieveScreen(HelpScreen, HELP);
 		}
 		
-		public function get nullScreen():ScreenBase
+		static public function get nullScreen():ScreenBase
 		{
 			C.out(ScreenFactory, "get nullScreen()");
 			return retrieveScreen(NullScreen, NULL);
 		}
 		
-		public function get scoresScreen():ScreenBase
+		static public function get scoresScreen():ScreenBase
 		{
 			C.out(ScreenFactory, "get scoresScreen()");
 			return retrieveScreen(ScoresScreen, SCORES);
 		}
 		
-		public function get setupScreen():ScreenBase
+		static public function get setupScreen():ScreenBase
 		{
 			C.out(ScreenFactory, "get setupScreen()");
 			return retrieveScreen(SetupScreen, SETUP);
 		}
 		
-		public function get titleScreen():ScreenBase
+		static public function get titleScreen():ScreenBase
 		{
 			C.out(ScreenFactory, "get titleScreen()");
 			return retrieveScreen(TitleScreen, TITLE);
 		}
 		
-		public function get debugScreen():ScreenBase
+		static public function get debugScreen():ScreenBase
 		{
 			C.out(ScreenFactory, "get debugScreen()");
 			return retrieveScreen(DebugScreen, DEBUG);
 		}
 		
 		
-		private function retrieveScreen(screenClass:Class, name:String):ScreenBase
+		static private function retrieveScreen(screenClass:Class, name:String):ScreenBase
 		{
 			// resource pooling; only instantiate once
 			if (screens[name] == null)

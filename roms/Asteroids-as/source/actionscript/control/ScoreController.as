@@ -11,7 +11,7 @@ package control
 	
 	import control.Signals;
 	import util.IDisposable;
-	import util.f.Message;
+	import util.Notifier;
 	
 	
 	
@@ -43,8 +43,8 @@ package control
 			scoresProxy.closeScoresTable();
 			scoresProxy = null;
 			
-			Message.remove(Signals.SCORES_RETRIEVE);
-			Message.remove(Signals.SCORES_SUBMIT);
+			Notifier.removeListener(Signals.SCORES_RETRIEVE, retrieveScores);
+			Notifier.removeListener(Signals.SCORES_SUBMIT, submitScores);
 			
 			return true;
 		}
@@ -58,8 +58,8 @@ package control
 			scoresProxy.addEventListener(ScoreEvent.SAVE, onScoresSaved);
 			scoresProxy.addEventListener(DataEvent.ERROR, onScoresError);
 			
-			Message.add(retrieveScores, Signals.SCORES_RETRIEVE);
-			Message.add(submitScores, Signals.SCORES_SUBMIT);
+			Notifier.addListener(Signals.SCORES_RETRIEVE, retrieveScores);
+			Notifier.addListener(Signals.SCORES_SUBMIT, submitScores);
 			
 			return true;
 		}

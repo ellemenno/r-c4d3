@@ -12,7 +12,7 @@ package control
 	
 	import control.Signals;
 	import util.IDisposable;
-	import util.f.Message;
+	import util.Notifier;
 	import view.screen.ScreenBase;
 	import view.screen.ScreenFactory;
 	
@@ -40,17 +40,19 @@ package control
 		public function shutDown():Boolean
 		{
 			C.out(this, "shutDown()");
+			
+			// shut down stats and remove it from its container
 			if (!stats.shutDown()) throw new Error("ERROR: " +stats.name +" unable to shut down");
+			screenContainer.removeChild(stats as DisplayObject);
+			screenContainer = null;
 			
 			// remove listeners from controls proxy and prep for garbage collection
 			controlsProxy.removeEventListener(JoyHatEvent.JOY_HAT_MOTION, onHatMotion);
 			controlsProxy.removeEventListener(JoyButtonEvent.JOY_BUTTON_MOTION, onButtonMotion);
 			controlsProxy = null;
 			
-			screenContainer = null;
-			
 			// remove listeners from messaging service
-			Message.remove(Signals.GAME_TICK);
+			Notifier.removeListener(Signals.GAME_TICK, gameTick);
 			
 			return true;
 		}
@@ -58,9 +60,8 @@ package control
 		public function initialize():Boolean
 		{
 			C.out(this, "initialize()");
-			var screenFactory:ScreenFactory = new ScreenFactory();
 			
-			stats = screenContainer.addChild(screenFactory.debugScreen as DisplayObject) as ScreenBase;
+			stats = screenContainer.addChild(ScreenFactory.debugScreen as DisplayObject) as ScreenBase;
 			stats.initialize();
 			
 			// attach listeners to controls proxy
@@ -68,7 +69,7 @@ package control
 			controlsProxy.addEventListener(JoyButtonEvent.JOY_BUTTON_MOTION, onButtonMotion);
 			
 			// attach listeners to messaging service
-			Message.add(gameTick, Signals.GAME_TICK);
+			Notifier.addListener(Signals.GAME_TICK, gameTick);
 			
 			return true;
 		}
