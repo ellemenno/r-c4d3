@@ -1,7 +1,7 @@
 
-package
+package com.pixeldroid.r_c4d3.game.control
 {
-	import util.Notifier;
+	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	
 	public class Z
 	{

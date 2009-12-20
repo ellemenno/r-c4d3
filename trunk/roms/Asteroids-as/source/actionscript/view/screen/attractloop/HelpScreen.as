@@ -5,9 +5,12 @@ package view.screen.attractloop
 	
 	import flash.text.TextField;
 	
-	import control.Signals;
-	import util.Notifier;
-	import view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.control.Signals;
+	import com.pixeldroid.r_c4d3.game.control.Notifier;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	
+	import FontAssets;
+	
 	
 	
 	public class HelpScreen extends ScreenBase

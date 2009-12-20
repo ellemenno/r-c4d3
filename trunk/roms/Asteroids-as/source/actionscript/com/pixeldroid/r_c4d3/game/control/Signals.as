@@ -1,8 +1,8 @@
 
-package control
+package com.pixeldroid.r_c4d3.game.control
 {
 	
-	final public class Signals
+	public class Signals
 	{
 		static public const ATTRACT_LOOP_BEGIN:String = "screen.go.first";
 		static public const SCREEN_GO_NEXT:String = "screen.go.next";

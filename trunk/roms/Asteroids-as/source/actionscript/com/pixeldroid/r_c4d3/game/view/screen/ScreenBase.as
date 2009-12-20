@@ -1,6 +1,6 @@
 
 
-package view.screen
+package com.pixeldroid.r_c4d3.game.view.screen
 {
 	
 	import flash.display.DisplayObject;
@@ -8,10 +8,9 @@ package view.screen
 	
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
-	
-	import util.IControllable;
-	import util.IDisposable;
-	import view.screen.IScreen;
+	import com.pixeldroid.r_c4d3.interfaces.IControllable;
+	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
+	import com.pixeldroid.r_c4d3.interfaces.IScreen;
 	
 	
 	

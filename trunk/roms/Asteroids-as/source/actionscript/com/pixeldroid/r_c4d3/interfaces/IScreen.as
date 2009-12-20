@@ -1,5 +1,5 @@
 
-package view.screen
+package com.pixeldroid.r_c4d3.interfaces
 {
 	
 	public interface IScreen

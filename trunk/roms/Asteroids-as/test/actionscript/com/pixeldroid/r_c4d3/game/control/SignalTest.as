@@ -1,4 +1,8 @@
 
+/*
+from test/actionscript
+mxmlc com/pixeldroid/r_c4d3/game/control/SignalTest.as -sp=./ -sp=../../source/actionscript
+*/
 package com.pixeldroid.r_c4d3.game.control
 {
 	import flash.display.Sprite;
@@ -6,10 +10,10 @@ package com.pixeldroid.r_c4d3.game.control
 	
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	
-	import W;
-	import X;
-	import Y;
-	import Z;
+	import com.pixeldroid.r_c4d3.game.control.W;
+	import com.pixeldroid.r_c4d3.game.control.X;
+	import com.pixeldroid.r_c4d3.game.control.Y;
+	import com.pixeldroid.r_c4d3.game.control.Z;
 	
 	[SWF(width="100", height="50", frameRate="1", backgroundColor="#000000")]
 	public class SignalTest extends Sprite
