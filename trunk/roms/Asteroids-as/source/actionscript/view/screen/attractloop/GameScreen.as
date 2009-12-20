@@ -57,13 +57,13 @@ package view.screen.attractloop
 		}
 		
 		// IController interface (pass-thru)
-		override public function onFrameUpdate(dt:int):void
+		override public function onScreenUpdate(dt:int):void
 		{
-			super.onFrameUpdate(dt);
+			super.onScreenUpdate(dt);
 			
 			gameModel.tick(dt);
 			//TODO: poll model and update view
-			gameView.onFrameUpdate(dt);
+			gameView.onScreenUpdate(dt);
 			
 			if (timeElapsed > 3*1000) gameOver();
 		}

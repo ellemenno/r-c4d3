@@ -13,25 +13,27 @@ package control
 	import control.Signals;
 	import util.IDisposable;
 	import util.Notifier;
+	import view.screen.IGameScreenFactory;
 	import view.screen.ScreenBase;
-	import view.screen.ScreenFactory;
 	
 	
 	
 	public class StatsScreenController implements IDisposable
 	{
 		
-		private var controlsProxy:IGameControlsProxy;
-		private var screenContainer:DisplayObjectContainer;
-		private var stats:ScreenBase;
+		protected var controlsProxy:IGameControlsProxy;
+		protected var screenContainer:DisplayObjectContainer;
+		protected var screenFactory:IGameScreenFactory;
+		protected var stats:ScreenBase;
 		
 		
 		// Constructor
-		public function StatsScreenController(controls:IGameControlsProxy, container:DisplayObjectContainer)
+		public function StatsScreenController(controls:IGameControlsProxy, container:DisplayObjectContainer, factory:IGameScreenFactory)
 		{
 			C.out(this, "constructor");
 			controlsProxy = controls;
 			screenContainer = container;
+			screenFactory = factory;
 		}
 		
 		
@@ -61,7 +63,7 @@ package control
 		{
 			C.out(this, "initialize()");
 			
-			stats = screenContainer.addChild(ScreenFactory.debugScreen as DisplayObject) as ScreenBase;
+			stats = screenContainer.addChild(screenFactory.getScreen(screenFactory.DEBUG) as DisplayObject) as ScreenBase;
 			stats.initialize();
 			
 			// attach listeners to controls proxy
@@ -77,12 +79,12 @@ package control
 		
 		
 		// event handlers
-		private function onHatMotion(e:JoyHatEvent):void
+		protected function onHatMotion(e:JoyHatEvent):void
 		{
 			stats.onHatMotion(e);
 		}
 		
-		private function onButtonMotion(e:JoyButtonEvent):void
+		protected function onButtonMotion(e:JoyButtonEvent):void
 		{
 			stats.onButtonMotion(e);
 		}
@@ -90,9 +92,9 @@ package control
 		
 		
 		// message callbacks
-		private function gameTick(e:Object):void
+		protected function gameTick(dt:int):void
 		{
-			stats.onFrameUpdate(e as int);
+			stats.onScreenUpdate(dt);
 		}
 		
 	}

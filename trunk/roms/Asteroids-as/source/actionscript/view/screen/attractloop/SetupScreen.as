@@ -23,26 +23,17 @@ package view.screen.attractloop
 		}
 		
 		
-		override public function initialize():Boolean
+		override protected function onFirstScreen():void
 		{
-			if (!super.initialize()) return false;
-			
 			backgroundColor = 0x333333;
 			var title:TextField = addChild(FontAssets.createTextField("Setup Screen", FontAssets.blojbytesdepa())) as TextField;
 			title.x = 15;
 			title.y = 15;
-			
-			return true;
 		}
 		
-		override public function shutDown():Boolean
+		override public function onScreenUpdate(dt:int):void
 		{
-			return super.shutDown();;
-		}
-		
-		override public function onFrameUpdate(dt:int):void
-		{
-			super.onFrameUpdate(dt);
+			super.onScreenUpdate(dt);
 			
 			if (timeElapsed > 3*1000) timeOut();
 		}

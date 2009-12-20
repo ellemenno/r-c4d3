@@ -12,6 +12,6 @@ package util
 	{
 		function onHatMotion(e:JoyHatEvent):void
 		function onButtonMotion(e:JoyButtonEvent):void
-		function onFrameUpdate(dt:int):void
+		function onScreenUpdate(dt:int):void
 	}
 }

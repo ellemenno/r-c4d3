@@ -40,7 +40,6 @@ package control
 			scoresProxy.removeEventListener(ScoreEvent.SAVE, onScoresSaved);
 			scoresProxy.removeEventListener(DataEvent.ERROR, onScoresError);
 			
-			scoresProxy.closeScoresTable();
 			scoresProxy = null;
 			
 			Notifier.removeListener(Signals.SCORES_RETRIEVE, retrieveScores);
@@ -67,18 +66,18 @@ package control
 		
 		
 		// event handlers
-		private function onScoresLoaded(e:Event):void
+		protected function onScoresLoaded(e:Event):void
 		{
 			C.out(this, "onScoresLoaded() - " +e);
 			C.out(this, scoresProxy.toString())
 		}
 		
-		private function onScoresSaved(e:Event):void
+		protected function onScoresSaved(e:Event):void
 		{
 			C.out(this, "onScoresSaved() - " +e);
 		}
 		
-		private function onScoresError(e:Event):void
+		protected function onScoresError(e:Event):void
 		{
 			C.out(this, "onScoresError() - " +e);
 		}
@@ -86,13 +85,13 @@ package control
 		
 		
 		// message callbacks
-		private function retrieveScores(e:Object):void
+		protected function retrieveScores():void
 		{
 			C.out(this, "retrieveScores()");
 			scoresProxy.load();
 		}
 		
-		private function submitScores(e:Object):void
+		protected function submitScores():void
 		{
 			C.out(this, "submitScores()");
 			/*

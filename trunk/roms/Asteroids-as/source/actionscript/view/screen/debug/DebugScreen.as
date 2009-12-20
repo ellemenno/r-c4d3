@@ -26,11 +26,15 @@ package view.screen.debug
 		{
 			if (!super.initialize()) return false;
 			
-			// TODO: fps monitor
-			// TODO: epf / spf / mem graph
 			numEvents = 0;
 			
 			return true;
+		}
+		
+		override protected function onFirstScreen():void
+		{
+			// TODO: fps monitor
+			// TODO: epf / spf / mem graph
 		}
 		
 		override public function shutDown():Boolean
@@ -40,9 +44,9 @@ package view.screen.debug
 			return super.shutDown();
 		}
 		
-		override public function onFrameUpdate(dt:int):void
+		override public function onScreenUpdate(dt:int):void
 		{
-			super.onFrameUpdate(dt);
+			super.onScreenUpdate(dt);
 			
 			// update graphs
 		}

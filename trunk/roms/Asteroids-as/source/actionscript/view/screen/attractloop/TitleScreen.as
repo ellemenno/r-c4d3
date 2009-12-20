@@ -24,27 +24,17 @@ package view.screen.attractloop
 		}
 		
 		
-		override public function initialize():Boolean
+		override protected function onFirstScreen():void
 		{
-			if (!super.initialize()) return false;
-			C.out(this, "initialize");
-			
 			backgroundColor = 0x777777;
 			var title:TextField = addChild(FontAssets.createTextField("ASTEROIDS", FontAssets.deLarge(120, 0xffffff, TextFormatAlign.CENTER), width)) as TextField;
 			title.x = width*.5 - title.width*.5;
 			title.y = height*.5 - title.height*.75;
-			
-			return true;
 		}
 		
-		override public function shutDown():Boolean
+		override public function onScreenUpdate(dt:int):void
 		{
-			return super.shutDown();;
-		}
-		
-		override public function onFrameUpdate(dt:int):void
-		{
-			super.onFrameUpdate(dt);
+			super.onScreenUpdate(dt);
 			
 			if (timeElapsed > 3*1000) timeOut();
 		}
