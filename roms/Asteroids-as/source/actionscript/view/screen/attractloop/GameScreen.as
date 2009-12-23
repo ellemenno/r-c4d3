@@ -35,7 +35,7 @@ package view.screen.attractloop
 			if (!super.initialize()) return false;
 			
 			gameModel = new AsteroidsModel();
-			//TODO: gameModel.initialize();
+			gameModel.initialize();
 			
 			gameView = addChild(new AsteroidsScreen() as DisplayObject) as AsteroidsScreen;
 			gameView.initialize();
@@ -45,13 +45,12 @@ package view.screen.attractloop
 		
 		override public function shutDown():Boolean
 		{
-			//TODO: gameModel.stop();
+			gameModel.shutDown();
 			gameModel = null;
-			/*
+			
 			gameView.shutDown();
 			removeChild(gameView);
 			gameView = null;
-			*/
 			
 			return super.shutDown();
 		}
@@ -62,20 +61,32 @@ package view.screen.attractloop
 			super.onScreenUpdate(dt);
 			
 			gameModel.tick(dt);
-			//TODO: poll model and update view
-			gameView.onScreenUpdate(dt);
+			//view receive notice sent from model and updates sprites accordingly
 			
-			if (timeElapsed > 3*1000) gameOver();
+			//TODO: end game conditions // if (timeElapsed > 5*1000) gameOver();
 		}
 		
 		override public function onHatMotion(e:JoyHatEvent):void
 		{
-			// switch on e.player, then handle up/dn/lf/rg to update model
+			super.onHatMotion(e);
+			C.out(this, "e.value: " +e.value);
+			switch(e.value)
+			{
+				case JoyHatEvent.HAT_CENTERED : gameModel.coast(e.which); break;
+				case JoyHatEvent.HAT_DOWN : gameModel.decelerate(e.which); break;
+				case JoyHatEvent.HAT_LEFT : gameModel.turnLeft(e.which); break;
+				case JoyHatEvent.HAT_RIGHT : gameModel.turnRight(e.which); break;
+				case JoyHatEvent.HAT_UP : gameModel.accelerate(e.which); break;
+			}
 		}
 		
 		override public function onButtonMotion(e:JoyButtonEvent):void
 		{
-			// switch on e.player, then handle x/a/b/c to update model
+			super.onButtonMotion(e);
+			switch(e.button)
+			{
+				case JoyButtonEvent.BTN_X : gameModel.fire(e.which); break;
+			}
 		}
 		
 		

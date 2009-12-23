@@ -3,13 +3,30 @@
 package view.screen.game
 {
 	
+	import flash.display.Sprite;
+	
+	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	
+	import GraphicAssets;
+	import control.AsteroidsSignals;
+	import model.SpriteVO;
 	
 	
 	
 	public class AsteroidsScreen extends ScreenBase
 	{
 		
+		private var sprites:Array;
+		/*
+		[Embed(source="/../resources/graphics/ship.svg", mimeType="image/svg")]
+		static private const Ship:Class;
+		
+		private function get ship():Sprite
+		{
+			return new Ship() as Sprite;
+		}
+		*/
 		
 		public function AsteroidsScreen():void
 		{
@@ -18,9 +35,57 @@ package view.screen.game
 		}
 		
 		
-		override public function onScreenUpdate(dt:int):void
+		
+		// IDisposable interface
+		override public function shutDown():Boolean
 		{
-			super.onScreenUpdate(dt);
+			C.out(this, "shutDown()");
+			
+			sprites = null;
+			
+			// remove listeners from messaging service
+			Notifier.removeListener(AsteroidsSignals.UPDATE_PLAYER_SPRITES, onUpdateSprites);
+			
+			return super.shutDown();
+		}
+		
+		override public function initialize():Boolean
+		{
+			C.out(this, "initialize()");
+			
+			sprites = [null, null, null, null];
+			
+			// attach listeners to messaging service
+			Notifier.addListener(AsteroidsSignals.UPDATE_PLAYER_SPRITES, onUpdateSprites);
+			
+			return true;
+		}
+		
+		
+		
+		private function onUpdateSprites(message:Object):void
+		{
+			C.out(this, "onUpdateSprites() - " +message);
+			var players:Array = message as Array;
+			var n:int = players.length;
+			var vo:SpriteVO;
+			var s:Sprite;
+			
+			for (var i:int = 0; i < n; i++)
+			{
+				vo = players[i] as SpriteVO;
+				C.out(this, vo.toString());
+				
+				s = sprites[i];
+				//if (s == null) s = sprites[i] = addChild(ship) as Sprite;
+				if (s == null) s = sprites[i] = addChild(GraphicAssets.ship) as Sprite;
+				
+				s.x = vo.x;
+				s.y = vo.y;
+				s.rotation = vo.rotation;
+				s.alpha = vo.alpha;
+				s.visible = vo.visible;
+			}
 		}
 		
 	}
