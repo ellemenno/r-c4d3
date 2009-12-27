@@ -6,12 +6,12 @@ package model
 	public class SpriteVO
 	{
 		
-		public var x:Number;
-		public var y:Number;
+		public var x:Number = 0;
+		public var y:Number = 0;
 		
-		public var alpha:Number;
-		public var rotation:Number;
-		public var visible:Boolean;
+		public var alpha:Number = 1;
+		public var rotation:Number = 0;
+		public var visible:Boolean = true;
 		
 		public function toString():String
 		{

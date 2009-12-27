@@ -70,7 +70,7 @@
 		<optimize>true</optimize>
 		
 		<!-- compiler.library-path: list of SWC files or directories that contain SWC files
-		<library-path>
+		<library-path append="true">
 			<path-element>libs</path-element>
 			<path-element>libs/player</path-element>
 			<path-element>libs/player/{targetPlayerMajorVersion}</path-element>
