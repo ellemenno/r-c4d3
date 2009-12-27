@@ -108,9 +108,10 @@ package com.pixeldroid.r_c4d3.game.control
 			scoresProxy.load();
 		}
 		
-		protected function submitScores():void
+		protected function submitScores(scores:Array):void
 		{
-			C.out(this, "submitScores()");
+			C.out(this, "submitScores() - received " +scores);
+			// TODO: formalize data structure
 			/*
 			TODO:
 			var playerScores:Array = [

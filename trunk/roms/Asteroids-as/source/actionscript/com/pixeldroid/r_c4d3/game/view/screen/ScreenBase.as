@@ -19,12 +19,13 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		
 		protected var _type:String;
 		protected var timeElapsed:int;
+		protected var previousFrameRate:Number;
 		
 		
 		
 		public function ScreenBase():void
 		{
-			C.out(this, "base constructor");
+			C.out(this, "(base) constructor");
 			super();
 		}
 		
@@ -62,7 +63,7 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		// IScreen interface
 		public function set type(value:String):void
 		{
-			C.out(this, "set type() - " +value);
+			C.out(this, "(base) set type() - " +value);
 			_type = value;
 		}
 		
@@ -76,6 +77,8 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		public function shutDown():Boolean
 		{
 			clear();
+			stage.frameRate = previousFrameRate;
+			
 			var t:String;
 			
 			if (timeElapsed < 1000) t = timeElapsed +"ms";
@@ -86,15 +89,16 @@ package com.pixeldroid.r_c4d3.game.view.screen
 				t = (m > 0) ? m +"m " +(s - m*60) +"s" : s +"s";
 			}
 			
-			C.out(this, "base shutDown() - lifetime was " +t);
+			C.out(this, "(base) shutDown() - lifetime was " +t);
 			
 			return true;
 		}
 		
 		public function initialize():Boolean
 		{
-			C.out(this, "base initialize()");
+			C.out(this, "(base) initialize()");
 			timeElapsed = 0;
+			previousFrameRate = stage.frameRate;
 			onFirstScreen();
 			
 			return true;
@@ -104,12 +108,12 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		// IController interface
 		public function onHatMotion(e:JoyHatEvent):void
 		{
-			C.out(this, "onHatMotion: " +e);
+			C.out(this, "(base) onHatMotion: " +e);
 		}
 		
 		public function onButtonMotion(e:JoyButtonEvent):void
 		{
-			C.out(this, "onButtonMotion: " +e);
+			C.out(this, "base onButtonMotion: " +e);
 		}
 		
 		public function onScreenUpdate(dt:int):void
