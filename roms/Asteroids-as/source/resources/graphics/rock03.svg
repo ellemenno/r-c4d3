@@ -14,7 +14,7 @@
    id="svg3671"
    version="1.1"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="rock02.svg">
+   sodipodi:docname="rock03.svg">
   <defs
      id="defs3673">
     <inkscape:perspective
@@ -31,6 +31,20 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3842"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3865"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -39,17 +53,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7"
-     inkscape:cx="24.576923"
+     inkscape:zoom="12.208333"
+     inkscape:cx="24"
      inkscape:cy="24"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer6"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
      inkscape:window-width="1109"
      inkscape:window-height="829"
-     inkscape:window-x="66"
-     inkscape:window-y="14"
+     inkscape:window-x="124"
+     inkscape:window-y="64"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata3676">
@@ -59,17 +73,32 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="bcirc">
+    <path
+       sodipodi:type="arc"
+       style="opacity:0.05;fill:none;stroke:#ffffff;stroke-width:0.87966442;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none"
+       id="path2906"
+       sodipodi:cx="25"
+       sodipodi:cy="23"
+       sodipodi:rx="21.213203"
+       sodipodi:ry="21.011173"
+       d="M 46.213203,23 A 21.213203,21.011173 0 1 1 3.7867966,23 21.213203,21.011173 0 1 1 46.213203,23 z"
+       transform="matrix(1.1082816,0,0,1.1189382,-3.70704,-1.7355786)" />
+  </g>
+  <g
      id="layer1"
-     inkscape:label="Layer 1"
+     inkscape:label="rock"
      inkscape:groupmode="layer">
     <path
-       style="fill:#f9f9f9;stroke:#d5d5d5;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
-       d="m 8.4285714,10.714285 c -10e-8,10e-7 17.7142856,-2.4285707 17.7142856,-2.4285707 L 34.285714,4.8571427 44.285715,9 42.285714,23.285715 44,33 39.428571,44.285714 21,45.142857 7.7142857,38 4.1428571,22.571428 8.4285714,10.714285 z"
+       style="fill:#f9f9f9;fill-opacity:1;stroke:#d5d5d5;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 8.5419304,7.0112136 c -10e-8,1e-6 17.7142856,-2.4285707 17.7142856,-2.4285707 L 34.399073,1.1540713 44.399074,5.2969286 42.399073,19.582643 44.113359,29.296928 39.54193,40.582642 21.113359,41.439785 7.8276447,34.296928 4.2562161,18.868356 8.5419304,7.0112136 z"
        id="path4200"
        sodipodi:nodetypes="ccccccccccc" />
   </g>

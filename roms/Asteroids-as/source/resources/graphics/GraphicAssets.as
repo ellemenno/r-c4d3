@@ -12,7 +12,7 @@ package
 		
 		static public function get ship():Sprite
 		{
-			return new Ship() as Sprite;
+			return centeredChild(new Ship());
 		}
 		
 		[Embed(source="zap.svg", mimeType="image/svg")]
@@ -20,7 +20,7 @@ package
 		
 		static public function get zap():Sprite
 		{
-			return new Zap() as Sprite;
+			return centeredChild(new Zap());
 		}
 		
 		[Embed(source="rock01.svg", mimeType="image/svg")]
@@ -28,7 +28,7 @@ package
 		
 		static public function get rock01():Sprite
 		{
-			return new Rock01() as Sprite;
+			return centeredChild(new Rock01());
 		}
 		
 		[Embed(source="rock02.svg", mimeType="image/svg")]
@@ -36,7 +36,7 @@ package
 		
 		static public function get rock02():Sprite
 		{
-			return new Rock02() as Sprite;
+			return centeredChild(new Rock02());
 		}
 		
 		[Embed(source="rock03.svg", mimeType="image/svg")]
@@ -44,7 +44,19 @@ package
 		
 		static public function get rock03():Sprite
 		{
-			return new Rock03() as Sprite;
+			return centeredChild(new Rock03());
 		}
+		
+		
+		
+		static private function centeredChild(value:Sprite):Sprite
+		{
+			var p:Sprite = new Sprite();
+			var c:Sprite = p.addChild(value) as Sprite;
+			c.x -= c.width/2;
+			c.y -= c.height/2;
+			return p;
+		}
+		
 	}
 }
