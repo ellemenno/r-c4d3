@@ -9,8 +9,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="48px"
-   height="48px"
+   width="16"
+   height="16"
    id="svg3671"
    version="1.1"
    inkscape:version="0.47 r22583"
@@ -31,6 +31,13 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3923"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -39,17 +46,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7"
-     inkscape:cx="3.1428571"
-     inkscape:cy="24"
+     inkscape:zoom="31.1875"
+     inkscape:cx="7.1182365"
+     inkscape:cy="8"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
-     inkscape:window-width="771"
-     inkscape:window-height="643"
-     inkscape:window-x="66"
-     inkscape:window-y="66"
+     inkscape:window-width="892"
+     inkscape:window-height="742"
+     inkscape:window-x="284"
+     inkscape:window-y="84"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata3676">
@@ -59,17 +66,21 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      id="layer1"
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer">
-    <path
-       style="fill:none;stroke:#f6f6f6;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 24,29.214286 C 24,18.785714 24,18.785714 24,18.785714"
-       id="path3614" />
+     inkscape:label="zap"
+     inkscape:groupmode="layer"
+     transform="translate(0,-32)">
+    <rect
+       style="opacity:0.05;fill:#e6e6e6;stroke:none"
+       id="rect3938"
+       width="4"
+       height="16"
+       x="0"
+       y="32" />
   </g>
 </svg>
