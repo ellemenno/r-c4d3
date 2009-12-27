@@ -43,7 +43,9 @@ package view.screen.game
 		override public function initialize():Boolean
 		{
 			C.out(this, "initialize()");
+			super.initialize();
 			
+			stage.frameRate = 60;
 			sprites = [null, null, null, null];
 			
 			// attach listeners to messaging service
@@ -56,7 +58,6 @@ package view.screen.game
 		
 		private function onUpdateSprites(message:Object):void
 		{
-			C.out(this, "onUpdateSprites() - " +message);
 			var players:Array = message as Array;
 			var n:int = players.length;
 			var vo:SpriteVO;
@@ -65,21 +66,19 @@ package view.screen.game
 			for (var i:int = 0; i < n; i++)
 			{
 				vo = players[i] as SpriteVO;
-				C.out(this, vo.toString());
-				
 				s = sprites[i];
-				if (s == null)
-				{
-					C.out(this, "adding sprite for player " +(i+1));
-					s = sprites[i] = addChild(GraphicAssets.ship) as Sprite;
-				}
+				if (s == null) s = sprites[i] = addChild(GraphicAssets.ship) as Sprite;
 				
 				s.x = vo.x;
 				s.y = vo.y;
 				s.rotation = vo.rotation;
 				s.alpha = vo.alpha;
 				s.visible = vo.visible;
+				
+				// TODO: update score overlay
+				//scores[i] = vo.score;
 			}
+			
 		}
 		
 	}

@@ -34,7 +34,8 @@ package view.screen.attractloop
 		{
 			if (!super.initialize()) return false;
 			
-			gameModel = new AsteroidsModel();
+			// TODO: get num players from somewhere -- globals?
+			gameModel = new AsteroidsModel(stage.stageWidth, stage.stageHeight, 4);
 			gameModel.initialize();
 			
 			gameView = addChild(new AsteroidsScreen() as DisplayObject) as AsteroidsScreen;
@@ -61,22 +62,28 @@ package view.screen.attractloop
 			super.onScreenUpdate(dt);
 			
 			gameModel.tick(dt);
-			//view receive notice sent from model and updates sprites accordingly
+			//view will receive notice sent from model and updates sprites accordingly
 			
-			//TODO: end game conditions // if (timeElapsed > 5*1000) gameOver();
+			// TODO: proper end game conditions
+			if (timeElapsed > 5*1000) gameOver();
 		}
 		
 		override public function onHatMotion(e:JoyHatEvent):void
 		{
 			super.onHatMotion(e);
-			C.out(this, "e.value: " +e.value);
-			switch(e.value)
+			var player:int = e.which;
+			//C.out(this, "player " +player +" e.value: " +e.value);
+			
+			if (e.isCentered) gameModel.coast(e.which);
+			else
 			{
-				case JoyHatEvent.HAT_CENTERED : gameModel.coast(e.which); break;
-				case JoyHatEvent.HAT_DOWN : gameModel.decelerate(e.which); break;
-				case JoyHatEvent.HAT_LEFT : gameModel.turnLeft(e.which); break;
-				case JoyHatEvent.HAT_RIGHT : gameModel.turnRight(e.which); break;
-				case JoyHatEvent.HAT_UP : gameModel.accelerate(e.which); break;
+				if (e.isDown)    gameModel.decelerate(e.which);
+				else if (e.isUp) gameModel.accelerate(e.which);
+				if (!e.isDown && !e.isUp) gameModel.noThrust(e.which);
+				
+				if (e.isLeft)       gameModel.turnLeft(e.which);
+				else if (e.isRight) gameModel.turnRight(e.which);
+				if (!e.isLeft && !e.isRight) gameModel.noTurn(e.which);
 			}
 		}
 		

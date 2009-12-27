@@ -11,24 +11,29 @@ package model
 	public class PlayerModel
 	{
 		
-		private const thrustInc:Number = .1;
-		private const drag:Number = .98;
-		private const topSpeed:Number = 15;
-		private const turnSpeed:Number = .1;
-		private const bulletSpeed:Number = topSpeed * .8;
-		private const kickback:Number = .03;
 		private const RAD_TO_DEG:Number = 180 / Math.PI;
 		
+		private var drag:Number = .98;
+		private var thrustInc:Number = .1;
+		private var topSpeed:Number = 15; // pixels / sec
+		private var bulletSpeed:Number = topSpeed * .8;
+		private var turnSpeed:Number = .1; // radians / sec
+		private var kickback:Number = .03;
+		private var driftEffect:Number = .008; // percent of top speed
+		
 		private var thrust:Number = 0;
-		private var thrustMultiplier:Number = 1;
+		private var thrustMultiplier:Number = 0;
+		private var turnMultiplier:Number = 0;
 		
 		private var heading:Number; // radians
-		private var pos:Point;
 		private var acc:Point;
+		private var pos:Point;
 		private var vel:Point;
 		private var lim:Point;
+		private var dft:Point;
 		
 		private var inPlay:Boolean;
+		private var points:int;
 		
 		
 		
@@ -40,6 +45,7 @@ package model
 			heading = Math.random() * 2 * Math.PI;
 			pos = new Point(0,0);
 			vel = new Point(0,0);
+			dft = new Point(0,0);
 		}
 		
 		
@@ -47,7 +53,10 @@ package model
 		public function set active(value:Boolean):void { inPlay = value; }
 		public function get active():Boolean { return inPlay; }
 		
-		public function set position(value:Point):void { pos = value; }
+		public function set drift(value:Point):void { dft.x = value.x; dft.y = value.y; }
+		public function get drift():Point { return dft.clone(); }
+		
+		public function set position(value:Point):void { pos.x = value.x; pos.y = value.y; }
 		public function get position():Point { return pos.clone(); }
 		
 		public function set worldEdge(value:Point):void { lim = value; }
@@ -60,35 +69,49 @@ package model
 			return d;
 		}
 		
+		public function get score():int { return points; }
+		
+		
+		
 		public function turnLeft():void 
 		{
 			C.out(this, "turnLeft");
-			heading -= turnSpeed; 
+			turnMultiplier = -1;
 		}
 		public function turnRight():void 
 		{ 
 			C.out(this, "turnRight");
-			heading += turnSpeed; 
+			turnMultiplier = +1;
+		}
+		public function noTurn():void 
+		{ 
+			C.out(this, "noTurn");
+			turnMultiplier = 0;
 		}
 		
 		public function accelerate():void
 		{
 			C.out(this, "accelerate");
-			thrust = Math.min(1, thrust + thrustInc);
-			thrustMultiplier = 1;
+			thrustMultiplier = +1;
 		}
 		
 		public function decelerate():void
 		{
 			C.out(this, "decelerate");
-			thrust = Math.min(1, thrust + thrustInc);
 			thrustMultiplier = -1;
+		}
+		public function noThrust():void 
+		{ 
+			C.out(this, "noThrust");
+			thrustMultiplier = 0;
+			thrust = 0; 
 		}
 		
 		public function coast():void 
 		{ 
 			C.out(this, "coast");
-			thrust = 0; 
+			noTurn();
+			noThrust();
 		}
 		
 		public function fire():void
@@ -109,16 +132,34 @@ package model
 		
 		public function update(dt:int):void
 		{
-			acc = direction;
-			mulScalar(acc, thrust * thrustMultiplier * topSpeed * dt * .001);
+			// apply turn and/or thrust 
+			heading += turnSpeed * turnMultiplier; 
+			if (thrustMultiplier != 0) thrust = Math.min(1, thrust + thrustInc);
+			
+			// apply drag
 			mulScalar(vel, drag);
+			
+			// collect forces
+			acc = direction;
+			var topSpeedSlice:Number = topSpeed * dt * .001;
+			mulScalar(acc, thrust * thrustMultiplier * topSpeedSlice);
+			mulScalar(dft, driftEffect * topSpeedSlice);
+			
+			// apply forces to velocity
 			addVector(vel, acc);
+			addVector(vel, dft);
+			
+			// apply velocity to position
 			addVector(pos, vel);
 			
-			if (pos.x > lim.x) { pos.x -= lim.x; }
-			else if(pos.x < 0 ) { pos.x += lim.x; }
-			if (pos.y > lim.y) { pos.y -= lim.y; }
-			else if(pos.y < 0 ) { pos.y += lim.y; }
+			// TODO: real point system
+			points += Math.round(vel.length);
+			
+			// check for edge wrapping
+			if (pos.x > lim.x)  pos.x -= lim.x;
+			else if (pos.x < 0) pos.x += lim.x;
+			if (pos.y > lim.y)  pos.y -= lim.y;
+			else if (pos.y < 0) pos.y += lim.y;
 		}
 		
 		
