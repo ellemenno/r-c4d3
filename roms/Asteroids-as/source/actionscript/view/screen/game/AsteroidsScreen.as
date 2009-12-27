@@ -18,15 +18,6 @@ package view.screen.game
 	{
 		
 		private var sprites:Array;
-		/*
-		[Embed(source="/../resources/graphics/ship.svg", mimeType="image/svg")]
-		static private const Ship:Class;
-		
-		private function get ship():Sprite
-		{
-			return new Ship() as Sprite;
-		}
-		*/
 		
 		public function AsteroidsScreen():void
 		{
@@ -77,8 +68,11 @@ package view.screen.game
 				C.out(this, vo.toString());
 				
 				s = sprites[i];
-				//if (s == null) s = sprites[i] = addChild(ship) as Sprite;
-				if (s == null) s = sprites[i] = addChild(GraphicAssets.ship) as Sprite;
+				if (s == null)
+				{
+					C.out(this, "adding sprite for player " +(i+1));
+					s = sprites[i] = addChild(GraphicAssets.ship) as Sprite;
+				}
 				
 				s.x = vo.x;
 				s.y = vo.y;
