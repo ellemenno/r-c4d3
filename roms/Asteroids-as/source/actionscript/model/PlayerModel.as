@@ -3,8 +3,10 @@
 package model
 {
 	import flash.geom.Point;
+	import flash.media.Sound;
 	
 	import model.SpriteVO;
+	import SoundAssets;
 	
 	
 	
@@ -18,9 +20,11 @@ package model
 		private var topSpeed:Number = 15; // pixels / sec
 		private var bulletSpeed:Number = topSpeed * .8;
 		private var turnSpeed:Number = .1; // radians / sec
-		private var kickback:Number = .03;
+		private var kickback:Number = -.03; // percent of bullet speed
 		private var driftEffect:Number = .008; // percent of top speed
 		
+		private var accelerating:Boolean = false;
+		private var decelerating:Boolean = false;
 		private var thrust:Number = 0;
 		private var thrustMultiplier:Number = 0;
 		private var turnMultiplier:Number = 0;
@@ -31,6 +35,10 @@ package model
 		private var vel:Point;
 		private var lim:Point;
 		private var dft:Point;
+		
+		private var sfxFire:Sound;
+		private var sfxTurn:Sound;
+		private var sfxMove:Sound;
 		
 		private var inPlay:Boolean;
 		private var points:int;
@@ -46,6 +54,10 @@ package model
 			pos = new Point(0,0);
 			vel = new Point(0,0);
 			dft = new Point(0,0);
+			
+			sfxFire = SoundAssets.laserFire;
+			sfxTurn = SoundAssets.turn;
+			sfxMove = SoundAssets.thrust;
 		}
 		
 		
@@ -76,11 +88,13 @@ package model
 		public function turnLeft():void 
 		{
 			C.out(this, "turnLeft");
+			sfxTurn.play();
 			turnMultiplier = -1;
 		}
 		public function turnRight():void 
 		{ 
 			C.out(this, "turnRight");
+			sfxTurn.play();
 			turnMultiplier = +1;
 		}
 		public function noTurn():void 
@@ -89,34 +103,34 @@ package model
 			turnMultiplier = 0;
 		}
 		
-		public function accelerate():void
+		public function accelerate(engaged:Boolean):void
 		{
-			C.out(this, "accelerate");
-			thrustMultiplier = +1;
+			C.out(this, "accelerate: engaged? " +engaged);
+			if (!accelerating && engaged) 
+			{
+				thrust = 0;
+				sfxMove.play();
+			}
+			accelerating = engaged;
+			thrustMultiplier = accelerating ? +1 : 0;
 		}
 		
-		public function decelerate():void
+		public function decelerate(engaged:Boolean):void
 		{
-			C.out(this, "decelerate");
-			thrustMultiplier = -1;
-		}
-		public function noThrust():void 
-		{ 
-			C.out(this, "noThrust");
-			thrustMultiplier = 0;
-			thrust = 0; 
-		}
-		
-		public function coast():void 
-		{ 
-			C.out(this, "coast");
-			noTurn();
-			noThrust();
+			C.out(this, "decelerate: engaged? " +engaged);
+			if (!decelerating && engaged) 
+			{
+				thrust = 0;
+				sfxMove.play();
+			}
+			decelerating = engaged;
+			thrustMultiplier = decelerating ? -1 : 0;
 		}
 		
 		public function fire():void
 		{
 			C.out(this, "fire");
+			sfxFire.play();
 			/*// TODO: launch zap
 			zap.x = pos.x + (acc.x * shipRadius);
 			zap.y = pos.y + (acc.y * shipRadius);
@@ -132,6 +146,8 @@ package model
 		
 		public function update(dt:int):void
 		{
+			if (!inPlay) return;
+			
 			// apply turn and/or thrust 
 			heading += turnSpeed * turnMultiplier; 
 			if (thrustMultiplier != 0) thrust = Math.min(1, thrust + thrustInc);

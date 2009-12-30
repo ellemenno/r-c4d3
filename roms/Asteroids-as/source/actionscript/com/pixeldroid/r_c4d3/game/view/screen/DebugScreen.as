@@ -3,15 +3,22 @@
 package com.pixeldroid.r_c4d3.game.view.screen
 {
 	
+	import flash.display.Sprite;
+	
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
 	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.tools.framerate.FpsMeter;
+	import com.pixeldroid.r_c4d3.tools.perfmon.PerfMon;
 	
 	
 	public class DebugScreen extends ScreenBase
 	{
 		
-		private var numEvents:int;
+		protected var numEvents:int;
+		protected var graphs:Sprite;
+		protected var fps:FpsMeter;
+		protected var pm:PerfMon;
 		
 		
 		public function DebugScreen():void
@@ -32,20 +39,30 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		
 		override protected function onFirstScreen():void
 		{
-			// TODO: fps monitor
-			// TODO: epf / spf / mem graph
+			graphs = addChild(new Sprite) as Sprite;
+			
+			fps = graphs.addChild(new FpsMeter()) as FpsMeter;
+			fps.targetRate = 45;
+			fps.startMonitoring();
+			
+			pm = graphs.addChild(new PerfMon(27)) as PerfMon;
+			pm.x = 125;
+			//pm.x = fps.x + fps.width + 5; // TODO: width is reporting high (212 vs 125 or so)
+			
+			graphs.x = stage.stageWidth - graphs.width - 12;
+			graphs.y = 15;
 		}
 		
 		override public function shutDown():Boolean
 		{
-			while (numChildren > 0) removeChildAt(0);
+			fps.stopMonitoring();
 			
 			return super.shutDown();
 		}
 		
-		override public function onScreenUpdate(dt:int):void
+		override public function onUpdateRequest(dt:int):void
 		{
-			super.onScreenUpdate(dt);
+			super.onUpdateRequest(dt);
 			
 			// update graphs
 		}

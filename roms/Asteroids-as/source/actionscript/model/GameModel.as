@@ -7,13 +7,15 @@ package model
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	import com.pixeldroid.r_c4d3.game.control.Signals;
 	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
+	import com.pixeldroid.r_c4d3.interfaces.IUpdatable;
 	
 	import control.AsteroidsSignals;
+	import model.GlobalModel;
 	import model.PlayerModel;
 	import model.SpriteVO;
 	
 	
-	public class AsteroidsModel implements IDisposable
+	public class GameModel implements IUpdatable, IDisposable
 	{
 		
 		private var worldEdge:Point;
@@ -22,7 +24,7 @@ package model
 		private var _drift:Point;
 		
 	
-		public function AsteroidsModel(worldWidth:int, worldHeight:int, numPlayers:int)
+		public function GameModel(worldWidth:int, worldHeight:int, numPlayers:int)
 		{
 			C.out(this, "constructor");
 			worldEdge = new Point(worldWidth, worldHeight);
@@ -54,11 +56,14 @@ package model
 			
 			drift = (new Point(Math.random(),Math.random()));
 			var p:PlayerModel;
+			var startPoints:Array = getStartPoints(numPlayers, worldEdge);
+			
 			for (var i:int = 0; i < numPlayers; i++)
 			{
 				p = new PlayerModel();
-				p.worldEdge = worldEdge
-				p.position = new Point(Math.random()*worldEdge.x, Math.random()*worldEdge.y);
+				p.worldEdge = worldEdge;
+				p.position = startPoints[i] as Point;
+				p.active = GlobalModel.activePlayers[i];
 				players.push(p);
 			}
 			
@@ -67,13 +72,33 @@ package model
 		
 		
 		
+		// IUpdatable interface
+		public function onUpdateRequest(dt:int):void
+		{
+			var n:int = players.length;
+			var i:int = 0;
+			var p:PlayerModel;
+			var vo:Array = [];
+			while (i < n)
+			{
+				p = players[i];
+				p.active = GlobalModel.activePlayers[i];
+				p.drift = drift;
+				p.update(dt);
+				vo.push(p.toSpriteVO());
+				i++;
+			}
+			
+			Notifier.send(AsteroidsSignals.UPDATE_PLAYER_SPRITES, vo);
+		}
+		
+		
+		
 		public function turnLeft(which:int):void { (players[which] as PlayerModel).turnLeft(); }
 		public function turnRight(which:int):void { (players[which] as PlayerModel).turnRight(); }
-		public function accelerate(which:int):void { (players[which] as PlayerModel).accelerate(); }
-		public function decelerate(which:int):void { (players[which] as PlayerModel).decelerate(); }
+		public function accelerate(which:int, engaged:Boolean):void { (players[which] as PlayerModel).accelerate(engaged); }
+		public function decelerate(which:int, engaged:Boolean):void { (players[which] as PlayerModel).decelerate(engaged); }
 		public function noTurn(which:int):void { (players[which] as PlayerModel).noTurn(); }
-		public function noThrust(which:int):void { (players[which] as PlayerModel).noThrust(); }
-		public function coast(which:int):void { (players[which] as PlayerModel).coast(); }
 		public function fire(which:int):void { (players[which] as PlayerModel).fire(); }
 		
 		
@@ -90,31 +115,32 @@ package model
 			return _drift.clone();
 		}
 		
-		public function enablePlayer(index:int, active:Boolean):void
+
+		
+		private function getStartPoints(howMany:int, worldSize:Point):Array/*Point*/
 		{
-			// TODO: join in support
-			if (index < 0 || index >= players.length) (players[index] as PlayerModel).active = active;
-		}
-		
-		
-		
-		public function tick(dt:int):void
-		{
-			var n:int = players.length;
-			var i:int = 0;
-			var p:PlayerModel;
-			var vo:Array = [];
-			while (i < n)
+			// create grid of non-overlapping positions, randomly select some
+			var n:int = numPlayers * 2;
+			var xInc:Number = worldSize.x / (n+1);
+			var yInc:Number = worldSize.y / (n+1);
+			var choices:Array = [];
+			var r:int, c:int;
+			for (r = 1; r <= n; r++)
 			{
-				p = players[i];
-				p.drift = drift;
-				p.update(dt);
-				vo.push(p.toSpriteVO());
-				i++;
+				for (c = 1; c <= n; c++) choices.push(new Point(c*xInc, r*yInc));
 			}
 			
-			Notifier.send(AsteroidsSignals.UPDATE_PLAYER_SPRITES, vo);
+			var points:Array = [];
+			var i:int, j:int;
+			for (i = 0; i <= howMany; i++)
+			{
+				j = Math.floor(Math.random() * choices.length);
+				points.push(choices.splice(j, 1)[0]);
+			}
+			C.out(this, "getStartPoints - " +points);
+			return points;
 		}
+		
 	}
 
 }

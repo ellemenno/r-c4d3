@@ -6,7 +6,8 @@ package view.screen.game
 	import flash.display.Sprite;
 	
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
+	import com.pixeldroid.r_c4d3.interfaces.IUpdatable;
 	
 	import GraphicAssets;
 	import control.AsteroidsSignals;
@@ -14,12 +15,15 @@ package view.screen.game
 	
 	
 	
-	public class AsteroidsScreen extends ScreenBase
+	public class GameView extends Sprite implements IUpdatable, IDisposable
 	{
 		
-		private var sprites:Array;
+		private var sprites:Array/*<Sprite>*/;
+		private var spriteData:Array/*<SpriteVO>*/;
 		
-		public function AsteroidsScreen():void
+		
+		
+		public function GameView():void
 		{
 			C.out(this, "constructor");
 			super();
@@ -28,22 +32,22 @@ package view.screen.game
 		
 		
 		// IDisposable interface
-		override public function shutDown():Boolean
+		public function shutDown():Boolean
 		{
 			C.out(this, "shutDown()");
 			
 			sprites = null;
+			spriteData = null;
 			
 			// remove listeners from messaging service
 			Notifier.removeListener(AsteroidsSignals.UPDATE_PLAYER_SPRITES, onUpdateSprites);
 			
-			return super.shutDown();
+			return true;
 		}
 		
-		override public function initialize():Boolean
+		public function initialize():Boolean
 		{
 			C.out(this, "initialize()");
-			super.initialize();
 			
 			stage.frameRate = 60;
 			sprites = [null, null, null, null];
@@ -56,16 +60,16 @@ package view.screen.game
 		
 		
 		
-		private function onUpdateSprites(message:Object):void
+		// IUpdatable interface
+		public function onUpdateRequest(dt:int):void
 		{
-			var players:Array = message as Array;
-			var n:int = players.length;
+			var n:int = spriteData.length;
 			var vo:SpriteVO;
 			var s:Sprite;
 			
 			for (var i:int = 0; i < n; i++)
 			{
-				vo = players[i] as SpriteVO;
+				vo = spriteData[i] as SpriteVO;
 				s = sprites[i];
 				if (s == null) s = sprites[i] = addChild(GraphicAssets.ship) as Sprite;
 				
@@ -78,7 +82,13 @@ package view.screen.game
 				// TODO: update score overlay
 				//scores[i] = vo.score;
 			}
-			
+		}
+		
+		
+		
+		private function onUpdateSprites(spriteVOs:Array):void
+		{
+			spriteData = spriteVOs;
 		}
 		
 	}
