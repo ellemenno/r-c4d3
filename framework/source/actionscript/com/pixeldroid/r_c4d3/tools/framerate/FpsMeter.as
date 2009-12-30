@@ -15,6 +15,9 @@ package com.pixeldroid.r_c4d3.tools.framerate {
 	/**
 	* <code>FpsMeter</code> monitors frame rate. It graphs timed averages against a target rate.
 	* 
+	* Usage: 
+	*   var fps:FpsMeter = addChild(new FpsMeter()) as FpsMeter;
+	*   fps.targetRate = 30;
 	* This class embeds a distributable font named "PixelHugger.ttf" Copyright pixelhugger.com.
 	* 
 	* @see http://www.pixelhugger.com/fonts.php
@@ -39,6 +42,7 @@ package com.pixeldroid.r_c4d3.tools.framerate {
 		private var UPDATE_INTERVAL:int;
 		private var updateTimer:Timer;
 		
+		private var background:Shape;
 		private var targetLine:Shape;
 		private var meterShadowContainer:Sprite;
 		private var meterContainer:Sprite;
@@ -48,7 +52,7 @@ package com.pixeldroid.r_c4d3.tools.framerate {
 		/**
 		* Create a new <code>FpsMeter</code>.
 		* Default target framerate of 30fps and interval meters averaging 1, 5, and 9 second frame counts will be created.
-		* These can be changed with <code>setFpsTarget</code> and <code>setFpsInterval</code>.
+		* These can be changed with <code>targetRate</code> and <code>setFpsInterval</code>.
 		* 
 		* Monitoring starts when you call <code>startMonitoring()</code>
 		* 
@@ -61,8 +65,8 @@ package com.pixeldroid.r_c4d3.tools.framerate {
 			timeCheckHandlers[2] = timeCheck3;
 			
 			buildParts();
+			targetRate = 30;
 			
-			setFpsTarget(30);
 			setFpsInterval(0, 1);
 			setFpsInterval(1, 5);
 			setFpsInterval(2, 9);
@@ -75,9 +79,11 @@ package com.pixeldroid.r_c4d3.tools.framerate {
 		* 
 		* @param t Target frame rate, in frames per second
 		*/
-		public function setFpsTarget(t:Number):void {
+		public function set targetRate(t:Number):void {
 			targetLine.x = targetFps = Math.max(1, Math.min(99, t));
 		}
+		/** @private */
+		public function get targetRate():Number { return targetFps; }
 		
 		/**
 		* Set the update interval for one of the three frame rate meters.
@@ -125,6 +131,13 @@ package com.pixeldroid.r_c4d3.tools.framerate {
 		
 		
 		private function buildParts():void {
+			background = new Shape();
+			background.graphics.beginFill(0x888888);
+			//background.graphics.beginFill(0xffffff, .6);
+			background.graphics.drawRect(0,-3, 100+24,NUM_METERS*10+3);
+			background.graphics.endFill();
+			addChild(background);
+			
 			buildMeterShadows()
 			buildMeters();
 			

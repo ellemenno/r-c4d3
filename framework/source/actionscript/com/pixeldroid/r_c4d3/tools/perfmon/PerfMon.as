@@ -3,6 +3,7 @@ package com.pixeldroid.r_c4d3.tools.perfmon {
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
@@ -47,6 +48,7 @@ package com.pixeldroid.r_c4d3.tools.perfmon {
 		private var frameRate:Bitmap;
 		private var memoryUsage:Bitmap;
 		private var updateLag:Bitmap;
+		private var background:Shape;
 		
 		
 		
@@ -163,6 +165,8 @@ package com.pixeldroid.r_c4d3.tools.perfmon {
 			memoryData = [];
 			lagData = [];
 			
+			background = new Shape();
+			
 			frameRate = new Bitmap();
 			frameRate.bitmapData = new BitmapData(graphWidth, graphHeight, false, BACK_COLOR);
 			
@@ -174,11 +178,16 @@ package com.pixeldroid.r_c4d3.tools.perfmon {
 		}
 		
 		private function addChildren():void {
+			addChild(background);
 			addChild(frameRate);
 			addChild(memoryUsage);
 			memoryUsage.x = frameRate.x + frameRate.width + 4;
 			addChild(updateLag);
 			updateLag.x = memoryUsage.x + memoryUsage.width + 4;
+			
+			background.graphics.beginFill(0x888888);
+			background.graphics.drawRect(-3,-3, width+6,height+6);
+			background.graphics.endFill();
 		}
 
 		private function startPolling():void {
