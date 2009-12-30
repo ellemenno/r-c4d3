@@ -36,8 +36,8 @@ Tasks to build and package the r-c4d3 as3 framework.
 	
     <target name="compile" depends="clean" description="compile the r-c4d3.swc">
     	<exec executable="${flex.compc}" failonerror="true">
-			<arg line="-output=${dir.target}/r-c4d3.swc"/>
-			<arg line="-load-config+=${dir.config}/compc-config.xml"/>
+			<arg line="-output='${dir.target}/r-c4d3.swc'"/>
+			<arg line="-load-config+='${dir.config}/compc-config.xml'"/>
 		</exec>
 	</target>
 	
@@ -48,7 +48,7 @@ Tasks to build and package the r-c4d3 as3 framework.
 		<unzip src="${dir.target}/r-c4d3.swc" dest="${dir.target}/temp"/>
     	<exec executable="${haxe.exe}" dir="${dir.target}" failonerror="false"
 			resultproperty="exitcode" errorproperty="exiterror">
-			<arg line="--gen-hx-classes ${dir.target}/temp/library.swf"/>
+			<arg line="--gen-hx-classes '${dir.target}/temp/library.swf'"/>
 		</exec>
 		<delete dir="${dir.target}/temp"/>
 		
@@ -76,9 +76,9 @@ Tasks to build and package the r-c4d3 as3 framework.
 			<format property="date.year" pattern="yyyy"/>
 		</tstamp>
     	<exec executable="${flex.asdoc}">
-			<arg line="-output=${dir.target}/asdoc"/>
+			<arg line="-output='${dir.target}/asdoc'"/>
 			<arg line="-footer='Copyleft ${date.year} Pixeldroid'"/>
-			<arg line="-load-config+=${dir.config}/asdoc-config.xml"/>
+			<arg line="-load-config+='${dir.config}/asdoc-config.xml'"/>
 		</exec>
 		<zip destfile="${dir.target}/framework-api.zip" basedir="${dir.target}/asdoc"/>
 		<copy todir="${dir.documentation}" failonerror="false">
