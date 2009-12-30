@@ -39,5 +39,21 @@ package
 			return new RockBreak() as Sound;
 		}
 		
+		[Embed(source="thrust.swf#wav", mimeType="application/x-shockwave-flash")]
+		static private const Thrust:Class;
+		
+		static public function get thrust():Sound
+		{
+			return new Thrust() as Sound;
+		}
+		
+		[Embed(source="turn.swf#wav", mimeType="application/x-shockwave-flash")]
+		static private const Turn:Class;
+		
+		static public function get turn():Sound
+		{
+			return new Turn() as Sound;
+		}
+		
 	}
 }

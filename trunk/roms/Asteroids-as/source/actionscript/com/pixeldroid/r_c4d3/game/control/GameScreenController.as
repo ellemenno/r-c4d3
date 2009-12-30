@@ -115,7 +115,7 @@ package com.pixeldroid.r_c4d3.game.control
 		// message callbacks
 		protected function gameTick(dt:int):void
 		{
-			currentScreen.onScreenUpdate(dt);
+			currentScreen.onUpdateRequest(dt);
 		}
 		
 		protected function nextScreen():void

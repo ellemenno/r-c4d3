@@ -33,9 +33,9 @@ package view.screen.attractloop
 			title.y = height*.5 - title.height*.75;
 		}
 		
-		override public function onScreenUpdate(dt:int):void
+		override public function onUpdateRequest(dt:int):void
 		{
-			super.onScreenUpdate(dt);
+			super.onUpdateRequest(dt);
 			
 			if (timeElapsed > 3*1000) timeOut();
 		}

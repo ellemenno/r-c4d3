@@ -110,7 +110,7 @@ package com.pixeldroid.r_c4d3.game.control
 		// message callbacks
 		protected function gameTick(dt:int):void
 		{
-			stats.onScreenUpdate(dt);
+			stats.onUpdateRequest(dt);
 		}
 		
 	}

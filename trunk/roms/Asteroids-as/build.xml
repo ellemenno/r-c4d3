@@ -34,9 +34,9 @@ Tasks to build and package the AS3 Asteroids game rom.
 	
     <target name="compile" depends="clean" description="compile the Asteroids rom">
     	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="${dir.source}/actionscript/Asteroids.as"/>
-			<arg line="-output=${dir.target}/rom.swf"/>
-			<arg line="-load-config+=${dir.config}/mxmlc-config.xml"/>
+			<arg line="'${dir.source}/actionscript/Asteroids.as'"/>
+			<arg line="-output='${dir.target}/rom.swf'"/>
+			<arg line="-load-config+='${dir.config}/mxmlc-config.xml'"/>
 		</exec>
 	</target>
 	

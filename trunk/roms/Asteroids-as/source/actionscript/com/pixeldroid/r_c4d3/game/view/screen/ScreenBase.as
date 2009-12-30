@@ -11,10 +11,11 @@ package com.pixeldroid.r_c4d3.game.view.screen
 	import com.pixeldroid.r_c4d3.interfaces.IControllable;
 	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
 	import com.pixeldroid.r_c4d3.interfaces.IScreen;
+	import com.pixeldroid.r_c4d3.interfaces.IUpdatable;
 	
 	
 	
-	public class ScreenBase extends Sprite implements IScreen, IControllable, IDisposable
+	public class ScreenBase extends Sprite implements IScreen, IUpdatable, IControllable, IDisposable
 	{
 		
 		protected var _type:String;
@@ -56,7 +57,7 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		protected function onFirstScreen():void
 		{
 			// to be overridden by subclasses to draw first view on screen
-			// updates will be prompted via onScreenUpdate
+			// updates will be prompted via onUpdateRequest
 		}
 		
 		
@@ -116,7 +117,7 @@ package com.pixeldroid.r_c4d3.game.view.screen
 			C.out(this, "base onButtonMotion: " +e);
 		}
 		
-		public function onScreenUpdate(dt:int):void
+		public function onUpdateRequest(dt:int):void
 		{
 			timeElapsed += dt;
 		}
