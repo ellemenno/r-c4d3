@@ -15,7 +15,7 @@ package com.pixeldroid.r_c4d3.scores
 	* <li>Scores are kept in descending order (highest first)</li>
 	* <li>Ties are allowed (same score, different initials), duplicates are not</li>
 	*/
-	public class HighScores extends EventDispatcher implements IGameScoresProxy
+	public class GameScoresProxy extends EventDispatcher implements IGameScoresProxy
 	{
 		
 		
@@ -37,7 +37,7 @@ package com.pixeldroid.r_c4d3.scores
 		* @param id A unique identifier for this set of scores and initials
 		* @param maxScores The maximum number of entries to store (up to 100)
 		*/
-		public function HighScores(id:String=null, maxScores:int=10)
+		public function GameScoresProxy(id:String=null, maxScores:int=10)
 		{
 			super();
 			

@@ -9,12 +9,12 @@ package com.pixeldroid.r_c4d3.scores {
 
 	import com.pixeldroid.r_c4d3.data.DataEvent;
 	import com.pixeldroid.r_c4d3.data.JsonLoader;
-	import com.pixeldroid.r_c4d3.scores.HighScores;
+	import com.pixeldroid.r_c4d3.scores.GameScoresProxy;
 	import com.pixeldroid.r_c4d3.scores.ScoreEvent;
 
 
 	/**
-	* <code>RemoteHighScores</code> extends the abstract HighScores base class to
+	* Extends the (abstract) GameScoresProxy base class to
 	* store high scores and initials on a remote server,
 	* using a web service that accepts the following parameters:<ul>
 	* <li><code>game</code> : <i>String</i> Unique game id</li>
@@ -31,11 +31,11 @@ package com.pixeldroid.r_c4d3.scores {
 	* Notes:<ul>
 	* <li>Requires <code>com.adobe.serialization.json.JSON</code></li>
 	* 
-	* @see com.pixeldroid.r_c4d3.scores.HighScores
+	* @see com.pixeldroid.r_c4d3.scores.GameScoresProxy
 	* @see com.adobe.serialization.json.JSON
 	* @see http://code.google.com/p/as3corelib/
 	*/
-	public class RemoteHighScores extends HighScores {
+	public class RemoteGameScoresProxy extends GameScoresProxy {
 		
 		private var _remoteUrl:String;
 		
@@ -53,7 +53,7 @@ package com.pixeldroid.r_c4d3.scores {
 		* @param maxScores The maximum number of entries to store
 		* @param accessUrl The storage webservice URL
 		*/
-		public function RemoteHighScores(id:String=null, maxScores:int=10, accessUrl:String=null) {
+		public function RemoteGameScoresProxy(id:String=null, maxScores:int=10, accessUrl:String=null) {
 			super(id, maxScores);
 			if (accessUrl) remoteUrl = accessUrl;
 		}
