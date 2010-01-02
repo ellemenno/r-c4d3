@@ -1,5 +1,5 @@
 
-package com.pixeldroid.r_c4d3.proxies {
+package com.pixeldroid.r_c4d3.controls {
 
 	/**
 	* The PathConstants utility class is an all-static class

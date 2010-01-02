@@ -1,5 +1,5 @@
 ﻿
-package com.pixeldroid.r_c4d3.proxies
+package com.pixeldroid.r_c4d3.controls
 {
 
 	import flash.display.Stage;

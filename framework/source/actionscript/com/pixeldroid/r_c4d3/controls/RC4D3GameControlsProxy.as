@@ -1,5 +1,5 @@
 ﻿
-package com.pixeldroid.r_c4d3.proxies
+package com.pixeldroid.r_c4d3.controls
 {
 
 	import flash.events.KeyboardEvent;
@@ -7,8 +7,8 @@ package com.pixeldroid.r_c4d3.proxies
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	
-	import com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy;
-	import com.pixeldroid.r_c4d3.proxies.PathConstants;
+	import com.pixeldroid.r_c4d3.controls.KeyboardGameControlsProxy;
+	import com.pixeldroid.r_c4d3.controls.PathConstants;
 	
 	
 	/**
@@ -25,7 +25,7 @@ package com.pixeldroid.r_c4d3.proxies
 	Uses hard-coded path from PathConstants to return to menu
 	</p>
 	
-	@see com.pixeldroid.r_c4d3.proxies.PathConstants
+	@see com.pixeldroid.r_c4d3.controls.PathConstants
 	*/
 	public class RC4D3GameControlsProxy extends KeyboardGameControlsProxy
 	{
