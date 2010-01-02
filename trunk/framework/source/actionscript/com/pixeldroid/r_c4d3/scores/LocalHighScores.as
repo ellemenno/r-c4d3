@@ -4,17 +4,17 @@ package com.pixeldroid.r_c4d3.scores {
 	import flash.net.SharedObject;
 	import flash.net.SharedObjectFlushStatus;
 	
-	import com.pixeldroid.r_c4d3.scores.HighScores;
+	import com.pixeldroid.r_c4d3.scores.GameScoresProxy;
 
 	
 	
 	/**
-	<code>LocalHighScores</code> extends the abstract HighScores base class to
+	Extends the (abstract) GameScoresProxy base class to
 	store high scores and initials on the local hard drive,	using a local SharedObject.
 	
-	@see com.pixeldroid.r_c4d3.scores.HighScores
+	@see com.pixeldroid.r_c4d3.scores.GameScoresProxy
 	*/
-	public class LocalHighScores extends HighScores {
+	public class LocalGameScoresProxy extends GameScoresProxy {
 	
 	
 		/**
@@ -22,7 +22,7 @@ package com.pixeldroid.r_c4d3.scores {
 		@param id A unique identifier for this set of scores and initials
 		@param maxScores The maximum number of entries to store
 		*/
-		public function LocalHighScores(id:String=null, maxScores:int=10) {
+		public function LocalGameScoresProxy(id:String=null, maxScores:int=10) {
 			super(id, maxScores);
 		}
 		
