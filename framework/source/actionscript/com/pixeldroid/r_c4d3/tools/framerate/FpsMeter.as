@@ -13,12 +13,30 @@ package com.pixeldroid.r_c4d3.tools.framerate {
 	
 	
 	/**
-	* <code>FpsMeter</code> monitors frame rate. It graphs timed averages against a target rate.
+	* Monitors frame rate. It graphs timed averages against a target rate.
 	* 
-	* Usage: 
-	*   var fps:FpsMeter = addChild(new FpsMeter()) as FpsMeter;
-	*   fps.targetRate = 30;
-	* This class embeds a distributable font named "PixelHugger.ttf" Copyright pixelhugger.com.
+	* @example The following code shows a simple fps meter instantiation; 
+	* see the constructor documentation for more options:
+	* <listing version="3.0" >
+	* package {
+	*    import com.pixeldroid.tools.framerate.FpsMeter;
+	*    import flash.display.Sprite;
+	*
+	*    public class MyFpsMeterExample extends Sprite {
+	*       public function MyFpsMeterExample() {
+	*          super();
+	*          var fps:FpsMeter = new FpsMeter();
+	*          addChild(fps);
+	*          fps.targetRate = 30;
+	*       }
+	*    }
+	* }
+	* </listing>
+	*
+	* <p>
+	* This class embeds a distributable font named "PixelHugger.ttf",
+	* Copyright pixelhugger.com.
+	* </p>
 	* 
 	* @see http://www.pixelhugger.com/fonts.php
 	*/
