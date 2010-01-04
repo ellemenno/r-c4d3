@@ -40,29 +40,29 @@ Tasks to build and package the r-c4d3 romloaders.
 	
     <target name="compile-desktop" depends="clean" description="compile the desktop romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="${dir.source}/actionscript/DesktopRomLoader.as"/>
-			<arg line="-output=${dir.target}/romloader-desktop.swf"/>
-			<arg line="-load-config+=${dir.config}/mxmlc-config_desktop.xml"/>
+			<arg line="'${dir.source}/actionscript/DesktopRomLoader.as'"/>
+			<arg line="-output='${dir.target}/romloader-desktop.swf'"/>
+			<arg line="-load-config+='${dir.config}/mxmlc-config_desktop.xml'"/>
 		</exec>
 	</target>
 	
     <target name="compile-web" depends="clean" description="compile the web-based romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="${dir.source}/actionscript/RC4D3RomLoader.as"/>
-			<arg line="-output=${dir.target}/romloader-web.swf"/>
-			<arg line="-load-config+=${dir.config}/mxmlc-config_web.xml"/>
+			<arg line="'${dir.source}/actionscript/RC4D3RomLoader.as'"/>
+			<arg line="-output='${dir.target}/romloader-web.swf'"/>
+			<arg line="-load-config+='${dir.config}/mxmlc-config_web.xml'"/>
 		</exec>
 	</target>
 	
     <target name="document" depends="clean" description="create asdoc for the romloader classes">
-		<mkdir dir="${dir.target}/asdoc"/>
+		<mkdir dir="'${dir.target}/asdoc'"/>
 		<tstamp>
 			<format property="date.year" pattern="yyyy"/>
 		</tstamp>
     	<exec executable="${flex.asdoc}">
-			<arg line="-output=${dir.target}/asdoc"/>
+			<arg line="-output='${dir.target}/asdoc'"/>
 			<arg line="-footer='Copyleft ${date.year} Pixeldroid'"/>
-			<arg line="-load-config+=${dir.config}/asdoc-config.xml"/>
+			<arg line="-load-config+='${dir.config}/asdoc-config.xml'"/>
 		</exec>
 		<zip destfile="${dir.target}/romloader-api.zip" basedir="${dir.target}/asdoc"/>
 		<copy todir="${dir.documentation}" failonerror="false">

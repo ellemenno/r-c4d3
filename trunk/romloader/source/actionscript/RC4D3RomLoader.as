@@ -9,6 +9,8 @@ package
 
 	import ConfigDataProxy;
 	import RomLoader;
+	import preloader.IPreloader;
+	import preloader.LoadBarPreloader;
 	
 	
 	
@@ -34,14 +36,21 @@ package
 		}
 		
 		
-		override protected function createControlsProxy():IGameControlsProxy
+		override protected function createControlsProxy(configData:ConfigDataProxy):IGameControlsProxy
 		{
 			return new RC4D3GameControlsProxy();
 		}
 		
-		override protected function createScoresProxy():IGameScoresProxy
+		override protected function createScoresProxy(configData:ConfigDataProxy):IGameScoresProxy
 		{
-			return new RemoteHighScores();
+			// TODO: set score server url and game id from config
+			//return new RemoteHighScores(gameId, server);
+			return null;
+		}
+		
+		override protected function createPreloader():IPreloader
+		{
+			return new LoadBarPreloader();
 		}
 
 

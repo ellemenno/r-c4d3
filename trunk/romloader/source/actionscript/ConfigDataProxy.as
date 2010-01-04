@@ -2,7 +2,6 @@
 package 
 {
 
-
 	/**
 		ConfigDataProxy is a simple data structure front end to the romloader xml configuration.
 		
@@ -13,7 +12,7 @@ package
 			&lt;logging enabled="true" /&gt;
 
 			&lt;!-- rom to load --&gt;
-			&lt;rom file="../controls/ControlTestGameRom.swf" /&gt;
+			&lt;rom file="../controls/ControlTestGameRom.swf" id="com_pixeldroid_controltest" /&gt;
 
 			&lt;!-- key mappings, player numbers start at 1 --&gt;
 			&lt;keymappings&gt;
@@ -34,10 +33,11 @@ package
 	public class ConfigDataProxy
 	{
 
-		private var xmlData:XML;
-		private var _xmlString:String;
-		private var _loggingEnabled:Boolean;
-		private var _romUrl:String;
+		protected var xmlData:XML;
+		protected var _xmlString:String;
+		protected var _loggingEnabled:Boolean;
+		protected var _romUrl:String;
+		protected var _gameId:String;
 
 
 
@@ -65,6 +65,13 @@ package
 		{
 			if (!_romUrl) _romUrl = xmlData..rom.@file.toString();
 			return _romUrl;
+		}
+		
+		/** Game id for scores storage and retrieval */
+		public function get gameId():String
+		{
+			if (!_gameId) _gameId = xmlData..rom.@id.toString();
+			return _gameId;
 		}
 
 		/** Were key codes defined for player 1? */    public function get p1HasKeys():Boolean { return (xmlData..keymappings.joystick.(@playerNumber==1).length() > 0); }
