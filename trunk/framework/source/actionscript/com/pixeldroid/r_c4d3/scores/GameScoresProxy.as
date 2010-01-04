@@ -6,6 +6,7 @@ package com.pixeldroid.r_c4d3.scores
 	import flash.events.EventDispatcher;
 	
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.scores.ScoreEntry;
 	
 
 	/**
@@ -37,7 +38,7 @@ package com.pixeldroid.r_c4d3.scores
 		* @param id A unique identifier for this set of scores and initials
 		* @param maxScores The maximum number of entries to store (up to 100)
 		*/
-		public function GameScoresProxy(id:String=null, maxScores:int=10)
+		public function GameScoresProxy(id:String, maxScores:int=10)
 		{
 			super();
 			
@@ -98,40 +99,70 @@ package com.pixeldroid.r_c4d3.scores
 		/** @inheritdoc */
 		public function getScore(i:int):Number 
 		{
-			var s:Number = (0 <= i && i < scores.length) ? scores[i] : null;
-			return s;
+			if (0 <= i && i < MAX_SCORES) return (i < scores.length) ? scores[i] : NaN;
+			throw new Error("Invalid index: " +i +", valid range is 0 - " +(MAX_SCORES-1));
 		}
 		
 		/** @inheritdoc */
-		public function getAllScores():Array { return scores.slice(); }
+		public function getAllScores():Array 
+		{
+			var A:Array = scores.slice();
+			while (A.length < MAX_SCORES) A.push(NaN);
+			return A; 
+		}
 		
 		/** @inheritdoc */
 		public function getInitials(i:int):String 
 		{
-			var s:String = (0 <= i && i < initials.length) ? initials[i] : null;
-			return s;
+			if (0 <= i && i < MAX_SCORES) return (i < initials.length) ? initials[i] : null;
+			throw new Error("Invalid index: " +i +", valid range is 0 - " +(MAX_SCORES-1));
 		}
 		
 		/** @inheritdoc */
-		public function getAllInitials():Array { return initials.slice(); }
-		
-		
-		/** @inheritdoc */
-		public function insert(s:Number, i:String):Boolean 
-		{
-			return _insert(s, i, scores, initials, MAX_SCORES);
+		public function getAllInitials():Array 
+		{ 
+			var A:Array = initials.slice();
+			while (A.length < MAX_SCORES) A.push(null);
+			return A; 
 		}
-		
+
+
 		/** @inheritdoc */
-		public function insertAll(s:Array, i:Array):Array
+		public function getAllEntries():Array
 		{
-			var n:int = Math.min(s.length, MAX_SCORES);
 			var A:Array = [];
+			var S:Array = getAllScores();
+			var I:Array = getAllInitials();
+			
+			var j:int = 0;
+			var n:int = S.length;
+			var e:ScoreEntry;
+			while (j < n) 
+			{
+				e = new ScoreEntry(S[j], I[j]);
+				e.setAccepted(true, this);
+				A.push(e);
+				j++;
+			}
+			while (j++ < MAX_SCORES) { A.push(null); }
+			
+			return A; 
+		}
+		
+		
+		/** @inheritdoc */
+		public function insertEntries(entries:Array):void
+		{
+			if (!entries || entries.length == 0) return; // nothing to do
+			
+			var index:Array = entries.sortOn("value", Array.DESCENDING | Array.RETURNINDEXEDARRAY | Array.NUMERIC);
+			var n:int = Math.min(entries.length, MAX_SCORES);
+			var e:ScoreEntry;
 			for (var j:int = 0; j < n; j++)
 			{
-				A.push(_insert(s[j], i[j], scores, initials, MAX_SCORES));
+				e = ScoreEntry(entries[index[j]]);
+				e.setAccepted(_insert(e.value, e.label, scores, initials, MAX_SCORES), this);
 			}
-			return A;
 		}
 		
 		
@@ -140,11 +171,11 @@ package com.pixeldroid.r_c4d3.scores
 		
 			var hr:String = "- - - - - - - - - - - - - - - -\n";
 			var s:String = hr;
-			s += " High Scores (game id = '" +_gameId +"')\n";
+			s += " High Scores (game id = '" +_gameId +"', max " +MAX_SCORES +")\n";
 			
-			var totalScores:uint = scores.length;
+			var n:int = scores.length;
 			var p:String;
-			for (var i:uint = 0; i < totalScores; i++) {
+			for (var i:int = 0; i < n; i++) {
 				p = pad((i+1).toString(), 5, " ");
 				s += p +". " +initials[i] +" : " +scores[i] +"\n";
 			}
@@ -160,38 +191,39 @@ package com.pixeldroid.r_c4d3.scores
 			initials = [];
 		}
 		
-		
-		
-		private function isApprovedChars(s:String):Boolean
+		protected function isApprovedChars(s:String):Boolean
 		{
 			return ("abc".match(/\W/g).length == 0);
 		}
 		
-		private static function pad(s:String, x:Number, c:String):String {
+		protected function pad(s:String, x:Number, c:String):String 
+		{
 			while (s.length < x) { s = c + s; }
 			return s;
 		}
 		
-		/*
-		TODO: adding smaller scores first will give false positive, and then they'll be removed as the higher ones bump them out..
-		need to receive all scores at once, sort highest first, then try adding and return results in matching array of booleans
-		*/
-		private static function _insert(score:Number, initial:String, S:Array, I:Array, max:uint):Boolean {
+		protected function _insert(score:Number, initial:String, S:Array, I:Array, max:uint):Boolean 
+		{
+			if (S.length != I.length) throw new Error("Number of scores does not match number of initials");
+			
 			var added:Boolean = false;
 			
-			if (S.length == 0) {
+			if (S.length == 0) 
+			{
 				S.push(score);
 				I.push(initial);
 				added = true;
 			}
-			
-			else {
+			else 
+			{
 				var resolved:Boolean = false;
-				var k:uint = 0;
+				var k:int = 0;
 
-				while (k < S.length) {
+				while (k < S.length) 
+				{
 
-					if (score > S[k]) {
+					if (score > S[k]) 
+					{
 						resolved = true;
 						S.splice(k, 0, score);
 						I.splice(k, 0, initial);
@@ -199,7 +231,8 @@ package com.pixeldroid.r_c4d3.scores
 						break;
 					}
 
-					if (score == S[k]) {
+					if (score == S[k]) 
+					{
 						resolved = true;
 						while (
 							(k < S.length) &&
@@ -217,7 +250,8 @@ package com.pixeldroid.r_c4d3.scores
 					k++;
 				}
 
-				if (S.length > max) {
+				if (S.length > max) 
+				{
 					S.pop();
 					I.pop();
 				}

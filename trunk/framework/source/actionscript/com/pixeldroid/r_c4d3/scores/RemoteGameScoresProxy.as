@@ -53,7 +53,7 @@ package com.pixeldroid.r_c4d3.scores {
 		* @param maxScores The maximum number of entries to store
 		* @param accessUrl The storage webservice URL
 		*/
-		public function RemoteGameScoresProxy(id:String=null, maxScores:int=10, accessUrl:String=null) {
+		public function RemoteGameScoresProxy(id:String, maxScores:int=10, accessUrl:String=null) {
 			super(id, maxScores);
 			if (accessUrl) remoteUrl = accessUrl;
 		}

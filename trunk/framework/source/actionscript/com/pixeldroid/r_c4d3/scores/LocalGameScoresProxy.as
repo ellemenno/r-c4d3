@@ -22,7 +22,7 @@ package com.pixeldroid.r_c4d3.scores {
 		@param id A unique identifier for this set of scores and initials
 		@param maxScores The maximum number of entries to store
 		*/
-		public function LocalGameScoresProxy(id:String=null, maxScores:int=10) {
+		public function LocalGameScoresProxy(id:String, maxScores:int=10) {
 			super(id, maxScores);
 		}
 		
