@@ -4,8 +4,8 @@ package
 
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
-	import com.pixeldroid.r_c4d3.proxies.RC4D3GameControlsProxy;
-	import com.pixeldroid.r_c4d3.scores.RemoteHighScores;
+	import com.pixeldroid.r_c4d3.controls.RC4D3GameControlsProxy;
+	import com.pixeldroid.r_c4d3.scores.RemoteGameScoresProxy;
 
 	import ConfigDataProxy;
 	import RomLoader;
@@ -44,7 +44,7 @@ package
 		override protected function createScoresProxy(configData:ConfigDataProxy):IGameScoresProxy
 		{
 			// TODO: set score server url and game id from config
-			//return new RemoteHighScores(gameId, server);
+			//return new RemoteGameScoresProxy(configData.gameId, server);
 			return null;
 		}
 		

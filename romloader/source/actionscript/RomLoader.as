@@ -2,6 +2,7 @@
 package 
 {
 
+	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -56,7 +57,7 @@ package
 		protected var controlsProxy:IGameControlsProxy;
 		protected var highScoresProxy:IGameScoresProxy;
 		
-		protected var preloader:IPreloader;
+		protected var splashScreen:IPreloader;
 		protected var swfBytesLoaded:int;
 		protected var swfBytesTotal:int;
 		protected var swfLoaded:Boolean;
@@ -89,25 +90,26 @@ package
 		/** @private */
 		protected function addChildren():void
 		{
-			preloader = IPreloader(createPreloader());
+			splashScreen = IPreloader( addChild(createPreloader() as Sprite) );
+			splashScreen.initialize();
 		}
 
 		/** @private */
 		protected function openPreloader():void
 		{
-			preloader.open(); // needs to dispatch Event.OPEN to trigger onPreloaderOpened
+			splashScreen.open(); // needs to dispatch Event.OPEN to trigger onPreloaderOpened
 		}
 
 		/** @private */
 		protected function onPreloadProgress(e:ProgressEvent):void
 		{
-			preloader.progress = e;
+			splashScreen.progress = e;
 		}
 
 		/** @private */
-		protected function closePreloader(errorOccured:Boolean=false):void
+		protected function closePreloader():void
 		{
-			if (errorOccured == true) preloader.shutDown();
+			splashScreen.shutDown();
 		}
 
 
@@ -130,12 +132,13 @@ package
 			Triggered when all xml bytes are loaded.
 
 			Initiates load of swf; calls for creation of controls and scores proxies,
-			applies config data to them, and hands them to the preloader for possible use.
+			applies config data to them, and hands them to the splashScreen for possible use.
 		*/
 		/** @private */
 		protected function onXmlComplete(e:Event):void
 		{
 			xmlLoaded = true;
+			C.out(this, "onXmlComplete", true);
 			loadSwf();
 			
 			configData = new ConfigDataProxy(xmlLoader.data);
@@ -146,7 +149,7 @@ package
 			highScoresProxy = createScoresProxy(configData);
 			if (!highScoresProxy) throw new Error("Couldn't load scores proxy."); // TODO: what a vague error!
 
-			preloader.onConfigData(configData, controlsProxy, highScoresProxy);
+			splashScreen.onConfigData(configData, controlsProxy, highScoresProxy);
 		}
 
 		/*
@@ -172,14 +175,16 @@ package
 		protected function onSwfComplete(e:Event):void
 		{
 			swfLoaded = true;
+			C.out(this, "onSwfComplete", true);
+			if (splashDone) finalizeLoad();
 		}
 
 		
 		
 		/*
-			Event handler responding to	the completion of the preloader opening animation.
+			Event handler responding to	the completion of the splashScreen opening animation.
 			
-			Signifies the preloader is ready to receive progress updates.
+			Signifies the splashScreen is ready to receive progress updates.
 
 			Calls loadXml()
 		*/
@@ -190,16 +195,18 @@ package
 		}
 
 		/*
-			Event handler responding to	the completion of the preloader closing animation.
+			Event handler responding to	the completion of the splashScreen closing animation.
 			
-			Signifies the preloader is done displaying and the user may progress on to the game.
+			Signifies the splashScreen is done displaying and the user may progress on to the game.
 
 			Calls finalizeLoad()
 		*/
 		/** @private */
 		protected function onPreloaderClosed(e:Event):void
 		{
-			finalizeLoad();
+			splashDone = true;
+			C.out(this, "onPreloaderClosed", true);
+			if (swfLoaded) finalizeLoad();
 		}
 
 
@@ -245,12 +252,12 @@ package
 			Looks for Haxe games through the side door.
 		*/
 		/** @private */
-		protected function extractGameRom(romLoadeContent:DisplayObject):IGameRom
+		protected function extractGameRom(romLoaderContent:DisplayObject):IGameRom
 		{
 			var gameRom:IGameRom;
 			
-			if (romLoadeContent is IGameRom) gameRom = IGameRom(romLoadeContent);
-			else if (getQualifiedClassName(romLoadeContent) == "flash::Boot")
+			if (romLoaderContent is IGameRom) gameRom = IGameRom(romLoaderContent);
+			else if (getQualifiedClassName(romLoaderContent) == "flash::Boot")
 			{
 				if (HaxeSideDoor.romInstance && HaxeSideDoor.romInstance is IGameRom) gameRom = IGameRom(HaxeSideDoor.romInstance);
 			}
@@ -289,7 +296,7 @@ package
 		protected function onIoError(e:IOErrorEvent):void
 		{
 			trace("IO Error: " +e);
-			closePreloader(true);
+			closePreloader();
 		}
 
 		/*
@@ -300,7 +307,7 @@ package
 		protected function onSecurityError(e:SecurityErrorEvent):void
 		{
 			trace("Security Error: " +e);
-			closePreloader(true);
+			closePreloader();
 		}
 		
 		/*
@@ -355,7 +362,9 @@ package
 			
 			if (romLoader.content)
 			{
-				removeChild(preloaderContainer);
+				closePreloader();
+				removeChild(Sprite(splashScreen));
+				
 				var gameRom:IGameRom = extractGameRom(romLoader.content);
 				if (gameRom)
 				{
@@ -385,8 +394,8 @@ package
 			xmlLoader.addEventListener(IOErrorEvent.IO_ERROR, onIoError);
 			xmlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 
-			preloaderContainer.addEventListener(Event.OPEN, onPreloaderOpened);
-			preloaderContainer.addEventListener(Event.CLOSE, onPreloaderClosed);
+			Sprite(splashScreen).addEventListener(Event.OPEN, onPreloaderOpened);
+			Sprite(splashScreen).addEventListener(Event.CLOSE, onPreloaderClosed);
 			
 			addListeners(); // let subclasses do their own
 		}
@@ -403,8 +412,8 @@ package
 			xmlLoader.removeEventListener(IOErrorEvent.IO_ERROR, onIoError);
 			xmlLoader.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onSecurityError);
 
-			preloaderContainer.removeEventListener(Event.OPEN, onPreloaderOpened);
-			preloaderContainer.removeEventListener(Event.CLOSE, onPreloaderClosed);
+			Sprite(splashScreen).removeEventListener(Event.OPEN, onPreloaderOpened);
+			Sprite(splashScreen).removeEventListener(Event.CLOSE, onPreloaderClosed);
 			
 			removeListeners(); // ask subclasses to clean up their listeners
 		}

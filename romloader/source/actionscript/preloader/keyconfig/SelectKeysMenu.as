@@ -14,9 +14,9 @@ package preloader.keyconfig
 	import flash.text.TextFormatAlign;
 	import flash.utils.ByteArray;
 	
-	import com.pixeldroid.r_c4d3.controls.KeyLabels;
 	import com.pixeldroid.r_c4d3.interfaces.IJoystick;
-	import com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy;
+	import com.pixeldroid.r_c4d3.controls.KeyboardGameControlsProxy;
+	import com.pixeldroid.r_c4d3.controls.KeyLabels;
 	
 	import preloader.keyconfig.Button;
 	import preloader.keyconfig.FullFrameSprite;
@@ -865,7 +865,7 @@ import flash.display.Stage;
 import flash.events.KeyboardEvent;
 import flash.text.TextField;
 
-import keyconfig.ICanFocus;
+import preloader.keyconfig.ICanFocus;
 	
 /*private*/ class KeyField extends TextField implements ICanFocus
 {

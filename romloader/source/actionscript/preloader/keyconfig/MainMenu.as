@@ -8,7 +8,7 @@ package preloader.keyconfig
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	
-	import com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy;
+	import com.pixeldroid.r_c4d3.controls.KeyboardGameControlsProxy;
 	
 	import preloader.keyconfig.Button;
 	import preloader.keyconfig.FullFrameSprite;

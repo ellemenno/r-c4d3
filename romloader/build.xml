@@ -55,7 +55,7 @@ Tasks to build and package the r-c4d3 romloaders.
 	</target>
 	
     <target name="document" depends="clean" description="create asdoc for the romloader classes">
-		<mkdir dir="'${dir.target}/asdoc'"/>
+		<mkdir dir="${dir.target}/asdoc"/>
 		<tstamp>
 			<format property="date.year" pattern="yyyy"/>
 		</tstamp>

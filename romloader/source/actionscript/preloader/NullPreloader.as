@@ -6,6 +6,10 @@ package preloader
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
 	
+	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
+
+	import ConfigDataProxy;
 	import preloader.IPreloader;
 	
 	
@@ -22,11 +26,11 @@ package preloader
 		
 		
 		// IDisposable interface
-		public function initialize():Boolean {}
-		public function shutDown():Boolean {}
+		public function initialize():Boolean { return true; }
+		public function shutDown():Boolean { return true; }
 		
 		// IPreloader interface
-		public function open():Boolean { dispatchEvent(new Event(Event.OPEN, true)); }
+		public function open():void { dispatchEvent(new Event(Event.OPEN, true)); }
 		public function set progress(value:ProgressEvent):void
 		{
 			progressEvent = value;
