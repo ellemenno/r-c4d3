@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="IGameScoresProxy,com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy,gameId,length,totalScores,clear,closeScoresTable,getAllInitials,getAllScores,getInitials,getScore,insert,insertAll,load,openScoresTable,store,toString" name="keywords">
+<meta content="IGameScoresProxy,com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy,gameId,length,totalScores,clear,closeScoresTable,getAllEntries,getAllInitials,getAllScores,getInitials,getScore,insertEntries,load,openScoresTable,store,toString" name="keywords">
 <title>com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy</title>
 </head>
 <body>
@@ -38,7 +38,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <td class="classHeaderTableLabel">Interface</td><td class="classSignature">public interface IGameScoresProxy extends <a href="none">flash.events.IEventDispatcher</a></td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Implementors</td><td><a href="../scores/HighScores.html">HighScores</a></td>
+<td class="classHeaderTableLabel">Implementors</td><td><a href="../scores/GameScoresProxy.html">GameScoresProxy</a></td>
 </tr>
 </table>
 <p></p>
@@ -98,9 +98,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#getAllEntries()">getAllEntries</a>():Array</div>
+<div class="summaryTableDescription">
+  Retrieve all entries, as an array of ScoreEntry instances.</div>
+</td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#getAllInitials()">getAllInitials</a>():Array</div>
 <div class="summaryTableDescription">
-  Retrieve all initials.</div>
+  Retrieve all initials, as an array of Strings.</div>
 </td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
 </tr>
 <tr class="">
@@ -108,7 +116,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <div class="summarySignature">
 <a class="signatureLink" href="#getAllScores()">getAllScores</a>():Array</div>
 <div class="summaryTableDescription">
-  Retrieve all scores.</div>
+  Retrieve all scores, as an array of Numbers.</div>
 </td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
 </tr>
 <tr class="">
@@ -130,18 +138,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#insert()">insert</a>(s:Number, i:String):Boolean</div>
+<a class="signatureLink" href="#insertEntries()">insertEntries</a>(entries:Array):void</div>
 <div class="summaryTableDescription">
-  Submit a score and associated initials string for inclusion into the 
-  score list, possibly bumping off the lowest score, or failing to be added.</div>
-</td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#insertAll()">insertAll</a>(s:Array, i:Array):Array</div>
-<div class="summaryTableDescription">
-  Submit all scores and initials into the score list at once.</div>
+  Submit a batch of score entry candidates into the score list at once.</div>
 </td><td class="summaryTableOwnerCol">IGameScoresProxy</td>
 </tr>
 <tr class="">
@@ -305,6 +304,26 @@ showHideInherited();
 <a href="../interfaces/IGameScoresProxy.html#store" target="">store</a>
 </div>
 </div>
+<a name="getAllEntries()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getAllEntries</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getAllEntries():Array</code><p>
+  Retrieve all entries, as an array of ScoreEntry instances.
+  
+  </p><p><em>Note:</em> Entries are stored in descending order based on the score they are associated with (largest first); 
+  'empty' slots contain <code>null</code></p>
+  <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Array</code></td>
+</tr>
+</table>
+</div>
 <a name="getAllInitials()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -313,9 +332,10 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function getAllInitials():Array</code><p>
-  Retrieve all initials.
+  Retrieve all initials, as an array of Strings.
   
-  </p><p><em>Note:</em> Initials are stored in descending order based on the score they are associated with (largest first).</p>
+  </p><p><em>Note:</em> Initials are stored in descending order based on the score they are associated with (largest first); 
+  'empty' slots contain <code>null</code></p>
   <p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
@@ -332,9 +352,10 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function getAllScores():Array</code><p>
-  Retrieve all scores.
+  Retrieve all scores, as an array of Numbers.
   
-  </p><p><em>Note:</em> Scores are stored in descending order (largest first).</p>
+  </p><p><em>Note:</em> Scores are stored in descending order (largest first); 
+  'empty' slots contain <code>NaN</code></p>
   <p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
@@ -392,79 +413,37 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>Number</code> &mdash; The score matching the rank index; null if rank is invalid or no scores exist.
+<td width="20"></td><td><code>Number</code> &mdash; The score matching the rank index; NaN if rank is invalid or no scores exist.
   </td>
 </tr>
 </table>
 </div>
-<a name="insert()"></a>
+<a name="insertEntries()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">insert</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">insertEntries</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public function insert(s:Number, i:String):Boolean</code><p>
-  Submit a score and associated initials string for inclusion into the 
-  score list, possibly bumping off the lowest score, or failing to be added.
+<code>public function insertEntries(entries:Array):void</code><p>
+  Submit a batch of score entry candidates into the score list at once.
   
-  </p><p>The new score and initials string will be added in rank order if they qualify,
+  </p><p>The individual score entries will be added in rank order if they qualify,
   or not added at all if they don't.</p>
   
-  <p>If adding the new score and initals string creates more than
-  MAX_SCORES entries, then the lowest rank score will be bumped off the list.</p>
+  <p>If adding the new score entries creates more than MAX_SCORES entries, 
+  then the lowest rank score(s) will be rejected from the list, 
+  possibly removing scores that were previously accepted.</p>
+    <p>Array elements will be modified to update their <code>accepted</code> property, 
+  to indicate inclusion into or rejection from the scores table, 
+  but the order of the elements in the provided array will not be altered.</p>
+  
+  <p>Subsequent calls to insertEntries may result in updates to the high
+  score table that invalidate previously provided <code>accepted</code> values</p>
     <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">s</span>:Number</code> &mdash; The score to add
-  </td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">i</span>:String</code> &mdash; The string of initials to add
-  </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>Boolean</code> &mdash; true if score was added, false if 
-  </td>
-</tr>
-</table>
-</div>
-<a name="insertAll()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">insertAll</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function insertAll(s:Array, i:Array):Array</code><p>
-  Submit all scores and initials into the score list at once.
-    </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">s</span>:Array</code> &mdash; The score to add
-  </td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">i</span>:Array</code> &mdash; The string of initials to add
-  </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>Array</code> &mdash; Array of Booleans matching the input order; 
-  true if the corresponding score was added, false if not
+<td width="20px"></td><td><code><span class="label">entries</span>:Array</code> &mdash; Array of the score entries to add. 
   </td>
 </tr>
 </table>
@@ -584,8 +563,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">Copyleft 2009 Pixeldroid</center>
+<center class="copyright">Copyleft 2010 Pixeldroid</center>
 </div>
 </body>
 </html>
-<!--Copyleft 2009 Pixeldroid-->
+<!--Copyleft 2010 Pixeldroid-->
