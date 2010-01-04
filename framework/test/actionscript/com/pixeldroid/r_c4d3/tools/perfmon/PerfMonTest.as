@@ -19,6 +19,7 @@ package com.pixeldroid.r_c4d3.tools.perfmon
 		
 		public function PerfMonTest():void
 		{
+			super();
 			addChildren();
 		}
 		

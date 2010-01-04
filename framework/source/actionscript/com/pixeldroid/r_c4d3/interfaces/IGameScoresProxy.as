@@ -4,6 +4,8 @@ package com.pixeldroid.r_c4d3.interfaces
 	
 	import flash.events.IEventDispatcher;
 	
+	import com.pixeldroid.r_c4d3.scores.ScoreEntry;
+	
 	
 	/**
 	Dispatched when the score saving process has completed.
@@ -105,16 +107,17 @@ package com.pixeldroid.r_c4d3.interfaces
 		* <p><em>Note:</em> Scores are stored in descending order (largest first).</p>
 		*
 		* @param i Index of score to retrieve. [0, MAX_SCORES)
-		* @return The score matching the rank index; null if rank is invalid or no scores exist.
+		* @return The score matching the rank index; NaN if rank is invalid or no scores exist.
 		*/
 		function getScore(i:int):Number;
 		
 		/**
-		* Retrieve all scores.
+		* Retrieve all scores, as an array of Numbers.
 		* 
-		* <p><em>Note:</em> Scores are stored in descending order (largest first).</p>
+		* <p><em>Note:</em> Scores are stored in descending order (largest first); 
+		* 'empty' slots contain <code>NaN</code></p>
 		*/
-		function getAllScores():Array;
+		function getAllScores():Array/*Number*/;
 		
 		
 		/**
@@ -128,38 +131,43 @@ package com.pixeldroid.r_c4d3.interfaces
 		function getInitials(i:int):String;
 		
 		/**
-		* Retrieve all initials.
+		* Retrieve all initials, as an array of Strings.
 		* 
-		* <p><em>Note:</em> Initials are stored in descending order based on the score they are associated with (largest first).</p>
+		* <p><em>Note:</em> Initials are stored in descending order based on the score they are associated with (largest first); 
+		* 'empty' slots contain <code>null</code></p>
 		*/
-		function getAllInitials():Array;
+		function getAllInitials():Array/*String*/;
 		
 		
 		/**
-		* Submit a score and associated initials string for inclusion into the 
-		* score list, possibly bumping off the lowest score, or failing to be added.
+		* Retrieve all entries, as an array of ScoreEntry instances.
 		* 
-		* <p>The new score and initials string will be added in rank order if they qualify,
+		* <p><em>Note:</em> Entries are stored in descending order based on the score they are associated with (largest first); 
+		* 'empty' slots contain <code>null</code></p>
+		*/
+		function getAllEntries():Array/*ScoreEntry*/;
+		
+		
+		/**
+		* Submit a batch of score entry candidates into the score list at once.
+		* 
+		* <p>The individual score entries will be added in rank order if they qualify,
 		* or not added at all if they don't.</p>
 		* 
-		* <p>If adding the new score and initals string creates more than
-		* MAX_SCORES entries, then the lowest rank score will be bumped off the list.</p>
+		* <p>If adding the new score entries creates more than MAX_SCORES entries, 
+		* then the lowest rank score(s) will be rejected from the list, 
+		* possibly removing scores that were previously accepted.</p>
 		*
-		* @param s The score to add
-		* @param i The string of initials to add
-		* @return true if score was added, false if 
-		*/
-		function insert(s:Number, i:String):Boolean;
-		
-		/**
-		* Submit all scores and initials into the score list at once.
+		* <p>Array elements will be modified to update their <code>accepted</code> property, 
+		* to indicate inclusion into or rejection from the scores table, 
+		* but the order of the elements in the provided array will not be altered.</p>
+		* 
+		* <p>Subsequent calls to insertEntries may result in updates to the high
+		* score table that invalidate previously provided <code>accepted</code> values</p>
 		*
-		* @param s The score to add
-		* @param i The string of initials to add
-		* @return Array of Booleans matching the input order; 
-		* true if the corresponding score was added, false if not
+		* @param entries Array of the score entries to add. 
 		*/
-		function insertAll(s:Array, i:Array):Array;
+		function insertEntries(entries:Array/*ScoreEntry*/):void;
 		
 		
 		/**

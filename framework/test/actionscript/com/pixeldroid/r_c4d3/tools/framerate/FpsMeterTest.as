@@ -19,6 +19,7 @@ package com.pixeldroid.r_c4d3.tools.framerate
 		
 		public function FpsMeterTest():void
 		{
+			super();
 			addChildren();
 			fps.startMonitoring();
 		}
