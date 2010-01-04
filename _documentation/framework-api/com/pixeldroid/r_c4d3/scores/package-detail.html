@@ -39,17 +39,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Pa
 <th>&nbsp;</th><th width="30%">Class</th><th width="70%">Description</th>
 </tr>
 <tr class="prow1">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="HighScores.html">HighScores</a></td><td class="summaryTableLastCol">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="GameScoresProxy.html">GameScoresProxy</a></td><td class="summaryTableLastCol">
  Base class for high score storage and retrieval.</td>
 </tr>
 <tr class="prow0">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="LocalHighScores.html">LocalHighScores</a></td><td class="summaryTableLastCol">
- <code>LocalHighScores</code> extends the abstract HighScores base class to
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="LocalGameScoresProxy.html">LocalGameScoresProxy</a></td><td class="summaryTableLastCol">
+ Extends the (abstract) GameScoresProxy base class to
  store high scores and initials on the local hard drive, using a local SharedObject.</td>
 </tr>
 <tr class="prow1">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="RemoteHighScores.html">RemoteHighScores</a></td><td class="summaryTableLastCol">
- <code>RemoteHighScores</code> extends the abstract HighScores base class to
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="RemoteGameScoresProxy.html">RemoteGameScoresProxy</a></td><td class="summaryTableLastCol">
+ Extends the (abstract) GameScoresProxy base class to
  store high scores and initials on a remote server,
  using a web service that accepts the following parameters:<ul>
  <li><code>game</code> : <i>String</i> Unique game id</li>
@@ -68,6 +68,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Pa
  </td>
 </tr>
 <tr class="prow0">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="ScoreEntry.html">ScoreEntry</a></td><td class="summaryTableLastCol">&nbsp;</td>
+</tr>
+<tr class="prow1">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="ScoreEvent.html">ScoreEvent</a></td><td class="summaryTableLastCol">
  <code>ScoreEvent</code> objects are dispatched in response to load and store requests on a HighScores subclass.</td>
 </tr>
@@ -75,9 +78,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Pa
 <p></p>
 <div>
 <p></p>
-<center class="copyright">Copyleft 2009 Pixeldroid</center>
+<center class="copyright">Copyleft 2010 Pixeldroid</center>
 </div>
 </div>
 </body>
 </html>
-<!--Copyleft 2009 Pixeldroid-->
+<!--Copyleft 2010 Pixeldroid-->

@@ -82,49 +82,47 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
   Retrieve the zero-based system index for this joystick.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#initialize()">initialize</a>() &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/GameScoresProxy.html#initialize()">initialize</a>() &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/GameScoresProxy.html">GameScoresProxy</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html#initialize()">initialize</a>() &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteHighScores.html">RemoteHighScores</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteGameScoresProxy.html#initialize()">initialize</a>() &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteGameScoresProxy.html">RemoteGameScoresProxy</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#initials">initials</a> &mdash; Property in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/GameScoresProxy.html#initials">initials</a> &mdash; Property in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/GameScoresProxy.html">GameScoresProxy</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html#insert()">insert</a>(s, i) &mdash; Method in interface com.pixeldroid.r_c4d3.interfaces.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html">IGameScoresProxy</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/GameScoresProxy.html#_insert()">_insert</a>(score, initial, S, I, max) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/GameScoresProxy.html">GameScoresProxy</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html#insertEntries()">insertEntries</a>(entries) &mdash; Method in interface com.pixeldroid.r_c4d3.interfaces.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html">IGameScoresProxy</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
-  Submit a score and associated initials string for inclusion into the 
-  score list, possibly bumping off the lowest score, or failing to be added.</td>
+  Submit a batch of score entry candidates into the score list at once.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#insert()">insert</a>(s, i) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/GameScoresProxy.html#insertEntries()">insertEntries</a>(entries) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/GameScoresProxy.html">GameScoresProxy</a></td>
 </tr>
 <tr>
 <td width="20"></td><td> </td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html#insertAll()">insertAll</a>(s, i) &mdash; Method in interface com.pixeldroid.r_c4d3.interfaces.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/interfaces/class-list.html');" href="com/pixeldroid/r_c4d3/interfaces/IGameScoresProxy.html">IGameScoresProxy</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/GameScoresProxy.html#isApprovedChars()">isApprovedChars</a>(s) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/GameScoresProxy.html">GameScoresProxy</a></td>
 </tr>
 <tr>
-<td width="20"></td><td>
-  Submit all scores and initials into the score list at once.</td>
-</tr>
-<tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html#insertAll()">insertAll</a>(s, i) &mdash; Method in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/HighScores.html">HighScores</a></td>
-</tr>
-<tr>
-<td width="20"></td><td> </td>
+<td width="20"></td><td></td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/controls/class-list.html');" href="com/pixeldroid/r_c4d3/controls/JoyHatEvent.html#isCentered">isCentered</a> &mdash; Property in class com.pixeldroid.r_c4d3.controls.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/controls/class-list.html');" href="com/pixeldroid/r_c4d3/controls/JoyHatEvent.html">JoyHatEvent</a></td>
@@ -212,8 +210,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("IÂ
 </tr>
 </table>
 <p></p>
-<center class="copyright">Copyleft 2009 Pixeldroid</center>
+<center class="copyright">Copyleft 2010 Pixeldroid</center>
 </div>
 </body>
 </html>
-<!--Copyleft 2009 Pixeldroid-->
+<!--Copyleft 2010 Pixeldroid-->
