@@ -30,7 +30,7 @@ package com.pixeldroid.r_c4d3.tools.console {
 	* </p>
 	*
 	* <p>
-	* The console is scollable by dragging a selection inside it with the cursor, 
+	* The console is scrollable by dragging a selection inside it with the cursor, 
 	* or clicking to give it focus and using the arrow keys, but does not provide a scrollbar.
 	* </p>
 	*
@@ -53,7 +53,8 @@ package com.pixeldroid.r_c4d3.tools.console {
 	* </listing>
 	*
 	* <p>
-	* This class embeds a distributable font named "VeraMono.ttf" Copyright 2003 by Bitstream, Inc.
+	* This class embeds a distributable font named "VeraMono.ttf",
+	* Copyright 2003 by Bitstream, Inc.
 	* </p>
 	* 
 	* @see http://www.gnome.org/fonts/
@@ -80,8 +81,6 @@ package com.pixeldroid.r_c4d3.tools.console {
 		/**
 		* Create a new Console with optional parameters.
 		* 
-		* @param left Left edge of console (pixels)
-		* @param top Top edge of console (pixels)
 		* @param width Width of console (pixels)
 		* @param height Height of console (pixels)
 		* @param bgColor Console background color

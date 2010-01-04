@@ -12,9 +12,10 @@ package com.pixeldroid.r_c4d3.scores
 	/**
 	* Base class for high score storage and retrieval.
 	*
-	* Notes:<ul>
+	* <ul>
 	* <li>Scores are kept in descending order (highest first)</li>
 	* <li>Ties are allowed (same score, different initials), duplicates are not</li>
+	* </ul>
 	*/
 	public class GameScoresProxy extends EventDispatcher implements IGameScoresProxy
 	{
@@ -186,22 +187,26 @@ package com.pixeldroid.r_c4d3.scores
 		
 		
 		
+		/** @private */
 		protected function initialize():void {
 			scores = [];
 			initials = [];
 		}
 		
+		/** @private */
 		protected function isApprovedChars(s:String):Boolean
 		{
 			return ("abc".match(/\W/g).length == 0);
 		}
 		
+		/** @private */
 		protected function pad(s:String, x:Number, c:String):String 
 		{
 			while (s.length < x) { s = c + s; }
 			return s;
 		}
 		
+		/** @private */
 		protected function _insert(score:Number, initial:String, S:Array, I:Array, max:uint):Boolean 
 		{
 			if (S.length != I.length) throw new Error("Number of scores does not match number of initials");
