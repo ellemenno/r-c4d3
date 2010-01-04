@@ -7,7 +7,8 @@
 	<logging enabled="true" />
 
 	<!-- rom to load -->
-	<rom file="http://r-c4d3.googlecode.com/svn/trunk/romloader/source/resources/rom.swf" />
+	<rom file="http://r-c4d3.googlecode.com/svn/trunk/romloader/source/resources/rom.swf" 
+	     id="test_romloader_web" />
 	
 	<!-- custom properties go here, e.g.
 		<properties>

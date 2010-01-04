@@ -7,7 +7,7 @@
 	<logging enabled="true" />
 
 	<!-- rom to load -->
-	<rom file="./rom.swf" />
+	<rom file="./rom.swf" id="test_romloader_desktop" />
 	
 	<!-- custom properties go here, e.g.
 		<properties>
