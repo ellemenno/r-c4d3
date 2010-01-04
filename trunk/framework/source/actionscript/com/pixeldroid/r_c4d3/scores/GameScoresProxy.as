@@ -196,7 +196,8 @@ package com.pixeldroid.r_c4d3.scores
 		/** @private */
 		protected function isApprovedChars(s:String):Boolean
 		{
-			return ("abc".match(/\W/g).length == 0);
+			// verify lack of non-word characters: [^a-zA-Z0-9_]
+			return (s.match(/\W/g).length == 0);
 		}
 		
 		/** @private */
