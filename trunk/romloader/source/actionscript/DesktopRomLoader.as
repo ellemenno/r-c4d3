@@ -8,8 +8,8 @@ package
 	
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
-	import com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy;
-	import com.pixeldroid.r_c4d3.scores.LocalHighScores;
+	import com.pixeldroid.r_c4d3.controls.KeyboardGameControlsProxy;
+	import com.pixeldroid.r_c4d3.scores.LocalGameScoresProxy;
 
 	import ConfigDataProxy;
 	import RomLoader;
@@ -55,7 +55,7 @@ package
 		
 		override protected function createScoresProxy(d:ConfigDataProxy):IGameScoresProxy
 		{
-			return new LocalHighScores(d.gameId);
+			return new LocalGameScoresProxy(d.gameId);
 		}
 		
 		override protected function createPreloader():IPreloader
@@ -63,11 +63,11 @@ package
 			return new LoadBarPreloader();
 		}
 		
-		override protected function onPreloaderClosed(e:Event):void
+		override protected function finalizeLoad():void
 		{
+			super.finalizeLoad();
 			stage.fullScreenSourceRect = romLoader.getBounds(this);
 			stage.displayState = StageDisplayState.FULL_SCREEN;
-			super.onPreloaderClosed(e);
 		}
 
 

@@ -5,6 +5,10 @@ package preloader
 	import flash.events.ProgressEvent;
 	
 	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
+	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
+
+	import ConfigDataProxy;
 
 	
 	/**
@@ -26,7 +30,7 @@ package preloader
 	
 	public interface IPreloader extends IDisposable
 	{
-		function open():Boolean;
+		function open():void;
 		function set progress(value:ProgressEvent):void;
 		function get progress():ProgressEvent;
 		function onConfigData(configData:ConfigDataProxy, controlsProxy:IGameControlsProxy, scoresProxy:IGameScoresProxy):void;
