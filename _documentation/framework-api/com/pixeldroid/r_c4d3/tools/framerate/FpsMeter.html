@@ -42,12 +42,31 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
- <code>FpsMeter</code> monitors frame rate. It graphs timed averages against a target rate.
+ Monitors frame rate. It graphs timed averages against a target rate.
  
- Usage: 
-   var fps:FpsMeter = addChild(new FpsMeter()) as FpsMeter;
-   fps.targetRate = 30;
- This class embeds a distributable font named "PixelHugger.ttf" Copyright pixelhugger.com.
+ <p></p>
+<br>
+<span class="label">Example</span>
+<br>The following code shows a simple fps meter instantiation; 
+ see the constructor documentation for more options:
+ <div class='listing'><pre>
+ package {
+    import com.pixeldroid.tools.framerate.FpsMeter;
+    import flash.display.Sprite;
+     public class MyFpsMeterExample extends Sprite {
+       public function MyFpsMeterExample() {
+          super();
+          var fps:FpsMeter = new FpsMeter();
+          addChild(fps);
+          fps.targetRate = 30;
+       }
+    }
+ }
+ </pre></div>
+  <p>
+ This class embeds a distributable font named "PixelHugger.ttf",
+ Copyright pixelhugger.com.
+ </p>
  
  <p></p>
 <p>
