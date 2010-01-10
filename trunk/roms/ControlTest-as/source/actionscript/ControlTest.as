@@ -25,6 +25,7 @@ package
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
 	import com.pixeldroid.r_c4d3.controls.JoyEventStateEnum;
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
+	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameRom;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
@@ -61,6 +62,12 @@ package
 
 
 		// IGameRom API
+
+		public function setConfigProxy(value:IGameConfigProxy):void
+		{
+			C.out(this, "setConfigProxy - no-op for controls demo");
+		}
+		
 		public function setControlsProxy(value:IGameControlsProxy):void
 		{
 			C.out(this, "setControlsProxy to " +value);

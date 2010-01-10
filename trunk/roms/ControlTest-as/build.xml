@@ -35,9 +35,9 @@ Tasks to build and package the AS3 Control Test rom.
 	
     <target name="compile" depends="clean" description="compile the Control Test rom">
     	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="${dir.source}/actionscript/ControlTest.as"/>
-			<arg line="-output=${dir.target}/rom.swf"/>
-			<arg line="-load-config+=${dir.config}/mxmlc-config.xml"/>
+			<arg line="'${dir.source}/actionscript/ControlTest.as'"/>
+			<arg line="-output='${dir.target}/rom.swf'"/>
+			<arg line="-load-config+='${dir.config}/mxmlc-config.xml'"/>
 		</exec>
 	</target>
 	
