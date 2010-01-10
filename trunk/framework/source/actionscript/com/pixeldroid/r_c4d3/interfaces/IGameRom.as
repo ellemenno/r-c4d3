@@ -2,6 +2,7 @@
 package com.pixeldroid.r_c4d3.interfaces
 {
 
+	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
 
@@ -16,19 +17,16 @@ package com.pixeldroid.r_c4d3.interfaces
 	</p>
 	
 	<p>
-	For example, the same IGameRom SWF can be loaded by 
-	a keyboard rom loader for play on a desktop pc,
-	a web rom loader for play in a web browser,
-	an R_C4D3 rom loader for play on an R_C4D3 system,
-	etc.
+	For example, the same IGameRom SWF can be loaded by a keyboard rom loader 
+	for play on a desktop pc, a web rom loader for play in a web browser,
+	an R_C4D3 rom loader for play on an R_C4D3 system, etc.
 	</p>
 	
 	<p>
-	The rom loader will call the <code>setControlsProxy()</code> and
-	<code>setScoresProxy()</code> methods to provide system-specific
-	implementations of IGameControlsProxy, and IGameScoresProxy to
-	the IGameRom. The IGameRom doesn't need to worry about how they work,
-	since it can rely on the interfaces to call the same methods every time.
+	The rom loader will call the <code>setControlsProxy()</code>, 
+	<code>setControlsProxy()</code> and <code>setScoresProxy()</code> methods 
+	to provide system-specific implementations of IGameControlsProxy, 
+	and IGameScoresProxy to the IGameRom.
 	</p>
 	
 	<p>Note: <i>
@@ -36,18 +34,20 @@ package com.pixeldroid.r_c4d3.interfaces
 	HaXe users must use the HaxeSideDoor class to declare IGameRom compliance.
 	</i></p>
 	
-	@see IGameControlsProxy
-	@see IGameScoresProxy
+	@see com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy
+	@see com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy
+	@see com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy
 	@see com.pixeldroid.r_c4d3.interfaces.HaxeSideDoor
 	*/
 	public interface IGameRom
 	{
+		
 		/**
-		Provide a reference to the preloaded config data for the GameRom to 
-		use for initialization.
-		@param value A ConfigDataProxy instance
+		Provide a reference to the preloaded configuration data for the 
+		GameRom to use during initialization.
+		@param value An implementation of IGameConfigProxy
 		*/
-		//TODO: function setConfigData(value:ConfigDataProxy):void;
+		function setConfigProxy(value:IGameConfigProxy):void;
 		
 		/**
 		Provide a reference to the controls proxy for the GameRom to 
