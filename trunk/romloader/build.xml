@@ -92,6 +92,7 @@ Tasks to build and package the r-c4d3 romloaders.
 	</target>
 	
 	<target name="release" description="copy zips to ${dir.releases}">
+		<copy file="${dir.target}/romloader-web.swf" todir="${dir.releases}"/>
 		<copy todir="${dir.releases}" failonerror="false">
 			<fileset dir="${dir.target}">
 				<include name="**/*.zip"/>
