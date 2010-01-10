@@ -6,6 +6,7 @@ package
 	import flash.display.StageDisplayState;
 	import flash.events.Event;
 	
+	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
 	import com.pixeldroid.r_c4d3.controls.KeyboardGameControlsProxy;
@@ -41,7 +42,7 @@ package
 			super();
 		}
 
-		override protected function createControlsProxy(d:ConfigDataProxy):IGameControlsProxy
+		override protected function createControlsProxy(d:IGameConfigProxy):IGameControlsProxy
 		{
 			var k:KeyboardGameControlsProxy = new KeyboardGameControlsProxy();
 			
@@ -53,7 +54,7 @@ package
 			return k;
 		}
 		
-		override protected function createScoresProxy(d:ConfigDataProxy):IGameScoresProxy
+		override protected function createScoresProxy(d:IGameConfigProxy):IGameScoresProxy
 		{
 			return new LocalGameScoresProxy(d.gameId);
 		}

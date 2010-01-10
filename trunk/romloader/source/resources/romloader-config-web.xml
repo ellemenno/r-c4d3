@@ -9,16 +9,16 @@
 	<!-- rom to load -->
 	<rom file="http://r-c4d3.googlecode.com/svn/trunk/romloader/source/resources/rom.swf" 
 	     id="test_romloader_web" />
-	
-	<!-- custom properties go here, e.g.
-		<properties>
-			<property name="myProperty">value of myProperty</property>
-		</properties>
-	-->
-	<properties />
 
 	<!-- not defining key mappings, using default values from romloader -->
 	<keymappings />
+	
+	<!-- custom properties go here, e.g.
+		<properties>
+			<property name="scoreServer">http://my.scoreserver.com</property>
+		</properties>
+	-->
+	<properties />
 
 
 </configuration>

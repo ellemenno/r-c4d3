@@ -2,6 +2,7 @@
 package 
 {
 
+	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
 	import com.pixeldroid.r_c4d3.controls.RC4D3GameControlsProxy;
@@ -18,6 +19,11 @@ package
 	Loads a valid IGameRom SWF and provides it access to 
 	an RC4D3 game controls proxy and a remote high scores proxy.
 
+	<p><i>
+	NOTE: The configuration data is expected to contain the high score 
+	server url under a property named 'scoreServer'.
+	</i></p>
+	
 	@see RomLoader
 	*/
 	public class RC4D3RomLoader extends RomLoader
@@ -36,18 +42,19 @@ package
 		}
 		
 		
-		override protected function createControlsProxy(configData:ConfigDataProxy):IGameControlsProxy
+		/** @inheritDoc */
+		override protected function createControlsProxy(configData:IGameConfigProxy):IGameControlsProxy
 		{
 			return new RC4D3GameControlsProxy();
 		}
 		
-		override protected function createScoresProxy(configData:ConfigDataProxy):IGameScoresProxy
+		/** @inheritDoc */
+		override protected function createScoresProxy(configData:IGameConfigProxy):IGameScoresProxy
 		{
-			// TODO: set score server url and game id from config
-			//return new RemoteGameScoresProxy(configData.gameId, server);
-			return null;
+			return new RemoteGameScoresProxy(configData.gameId, configData.getPropertyValue("scoreServer"));
 		}
 		
+		/** @inheritDoc */
 		override protected function createPreloader():IPreloader
 		{
 			return new LoadBarPreloader();

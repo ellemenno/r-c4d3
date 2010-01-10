@@ -8,6 +8,7 @@ package preloader
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
 	
+	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
 
@@ -83,7 +84,7 @@ package preloader
 		}
 		public function get progress():ProgressEvent { return progressEvent; }
 		
-		public function onConfigData(configData:ConfigDataProxy, controlsProxy:IGameControlsProxy, scoresProxy:IGameScoresProxy):void {}
+		public function onConfigData(configProxy:IGameConfigProxy, controlsProxy:IGameControlsProxy, scoresProxy:IGameScoresProxy):void {}
 
 	}
 	

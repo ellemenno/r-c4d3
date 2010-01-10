@@ -16,8 +16,9 @@ package
 	import com.pixeldroid.r_c4d3.interfaces.HaxeSideDoor;
 	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
 	import com.pixeldroid.r_c4d3.interfaces.IGameRom;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
 	
 	import ConfigDataProxy;
 	import preloader.IPreloader;
@@ -29,14 +30,16 @@ package
 	Base rom loader implementation.
 	
 	<p>
-	Loads a valid IGameRom SWF and provides access to an IGameControlsProxy
-	and an IGameScoresProxy. 
+	Loads a valid IGameRom SWF and provides access to an IGameConfigProxy, 
+	IGameControlsProxy, and an IGameScoresProxy. 
 	</p>
+	
+	<p>
 	Configuration values are defined in a companion xml file that must 
 	live in the same folder as the 	DesktopRomLoaderForKeyboard SWF and be
 	named <code>romloader-config.xml</code> (subclasses can override the 
-	configFile getter to e.g. get url from flashVars). See ConfigDataProxy for 
-	the xml format expected.
+	configFile getter to expect a different position or get the url from 
+	flashVars). See ConfigDataProxy for the xml format expected.
 	</p>
 	
 	<p>Note: <i>
@@ -44,6 +47,7 @@ package
 	HaXe users must use the HaxeSideDoor to declare IGameRom compliance.
 	</i></p>
 	
+	@see com.pixeldroid.interfaces.IGameConfigProxy
 	@see com.pixeldroid.interfaces.IGameControlsProxy
 	@see com.pixeldroid.interfaces.IGameScoresProxy
 	@see ConfigDataProxy
@@ -53,11 +57,12 @@ package
 	{
 		protected var romLoader:Loader;
 		protected var xmlLoader:URLLoader;
-		protected var configData:ConfigDataProxy;
+		
+		protected var configProxy:IGameConfigProxy;
 		protected var controlsProxy:IGameControlsProxy;
 		protected var highScoresProxy:IGameScoresProxy;
-		
 		protected var splashScreen:IPreloader;
+		
 		protected var swfBytesLoaded:int;
 		protected var swfBytesTotal:int;
 		protected var swfLoaded:Boolean;
@@ -139,17 +144,17 @@ package
 		{
 			xmlLoaded = true;
 			C.out(this, "onXmlComplete", true);
-			loadSwf();
+			configProxy = createConfigProxy(xmlLoader.data);
 			
-			configData = new ConfigDataProxy(xmlLoader.data);
-			
-			controlsProxy = createControlsProxy(configData);
+			controlsProxy = createControlsProxy(configProxy);
 			if (!controlsProxy) throw new Error("Couldn't load controls proxy."); // TODO: what a vague error!
 					
-			highScoresProxy = createScoresProxy(configData);
+			highScoresProxy = createScoresProxy(configProxy);
 			if (!highScoresProxy) throw new Error("Couldn't load scores proxy."); // TODO: what a vague error!
 
-			splashScreen.onConfigData(configData, controlsProxy, highScoresProxy);
+			splashScreen.onConfigData(configProxy, controlsProxy, highScoresProxy);
+			
+			loadSwf();
 		}
 
 		/*
@@ -226,7 +231,7 @@ package
 		/** @private */
 		protected function loadSwf():void
 		{
-			try { romLoader.load(new URLRequest(configData.romUrl)); }
+			try { romLoader.load(new URLRequest(configProxy.romUrl)); }
 			catch(e:Error) { C.out(this, "Error - rom could not be loaded: " +e); }
 		}
 
@@ -328,10 +333,21 @@ package
 		}
 		
 		/*
+			Provides the game configuration proxy instance.
+			Broken out for easy override.
+		*/
+		protected function createConfigProxy(configData:String):IGameConfigProxy
+		{
+			// can be overridden
+			// base implementation provides ConfigDataProxy.
+			return new ConfigDataProxy(xmlLoader.data);
+		}
+		
+		/*
 			Provides the game controls proxy instance.
 			Broken out for easy override.
 		*/
-		protected function createControlsProxy(configData:ConfigDataProxy):IGameControlsProxy
+		protected function createControlsProxy(configProxy:IGameConfigProxy):IGameControlsProxy
 		{
 			// to be overridden
 			// base implementation does nothing.
@@ -342,7 +358,7 @@ package
 			Provides the game scores proxy instance.
 			Broken out for easy override.
 		*/
-		protected function createScoresProxy(configData:ConfigDataProxy):IGameScoresProxy
+		protected function createScoresProxy(configProxy:IGameConfigProxy):IGameScoresProxy
 		{
 			// to be overridden
 			// base implementation does nothing.
@@ -368,8 +384,9 @@ package
 				var gameRom:IGameRom = extractGameRom(romLoader.content);
 				if (gameRom)
 				{
-					C.out(this, "finalizeLoad() - valid game rom found, sending over controls proxy and scores proxy")
+					C.out(this, "finalizeLoad() - valid game rom found, sending over config proxy, controls proxy and scores proxy")
 					
+					gameRom.setConfigProxy(configProxy);
 					gameRom.setControlsProxy(controlsProxy);
 					gameRom.setScoresProxy(highScoresProxy);
 					
