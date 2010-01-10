@@ -20,6 +20,11 @@ package com.pixeldroid.r_c4d3.scores
 	public class GameScoresProxy extends EventDispatcher implements IGameScoresProxy
 	{
 		
+		/** Least number of characters a valid id may contain */
+		public static const GAMEID_MIN:int = 4;
+		
+		/** Most number of characters a valid id may contain */
+		public static const GAMEID_MAX:int = 32;
 		
 		private var _gameId:String; // subclasses access via gameId getter
 		
@@ -36,7 +41,8 @@ package com.pixeldroid.r_c4d3.scores
 		/**
 		* Constructor.
 		* 
-		* @param id A unique identifier for this set of scores and initials
+		* @param id A unique identifier for this set of scores and initials.
+		* Must be at least GAMEID_MIN characters long, but no longer than GAMEID_MAX.
 		* @param maxScores The maximum number of entries to store (up to 100)
 		*/
 		public function GameScoresProxy(id:String, maxScores:int=10)
@@ -57,7 +63,10 @@ package com.pixeldroid.r_c4d3.scores
 		/** @inheritdoc */
 		public function openScoresTable(gameId:String):void
 		{
-			if (gameId.length > 0 && gameId.length <= 32 && isApprovedChars(gameId))
+			if (gameId.length >= GAMEID_MIN 
+				&& gameId.length <= GAMEID_MAX 
+				&& isApprovedChars(gameId)
+			)
 			{
 				_gameId = gameId;
 			}
@@ -196,8 +205,9 @@ package com.pixeldroid.r_c4d3.scores
 		/** @private */
 		protected function isApprovedChars(s:String):Boolean
 		{
-			// verify lack of non-word characters: [^a-zA-Z0-9_]
-			return (s.match(/\W/g).length == 0);
+			// verify lack of any characters not in approved list
+			var invalid:RegExp = /[^a-zA-Z0-9\._-]/;
+			return !invalid.test(s);
 		}
 		
 		/** @private */

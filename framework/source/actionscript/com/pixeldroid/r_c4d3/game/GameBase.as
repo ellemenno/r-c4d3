@@ -15,6 +15,7 @@ package com.pixeldroid.r_c4d3.game
 	
 	import com.pixeldroid.r_c4d3.controls.JoyEventStateEnum;
 	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
+	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameRom;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
@@ -49,6 +50,7 @@ package com.pixeldroid.r_c4d3.game
 	public class GameBase extends Sprite implements IGameRom, IDisposable
 	{
 		
+		protected var config:IGameConfigProxy;
 		protected var controls:IGameControlsProxy;
 		protected var scores:IGameScoresProxy;
 		protected var screens:IGameScreenFactory;
@@ -78,6 +80,16 @@ package com.pixeldroid.r_c4d3.game
 		
 		
 		// IGameRom interface
+		/** @inheritDoc */
+		public function setConfigProxy(value:IGameConfigProxy):void
+		{
+			C.out(this, "setConfigProxy to " +getQualifiedClassName(value));
+			if (!value) throw new Error("Error - expected IGameConfigProxy, got " +value);
+			
+			// store local ref to IGameConfigProxy
+			config = value;
+		}
+		
 		/** @inheritDoc */
 		public function setControlsProxy(value:IGameControlsProxy):void
 		{
