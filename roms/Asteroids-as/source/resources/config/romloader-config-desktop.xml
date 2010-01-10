@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configuration>
+
+
+	<!-- trace logging on when true -->
+	<logging enabled="true" />
+
+	<!-- rom to load -->
+	<rom file="./rom.swf" 
+	     id="r-c4d3.asteroids.desktop" />
+
+	<!-- not defining key mappings, using default values from romloader -->
+	<keymappings />
+	
+	<!-- custom properties go here, e.g.
+		<properties>
+			<property name="myProperty">value of myProperty</property>
+		</properties>
+	-->
+	<properties />
+
+
+</configuration>
