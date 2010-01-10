@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="print.css" type="text/css" media="print">
-<meta content="ConfigDataProxy,loggingEnabled,p1A,p1B,p1C,p1D,p1HasKeys,p1L,p1R,p1U,p1X,p2A,p2B,p2C,p2D,p2HasKeys,p2L,p2R,p2U,p2X,p3A,p3B,p3C,p3D,p3HasKeys,p3L,p3R,p3U,p3X,p4A,p4B,p4C,p4D,p4HasKeys,p4L,p4R,p4U,p4X,romUrl,xml,xmlString,getPropertyValue,toString" name="keywords">
+<meta content="ConfigDataProxy,_gameId,_loggingEnabled,_romUrl,_xmlString,xmlData,gameId,loggingEnabled,p1A,p1B,p1C,p1D,p1HasKeys,p1L,p1R,p1U,p1X,p2A,p2B,p2C,p2D,p2HasKeys,p2L,p2R,p2U,p2X,p3A,p3B,p3C,p3D,p3HasKeys,p3L,p3R,p3U,p3X,p4A,p4B,p4C,p4D,p4HasKeys,p4L,p4R,p4U,p4X,romUrl,xmlString,getPropertyValue,playerKeyMapping,toString" name="keywords">
 <title>ConfigDataProxy</title>
 </head>
 <body>
@@ -37,9 +37,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr>
 <td class="classHeaderTableLabel">Class</td><td class="classSignature">public class ConfigDataProxy</td>
 </tr>
+<tr>
+<td class="classHeaderTableLabel">Implements</td><td>com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy</td>
+</tr>
 </table>
 <p></p>
-  ConfigDataProxy is a simple data structure front end to the romloader xml configuration.
+  ConfigDataProxy is a simple data structure front end to the romloader 
+  xml configuration.
   
   <p></p>
 <br>
@@ -50,8 +54,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    &lt;!-- trace logging on when true --&gt;
    &lt;logging enabled="true" /&gt;
 
-   &lt;!-- rom to load --&gt;
-   &lt;rom file="../controls/ControlTestGameRom.swf" /&gt;
+   &lt;!-- rom to load, and its game id for scores storage --&gt;
+   &lt;rom file="../controls/ControlTestGameRom.swf" id="com_pixeldroid_controltest" /&gt;
 
    &lt;!-- key mappings, player numbers start at 1 --&gt;
    &lt;keymappings&gt;
@@ -66,6 +70,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
      &lt;buttonB  keyCode="34" /&gt;
     &lt;/joystick&gt;
    &lt;/keymappings&gt;
+   
+   &lt;!-- arbitrary property values --&gt;
+   &lt;property name="scoreServer"&gt;http://scores.foo.com&lt;/property&gt;
+   &lt;property name="foo"&gt;foo value&lt;/property&gt;
+   &lt;property name="bar"&gt;bar value&lt;/property&gt;
+   &lt;property name="bat"&gt;bat value&lt;/property&gt;
+
   &lt;/configuration&gt;
   </pre></div>
  <p></p>
@@ -80,165 +91,192 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#loggingEnabled">loggingEnabled</a> : Boolean<div class="summaryTableDescription">[read-only] Is trace logging requested? </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#gameId">gameId</a> : String<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1A">p1A</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 1 Button A (red) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#loggingEnabled">loggingEnabled</a> : Boolean<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1B">p1B</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 1 Button B (blue) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1A">p1A</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1C">p1C</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 1 Button C (green) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1B">p1B</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1D">p1D</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 1 Down </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1C">p1C</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1HasKeys">p1HasKeys</a> : Boolean<div class="summaryTableDescription">[read-only] Were key codes defined for player 1? </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1D">p1D</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1L">p1L</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 1 Left </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1HasKeys">p1HasKeys</a> : Boolean<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1R">p1R</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 1 Right </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1L">p1L</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1U">p1U</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 1 Up </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1R">p1R</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1X">p1X</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 1 Button X (yellow) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1U">p1U</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2A">p2A</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 2 Button A (red) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p1X">p1X</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2B">p2B</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 2 Button B (blue) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2A">p2A</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2C">p2C</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 2 Button C (green) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2B">p2B</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2D">p2D</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 2 Down </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2C">p2C</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2HasKeys">p2HasKeys</a> : Boolean<div class="summaryTableDescription">[read-only] Were key codes defined for player 2? </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2D">p2D</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2L">p2L</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 2 Left </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2HasKeys">p2HasKeys</a> : Boolean<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2R">p2R</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 2 Right </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2L">p2L</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2U">p2U</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 2 Up </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2R">p2R</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2X">p2X</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 2 Button X (yellow) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2U">p2U</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3A">p3A</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 3 Button A (red) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p2X">p2X</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3B">p3B</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 3 Button B (blue) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3A">p3A</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3C">p3C</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 3 Button C (green) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3B">p3B</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3D">p3D</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 3 Down </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3C">p3C</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3HasKeys">p3HasKeys</a> : Boolean<div class="summaryTableDescription">[read-only] Were key codes defined for player 3? </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3D">p3D</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3L">p3L</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 3 Left </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3HasKeys">p3HasKeys</a> : Boolean<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3R">p3R</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 3 Right </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3L">p3L</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3U">p3U</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 3 Up </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3R">p3R</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3X">p3X</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 3 Button X (yellow) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3U">p3U</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4A">p4A</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 4 Button A (red) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p3X">p3X</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4B">p4B</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 4 Button B (blue) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4A">p4A</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4C">p4C</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 4 Button C (green) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4B">p4B</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4D">p4D</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 4 Down </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4C">p4C</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4HasKeys">p4HasKeys</a> : Boolean<div class="summaryTableDescription">[read-only] Were key codes defined for player 4? </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4D">p4D</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4L">p4L</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 4 Left </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4HasKeys">p4HasKeys</a> : Boolean<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4R">p4R</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 4 Right </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4L">p4L</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4U">p4U</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 4 Up </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4R">p4R</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4X">p4X</a> : uint<div class="summaryTableDescription">[read-only] Key code for player 4 Button X (yellow) </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4U">p4U</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#romUrl">romUrl</a> : String<div class="summaryTableDescription">[read-only] IGameRom swf to load </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#p4X">p4X</a> : uint<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#xml">xml</a> : XML<div class="summaryTableDescription">[read-only]
-   Xml string as XML
-  </div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#romUrl">romUrl</a> : String<div class="summaryTableDescription">[read-only] </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#xmlString">xmlString</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_gameId">_gameId</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_loggingEnabled">_loggingEnabled</a> : Boolean<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_romUrl">_romUrl</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#xmlData">xmlData</a> : XML<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_xmlString">_xmlString</a> : String<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 </table>
@@ -263,9 +301,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#getPropertyValue()">getPropertyValue</a>(propertyName:String):String</div>
-<div class="summaryTableDescription"> 
-   Arbitrary property request 
-   </div>
+<div class="summaryTableDescription"> </div>
 </td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
 </tr>
 <tr class="">
@@ -279,6 +315,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 </div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#playerKeyMapping()">playerKeyMapping</a>(i:int):XMLList</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">ConfigDataProxy</td>
+</tr>
+</table>
+</div>
 <script type="text/javascript" language="javascript">
 <!--
 showHideInherited();
@@ -286,14 +338,44 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
-<a name="loggingEnabled"></a>
+<a name="_gameId"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">loggingEnabled</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">_gameId</td><td class="detailHeaderType">property</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>loggingEnabled:Boolean</code>&nbsp;&nbsp;[read-only]<p> Is trace logging requested? </p><span class="label">Implementation</span>
+<code>protected var _gameId:String</code>
+</div>
+<a name="gameId"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">gameId</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>gameId:String</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get gameId():String</code>
+<br>
+</div>
+<a name="_loggingEnabled"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_loggingEnabled</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _loggingEnabled:Boolean</code>
+</div>
+<a name="loggingEnabled"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">loggingEnabled</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>loggingEnabled:Boolean</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get loggingEnabled():Boolean</code>
 <br>
@@ -305,7 +387,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p1A:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 1 Button A (red) </p><span class="label">Implementation</span>
+<code>p1A:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p1A():uint</code>
 <br>
@@ -317,7 +399,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p1B:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 1 Button B (blue) </p><span class="label">Implementation</span>
+<code>p1B:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p1B():uint</code>
 <br>
@@ -329,7 +411,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p1C:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 1 Button C (green) </p><span class="label">Implementation</span>
+<code>p1C:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p1C():uint</code>
 <br>
@@ -341,7 +423,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p1D:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 1 Down </p><span class="label">Implementation</span>
+<code>p1D:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p1D():uint</code>
 <br>
@@ -353,7 +435,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p1HasKeys:Boolean</code>&nbsp;&nbsp;[read-only]<p> Were key codes defined for player 1? </p><span class="label">Implementation</span>
+<code>p1HasKeys:Boolean</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p1HasKeys():Boolean</code>
 <br>
@@ -365,7 +447,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p1L:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 1 Left </p><span class="label">Implementation</span>
+<code>p1L:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p1L():uint</code>
 <br>
@@ -377,7 +459,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p1R:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 1 Right </p><span class="label">Implementation</span>
+<code>p1R:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p1R():uint</code>
 <br>
@@ -389,7 +471,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p1U:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 1 Up </p><span class="label">Implementation</span>
+<code>p1U:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p1U():uint</code>
 <br>
@@ -401,7 +483,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p1X:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 1 Button X (yellow) </p><span class="label">Implementation</span>
+<code>p1X:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p1X():uint</code>
 <br>
@@ -413,7 +495,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p2A:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 2 Button A (red) </p><span class="label">Implementation</span>
+<code>p2A:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p2A():uint</code>
 <br>
@@ -425,7 +507,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p2B:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 2 Button B (blue) </p><span class="label">Implementation</span>
+<code>p2B:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p2B():uint</code>
 <br>
@@ -437,7 +519,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p2C:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 2 Button C (green) </p><span class="label">Implementation</span>
+<code>p2C:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p2C():uint</code>
 <br>
@@ -449,7 +531,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p2D:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 2 Down </p><span class="label">Implementation</span>
+<code>p2D:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p2D():uint</code>
 <br>
@@ -461,7 +543,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p2HasKeys:Boolean</code>&nbsp;&nbsp;[read-only]<p> Were key codes defined for player 2? </p><span class="label">Implementation</span>
+<code>p2HasKeys:Boolean</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p2HasKeys():Boolean</code>
 <br>
@@ -473,7 +555,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p2L:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 2 Left </p><span class="label">Implementation</span>
+<code>p2L:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p2L():uint</code>
 <br>
@@ -485,7 +567,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p2R:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 2 Right </p><span class="label">Implementation</span>
+<code>p2R:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p2R():uint</code>
 <br>
@@ -497,7 +579,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p2U:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 2 Up </p><span class="label">Implementation</span>
+<code>p2U:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p2U():uint</code>
 <br>
@@ -509,7 +591,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p2X:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 2 Button X (yellow) </p><span class="label">Implementation</span>
+<code>p2X:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p2X():uint</code>
 <br>
@@ -521,7 +603,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p3A:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 3 Button A (red) </p><span class="label">Implementation</span>
+<code>p3A:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p3A():uint</code>
 <br>
@@ -533,7 +615,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p3B:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 3 Button B (blue) </p><span class="label">Implementation</span>
+<code>p3B:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p3B():uint</code>
 <br>
@@ -545,7 +627,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p3C:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 3 Button C (green) </p><span class="label">Implementation</span>
+<code>p3C:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p3C():uint</code>
 <br>
@@ -557,7 +639,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p3D:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 3 Down </p><span class="label">Implementation</span>
+<code>p3D:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p3D():uint</code>
 <br>
@@ -569,7 +651,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p3HasKeys:Boolean</code>&nbsp;&nbsp;[read-only]<p> Were key codes defined for player 3? </p><span class="label">Implementation</span>
+<code>p3HasKeys:Boolean</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p3HasKeys():Boolean</code>
 <br>
@@ -581,7 +663,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p3L:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 3 Left </p><span class="label">Implementation</span>
+<code>p3L:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p3L():uint</code>
 <br>
@@ -593,7 +675,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p3R:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 3 Right </p><span class="label">Implementation</span>
+<code>p3R:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p3R():uint</code>
 <br>
@@ -605,7 +687,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p3U:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 3 Up </p><span class="label">Implementation</span>
+<code>p3U:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p3U():uint</code>
 <br>
@@ -617,7 +699,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p3X:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 3 Button X (yellow) </p><span class="label">Implementation</span>
+<code>p3X:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p3X():uint</code>
 <br>
@@ -629,7 +711,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p4A:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 4 Button A (red) </p><span class="label">Implementation</span>
+<code>p4A:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p4A():uint</code>
 <br>
@@ -641,7 +723,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p4B:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 4 Button B (blue) </p><span class="label">Implementation</span>
+<code>p4B:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p4B():uint</code>
 <br>
@@ -653,7 +735,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p4C:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 4 Button C (green) </p><span class="label">Implementation</span>
+<code>p4C:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p4C():uint</code>
 <br>
@@ -665,7 +747,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p4D:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 4 Down </p><span class="label">Implementation</span>
+<code>p4D:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p4D():uint</code>
 <br>
@@ -677,7 +759,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p4HasKeys:Boolean</code>&nbsp;&nbsp;[read-only]<p> Were key codes defined for player 4? </p><span class="label">Implementation</span>
+<code>p4HasKeys:Boolean</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p4HasKeys():Boolean</code>
 <br>
@@ -689,7 +771,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p4L:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 4 Left </p><span class="label">Implementation</span>
+<code>p4L:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p4L():uint</code>
 <br>
@@ -701,7 +783,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p4R:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 4 Right </p><span class="label">Implementation</span>
+<code>p4R:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p4R():uint</code>
 <br>
@@ -713,7 +795,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p4U:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 4 Up </p><span class="label">Implementation</span>
+<code>p4U:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p4U():uint</code>
 <br>
@@ -725,10 +807,19 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>p4X:uint</code>&nbsp;&nbsp;[read-only]<p> Key code for player 4 Button X (yellow) </p><span class="label">Implementation</span>
+<code>p4X:uint</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get p4X():uint</code>
 <br>
+</div>
+<a name="_romUrl"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_romUrl</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _romUrl:String</code>
 </div>
 <a name="romUrl"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -737,24 +828,28 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>romUrl:String</code>&nbsp;&nbsp;[read-only]<p> IGameRom swf to load </p><span class="label">Implementation</span>
+<code>romUrl:String</code>&nbsp;&nbsp;[read-only]<p> </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get romUrl():String</code>
 <br>
 </div>
-<a name="xml"></a>
+<a name="xmlData"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">xml</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">xmlData</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>xml:XML</code>&nbsp;&nbsp;[read-only]<p>
-   Xml string as XML
-  </p><span class="label">Implementation</span>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get xml():XML</code>
-<br>
+<code>protected var xmlData:XML</code>
+</div>
+<a name="_xmlString"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_xmlString</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _xmlString:String</code>
 </div>
 <a name="xmlString"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -797,13 +892,10 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getPropertyValue(propertyName:String):String</code><p> 
-   Arbitrary property request 
-   </p><span class="label">Parameters</span>
+<code>public function getPropertyValue(propertyName:String):String</code><p> </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">propertyName</span>:String</code> &mdash; - name attribute value of property node to retrieve
-  </td>
+<td width="20px"></td><td><code><span class="label">propertyName</span>:String</code></td>
 </tr>
 </table>
 <p></p>
@@ -811,6 +903,27 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code>String</code></td>
+</tr>
+</table>
+</div>
+<a name="playerKeyMapping()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">playerKeyMapping</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function playerKeyMapping(i:int):XMLList</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">i</span>:int</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>XMLList</code></td>
 </tr>
 </table>
 </div>
@@ -836,8 +949,8 @@ showHideInherited();
 <hr>
 <br>
 <p></p>
-<center class="copyright">Copyleft 2009 Pixeldroid</center>
+<center class="copyright">Copyleft 2010 Pixeldroid</center>
 </div>
 </body>
 </html>
-<!--Copyleft 2009 Pixeldroid-->
+<!--Copyleft 2010 Pixeldroid-->
