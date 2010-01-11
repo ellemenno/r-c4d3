@@ -15,7 +15,7 @@
 	
 	<!-- custom properties go here, e.g.
 		<properties>
-			<property name="myProperty">value of myProperty</property>
+			<property name="fullScreen">false</property>
 		</properties>
 	-->
 	<properties />

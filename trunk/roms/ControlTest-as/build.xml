@@ -47,21 +47,25 @@ Tasks to build and package the AS3 Control Test rom.
     <target name="package-desktop" description="collect the desktop version of Control Test and its dependencies into a zip file">
 		<mkdir dir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop"/>
-		<copy file="${dir.source}/resources/config/romloader-config.xml" todir="${dir.target}/temp-desktop"/>
-		<copy file="${romloader.projector}" tofile="${dir.target}/temp-desktop/ControlTest${exe}"/>
+		<copy file="${dir.source}/resources/config/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop/romloader-config.xml"/>
+		<unzip src="${dir.releases}/romloader-desktop.zip" dest="${dir.target}/temp-desktop">
+			<patternset includes="${romloader.projector.name}"/>
+			<mapper type="glob" from="${romloader.projector.name}" to="ControlTest${exe}"/>
+		</unzip>
 		<zip destfile="${dir.target}/ControlTest-desktop.zip" basedir="${dir.target}/temp-desktop"/>
 	</target>
 	
     <target name="package-web" description="collect the web-based version of Control Test and its dependencies into a zip file">
 		<mkdir dir="${dir.target}/temp-web"/>
 		<copy todir="${dir.target}/temp-web">
-			<fileset dir="${dir.source}/resources/web">
-				<include name="**/*"/>
-			</fileset>
+			<fileset includes="**/*" dir="${dir.source}/resources/web"/>
 		</copy>
 		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-web"/>
-		<copy file="${dir.source}/resources/config/romloader-config.xml" todir="${dir.target}/temp-web"/>
-		<copy file="${dir.releases}/romloader-web.swf" tofile="${dir.target}/temp-web/romloader.swf"/>
+		<copy file="${dir.source}/resources/config/romloader-config-web.xml" tofile="${dir.target}/temp-web/romloader-config.xml"/>
+		<unzip src="${dir.releases}/romloader-web.zip" dest="${dir.target}/temp-web">
+			<patternset includes="romloader-web.swf"/>
+			<mapper type="glob" from="romloader-web.swf" to="romloader.swf"/>
+		</unzip>
 		<zip destfile="${dir.target}/ControlTest-web.zip" basedir="${dir.target}/temp-web"/>
 	</target>
 	

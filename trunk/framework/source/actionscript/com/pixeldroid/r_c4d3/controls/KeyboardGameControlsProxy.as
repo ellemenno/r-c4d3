@@ -61,7 +61,7 @@ package com.pixeldroid.r_c4d3.controls
 		protected var gameStage:Stage;
 		protected var _joystickEventState:String;
 		
-		protected var P1_R:uint = 49; //1  // TODO: set defaults to 9-square clusters (e.g. DWASQZXC)
+		protected var P1_R:uint = 49; //1
 		protected var P1_U:uint = 50; //2
 		protected var P1_L:uint = 51; //3
 		protected var P1_D:uint = 52; //4

@@ -45,8 +45,8 @@
 		<publisher>pixeldroid.com</publisher>
 	</metadata>
 	
-	<!-- target-player: specifies the version of the player the application is targeting. Features requiring a later version will not be compiled into the application. The minimum value supported is "9.0.0".-->
-	<target-player>9.0.124</target-player>
+	<!-- target-player: specifies the version of the player the application is targeting. Features requiring a later version will not be compiled into the application. The minimum value supported is "9.0.0".
+	<target-player>9.0.124</target-player>-->
 	
 	<!-- use-network: toggle whether the SWF is flagged for access to network resources-->
 	<use-network>true</use-network>

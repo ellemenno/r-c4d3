@@ -293,7 +293,7 @@ package
 			// base implementation does nothing.
 		}
 
-		/*
+		/**
 			Triggered when an IOError occurs.
 
 			Writes the IOErrorEvent.toString() to the tracelog.
@@ -304,7 +304,7 @@ package
 			closePreloader();
 		}
 
-		/*
+		/**
 			Triggered when an SecurityError occurs.
 
 			Writes the SecurityErrorEvent.toString() to the tracelog.
@@ -315,7 +315,7 @@ package
 			closePreloader();
 		}
 		
-		/*
+		/**
 			Retrieves the url of the rom loader config file.
 		*/
 		protected function get configUrl():String
@@ -323,7 +323,7 @@ package
 			return "romloader-config.xml";
 		}
 		
-		/*
+		/**
 			Provides the IPreloader instance to display during load.
 			Broken out for easy override.
 		*/
@@ -332,18 +332,22 @@ package
 			return new NullPreloader();
 		}
 		
-		/*
+		/**
 			Provides the game configuration proxy instance.
 			Broken out for easy override.
+			
+			<p>
+			This base implementation provides a ConfigDataProxy instance.
+			</p>
+			
+			@see ConfigDataProxy
 		*/
 		protected function createConfigProxy(configData:String):IGameConfigProxy
 		{
-			// can be overridden
-			// base implementation provides ConfigDataProxy.
 			return new ConfigDataProxy(xmlLoader.data);
 		}
 		
-		/*
+		/**
 			Provides the game controls proxy instance.
 			Broken out for easy override.
 		*/
@@ -354,7 +358,7 @@ package
 			return null;
 		}
 
-		/*
+		/**
 			Provides the game scores proxy instance.
 			Broken out for easy override.
 		*/
@@ -367,9 +371,6 @@ package
 		
 
 		
-		/*
-			Triggered by onPreloaderClosed.
-		*/
 		/** @private */
 		protected function finalizeLoad():void
 		{
