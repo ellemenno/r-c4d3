@@ -14,7 +14,8 @@ package com.pixeldroid.r_c4d3.scores
 	*
 	* <ul>
 	* <li>Scores are kept in descending order (highest first)</li>
-	* <li>Ties are allowed (same score, different initials), duplicates are not</li>
+	* <li>Ties are allowed (same score, different initials), 
+	*     duplicates are not (first in wins)</li>
 	* </ul>
 	*/
 	public class GameScoresProxy extends EventDispatcher implements IGameScoresProxy
@@ -81,7 +82,7 @@ package com.pixeldroid.r_c4d3.scores
 		* Read the scores and initials from the storage medium.
 		* <strong>To be overridden by subclasses</strong>
 		*/
-		public function load():void { /* sub-classes should override this method */ }
+		public function load():void { clear(); /* sub-classes should override this method */ }
 		
 		/**
 		* Write the scores and initials to the storage medium.
@@ -178,18 +179,13 @@ package com.pixeldroid.r_c4d3.scores
 		
 		/** @inheritdoc */
 		override public function toString():String {
-		
-			var hr:String = "- - - - - - - - - - - - - - - -\n";
-			var s:String = hr;
-			s += " High Scores (game id = '" +_gameId +"', max " +MAX_SCORES +")\n";
-			
+			var s:String = "";
 			var n:int = scores.length;
 			var p:String;
 			for (var i:int = 0; i < n; i++) {
 				p = pad((i+1).toString(), 5, " ");
-				s += p +". " +initials[i] +" : " +scores[i] +"\n";
+				s += p +". " +initials[i] +" : " +pad(chunk(scores[i].toString(), 3, ","), 12, " ") +"\n";
 			}
-			s += hr;
 			
 			return s;
 		}
@@ -198,8 +194,7 @@ package com.pixeldroid.r_c4d3.scores
 		
 		/** @private */
 		protected function initialize():void {
-			scores = [];
-			initials = [];
+			load(); // TODO: handle possibility of collision when scores are added to remote proxy while load is still happening
 		}
 		
 		/** @private */
@@ -215,6 +210,21 @@ package com.pixeldroid.r_c4d3.scores
 		{
 			while (s.length < x) { s = c + s; }
 			return s;
+		}
+		
+		/** @private */
+		protected function chunk(s:String, x:Number, c:String):String 
+		{
+			var ss:String = "";
+			var i:int = 0;
+			var n:int = s.length;
+			while (i < n) 
+			{ 
+				ss = s.charAt(n-1 - i) +ss;
+				i++;
+				if (i % x == 0 && i < n) ss = c +ss;
+			}
+			return ss;
 		}
 		
 		/** @private */

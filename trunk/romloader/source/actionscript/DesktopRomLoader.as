@@ -21,7 +21,7 @@ package
 	
 	/**
 	Loads a valid IGameRom SWF and provides it access to 
-	a keyboard game controls proxy and a remote high scores proxy.
+	a keyboard game controls proxy and a local high scores proxy.
 
 	<p><i>
 	NOTE: The configuration data can suppress the default full-screen behavior 
@@ -30,7 +30,7 @@ package
 
 	@see RomLoader
 	@see com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy
-	@see com.pixeldroid.r_c4d3.scores.LocalHighScores
+	@see com.pixeldroid.r_c4d3.scores.LocalGameScoresProxy
 	*/
 	public class DesktopRomLoader extends RomLoader
 	{

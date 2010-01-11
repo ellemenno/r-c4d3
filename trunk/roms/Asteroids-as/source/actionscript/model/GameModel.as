@@ -8,6 +8,7 @@ package model
 	import com.pixeldroid.r_c4d3.game.control.Signals;
 	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
 	import com.pixeldroid.r_c4d3.interfaces.IUpdatable;
+	import com.pixeldroid.r_c4d3.scores.ScoreEntry;
 	
 	import control.AsteroidsSignals;
 	import model.GlobalModel;
@@ -36,11 +37,11 @@ package model
 		// IDisposable interface
 		public function shutDown():Boolean
 		{
-			C.out(this, "shutDown()");
-			
 			var scores:Array = [];
-			for each (var p:PlayerModel in players) scores.push(p.score);
+			for each (var p:PlayerModel in players) scores.push(new ScoreEntry(p.score, p.initials));
+			C.out(this, "shutDown() - sending scores to proxy: " +scores);
 			Notifier.send(Signals.SCORES_SUBMIT, scores);
+			// acceptance values now updated
 			
 			players = null;
 			
@@ -60,7 +61,7 @@ package model
 			
 			for (var i:int = 0; i < numPlayers; i++)
 			{
-				p = new PlayerModel();
+				p = new PlayerModel(GlobalModel.playerNames[i]);
 				p.worldEdge = worldEdge;
 				p.position = startPoints[i] as Point;
 				p.active = GlobalModel.activePlayers[i];

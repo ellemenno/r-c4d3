@@ -87,6 +87,8 @@ package com.pixeldroid.r_c4d3.game.control
 		{
 			C.out(this, "onScoresLoaded() - " +e);
 			C.out(this, scoresProxy.toString())
+			
+			Notifier.send(Signals.SCORES_READY, scoresProxy);
 		}
 		
 		protected function onScoresSaved(e:Event):void
@@ -108,23 +110,11 @@ package com.pixeldroid.r_c4d3.game.control
 			scoresProxy.load();
 		}
 		
-		protected function submitScores(scores:Array):void
+		protected function submitScores(entries:Array/*ScoreEntry*/):void
 		{
-			C.out(this, "submitScores() - received " +scores);
-			// TODO: formalize data structure
-			/*
-			TODO:
-			var playerScores:Array = [
-				{ score:1, initials:"a" },
-			];
-			var n:int = playerScores.length;
-			for (var j:int = 0; j < n; j++)
-			{
-				if (scoresProxy.insert(playerScores[j].score, playerScores[j].initials)) C.out(this, "player " +playerScores[j].initials +" made the score table");
-			}
-			
-			TODO: Notifier.send(Signals.SCORES_READY)
-			*/
+			C.out(this, "submitScores() - received " +entries);
+			scoresProxy.insertEntries(entries); // acceptance values modified in place
+			scoresProxy.store();
 		}
 	}
 }

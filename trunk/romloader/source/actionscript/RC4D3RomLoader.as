@@ -23,8 +23,10 @@ package
 	NOTE: The configuration data is expected to contain the high score 
 	server url under a property named 'scoreServer'.
 	</i></p>
-	
+
 	@see RomLoader
+	@see com.pixeldroid.r_c4d3.proxies.RC4D3GameControlsProxy
+	@see com.pixeldroid.r_c4d3.scores.RemoteGameScoresProxy
 	*/
 	public class RC4D3RomLoader extends RomLoader
 	{

@@ -67,7 +67,7 @@ package view.screen.attractloop
 			gameView.onUpdateRequest(dt);
 			
 			// TODO: proper end game conditions
-			//if (timeElapsed > 15*1000) gameOver();
+			if (timeElapsed > 10*1000) gameOver();
 		}
 		
 		override public function onHatMotion(e:JoyHatEvent):void

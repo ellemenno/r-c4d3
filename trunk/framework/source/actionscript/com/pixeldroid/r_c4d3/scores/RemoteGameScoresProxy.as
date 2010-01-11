@@ -133,11 +133,11 @@ package com.pixeldroid.r_c4d3.scores {
 		
 		
 		override protected function initialize():void {
-			super.initialize();
-	
 			JL = new JsonLoader();
 			JL.addEventListener(DataEvent.READY, onJsonData);
 			JL.addEventListener(DataEvent.ERROR, onJsonError);
+			
+			super.initialize();
 		}
 		
 		
