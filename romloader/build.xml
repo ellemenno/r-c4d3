@@ -35,8 +35,8 @@ Tasks to build and package the r-c4d3 romloaders.
 		</delete>
 	</target>
 	
-    <target name="compile" depends="compile-desktop, compile-web" 
-		description="compile-desktop, compile-web"/>
+    <target name="compile" depends="compile-desktop, compile-web, compile-rc4d3" 
+		description="compile-desktop, compile-web, compile-rc4d3"/>
 	
     <target name="compile-desktop" depends="clean" description="compile the desktop romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
@@ -48,8 +48,16 @@ Tasks to build and package the r-c4d3 romloaders.
 	
     <target name="compile-web" depends="clean" description="compile the web-based romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="'${dir.source}/actionscript/RC4D3RomLoader.as'"/>
+			<arg line="'${dir.source}/actionscript/WebRomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-web.swf'"/>
+			<arg line="-load-config+='${dir.config}/mxmlc-config_web.xml'"/>
+		</exec>
+	</target>
+	
+    <target name="compile-rc4d3" depends="clean" description="compile the web-based r-c4d3 romloader">
+    	<exec executable="${flex.mxmlc}" failonerror="true">
+			<arg line="'${dir.source}/actionscript/RC4D3RomLoader.as'"/>
+			<arg line="-output='${dir.target}/romloader-rc4d3.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_web.xml'"/>
 		</exec>
 	</target>
@@ -72,27 +80,44 @@ Tasks to build and package the r-c4d3 romloaders.
 		</copy>
 	</target>
 	
-    <target name="package" depends="package-desktop, package-web" 
-		description="package-desktop, package-web"/>
+    <target name="package" depends="package-desktop, package-web, package-rc4d3" 
+		description="package-desktop, package-web, package-rc4d3"/>
 	
     <target name="package-desktop" description="collect the desktop romloader and dependencies into a zip file">
 		<mkdir dir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.source}/resources/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop/romloader-config.xml"/>
 		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.target}/romloader-desktop.swf" todir="${dir.target}/temp-desktop"/>
+		<input>
+In ${dir.target}/temp-desktop,
+please create ${romloader.projector.name} projector from romloader-desktop.swf.
+
+Press Enter when ready...
+		</input>
 		<zip destfile="${dir.target}/romloader-desktop.zip" basedir="${dir.target}/temp-desktop"/>
 	</target>
 	
     <target name="package-web" description="collect the web-based romloader and dependencies into a zip file">
 		<mkdir dir="${dir.target}/temp-web"/>
 		<copy file="${dir.source}/resources/romloader-config-web.xml" tofile="${dir.target}/temp-web/romloader-config.xml"/>
+		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-web"/>
 		<copy file="${dir.source}/resources/index-web.html" todir="${dir.target}/temp-web"/>
 		<copy file="${dir.target}/romloader-web.swf" todir="${dir.target}/temp-web"/>
 		<zip destfile="${dir.target}/romloader-web.zip" basedir="${dir.target}/temp-web"/>
 	</target>
 	
+    <target name="package-rc4d3" description="collect the web-based r-c4d3 romloader and dependencies into a zip file">
+		<mkdir dir="${dir.target}/temp-rc4d3"/>
+		<copy file="${dir.source}/resources/romloader-config-web.xml" tofile="${dir.target}/temp-rc4d3/romloader-config.xml"/>
+		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-rc4d3"/>
+		<copy file="${dir.source}/resources/index-rc4d3.html" todir="${dir.target}/temp-rc4d3"/>
+		<copy file="${dir.target}/romloader-rc4d3.swf" todir="${dir.target}/temp-rc4d3"/>
+		<zip destfile="${dir.target}/romloader-rc4d3.zip" basedir="${dir.target}/temp-rc4d3"/>
+	</target>
+	
 	<target name="release" description="copy zips to ${dir.releases}">
-		<copy file="${dir.target}/romloader-web.swf" todir="${dir.releases}"/>
+		<!--copy file="${dir.target}/romloader-web.swf" todir="${dir.releases}"/>
+		<copy file="${dir.target}/romloader-rc4d3.swf" todir="${dir.releases}"/-->
 		<copy todir="${dir.releases}" failonerror="false">
 			<fileset dir="${dir.target}">
 				<include name="**/*.zip"/>

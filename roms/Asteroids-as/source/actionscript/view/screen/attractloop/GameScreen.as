@@ -35,6 +35,8 @@ package view.screen.attractloop
 		{
 			if (!super.initialize()) return false;
 			
+			backgroundColor = 0x000000;
+			
 			gameModel = new GameModel(stage.stageWidth, stage.stageHeight, GlobalModel.activePlayers.length);
 			gameModel.initialize();
 			

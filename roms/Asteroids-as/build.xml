@@ -47,21 +47,25 @@ Tasks to build and package the AS3 Asteroids game rom.
 		<mkdir dir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.source}/resources/config/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop/romloader-config.xml"/>
-		<copy file="${romloader.projector}" tofile="${dir.target}/temp-desktop/Asteroids${exe}"/>
+		<unzip src="${dir.releases}/romloader-desktop.zip" dest="${dir.target}/temp-desktop">
+			<patternset includes="${romloader.projector.name}"/>
+			<mapper type="glob" from="${romloader.projector.name}" to="Asteroids${exe}"/>
+		</unzip>
 		<zip destfile="${dir.target}/Asteroids-desktop.zip" basedir="${dir.target}/temp-desktop"/>
 	</target>
 	
     <target name="package-web" description="collect the web-based version and its dependencies into a zip file">
-		<!--mkdir dir="${dir.target}/temp-web"/>
+		<mkdir dir="${dir.target}/temp-web"/>
 		<copy todir="${dir.target}/temp-web">
-			<fileset dir="${dir.source}/resources/web">
-				<include name="**/*"/>
-			</fileset>
+			<fileset includes="**/*" dir="${dir.source}/resources/web"/>
 		</copy>
 		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-web"/>
-		<copy file="${dir.source}/resources/config/romloader-config-web.xml" tofile="${dir.target}/temp-desktop/romloader-config.xml"/>
-		<copy file="${dir.releases}/romloader-web.swf" tofile="${dir.target}/temp-web/romloader.swf"/>
-		<zip destfile="${dir.target}/ControlTest-web.zip" basedir="${dir.target}/temp-web"/-->
+		<copy file="${dir.source}/resources/config/romloader-config-web.xml" tofile="${dir.target}/temp-web/romloader-config.xml"/>
+		<unzip src="${dir.releases}/romloader-web.zip" dest="${dir.target}/temp-web">
+			<patternset includes="romloader-web.swf"/>
+			<mapper type="glob" from="romloader-web.swf" to="romloader.swf"/>
+		</unzip>
+		<zip destfile="${dir.target}/Asteroids-web.zip" basedir="${dir.target}/temp-web"/>
 	</target>
 	
 	<target name="release" description="copy zips to ${dir.releases}/roms">

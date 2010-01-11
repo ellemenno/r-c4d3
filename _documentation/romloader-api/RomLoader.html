@@ -41,7 +41,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">RomLoader <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="images/inherit-arrow.gif"> flash.display.Sprite</td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Subclasses</td><td><a href="DesktopRomLoader.html">DesktopRomLoader</a>, <a href="RC4D3RomLoader.html">RC4D3RomLoader</a></td>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="DesktopRomLoader.html">DesktopRomLoader</a>, <a href="RC4D3RomLoader.html">RC4D3RomLoader</a>, <a href="WebRomLoader.html">WebRomLoader</a></td>
 </tr>
 </table>
 <p></p>
@@ -87,7 +87,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">RomLoader</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#configUrl">configUrl</a> : String<div class="summaryTableDescription">[read-only]</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#configUrl">configUrl</a> : String<div class="summaryTableDescription">[read-only]
+   Retrieves the url of the rom loader config file.</div>
 </td><td class="summaryTableOwnerCol">RomLoader</td>
 </tr>
 <tr class="">
@@ -177,14 +178,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#createConfigProxy()">createConfigProxy</a>(configData:String):IGameConfigProxy</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Provides the game configuration proxy instance.</div>
 </td><td class="summaryTableOwnerCol">RomLoader</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#createControlsProxy()">createControlsProxy</a>(configProxy:IGameConfigProxy):IGameControlsProxy</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Provides the game controls proxy instance.</div>
 </td><td class="summaryTableOwnerCol">RomLoader</td>
 </tr>
 <tr class="">
@@ -192,28 +195,32 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#createPreloader()">createPreloader</a>():<a href="preloader/preloader/IPreloader.html">IPreloader</a>
 </div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Provides the IPreloader instance to display during load.</div>
 </td><td class="summaryTableOwnerCol">RomLoader</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#createScoresProxy()">createScoresProxy</a>(configProxy:IGameConfigProxy):IGameScoresProxy</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Provides the game scores proxy instance.</div>
 </td><td class="summaryTableOwnerCol">RomLoader</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#onIoError()">onIoError</a>(e:IOErrorEvent):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Triggered when an IOError occurs.</div>
 </td><td class="summaryTableOwnerCol">RomLoader</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#onSecurityError()">onSecurityError</a>(e:SecurityErrorEvent):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Triggered when an SecurityError occurs.</div>
 </td><td class="summaryTableOwnerCol">RomLoader</td>
 </tr>
 <tr class="">
@@ -249,7 +256,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>configUrl:String</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<code>configUrl:String</code>&nbsp;&nbsp;[read-only]<p>
+   Retrieves the url of the rom loader config file.
+  </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;protected function get configUrl():String</code>
 <br>
@@ -392,7 +401,15 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function createConfigProxy(configData:String):IGameConfigProxy</code><span class="label">Parameters</span>
+<code>protected function createConfigProxy(configData:String):IGameConfigProxy</code><p>
+   Provides the game configuration proxy instance.
+   Broken out for easy override.
+   
+   </p><p>
+   This base implementation provides a ConfigDataProxy instance.
+   </p>
+   
+   <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">configData</span>:String</code></td>
@@ -405,6 +422,12 @@ showHideInherited();
 <td width="20"></td><td><code>IGameConfigProxy</code></td>
 </tr>
 </table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="ConfigDataProxy.html" target="">ConfigDataProxy</a>
+</div>
 </div>
 <a name="createControlsProxy()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -413,7 +436,10 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function createControlsProxy(configProxy:IGameConfigProxy):IGameControlsProxy</code><span class="label">Parameters</span>
+<code>protected function createControlsProxy(configProxy:IGameConfigProxy):IGameControlsProxy</code><p>
+   Provides the game controls proxy instance.
+   Broken out for easy override.
+  </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">configProxy</span>:IGameConfigProxy</code></td>
@@ -434,8 +460,10 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function createPreloader():<a href="preloader/preloader/IPreloader.html">IPreloader</a></code>
-<p></p>
+<code>protected function createPreloader():<a href="preloader/preloader/IPreloader.html">IPreloader</a></code><p>
+   Provides the IPreloader instance to display during load.
+   Broken out for easy override.
+  </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -450,7 +478,10 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function createScoresProxy(configProxy:IGameConfigProxy):IGameScoresProxy</code><span class="label">Parameters</span>
+<code>protected function createScoresProxy(configProxy:IGameConfigProxy):IGameScoresProxy</code><p>
+   Provides the game scores proxy instance.
+   Broken out for easy override.
+  </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">configProxy</span>:IGameConfigProxy</code></td>
@@ -471,7 +502,11 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function onIoError(e:IOErrorEvent):void</code><span class="label">Parameters</span>
+<code>protected function onIoError(e:IOErrorEvent):void</code><p>
+   Triggered when an IOError occurs.
+
+   Writes the IOErrorEvent.toString() to the tracelog.
+  </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">e</span>:IOErrorEvent</code></td>
@@ -485,7 +520,11 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function onSecurityError(e:SecurityErrorEvent):void</code><span class="label">Parameters</span>
+<code>protected function onSecurityError(e:SecurityErrorEvent):void</code><p>
+   Triggered when an SecurityError occurs.
+
+   Writes the SecurityErrorEvent.toString() to the tracelog.
+  </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">e</span>:SecurityErrorEvent</code></td>

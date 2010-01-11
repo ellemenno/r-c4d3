@@ -23,6 +23,11 @@ package
 	Loads a valid IGameRom SWF and provides it access to 
 	a keyboard game controls proxy and a remote high scores proxy.
 
+	<p><i>
+	NOTE: The configuration data can suppress the default full-screen behavior 
+	with a property named 'fullScreen' with value 'false'.
+	</i></p>
+
 	@see RomLoader
 	@see com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy
 	@see com.pixeldroid.r_c4d3.scores.LocalHighScores
@@ -34,7 +39,7 @@ package
 		Constructor.
 		
 		<p>
-		Creates a rom loader designed for local play and storage.
+		Creates a rom loader designed for local play and scores storage.
 		</p>
 		*/
 		public function DesktopRomLoader()
@@ -42,9 +47,10 @@ package
 			super();
 		}
 
-		override protected function createControlsProxy(d:IGameConfigProxy):IGameControlsProxy
+		override protected function createControlsProxy(configData:IGameConfigProxy):IGameControlsProxy
 		{
 			var k:KeyboardGameControlsProxy = new KeyboardGameControlsProxy();
+			var d:IGameConfigProxy = configData; // shorthand for next few lines
 			
 			if (d.p1HasKeys) k.setKeys(0, d.p1U, d.p1R, d.p1D, d.p1L, d.p1X, d.p1A, d.p1B, d.p1C); else C.out(this, "no keys for p1");
 			if (d.p2HasKeys) k.setKeys(1, d.p2U, d.p2R, d.p2D, d.p2L, d.p2X, d.p2A, d.p2B, d.p2C); else C.out(this, "no keys for p2");
@@ -54,9 +60,9 @@ package
 			return k;
 		}
 		
-		override protected function createScoresProxy(d:IGameConfigProxy):IGameScoresProxy
+		override protected function createScoresProxy(configData:IGameConfigProxy):IGameScoresProxy
 		{
-			return new LocalGameScoresProxy(d.gameId);
+			return new LocalGameScoresProxy(configData.gameId);
 		}
 		
 		override protected function createPreloader():IPreloader
@@ -67,8 +73,12 @@ package
 		override protected function finalizeLoad():void
 		{
 			super.finalizeLoad();
-			stage.fullScreenSourceRect = romLoader.getBounds(this);
-			stage.displayState = StageDisplayState.FULL_SCREEN;
+			
+			if (configProxy.getPropertyValue("fullScreen").toLowerCase() != "false")
+			{
+				stage.fullScreenSourceRect = romLoader.getBounds(this);
+				stage.displayState = StageDisplayState.FULL_SCREEN;
+			}
 		}
 
 

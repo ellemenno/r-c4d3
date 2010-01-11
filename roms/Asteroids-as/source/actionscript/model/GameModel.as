@@ -54,7 +54,7 @@ package model
 			_drift = new Point();
 			players = [];
 			
-			drift = (new Point(Math.random(),Math.random()));
+			drift = (new Point(Math.random()*2-1,Math.random()*2-1));
 			var p:PlayerModel;
 			var startPoints:Array = getStartPoints(numPlayers, worldEdge);
 			
