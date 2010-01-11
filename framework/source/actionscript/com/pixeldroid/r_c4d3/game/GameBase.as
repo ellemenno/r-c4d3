@@ -117,11 +117,11 @@ package com.pixeldroid.r_c4d3.game
 			C.out(this, "setScoresProxy to " +getQualifiedClassName(value));
 			if (!value) throw new Error("Error - expected IGameScoresProxy, got " +value);
 			
-			// store local ref to IGameScoresProxy (manager will be created in initialize)
+			// store local ref to IGameScoresProxy
 			scores = value;
 			
 			// activate score table for this game
-			scores.openScoresTable("r-c4d3.asteroids");
+			scores.openScoresTable(config.gameId);
 			
 			// instantiate and initialize manager
 			scoreManager = new ScoreController(scores) as IDisposable;

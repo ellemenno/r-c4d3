@@ -6,7 +6,7 @@ package
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
 	import com.pixeldroid.r_c4d3.controls.KeyboardGameControlsProxy;
-	import com.pixeldroid.r_c4d3.scores.RemoteGameScoresProxy;
+	import com.pixeldroid.r_c4d3.scores.LocalGameScoresProxy;
 
 	import ConfigDataProxy;
 	import RomLoader;
@@ -17,14 +17,11 @@ package
 	
 	/**
 	Loads a valid IGameRom SWF and provides it access to 
-	a keyboard game controls proxy and a remote high scores proxy.
+	a keyboard game controls proxy and a local high scores proxy.
 
-	<p><i>
-	NOTE: The configuration data is expected to contain the high score 
-	server url under a property named 'scoreServer'.
-	</i></p>
-	
 	@see RomLoader
+	@see com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy
+	@see com.pixeldroid.r_c4d3.scores.LocalGameScoresProxy
 	*/
 	public class WebRomLoader extends RomLoader
 	{
@@ -33,7 +30,7 @@ package
 		Constructor.
 		
 		<p>
-		Creates a rom loader designed for online play and scores storage.
+		Creates a rom loader designed for online play and local scores storage.
 		</p>
 		*/
 		public function WebRomLoader()
@@ -59,7 +56,7 @@ package
 		/** @inheritDoc */
 		override protected function createScoresProxy(configData:IGameConfigProxy):IGameScoresProxy
 		{
-			return new RemoteGameScoresProxy(configData.gameId, configData.getPropertyValue("scoreServer"));
+			return new LocalGameScoresProxy(configData.gameId);
 		}
 		
 		/** @inheritDoc */

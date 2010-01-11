@@ -43,20 +43,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </table>
 <p></p>
  Loads a valid IGameRom SWF and provides it access to 
- a keyboard game controls proxy and a remote high scores proxy.
+ a keyboard game controls proxy and a local high scores proxy.
 
- <p><i>
- NOTE: The configuration data is expected to contain the high score 
- server url under a property named 'scoreServer'.
- </i></p>
- 
  <p></p>
 <p>
 <span class="classHeaderTableLabel">See also</span>
 </p>
 <div class="seeAlso">
 <a href="RomLoader.html" target="">RomLoader</a>
-</div>
+<br>com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy<br>com.pixeldroid.r_c4d3.scores.LocalGameScoresProxy</div>
 <br>
 <hr>
 </div>
@@ -252,7 +247,7 @@ showHideInherited();
   Constructor.
   
   </p><p>
-  Creates a rom loader designed for online play and scores storage.
+  Creates a rom loader designed for online play and local scores storage.
   </p>
   </div>
 <a name="methodDetail"></a>

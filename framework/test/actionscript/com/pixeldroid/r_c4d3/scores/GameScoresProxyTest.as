@@ -36,7 +36,7 @@ package com.pixeldroid.r_c4d3.scores
 		
 		private function onFrame(e:Event):void
 		{
-			C.out(scores.toString());
+			C.out("\n" +scores.toString());
 			C.out(" ");
 			
 			var i:String;
@@ -57,7 +57,7 @@ package com.pixeldroid.r_c4d3.scores
 			var n:int = rnd(15);
 			while (A.length < n)
 			{
-				score = isNaN(s) ? rnd(1000) : s;
+				score = isNaN(s) ? rnd(999999999) : s;
 				initials = (i == null) ? str(3) : i;
 				A.push(new ScoreEntry(score, initials));
 			}

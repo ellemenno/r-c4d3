@@ -9,6 +9,8 @@ package view.screen.attractloop
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
 	
+	import model.GlobalModel;
+	
 	import FontAssets;
 	
 	
@@ -30,6 +32,12 @@ package view.screen.attractloop
 			var title:TextField = addChild(FontAssets.createTextField("Setup Screen", FontAssets.blojbytesdepa())) as TextField;
 			title.x = 15;
 			title.y = 15;
+			
+			for (var i:int = 0; i < GlobalModel.playerNames.length; i++)
+			{
+				GlobalModel.playerNames[i] = str(5);
+			}
+			C.out(this, "onFirstScreen - new player names are: " +GlobalModel.playerNames);
 		}
 		
 		override public function onUpdateRequest(dt:int):void
@@ -44,6 +52,19 @@ package view.screen.attractloop
 		{
 			C.out(this, "timeOut - sending SCREEN_GO_NEXT signal");
 			Notifier.send(Signals.SCREEN_GO_NEXT);
+		}
+		
+		private function rnd(hi:int, lo:int=0):int
+		{
+			return Math.floor(Math.random()*(hi-lo)) + lo;
+		}
+		
+		private function str(length:int):String
+		{
+			var alpha:String = "RRRRSSSSTTTTLLLLNNNNEEEEAAABCDEFGHIIIJKLMNOOOPQRSTUUUVWXYZ";
+			var string:String = "";
+			while (string.length < length) string += alpha.charAt(rnd(alpha.length));
+			return string;
 		}
 		
 	}

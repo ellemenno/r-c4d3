@@ -42,12 +42,15 @@ package model
 		
 		private var inPlay:Boolean;
 		private var points:int;
+		private var name:String;
 		
 		
 		
-		public function PlayerModel()
+		public function PlayerModel(playerName:String)
 		{
 			C.out(this, "constructor");
+			
+			name = playerName;
 			
 			inPlay = true;
 			heading = Math.random() * 2 * Math.PI;
@@ -82,6 +85,7 @@ package model
 		}
 		
 		public function get score():int { return points; }
+		public function get initials():String { return name; }
 		
 		
 		
