@@ -76,6 +76,7 @@ package
 			
 			if (configProxy.getPropertyValue("fullScreen").toLowerCase() != "false")
 			{
+				C.out(this, "going fullscreen");
 				stage.fullScreenSourceRect = romLoader.getBounds(this);
 				stage.displayState = StageDisplayState.FULL_SCREEN;
 			}
