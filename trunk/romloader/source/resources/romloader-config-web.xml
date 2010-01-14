@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+	Config file for R-C4D3 romloader.
+	
+	see documentation at:
+	http://r-c4d3.googlecode.com/svn/trunk/_documentation/romloader-api/ConfigDataProxy.html
+  -->
 <configuration>
 
 

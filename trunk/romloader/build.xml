@@ -94,9 +94,20 @@ Tasks to build and package the r-c4d3 romloaders.
 		<mkdir dir="${dir.target}/temp-desktop-projectors"/>
 		<copy file="${dir.target}/romloader-desktop.swf" todir="${dir.target}/temp-desktop-projectors"/>
 		<input>
-In ${dir.target}/temp-desktop-projectors,
+
+In temp-desktop-projectors,
 please create projectors from romloader-desktop.swf for supported OSes.
+
 Naming for this OS should be: ${romloader.projector.name} 
+
+Meta data to insert (apply [debug] when appropriate):
+  file version    : 0.${svn-revision}.0.0
+  file description: [Debug version of ]Desktop Rom Loader for R-C4D3 flash game roms
+  legal copyright : Copyleft ${date.year} Pixeldroid
+  product name    : R-C4D3 Desktop Rom Loader[ (debug)]
+  company name    : pixeldroid.com
+  (disable menu bar)
+  app title       : R-C4D3 Rom Loader[ (debug)]
 
 Press Enter when ready...
 		</input>
