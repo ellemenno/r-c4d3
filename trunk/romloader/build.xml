@@ -80,21 +80,32 @@ Tasks to build and package the r-c4d3 romloaders.
 		</copy>
 	</target>
 	
-    <target name="package" depends="package-desktop, package-web, package-rc4d3" 
+    <target name="package" depends="package-desktop, add-projectors, package-web, package-rc4d3" 
 		description="package-desktop, package-web, package-rc4d3"/>
 	
     <target name="package-desktop" description="collect the desktop romloader and dependencies into a zip file">
 		<mkdir dir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.source}/resources/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop/romloader-config.xml"/>
 		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-desktop"/>
-		<copy file="${dir.target}/romloader-desktop.swf" todir="${dir.target}/temp-desktop"/>
+		<zip destfile="${dir.target}/romloader-desktop.zip" basedir="${dir.target}/temp-desktop"/>
+	</target>
+	
+	<target name="add-projectors" unless="skip.add.projectors" description="prepares romloader swf for conversion to projector">
+		<mkdir dir="${dir.target}/temp-desktop-projectors"/>
+		<copy file="${dir.target}/romloader-desktop.swf" todir="${dir.target}/temp-desktop-projectors"/>
 		<input>
-In ${dir.target}/temp-desktop,
-please create ${romloader.projector.name} projector from romloader-desktop.swf.
+In ${dir.target}/temp-desktop-projectors,
+please create projectors from romloader-desktop.swf for supported OSes.
+Naming for this OS should be: ${romloader.projector.name} 
 
 Press Enter when ready...
 		</input>
-		<zip destfile="${dir.target}/romloader-desktop.zip" basedir="${dir.target}/temp-desktop"/>
+		<delete file="${dir.target}/temp-desktop-projectors/romloader-desktop.swf"/>
+		<zip 
+			destfile="${dir.releases}/romloader-desktop.zip" 
+			basedir="${dir.target}/temp-desktop-projectors"
+			update="true"
+			/>
 	</target>
 	
     <target name="package-web" description="collect the web-based romloader and dependencies into a zip file">
@@ -116,8 +127,6 @@ Press Enter when ready...
 	</target>
 	
 	<target name="release" description="copy zips to ${dir.releases}">
-		<!--copy file="${dir.target}/romloader-web.swf" todir="${dir.releases}"/>
-		<copy file="${dir.target}/romloader-rc4d3.swf" todir="${dir.releases}"/-->
 		<copy todir="${dir.releases}" failonerror="false">
 			<fileset dir="${dir.target}">
 				<include name="**/*.zip"/>
