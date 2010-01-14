@@ -86,7 +86,7 @@ package com.pixeldroid.r_c4d3.game.control
 		protected function onScoresLoaded(e:Event):void
 		{
 			C.out(this, "onScoresLoaded() - " +e);
-			C.out(this, scoresProxy.toString())
+			C.out(this, "\n" +scoresProxy.toString())
 			
 			Notifier.send(Signals.SCORES_READY, scoresProxy);
 		}

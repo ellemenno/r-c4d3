@@ -77,7 +77,7 @@ Tasks to build and package the AS3 Control Test rom.
 		</copy>
 	</target>
 	
-	<target name="launch" unless="no.rom.launches" description="launch the rom in the desktop romloader">
+	<target name="launch" unless="skip.rom.launches" description="launch the rom in the desktop romloader">
 		<exec executable="${dir.target}/temp-desktop/ControlTest${exe}" failonerror="false"/>
 	</target>
 

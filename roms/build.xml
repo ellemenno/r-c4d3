@@ -6,7 +6,7 @@
 Top level build file for all r-c4d3 roms.
 </description>
 
-	<property name="no.rom.launches" value="true"/>
+	<property name="skip.rom.launches" value="true"/>
 	
 	<target name="-usage" description="ant &lt;target&gt;">
 		<java classname="org.apache.tools.ant.Main">

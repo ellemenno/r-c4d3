@@ -6,7 +6,6 @@
 Top level build file for all components of the r-c4d3 platform.
 </description>
 	
-	
 	<target name="-usage" description="ant &lt;target&gt;">
 		<java classname="org.apache.tools.ant.Main">
 			<arg value="-projecthelp" />
@@ -26,10 +25,12 @@ Top level build file for all components of the r-c4d3 platform.
 	</target>
 			
 	<target name="romloader" description="calls the build task of ${basedir}/romloader/build.xml">
+		<property name="skip.add.projectors" value="true"/>
 		<ant
 			antfile="${basedir}/romloader/build.xml"
 			dir="${basedir}/romloader"
 			target="build"
+			inheritall="true"
 			/>
 	</target>
 			
