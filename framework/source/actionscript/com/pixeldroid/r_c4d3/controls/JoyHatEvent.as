@@ -9,6 +9,11 @@ package com.pixeldroid.r_c4d3.controls
 	The field 'which' is the index of the joystick that reported the event and 'hat' is 
 	the index of the hat. 'value' is the current position of the hat encoded as a bitfield.
 	</p>
+	
+	<p>
+	Use the boolean properties of the event to inquire about various directionalities, 
+	or centering , or write your conditionals testing the event value against the predefinied direction constants.
+	</p>
 	*/
 	public class JoyHatEvent extends Event
 	{

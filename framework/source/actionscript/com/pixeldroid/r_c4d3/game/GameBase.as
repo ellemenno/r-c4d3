@@ -10,6 +10,7 @@ package com.pixeldroid.r_c4d3.game
 
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.system.Capabilities;
 	import flash.utils.getTimer;
 	import flash.utils.getQualifiedClassName;
 	
@@ -45,7 +46,7 @@ package com.pixeldroid.r_c4d3.game
 	@see #createGameScreenController
 	@see #createStatsScreenController
 	@see #createScoreController
-	@see Signals#
+	@see com.pixeldroid.r_c4d3.game.control.Signals
 	*/
 	public class GameBase extends Sprite implements IGameRom, IDisposable
 	{
@@ -103,12 +104,18 @@ package com.pixeldroid.r_c4d3.game
 			for (var i:int = 0; i < 4; i++) controls.joystickOpen(i); // activate joystick for players 1 - 4
 			controls.joystickEventState(JoyEventStateEnum.ENABLE, stage); // enable event reporting
 			
-			// instantiate and initialize mangers
+			// instantiate and initialize managers
 			screenManager = createGameScreenController(controls, gameLayer, screens);
+			if (!screenManager) throw new Error("createGameScreenController not implemented or returned null");
 			screenManager.initialize();
 			
-			statsManager = createStatsScreenController(controls, debugLayer, screens);
-			if (statsManager) statsManager.initialize();
+			// only create stats controller when in debug player and config says statsEnabled=true
+			if (Capabilities.isDebugger && config.statsEnabled == true)
+			{
+				statsManager = createStatsScreenController(controls, debugLayer, screens);
+				if (statsManager) statsManager.initialize();
+				else C.out(this, "setControlsProxy - no statsManager to initialize");
+			}
 		}
 		
 		/** @inheritDoc */
@@ -126,13 +133,13 @@ package com.pixeldroid.r_c4d3.game
 			// instantiate and initialize manager
 			scoreManager = new ScoreController(scores) as IDisposable;
 			if (scoreManager) scoreManager.initialize();
+			else C.out(this, "setScoresProxy - no scoreManager to initialize");
 		}
 		
 		/** @inheritDoc */
 		public function enterAttractLoop():void
 		{
 			C.out(this, "enterAttractLoop");
-			stage.frameRate = 10;
 			
 			// initialize frame event reporting and timing
 			lastTime = getTimer();
@@ -216,9 +223,9 @@ package com.pixeldroid.r_c4d3.game
 		
 		@see GameScreenController
 		*/
-		protected function createGameScreenController(controlsProxy:IGameControlsProxy, gameLayer:Sprite, screenFactory:IGameScreenFactory):IDisposable
+		protected function createGameScreenController(controlsProxy:IGameControlsProxy, container:Sprite, screenFactory:IGameScreenFactory):IDisposable
 		{
-			return new GameScreenController(controlsProxy, gameLayer, screenFactory) as IDisposable
+			return new GameScreenController(controlsProxy, container, screenFactory) as IDisposable
 		}
 		
 		/**
@@ -226,9 +233,9 @@ package com.pixeldroid.r_c4d3.game
 		
 		@see StatsScreenController
 		*/
-		protected function createStatsScreenController(controlsProxy:IGameControlsProxy, gameLayer:Sprite, screenFactory:IGameScreenFactory):IDisposable
+		protected function createStatsScreenController(controlsProxy:IGameControlsProxy, container:Sprite, screenFactory:IGameScreenFactory):IDisposable
 		{
-			return new StatsScreenController(controlsProxy, gameLayer, screenFactory) as IDisposable
+			return new StatsScreenController(controlsProxy, container, screenFactory) as IDisposable
 		}
 		
 		/**

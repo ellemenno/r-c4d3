@@ -59,7 +59,7 @@ package com.pixeldroid.r_c4d3.game.control
 			C.out(this, "shutDown()");
 			
 			// shut down stats and remove it from its container
-			if (!stats.shutDown()) throw new Error("ERROR: " +stats.name +" unable to shut down");
+			if (!stats.shutDown()) throw new Error("ERROR: " +stats.type +" unable to shut down");
 			screenContainer.removeChild(stats as DisplayObject);
 			screenContainer = null;
 			
