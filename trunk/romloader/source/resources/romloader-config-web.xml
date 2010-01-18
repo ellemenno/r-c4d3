@@ -12,6 +12,9 @@
 	<!-- trace logging on when true -->
 	<logging enabled="true" />
 
+	<!-- performance statistics on when true and played in debug player -->
+	<stats enabled="true" />
+
 	<!-- rom to load -->
 	<rom file="http://r-c4d3.googlecode.com/svn/trunk/romloader/source/resources/rom.swf" 
 	     id="test_romloader_web" />
