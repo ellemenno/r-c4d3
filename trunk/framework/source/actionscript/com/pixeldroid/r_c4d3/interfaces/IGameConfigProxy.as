@@ -11,6 +11,9 @@ package com.pixeldroid.r_c4d3.interfaces
 		/** Is trace logging requested? */
 		function get loggingEnabled():Boolean
 		
+		/** Are performance stats requested? */
+		function get statsEnabled():Boolean
+		
 		/** IGameRom swf to load */
 		function get romUrl():String;
 		

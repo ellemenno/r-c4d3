@@ -11,7 +11,17 @@ package com.pixeldroid.r_c4d3.game.view.screen
 	import com.pixeldroid.r_c4d3.tools.framerate.FpsMeter;
 	import com.pixeldroid.r_c4d3.tools.perfmon.PerfMon;
 	
+	/**
+	A ScreenBase implementation to provide on-screen performance statistics.
 	
+	<p>
+	The DebugScreen screen is typically added as a layer above the game, and is 
+	not part of the screen flow.
+	</p>
+	
+	@see com.pixeldroid.r_c4d3.tools.framerate.FpsMeter
+	@see com.pixeldroid.r_c4d3.tools.framerate.PerfMon
+	*/
 	public class DebugScreen extends ScreenBase
 	{
 		

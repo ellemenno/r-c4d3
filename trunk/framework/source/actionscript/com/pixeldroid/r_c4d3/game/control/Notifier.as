@@ -7,8 +7,23 @@ package com.pixeldroid.r_c4d3.game.control
 	Global registry of callback functions associated with string trigger signals.
 	
 	<p>
-	A simple way to send messages around an application without direct coupling.
+	A simple way to send messages around an application without direct coupling. 
+	Multiple listeners may be added for the same signal. The same listener may also 
+	be added to multiple signals.
 	</p>
+	
+	@example The following code shows the two basic steps for working with
+	Notifier-- adding a callback function for a particular signal with <tt>addListener</tt> 
+	and later sending that same signal with a value attached to it via <tt>send</tt>. 
+	<listing version="3.0" >
+	// in some class responsible for showing the score on screen:
+	Notifier.addListener("update.score", onUpdateScore);
+	function onUpdateScore(newScore:Number):void { score.text = newScore.toString(); }
+	
+	// in some other class responsible for calculating the score:
+	var newScore:Number = oldScore + 5;
+	Notifier.send("update.score", newScore);
+	</listing>
 	*/
 	public class Notifier
 	{

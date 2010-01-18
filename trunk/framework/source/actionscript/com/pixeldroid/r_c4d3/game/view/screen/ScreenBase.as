@@ -10,12 +10,17 @@ package com.pixeldroid.r_c4d3.game.view.screen
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
 	import com.pixeldroid.r_c4d3.interfaces.IControllable;
 	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
-	import com.pixeldroid.r_c4d3.interfaces.IScreen;
+	import com.pixeldroid.r_c4d3.interfaces.ITypable;
 	import com.pixeldroid.r_c4d3.interfaces.IUpdatable;
 	
 	
 	
-	public class ScreenBase extends Sprite implements IScreen, IUpdatable, IControllable, IDisposable
+	/**
+	Base screen implementation, suitable for use with IGameScreenFactory.
+	
+	@see com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory
+	*/
+	public class ScreenBase extends Sprite implements ITypable, IDisposable, IControllable, IUpdatable
 	{
 		
 		protected var _type:String;
@@ -24,6 +29,7 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		
 		
 		
+		/** Constructor. */
 		public function ScreenBase():void
 		{
 			C.out(this, "(base) constructor");
@@ -31,7 +37,10 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		}
 		
 		
-		
+		/** 
+		Fills the screen (to stage dimensions) with the provided color. 
+		@param value An rgb color integer
+		*/
 		protected function set backgroundColor(value:uint):void
 		{
 			var w:int = stage.stageWidth;
@@ -43,6 +52,9 @@ package com.pixeldroid.r_c4d3.game.view.screen
 			graphics.endFill();
 		}
 		
+		/**
+		Clears any drawn graphics and asks child instances of ScreenBase to shutDown.
+		*/
 		protected function clear():void
 		{
 			graphics.clear();
@@ -54,20 +66,29 @@ package com.pixeldroid.r_c4d3.game.view.screen
 			}
 		}
 		
+		/**
+		Prompt to provide first on-screen view. 
+		Designed to be overridden by subclasses. 
+		
+		<p>
+		Updates will be prompted via <code>onUpdateRequest</code>
+		</p>
+		*/
 		protected function onFirstScreen():void
 		{
-			// to be overridden by subclasses to draw first view on screen
-			// updates will be prompted via onUpdateRequest
+			// to be overridden
 		}
 		
 		
-		// IScreen interface
+		// ITypable interface
+		/** @inheritDoc */
 		public function set type(value:String):void
 		{
 			C.out(this, "(base) set type() - " +value);
 			_type = value;
 		}
 		
+		/** @inheritDoc */
 		public function get type():String
 		{
 			return _type;
@@ -75,6 +96,7 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		
 		
 		// IDisposable interface
+		/** @inheritDoc */
 		public function shutDown():Boolean
 		{
 			clear();
@@ -95,6 +117,7 @@ package com.pixeldroid.r_c4d3.game.view.screen
 			return true;
 		}
 		
+		/** @inheritDoc */
 		public function initialize():Boolean
 		{
 			C.out(this, "(base) initialize()");
@@ -106,20 +129,26 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		}
 		
 		
-		// IController interface
+		// IControllable interface
+		/** @inheritDoc */
 		public function onHatMotion(e:JoyHatEvent):void
 		{
 			C.out(this, "(base) onHatMotion: " +e);
 		}
 		
+		/** @inheritDoc */
 		public function onButtonMotion(e:JoyButtonEvent):void
 		{
 			C.out(this, "base onButtonMotion: " +e);
 		}
 		
+		
+		// IUpdatable interface
+		/** @inheritDoc */
 		public function onUpdateRequest(dt:int):void
 		{
 			timeElapsed += dt;
 		}
+		
 	}
 }

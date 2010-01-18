@@ -18,18 +18,25 @@ package com.pixeldroid.r_c4d3.game.control
 	
 	
 	/**
-	Handles game state at the attract loop level by advancing through the screens specified in IGameScreenFactory.
+	Implements the attract loop, connecting and disconnecting screens to the 
+	controls proxy and update requests.
 	
 	<p>
-	Listens for the following signals: 
-	ATTRACT_LOOP_BEGIN (start the attract loop), 
-	SCREEN_GO_NEXT (advance to next screen in the attract loop), 
-	GAME_BEGIN (jump to the setup screen), 
-	GAME_TICK (ask the current screen to update)
+	Relies on a provided IGameScreenFactory to create the screens and manage 
+	their advancement order.
 	</p>
 	
-	@see IGameScreenFactory
-	@see Signals
+	<p>
+	Listens for the following signals:
+	<ul>
+	<li>ATTRACT_LOOP_BEGIN (start the attract loop)</li>
+	<li>SCREEN_GO_NEXT (advance to next screen in the attract loop)</li>
+	<li>GAME_BEGIN (jump to the setup screen)</li>
+	<li>GAME_TICK (ask the current screen to update)</li>
+	</p>
+	
+	@see com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory
+	@see com.pixeldroid.r_c4d3.game.control.Signals
 	*/
 	public class GameScreenController implements IDisposable
 	{
@@ -41,7 +48,11 @@ package com.pixeldroid.r_c4d3.game.control
 		
 		
 		/**
-		Constructor
+		Constructor.
+	
+		@param controls An IGameControlsProxy (provided by the rom loader)
+		@param container A DisplayObjectContainer for screens to be added and removed
+		@param factory An IGameScreenFactory to create screens and determine screen order
 		*/
 		public function GameScreenController(controls:IGameControlsProxy, container:DisplayObjectContainer, factory:IGameScreenFactory)
 		{
@@ -60,7 +71,7 @@ package com.pixeldroid.r_c4d3.game.control
 			C.out(this, "shutDown()");
 			
 			// shut down current screen and remove it from its container
-			if (!currentScreen.shutDown()) throw new Error("ERROR: " +currentScreen.name +" unable to shut down");
+			if (!currentScreen.shutDown()) throw new Error("ERROR: " +currentScreen.type +" unable to shut down");
 			screenContainer.removeChild(currentScreen as DisplayObject);
 			screenContainer = null;
 			
@@ -82,7 +93,7 @@ package com.pixeldroid.r_c4d3.game.control
 		public function initialize():Boolean
 		{
 			C.out(this, "initialize()");
-			currentScreen = screenContainer.addChild(screenFactory.getScreen(screenFactory.NULL) as DisplayObject) as ScreenBase;
+			currentScreen = screenContainer.addChild(screenFactory.getScreen(screenFactory.loopStartScreenType) as DisplayObject) as ScreenBase;
 			
 			// attach listeners to controls proxy
 			controlsProxy.addEventListener(JoyHatEvent.JOY_HAT_MOTION, onHatMotion);
@@ -102,12 +113,14 @@ package com.pixeldroid.r_c4d3.game.control
 		// event handlers
 		protected function onHatMotion(e:JoyHatEvent):void
 		{
-			currentScreen.onHatMotion(e);
+			try { currentScreen.onHatMotion(e); }
+			catch (e:Error) { C.out(this, "onHatMotion - Error: " +e); }
 		}
 		
 		protected function onButtonMotion(e:JoyButtonEvent):void
 		{
-			currentScreen.onButtonMotion(e);
+			try { currentScreen.onButtonMotion(e); }
+			catch (e:Error) { C.out(this, "onButtonMotion - Error: " +e); }
 		}
 		
 		
@@ -115,48 +128,21 @@ package com.pixeldroid.r_c4d3.game.control
 		// message callbacks
 		protected function gameTick(dt:int):void
 		{
-			currentScreen.onUpdateRequest(dt);
+			try { currentScreen.onUpdateRequest(dt); }
+			catch (e:Error) { C.out(this, "gameTick - Error: " +e); }
 		}
 		
 		protected function nextScreen():void
 		{
 			C.out(this, "nextScreen()");
-			switch (currentScreen.name)
-			{
-				case screenFactory.NULL:
-				setCurrentScreen(screenFactory.getScreen(screenFactory.TITLE));
-				break;
-				
-				case screenFactory.TITLE:
-				setCurrentScreen(screenFactory.getScreen(screenFactory.HELP));
-				break;
-				
-				case screenFactory.HELP:
-				setCurrentScreen(screenFactory.getScreen(screenFactory.SETUP));
-				break;
-				
-				case screenFactory.SETUP:
-				setCurrentScreen(screenFactory.getScreen(screenFactory.GAME));
-				break;
-				
-				case screenFactory.GAME:
-				setCurrentScreen(screenFactory.getScreen(screenFactory.SCORES));
-				break;
-				
-				case screenFactory.SCORES:
-				setCurrentScreen(screenFactory.getScreen(screenFactory.TITLE));
-				break;
-				
-				default:
-				throw new Error("ERROR: unrecognized screen type '" +currentScreen.name +"'");
-				break;
-			}
+			var nextType:String = screenFactory.getNextScreenType(currentScreen.type);
+			setCurrentScreen(screenFactory.getScreen(nextType));
 		}
 		
 		protected function gameBegin():void
 		{
 			C.out(this, "gameBegin()");
-			setCurrentScreen(screenFactory.getScreen(screenFactory.SETUP));
+			setCurrentScreen(screenFactory.getScreen(screenFactory.gameStartScreenType));
 		}
 		
 		
@@ -164,17 +150,17 @@ package com.pixeldroid.r_c4d3.game.control
 		// utility
 		protected function setCurrentScreen(screen:ScreenBase):void
 		{
-			var prevScreen:String = currentScreen.name;
+			var prevScreen:String = currentScreen.type;
 			
 			var isShutDown:Boolean = currentScreen.shutDown();
 			if (!isShutDown) throw new Error("ERROR: " +prevScreen +" unable to shut down");
 			screenContainer.removeChild(currentScreen as DisplayObject);
 			
 			currentScreen = screenContainer.addChild(screen as DisplayObject) as ScreenBase;
-			C.out(this, "setCurrentScreen() - moving from " +prevScreen +" to " +currentScreen.name);
+			C.out(this, "setCurrentScreen() - moving from " +prevScreen +" to " +currentScreen.type);
 			
 			var isInitialized:Boolean = currentScreen.initialize();
-			if (!isInitialized) throw new Error("ERROR: " +currentScreen.name +" unable to initialize");
+			if (!isInitialized) throw new Error("ERROR: " +currentScreen.type +" unable to initialize");
 		}
 	}
 }
