@@ -13,6 +13,9 @@ package
 			&lt;!-- trace logging on when true --&gt;
 			&lt;logging enabled="true" /&gt;
 
+			&lt;!-- performance stats on when true --&gt;
+			&lt;stats enabled="true" /&gt;
+
 			&lt;!-- rom to load, and its game id for scores storage --&gt;
 			&lt;rom file="../controls/ControlTestGameRom.swf" id="com_pixeldroid_controltest" /&gt;
 
@@ -45,6 +48,7 @@ package
 		protected var xmlData:XML;
 		protected var _xmlString:String;
 		protected var _loggingEnabled:Boolean;
+		protected var _statsEnabled:Boolean;
 		protected var _romUrl:String;
 		protected var _gameId:String;
 
@@ -69,6 +73,13 @@ package
 		{
 			if (!_loggingEnabled) _loggingEnabled = Boolean(xmlData..logging.@enabled.toString());
 			return _loggingEnabled;
+		}
+		
+		/** @inheritDoc */
+		public function get statsEnabled():Boolean
+		{
+			if (!_statsEnabled) _statsEnabled = Boolean(xmlData..stats.@enabled.toString());
+			return _statsEnabled;
 		}
 		
 		/** @inheritDoc */
