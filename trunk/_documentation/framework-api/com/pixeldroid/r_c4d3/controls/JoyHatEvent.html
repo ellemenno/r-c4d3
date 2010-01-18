@@ -1,0 +1,670 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
+<meta content="JoyHatEvent,com.pixeldroid.r_c4d3.controls.JoyHatEvent,HAT_CENTERED,HAT_DOWN,HAT_LEFT,HAT_LEFTDOWN,HAT_LEFTUP,HAT_RIGHT,HAT_RIGHTDOWN,HAT_RIGHTUP,HAT_UP,JOY_HAT_MOTION,hat,value,which,isCentered,isDown,isLeft,isLeftDown,isLeftUp,isRight,isRightDown,isRightUp,isStrictlyDown,isStrictlyLeft,isStrictlyRight,isStrictlyUp,isUp,bit4ToString,clone,toString" name="keywords">
+<title>com.pixeldroid.r_c4d3.controls.JoyHatEvent</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'JoyHatEvent - API Documentation';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">R-C4D3 Framework Library</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?com/pixeldroid/r_c4d3/controls/JoyHatEvent.html&amp;com/pixeldroid/r_c4d3/controls/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;JoyHatEvent</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#constantSummary">Constants</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class JoyHatEvent"); titleBar_setSubNav(true,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">com.pixeldroid.r_c4d3.controls</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class JoyHatEvent</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">JoyHatEvent <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> flash.events.Event</td>
+</tr>
+</table>
+<p></p>
+ A JOY_HAT_MOTION event occurs when ever a user moves a 4-way hat on the joystick.
+ <p>
+ The field 'which' is the index of the joystick that reported the event and 'hat' is 
+ the index of the hat. 'value' is the current position of the hat encoded as a bitfield.
+ </p>
+ 
+ <p>
+ Use the boolean properties of the event to inquire about various directionalities, 
+ or centering , or write your conditionals testing the event value against the predefinied direction constants.
+ </p>
+ <p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#hat">hat</a> : int<div class="summaryTableDescription">
+  Joystick hat index
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isCentered">isCentered</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is not pressed in any direction.</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isDown">isDown</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is pressed any type of down (leftDown, down, or rightDown).</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isLeft">isLeft</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is pressed any type of left (leftup, left, leftdown).</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isLeftDown">isLeftDown</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is pressed diagonally left and down.</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isLeftUp">isLeftUp</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is pressed diagonally left and up.</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isRight">isRight</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is pressed any type of right (rightup, right, rightdown).</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isRightDown">isRightDown</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is pressed diagonally right and down.</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isRightUp">isRightUp</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is pressed diagonally right and up.</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isStrictlyDown">isStrictlyDown</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is pressed strictly down.</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isStrictlyLeft">isStrictlyLeft</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is pressed strictly left.</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isStrictlyRight">isStrictlyRight</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is pressed strictly right.</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isStrictlyUp">isStrictlyUp</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is pressed strictly up.</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#isUp">isUp</a> : Boolean<div class="summaryTableDescription">[read-only] <code>true</code> when joyhat is pressed any type of up (leftUp, up, or rightUp).</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#value">value</a> : int<div class="summaryTableDescription">
+  Hat value as bitfield
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#which">which</a> : int<div class="summaryTableDescription">
+  Joystick device index
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#JoyHatEvent()">JoyHatEvent</a>(whichJoystick:int, whichHat:int, motionValue:int, bubbles:Boolean = false, cancelable:Boolean = false)</div>
+<div class="summaryTableDescription">
+  Creates an event object which contains information about digital (4- or 8-way) stick motion.</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#bit4ToString()">bit4ToString</a>(n:int):String</div>
+<div class="summaryTableDescription">
+  Pretty print a 4-bit int.</div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#clone()">clone</a>():Event</div>
+<div class="summaryTableDescription"> </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#toString()">toString</a>():String</div>
+<div class="summaryTableDescription"> </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+</table>
+</div>
+<a name="constantSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Constants</div>
+<table id="summaryTableConstant" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Constant</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_CENTERED">HAT_CENTERED</a> : int = 0x00<div class="summaryTableDescription">[static]
+  Hat value when centered (resting position)
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_DOWN">HAT_DOWN</a> : int = 0x04<div class="summaryTableDescription">[static]
+  Hat value mask for the down position
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_LEFT">HAT_LEFT</a> : int = 0x08<div class="summaryTableDescription">[static]
+  Hat value mask for the left position
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_LEFTDOWN">HAT_LEFTDOWN</a> : int<div class="summaryTableDescription">[static]
+  Hat value mask for the left-down diagonal position
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_LEFTUP">HAT_LEFTUP</a> : int<div class="summaryTableDescription">[static]
+  Hat value mask for the left-up diagonal position
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_RIGHT">HAT_RIGHT</a> : int = 0x02<div class="summaryTableDescription">[static]
+  Hat value mask for the right position
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_RIGHTDOWN">HAT_RIGHTDOWN</a> : int<div class="summaryTableDescription">[static]
+  Hat value mask for the right-down diagonal position
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_RIGHTUP">HAT_RIGHTUP</a> : int<div class="summaryTableDescription">[static]
+  Hat value mask for the right-up diagonal position
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#HAT_UP">HAT_UP</a> : int = 0x01<div class="summaryTableDescription">[static]
+  Hat value mask for the up position
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#JOY_HAT_MOTION">JOY_HAT_MOTION</a> : String = "JOY_HAT_MOTION"<div class="summaryTableDescription">[static]
+  Type of event triggered by pressing a button down
+  </div>
+</td><td class="summaryTableOwnerCol">JoyHatEvent</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="hat"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">hat</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var hat:int</code><p>
+  Joystick hat index
+  </p><p>The default value is <code>null</code>.</p>
+</div>
+<a name="isCentered"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isCentered</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isCentered:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is not pressed in any direction. </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isCentered():Boolean</code>
+<br>
+</div>
+<a name="isDown"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isDown</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isDown:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is pressed any type of down (leftDown, down, or rightDown). </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isDown():Boolean</code>
+<br>
+</div>
+<a name="isLeft"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isLeft</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isLeft:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is pressed any type of left (leftup, left, leftdown). </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isLeft():Boolean</code>
+<br>
+</div>
+<a name="isLeftDown"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isLeftDown</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isLeftDown:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is pressed diagonally left and down. </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isLeftDown():Boolean</code>
+<br>
+</div>
+<a name="isLeftUp"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isLeftUp</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isLeftUp:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is pressed diagonally left and up. </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isLeftUp():Boolean</code>
+<br>
+</div>
+<a name="isRight"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isRight</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isRight:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is pressed any type of right (rightup, right, rightdown). </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isRight():Boolean</code>
+<br>
+</div>
+<a name="isRightDown"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isRightDown</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isRightDown:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is pressed diagonally right and down. </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isRightDown():Boolean</code>
+<br>
+</div>
+<a name="isRightUp"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isRightUp</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isRightUp:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is pressed diagonally right and up. </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isRightUp():Boolean</code>
+<br>
+</div>
+<a name="isStrictlyDown"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isStrictlyDown</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isStrictlyDown:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is pressed strictly down. </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isStrictlyDown():Boolean</code>
+<br>
+</div>
+<a name="isStrictlyLeft"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isStrictlyLeft</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isStrictlyLeft:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is pressed strictly left. </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isStrictlyLeft():Boolean</code>
+<br>
+</div>
+<a name="isStrictlyRight"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isStrictlyRight</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isStrictlyRight:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is pressed strictly right. </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isStrictlyRight():Boolean</code>
+<br>
+</div>
+<a name="isStrictlyUp"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isStrictlyUp</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isStrictlyUp:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is pressed strictly up. </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isStrictlyUp():Boolean</code>
+<br>
+</div>
+<a name="isUp"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">isUp</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>isUp:Boolean</code>&nbsp;&nbsp;[read-only]<p> <code>true</code> when joyhat is pressed any type of up (leftUp, up, or rightUp). </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isUp():Boolean</code>
+<br>
+</div>
+<a name="value"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">value</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var value:int</code><p>
+  Hat value as bitfield
+  </p><p>The default value is <code>null</code>.</p>
+</div>
+<a name="which"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">which</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var which:int</code><p>
+  Joystick device index
+  </p><p>The default value is <code>null</code>.</p>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="JoyHatEvent()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">JoyHatEvent</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function JoyHatEvent(whichJoystick:int, whichHat:int, motionValue:int, bubbles:Boolean = false, cancelable:Boolean = false)</code><p>
+  Creates an event object which contains information about digital (4- or 8-way) stick motion.
+  Event objects are passed as parameters to event listeners.
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">whichJoystick</span>:int</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">whichHat</span>:int</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">motionValue</span>:int</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">bubbles</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">cancelable</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="bit4ToString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">bit4ToString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function bit4ToString(n:int):String</code><p>
+  Pretty print a 4-bit int.
+  
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">n</span>:int</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code></td>
+</tr>
+</table>
+<br>
+<span class="label">Example</span>
+<br>The following code prints the bitfield value of a JoyHatEvent:
+  <div class='listing'><pre>
+  function onHatEvent(e:JoyHatEvent):void {
+      trace(e.bit4ToString(e.value));
+  }
+  </pre></div>
+  <p></p>
+</div>
+<a name="clone()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">clone</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function clone():Event</code><p> </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Event</code></td>
+</tr>
+</table>
+</div>
+<a name="toString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">toString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function toString():String</code><p> </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code></td>
+</tr>
+</table>
+</div>
+<a name="constantDetail"></a>
+<div class="detailSectionHeader">Constant detail</div>
+<a name="HAT_CENTERED"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">HAT_CENTERED</td><td class="detailHeaderType">constant</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const HAT_CENTERED:int = 0x00</code><p>
+  Hat value when centered (resting position)
+  </p><p>The default value is <code>0x00</code>.</p>
+</div>
+<a name="HAT_DOWN"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">HAT_DOWN</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const HAT_DOWN:int = 0x04</code><p>
+  Hat value mask for the down position
+  </p><p>The default value is <code>0x04 - binary 0100</code>.</p>
+</div>
+<a name="HAT_LEFT"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">HAT_LEFT</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const HAT_LEFT:int = 0x08</code><p>
+  Hat value mask for the left position
+  </p><p>The default value is <code>0x08 - binary 1000</code>.</p>
+</div>
+<a name="HAT_LEFTDOWN"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">HAT_LEFTDOWN</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const HAT_LEFTDOWN:int</code><p>
+  Hat value mask for the left-down diagonal position
+  </p><p>The default value is <code>0x0c - binary 1100</code>.</p>
+</div>
+<a name="HAT_LEFTUP"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">HAT_LEFTUP</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const HAT_LEFTUP:int</code><p>
+  Hat value mask for the left-up diagonal position
+  </p><p>The default value is <code>0x09 - binary 1001</code>.</p>
+</div>
+<a name="HAT_RIGHT"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">HAT_RIGHT</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const HAT_RIGHT:int = 0x02</code><p>
+  Hat value mask for the right position
+  </p><p>The default value is <code>0x02 - binary 0010</code>.</p>
+</div>
+<a name="HAT_RIGHTDOWN"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">HAT_RIGHTDOWN</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const HAT_RIGHTDOWN:int</code><p>
+  Hat value mask for the right-down diagonal position
+  </p><p>The default value is <code>0x06 - binary 0110</code>.</p>
+</div>
+<a name="HAT_RIGHTUP"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">HAT_RIGHTUP</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const HAT_RIGHTUP:int</code><p>
+  Hat value mask for the right-up diagonal position
+  </p><p>The default value is <code>0x03 - binary 0011</code>.</p>
+</div>
+<a name="HAT_UP"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">HAT_UP</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const HAT_UP:int = 0x01</code><p>
+  Hat value mask for the up position
+  </p><p>The default value is <code>0x01 - binary 0001</code>.</p>
+</div>
+<a name="JOY_HAT_MOTION"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">JOY_HAT_MOTION</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const JOY_HAT_MOTION:String = "JOY_HAT_MOTION"</code><p>
+  Type of event triggered by pressing a button down
+  </p></div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright">Copyleft 2010 Pixeldroid</center>
+</div>
+</body>
+</html>
+<!--Copyleft 2010 Pixeldroid-->
