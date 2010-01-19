@@ -15,7 +15,7 @@ package com.pixeldroid.r_c4d3.tools.framerate {
 	/**
 	* Monitors frame rate. It graphs timed averages against a target rate.
 	* 
-	* @example The following code shows a simple fps meter instantiation; 
+	* @example The following code shows a simple fps meter instantiation: 
 	* see the constructor documentation for more options:
 	* <listing version="3.0" >
 	* package {
