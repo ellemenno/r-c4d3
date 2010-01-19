@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configuration>
+
+
+	<!-- trace logging on when true -->
+	<logging enabled="true" />
+
+	<!-- performance statistics on when true and played in debug player -->
+	<stats enabled="true" />
+
+	<!-- rom to load -->
+	<rom file="./rom.swf" 
+	     id="r-c4d3.hungries.web" />
+
+	<!-- not defining key mappings, using default values from romloader -->
+	<keymappings />
+	
+	<!-- custom properties go here, e.g.
+		<properties>
+			<property name="scoreServer">http://my.scoreserver.com</property>
+		</properties>
+	-->
+	<properties />
+
+
+</configuration>
