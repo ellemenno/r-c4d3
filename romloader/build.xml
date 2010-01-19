@@ -26,8 +26,8 @@ Tasks to build and package the r-c4d3 romloaders.
 		</java>
 	</target>
 	
-    <target name="build" depends="compile, document, package, release" 
-		description="&gt; this is the main task: compile, document, package, release"/>
+    <target name="build" depends="compile, document, package, release, add-projectors" 
+		description="&gt; this is the main task: compile, document, package, release, add-projectors"/>
 	
 	<target name="clean" description="remove the contents of ${dir.target}">
 		<delete failonerror="false" includeemptydirs="true">
@@ -80,7 +80,7 @@ Tasks to build and package the r-c4d3 romloaders.
 		</copy>
 	</target>
 	
-    <target name="package" depends="package-desktop, add-projectors, package-web, package-rc4d3" 
+    <target name="package" depends="package-desktop, package-web, package-rc4d3" 
 		description="package-desktop, package-web, package-rc4d3"/>
 	
     <target name="package-desktop" description="collect the desktop romloader and dependencies into a zip file">
@@ -88,6 +88,32 @@ Tasks to build and package the r-c4d3 romloaders.
 		<copy file="${dir.source}/resources/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop/romloader-config.xml"/>
 		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-desktop"/>
 		<zip destfile="${dir.target}/romloader-desktop.zip" basedir="${dir.target}/temp-desktop"/>
+	</target>
+	
+    <target name="package-web" description="collect the web-based romloader and dependencies into a zip file">
+		<mkdir dir="${dir.target}/temp-web"/>
+		<copy file="${dir.source}/resources/romloader-config-web.xml" tofile="${dir.target}/temp-web/romloader-config.xml"/>
+		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-web"/>
+		<copy file="${dir.source}/resources/index-web.html" todir="${dir.target}/temp-web"/>
+		<copy file="${dir.target}/romloader-web.swf" todir="${dir.target}/temp-web"/>
+		<zip destfile="${dir.target}/romloader-web.zip" basedir="${dir.target}/temp-web"/>
+	</target>
+	
+    <target name="package-rc4d3" description="collect the web-based r-c4d3 romloader and dependencies into a zip file">
+		<mkdir dir="${dir.target}/temp-rc4d3"/>
+		<copy file="${dir.source}/resources/romloader-config-web.xml" tofile="${dir.target}/temp-rc4d3/romloader-config.xml"/>
+		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-rc4d3"/>
+		<copy file="${dir.source}/resources/index-rc4d3.html" todir="${dir.target}/temp-rc4d3"/>
+		<copy file="${dir.target}/romloader-rc4d3.swf" todir="${dir.target}/temp-rc4d3"/>
+		<zip destfile="${dir.target}/romloader-rc4d3.zip" basedir="${dir.target}/temp-rc4d3"/>
+	</target>
+	
+	<target name="release" description="copy zips to ${dir.releases}">
+		<copy todir="${dir.releases}" overwrite="true" failonerror="false">
+			<fileset dir="${dir.target}">
+				<include name="**/*.zip"/>
+			</fileset>
+		</copy>
 	</target>
 	
 	<target name="add-projectors" unless="skip.add.projectors" description="prepares romloader swf for conversion to projector">
@@ -117,32 +143,6 @@ Press Enter when ready...
 			basedir="${dir.target}/temp-desktop-projectors"
 			update="true"
 			/>
-	</target>
-	
-    <target name="package-web" description="collect the web-based romloader and dependencies into a zip file">
-		<mkdir dir="${dir.target}/temp-web"/>
-		<copy file="${dir.source}/resources/romloader-config-web.xml" tofile="${dir.target}/temp-web/romloader-config.xml"/>
-		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-web"/>
-		<copy file="${dir.source}/resources/index-web.html" todir="${dir.target}/temp-web"/>
-		<copy file="${dir.target}/romloader-web.swf" todir="${dir.target}/temp-web"/>
-		<zip destfile="${dir.target}/romloader-web.zip" basedir="${dir.target}/temp-web"/>
-	</target>
-	
-    <target name="package-rc4d3" description="collect the web-based r-c4d3 romloader and dependencies into a zip file">
-		<mkdir dir="${dir.target}/temp-rc4d3"/>
-		<copy file="${dir.source}/resources/romloader-config-web.xml" tofile="${dir.target}/temp-rc4d3/romloader-config.xml"/>
-		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-rc4d3"/>
-		<copy file="${dir.source}/resources/index-rc4d3.html" todir="${dir.target}/temp-rc4d3"/>
-		<copy file="${dir.target}/romloader-rc4d3.swf" todir="${dir.target}/temp-rc4d3"/>
-		<zip destfile="${dir.target}/romloader-rc4d3.zip" basedir="${dir.target}/temp-rc4d3"/>
-	</target>
-	
-	<target name="release" description="copy zips to ${dir.releases}">
-		<copy todir="${dir.releases}" failonerror="false">
-			<fileset dir="${dir.target}">
-				<include name="**/*.zip"/>
-			</fileset>
-		</copy>
 	</target>
 
 </project>
