@@ -40,11 +40,9 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		
 		override public function initialize():Boolean
 		{
-			if (!super.initialize()) return false;
-			
 			numEvents = 0;
 			
-			return true;
+			return super.initialize();
 		}
 		
 		override protected function onFirstScreen():void

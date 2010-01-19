@@ -177,14 +177,33 @@ package com.pixeldroid.r_c4d3.scores
 		}
 		
 		
-		/** @inheritdoc */
+		/**
+		Generates a displayable list of initials (up to 10 chars) and scores (up to 12 digits).
+		
+		<p>
+		The character and digit limits are arbitrary for this toString implementation. 
+		Override this method to implement custom formats.
+		</p>
+
+		<p>
+		The following is a sample of the type of output toString produces:		
+<listing version="3.0" >
+    1. Mr. Yellow : 999,999,999,999
+    2. Mr. Green  :       1,234,567
+    3. Ms. Red    :              89
+    4. Ms. Magent :               0
+</listing>
+		</p>
+		*/
 		override public function toString():String {
 			var s:String = "";
 			var n:int = scores.length;
-			var p:String;
+			var s1:String, s2:String, s3:String;
 			for (var i:int = 0; i < n; i++) {
-				p = pad((i+1).toString(), 5, " ");
-				s += p +". " +initials[i] +" : " +pad(chunk(scores[i].toString(), 3, ","), 12, " ") +"\n";
+				s1 = pad((i+1).toString(), 5, " ");
+				s2 = pad(initials[i].substring(0,10), 10, " ");
+				s3 = pad(chunk(scores[i].toString(), 3, ","), 12, " ");
+				s += s1 +". " +s2 +" : " +s3 +"\n";
 			}
 			
 			return s;
