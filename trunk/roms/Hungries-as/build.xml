@@ -50,8 +50,8 @@ Tasks to build and package the AS3 Hungries game rom.
 		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.source}/resources/config/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop/romloader-config.xml"/>
 		<unzip src="${dir.releases}/romloader-desktop.zip" dest="${dir.target}/temp-desktop">
-			<patternset includes="${romloader.projector.name}"/>
-			<mapper type="glob" from="${romloader.projector.name}" to="${game.name}${exe}"/>
+			<patternset includes="romloader-desktop*"/>
+			<mapper type="glob" from="romloader-desktop*" to="${game.name}*"/>
 		</unzip>
 		<zip destfile="${dir.target}/${game.name}-desktop.zip" basedir="${dir.target}/temp-desktop"/>
 	</target>
