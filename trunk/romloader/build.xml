@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="r-c4d3 tools: romloader (as3)" default="-usage" basedir="./">
+<project name="r-c4d3.romloader-as3" default="-usage" basedir="./">
 
 <description>
 Tasks to build and package the r-c4d3 romloaders.
