@@ -4,6 +4,9 @@ _currently_
   * *roms* game with motor2 physics integration
   * *roms* guimark / FlashSAT score
   * *romloader* ui for runtime keymapping
+  * user manual wiki pages (about components, framework architecture, simple game walkthru)
+  * *framework* API documentation review
+  * *framework* examples pulled into docs
   * *framework* unit tests
   * *framework* issue identification and resolution
   * *framework* add trackball to joystick types for mouse support
