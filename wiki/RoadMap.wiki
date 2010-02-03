@@ -1,8 +1,8 @@
 _currently_
 == Focus 002: alpha ==
   * *roms* moderately complex game
-  * *roms* game with motor2 physics integration
-  * *roms* guimark / FlashSAT score
+  * *roms* game with [http://code.google.com/p/polygonal/wiki/Motor2 motor2] physics integration
+  * *roms* [http://www.craftymind.com/guimark/ GUIMark] / [http://en.wikipedia.org/wiki/Windows_System_Assessment_Tool FlashSAT] score
   * *romloader* ui for runtime keymapping
   * user manual wiki pages (about components, framework architecture, simple game walkthru)
   * *framework* API documentation review
@@ -48,7 +48,7 @@ _queueing up_
   * *roms* add screenshots and trailers list fields to meta-data
   * *menu* improve admin : support list of game portals to aggregate romlists from
   * *menu* improve admin : rom sorting options
-  * *server* google app engine for rom registry, high scores, and ratings
+  * *server* [http://code.google.com/appengine/docs/whatisgoogleappengine.html google app engine] for rom registry, high scores, and ratings
   * *shell* rewrite on chromium / webkit to be cross-platform
 
 === Focus 0??: other ideas ===
