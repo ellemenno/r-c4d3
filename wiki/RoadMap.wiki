@@ -9,13 +9,13 @@ _currently_
   * *framework* add trackball to joystick types for mouse support
 
 == Focus 001: barebones ==
+  * *romloader* document / simplify exe creation
+  * *shared* config files for joy2key and xpadder
   * ~~*framework* stabilize~~
   * ~~*romloader* desktop win / osx / nix~~
   * ~~project summary links to romloaders~~
-  * *romloader* document / simplify exe creation
   * ~~*roms* control test~~
   * ~~*roms* simple game~~
-  * *shared* config files for joy2key and xpadder
 
 == Focus 000: setup ==
   * ~~create ohloh account and integrat widgets~~
