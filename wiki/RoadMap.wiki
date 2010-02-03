@@ -13,7 +13,7 @@ _currently_
 
 == Focus 001: barebones ==
   * *romloader* document / simplify exe creation
-  * *shared* config files for joy2key and xpadder
+  * *shared* config files for [http://www.electracode.com/4/joy2key/JoyToKey%20English%20Version.htm JoyTokey] and [http://xpadder.com/ xpadder]
   * ~~*framework* stabilize~~
   * ~~*romloader* desktop win / osx / nix~~
   * ~~project summary links to romloaders~~
