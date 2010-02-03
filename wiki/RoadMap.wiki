@@ -1,45 +1,55 @@
-#summary TODOs for the project components.
-
-
-The following is what we have on the drawing board.
-
-== Phase 001 ==
-  * ~~create an ohloh account~~
-  * ~~improve project description and integrate ohloh widgets~~
-  * ~~*framework* update mime-type for asdoc and link from project summary page~~ (r3),(r4)
-  * ~~*framework* add hx-classes task to build scripts~~ (r10)
-  * *installation* fill in the missing files to have a useable install
-  * *menushell* validate that the source code compiles after being transferred from cold storage
+_currently_
+== Focus 002: alpha ==
+  * *roms* moderately complex game
+  * *roms* game with motor2 physics integration
+  * *roms* guimark / FlashSAT score
+  * *romloader* ui for runtime keymapping
+  * *framework* unit tests
+  * *framework* issue identification and resolution
   * *framework* add trackball to joystick types for mouse support
-  * *menu* update to as3 and framework swc
-  * *menu* add admin panel
-    * about
-    * romlist url
-  * *romloader* add ui for runtime configuration of keymapping
-  * *roms* add full-featured example(s), using control and score proxies
-  * *roms* add screenshots and trailers list fields to meta-data
+
+== Focus 001: barebones ==
+  * ~~*framework* stabilize~~
+  * ~~*romloader* desktop win / osx / nix~~
+  * ~~project summary links to romloaders~~
+  * *romloader* document / simplify exe creation
+  * ~~*roms* control test~~
+  * ~~*roms* simple game~~
+  * *shared* config files for joy2key and xpadder
+
+== Focus 000: setup ==
+  * ~~create ohloh account and integrat widgets~~
+  * ~~determine usable file structure (ref [http://www.gradle.org/0.8/docs/userguide/java_plugin.html#N1158A gradle], [http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html maven])~~
+  * ~~*framework* build scripts~~
+  * ~~*framework* mime types set for asdoc~~
+  * ~~project summary links to api docs~~
+
+----
+_queueing up_
+=== Focus 003: r-c4d3 portal v1 ===
+  * *romloader* web, r-c4d3 portal
+  * *installation* provide usable release
+  * *menushell* validate old project files
+  * *menu* update to as3 and current framework
+  * *menu* add admin panel (about info, romlist url)
   * *roms* add instructions field to meta-data
   * *roms* adopt [http://www.tigrs.org/?page=pubinfo TIGRS rating system] - http://www.tigrs.org/?page=generate
-  * *roms* add task to generate about page for game from meta xml, e.g. http://www.us.playstation.com/PS3/Games/LittleBigPlanet
-  * *server* refactor scoreserver component to more general _server_ and add php script to auto-gen the romslist json
-
-== Phase 002 ==
-  * *shell* add method to clear cache
+  * *roms* add minimum performance score to metabata
+  * *roms* add device icons to metadata (MO - mouse only, KO - keys only, MK - mouse+keys, GP - usb gamepad, TS - touchscreen)
+  * *server* server script to autogen romslist json file
+  * *server* add task to generate about page for game from meta xml, e.g. [http://www.us.playstation.com/PS3/Games/LittleBigPlanet us.playstation.com]
+  * *shell* method to clear cache
   * *framework* add ga snippet to docs (? necessary, or does top level ga code handle doc browsing?)
-  * *roms* performance score rom
-  * *roms* add minimum performance score metabata
-  * *roms* add device icons (MO - mouse only, KO - keys only, MK - mouse+keys, GP - usb gamepad, CB - chumby); wii == MO; ps3 =? MK
-  * *menushell* set device mode (MO,KO,MK,GP), in config and in UI to control romloaders selected for game loading
-  * *installation* re-org to support core device-type romloaders from include, php-gen the index.html
-  * *menu* improve admin functionality:
-    * support list of game portals to aggregate romlists from
-    * rom sorting options
 
-== Phase 00Later ==
-  * continuous integration and unit testing
-  * *menushell* chumby target (fp8-flash lite 3.0) - 320x240 (will scaling handle it?)
-  * *menushell* ps3 target (fp9)
-  * *menushell* wii target (fp7)
-  * *roms* add device icons for new targets (CB - chumby, wii == MO, ps3 =? MK)
-  * *installation* seat on frameworky? - http://code.google.com/p/frameworky/
-  * *roms* more excamples in more languages (esp. haxe, canvas, java)
+=== Focus 00?: r-c4d3 portal v2 ===
+  * *roms* add screenshots and trailers list fields to meta-data
+  * *menu* improve admin : support list of game portals to aggregate romlists from
+  * *menu* improve admin : rom sorting options
+  * *server* google app engine for rom registry, high scores, and ratings
+  * *shell* rewrite on chromium / webkit to be cross-platform
+
+=== Focus 0??: other ideas ===
+  * CI server with hudson and sonar
+  * code quality dashboard page
+  * google viz [http://code.google.com/apis/visualization/documentation/gallery.html widgets]
+  * *roms* more examples in more languages (_esp._ haxe, canvas, java)
