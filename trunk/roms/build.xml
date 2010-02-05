@@ -5,37 +5,29 @@
 <description>
 Top level build file for all r-c4d3 roms.
 </description>
+	
+	<property name="dir.trunk" value=".."/>
+	<import file="${dir.trunk}/build_init.xml"/>
 
-	<property name="skip.rom.launches" value="true"/>
+
 	
-	<target name="-usage" description="ant &lt;target&gt;">
-		<java classname="org.apache.tools.ant.Main">
-			<arg value="-projecthelp" />
-		</java>
-	</target>
-	
-    <target name="build" depends="controltest-as3, asteroids-as3" 
-		description="&gt; this is the main task: controltest-as3, asteroids-as3"/>
+    <target name="build" description="&gt; this is the main task">
+    	<antcall target="build-rom"><param value="Asteroids-as" name="rom.folder"/></antcall>
+    	<antcall target="build-rom"><param value="ControlTest-as" name="rom.folder"/></antcall>
+    	<antcall target="build-rom"><param value="Hungries-as" name="rom.folder"/></antcall>
+    </target>
 	
 	
-	<target name="controltest-as3" description="calls the build task of ${basedir}/ControlTest-as/build.xml">
+    <target name="build-rom" description="reusable task to build rom indicated by the 'rom.folder' param">
+    	<echo message="compiling ${rom.folder}"/>
 		<ant
-			antfile="${basedir}/ControlTest-as/build.xml"
-			dir="${basedir}/ControlTest-as"
-			inheritall="true"
-			inheritrefs="true"
+			antfile="${basedir}/${rom.folder}/build.xml"
+			dir="${basedir}/${rom.folder}"
+			inheritall="false"
 			target="build"
-			/>
-	</target>
-	
-	<target name="asteroids-as3" description="calls the build task of ${basedir}/Asteroids-as/build.xml">
-		<ant
-			antfile="${basedir}/Asteroids-as/build.xml"
-			dir="${basedir}/Asteroids-as"
-			inheritall="true"
-			inheritrefs="true"
-			target="build"
-			/>
+			>
+			<property name="skip.rom.launches" value="true"/>
+		</ant>
 	</target>
 
 </project>
