@@ -1,19 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="init" default="init" basedir="./">
+<project name="init" default="-usage" basedir="./">
 
 <description>
 Looks for and sets common properties used by all the build files in the r-c4d3 project.
 </description>
 
-	<target name="init"/> <!-- This is never called from this file, but is set as the default target. -->
+	<target name="-usage" description="ant &lt;target&gt;">
+		<java classname="org.apache.tools.ant.Main">
+			<arg value="-projecthelp" />
+		</java>
+	</target>
+	
 
 	<!-- Set convenience suffixes for executables across platforms. -->
 	<condition property="exe" value=".exe">
 		<os family="windows"/>
 	</condition>
+	<condition property="exe" value=".app">
+		<and>
+			<os family="unix"/>
+			<os family="mac"/>
+		</and>
+	</condition>
 	<condition property="exe" value="">
-		<os family="unix"/>
+		<and>
+			<os family="unix"/>
+			<not><os family="mac"/></not>
+		</and>
+	</condition>
+
+	<!-- Set 3 character os label -->
+	<condition property="os" value="win">
+		<os family="windows"/>
+	</condition>
+	<condition property="os" value="osx">
+		<and>
+			<os family="unix"/>
+			<os family="mac"/>
+		</and>
+	</condition>
+	<condition property="os" value="nix">
+		<and>
+			<os family="unix"/>
+			<not><os family="mac"/></not>
+		</and>
 	</condition>
 	
 	
