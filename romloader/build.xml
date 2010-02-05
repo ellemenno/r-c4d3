@@ -20,12 +20,6 @@ Tasks to build and package the r-c4d3 romloaders.
 	<property file="build.properties"/>
 	
 	
-	<target name="-usage" description="ant &lt;target&gt;">
-		<java classname="org.apache.tools.ant.Main">
-			<arg value="-projecthelp" />
-		</java>
-	</target>
-	
     <target name="build" depends="compile, document, package, release, add-projectors" 
 		description="&gt; this is the main task: compile, document, package, release, add-projectors"/>
 	
@@ -139,7 +133,7 @@ Press Enter when ready...
 		</input>
 		<delete file="${dir.target}/temp-desktop-projectors/romloader-desktop.swf"/>
 		<zip 
-			destfile="${dir.releases}/romloader-desktop.zip" 
+			destfile="${dir.releases}/romloader-desktop-${os}.zip"
 			basedir="${dir.target}/temp-desktop-projectors"
 			update="true"
 			/>
