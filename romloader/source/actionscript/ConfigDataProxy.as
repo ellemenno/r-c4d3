@@ -22,14 +22,14 @@ package
 			&lt;!-- key mappings, player numbers start at 1 --&gt;
 			&lt;keymappings&gt;
 				&lt;joystick playerNumber="1"&gt;
-					&lt;hatUp    keyCode="38" /&gt;
 					&lt;hatRight keyCode="39" /&gt;
+					&lt;hatUp    keyCode="38" /&gt;
 					&lt;hatLeft  keyCode="37" /&gt;
 					&lt;hatDown  keyCode="40" /&gt;
-					&lt;buttonY  keyCode="17" /&gt;
-					&lt;buttonR  keyCode="46" /&gt;
-					&lt;buttonG  keyCode="35" /&gt;
-					&lt;buttonB  keyCode="34" /&gt;
+					&lt;buttonX  keyCode="17" /&gt;
+					&lt;buttonA  keyCode="46" /&gt;
+					&lt;buttonB  keyCode="35" /&gt;
+					&lt;buttonC  keyCode="34" /&gt;
 				&lt;/joystick&gt;
 			&lt;/keymappings&gt;
 			
