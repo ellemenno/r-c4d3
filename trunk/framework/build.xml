@@ -19,12 +19,6 @@ Tasks to build and package the r-c4d3 as3 framework.
 	<property file="build.properties"/>
 	
 	
-	<target name="-usage" description="ant &lt;target&gt;">
-		<java classname="org.apache.tools.ant.Main">
-			<arg value="-projecthelp" />
-		</java>
-	</target>
-	
     <target name="build" depends="compile, test, haxe, document, release" 
 		description="&gt; this is the main task: compile, haxe, document, release"/>
 	
