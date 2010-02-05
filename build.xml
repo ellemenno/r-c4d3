@@ -6,11 +6,7 @@
 Top level build file for all components of the r-c4d3 platform.
 </description>
 	
-	<target name="-usage" description="ant &lt;target&gt;">
-		<java classname="org.apache.tools.ant.Main">
-			<arg value="-projecthelp" />
-		</java>
-	</target>
+	<import file="build_init.xml"/>
 	
     <target name="build" depends="framework, romloader, roms" 
 		description="&gt; this is the main task: framework, romloader, roms"/>
@@ -21,17 +17,19 @@ Top level build file for all components of the r-c4d3 platform.
 			antfile="${basedir}/framework/build.xml"
 			dir="${basedir}/framework"
 			target="build"
+			inheritall="false"
 			/>
 	</target>
 			
 	<target name="romloader" description="calls the build task of ${basedir}/romloader/build.xml">
-		<property name="skip.add.projectors" value="true"/>
 		<ant
 			antfile="${basedir}/romloader/build.xml"
 			dir="${basedir}/romloader"
 			target="build"
-			inheritall="true"
-			/>
+			inheritall="false"
+			>
+			<property name="skip.add.projectors" value="true"/>
+		</ant>
 	</target>
 			
 	<target name="roms" description="calls the build task of ${basedir}/roms/build.xml">
@@ -39,6 +37,7 @@ Top level build file for all components of the r-c4d3 platform.
 			antfile="${basedir}/roms/build.xml"
 			dir="${basedir}/roms"
 			target="build"
+			inheritall="false"
 			/>
 	</target>
 
