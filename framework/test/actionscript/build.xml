@@ -11,47 +11,33 @@ Top level build file for all r-c4d3 framework tests.
 
 
 	
-	<target name="-usage" description="ant &lt;target&gt;">
-		<java classname="org.apache.tools.ant.Main">
-			<arg value="-projecthelp" />
-		</java>
+    <target name="build" description="&gt; this is the main task">
+    	<antcall target="compile-test">
+    		<param value="com/pixeldroid/r_c4d3/scores/GameScoresProxyTest.as" name="src.main"/>
+    	</antcall>
+    	<antcall target="compile-test">
+    		<param value="com/pixeldroid/r_c4d3/game/control/SignalTest.as" name="src.main"/>
+    	</antcall>
+    	<antcall target="compile-test">
+    		<param value="com/pixeldroid/r_c4d3/tools/console/ConsoleTest.as" name="src.main"/>
+    	</antcall>
+    	<antcall target="compile-test">
+    		<param value="com/pixeldroid/r_c4d3/tools/framerate/FpsMeterTest.as" name="src.main"/>
+    	</antcall>
+    	<antcall target="compile-test">
+    		<param value="com/pixeldroid/r_c4d3/tools/perfmon/PerfMonTest.as" name="src.main"/>
+    	</antcall>
 	</target>
 	
-    <target name="build" depends="scores, tools-console, tools-fps, tools-perfmon" 
-		description="&gt; this is the main task"/>
 	
-	
-    <target name="scores" description="compile the scores test">
+    <target name="compile-test" description="reusable task to compile tests provided via the 'src.main' param">
+    	<echo message="compiling ${src.main}"/>
     	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="com/pixeldroid/r_c4d3/scores/GameScoresProxyTest.as"/>
+			<arg line="${src.main}"/>
 			<arg line="-sp=./"/>
 			<arg line="-sp=../../source/actionscript"/>
 		</exec>
 	</target>
 	
-    <target name="tools-console" description="compile the console test">
-    	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="com/pixeldroid/r_c4d3/tools/console/ConsoleTest.as"/>
-			<arg line="-sp=./"/>
-			<arg line="-sp=../../source/actionscript"/>
-		</exec>
-	</target>
-	
-    <target name="tools-fps" description="compile the fps test">
-    	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="com/pixeldroid/r_c4d3/tools/framerate/FpsMeterTest.as"/>
-			<arg line="-sp=./"/>
-			<arg line="-sp=../../source/actionscript"/>
-		</exec>
-	</target>
-	
-    <target name="tools-perfmon" description="compile the perfmon test">
-    	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="com/pixeldroid/r_c4d3/tools/perfmon/PerfMonTest.as"/>
-			<arg line="-sp=./"/>
-			<arg line="-sp=../../source/actionscript"/>
-		</exec>
-	</target>
-
 </project>
 
