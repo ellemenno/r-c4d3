@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="init-roms" default="-usage">
+
+<description>
+Import file. $${basedir} should be set by importing script.
+Contains reusable tasks for building and deploying roms.
+Expects $${game.name} and $${dir.trunk} to be set before import.
+</description>
+	
+	<property name="dir.source" value="${basedir}/source"/>
+	<property name="dir.config" value="${basedir}/config"/>
+	<property name="dir.target" value="${basedir}/target"/>
+	
+	<property name="dir.releases" value="${dir.trunk}/_releases"/>
+
+	
+	
+    <target name="build" depends="compile, package, release, launch" 
+		description="&gt; this is the main task: compile, package, release"/>
+	
+	<target name="clean" description="remove the contents of ${dir.target}">
+		<delete failonerror="false" includeemptydirs="true">
+			<!-- excluding .swf and .swf.cache for incremental compilation -->
+			<fileset dir="${dir.target}" includes="**/*" excludes="*.swf*"/>
+		</delete>
+	</target>
+	
+    <target name="compile" depends="clean" description="compile the ${game.name} rom">
+    	<exec executable="${flex.mxmlc}" failonerror="true">
+			<arg line="'${dir.source}/actionscript/${game.name}.as'"/>
+			<arg line="-output='${dir.target}/rom.swf'"/>
+			<arg line="-load-config+='${dir.config}/mxmlc-config.xml'"/>
+			<arg line="-compiler.incremental=true"/>
+		</exec>
+	</target>
+	
+    <target name="package" depends="package-desktop, package-web" 
+		description="package-desktop, package-web"/>
+	
+    <target name="package-desktop" description="collect the desktop version and its dependencies into a zip file">
+		<mkdir dir="${dir.target}/temp-desktop"/>
+		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop"/>
+		<copy file="${dir.source}/resources/config/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop/romloader-config.xml"/>
+		<unzip src="${dir.releases}/romloader-desktop-${os}.zip" dest="${dir.target}/temp-desktop">
+			<patternset includes="romloader-desktop*"/>
+			<mapper type="glob" from="romloader-desktop*" to="${game.name}*"/>
+		</unzip>
+		<zip destfile="${dir.target}/${game.name}-desktop-${os}.zip" basedir="${dir.target}/temp-desktop"/>
+	</target>
+	
+    <target name="package-web" description="collect the web-based version and its dependencies into a zip file">
+		<mkdir dir="${dir.target}/temp-web"/>
+		<copy todir="${dir.target}/temp-web">
+			<fileset includes="**/*" dir="${dir.source}/resources/web"/>
+		</copy>
+		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-web"/>
+		<copy file="${dir.source}/resources/config/romloader-config-web.xml" tofile="${dir.target}/temp-web/romloader-config.xml"/>
+		<unzip src="${dir.releases}/romloader-web.zip" dest="${dir.target}/temp-web">
+			<patternset includes="romloader-web.swf"/>
+			<mapper type="glob" from="romloader-web.swf" to="romloader.swf"/>
+		</unzip>
+		<zip destfile="${dir.target}/${game.name}-web.zip" basedir="${dir.target}/temp-web"/>
+	</target>
+	
+	<target name="release" description="copy zips to ${dir.releases}/roms">
+		<copy todir="${dir.releases}/roms" failonerror="false">
+			<fileset dir="${dir.target}">
+				<include name="**/*.zip"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="launch" unless="skip.rom.launches" description="launch the rom in the desktop romloader">
+		<exec executable="${dir.target}/temp-desktop/${game.name}${exe}" failonerror="false"/>
+	</target>
+
+</project>
+

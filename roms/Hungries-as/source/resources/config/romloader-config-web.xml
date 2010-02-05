@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!-- 
+	for details of supported settings, see 
+	http://r-c4d3.googlecode.com/svn/trunk/_documentation/romloader-api/ConfigDataProxy.html 
+-->
 <configuration>
 
 
