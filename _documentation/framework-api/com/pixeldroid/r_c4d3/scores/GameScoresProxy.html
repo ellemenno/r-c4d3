@@ -208,7 +208,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#toString()">toString</a>():String</div>
-<div class="summaryTableDescription"> </div>
+<div class="summaryTableDescription">
+  Generates a displayable list of initials (up to 10 chars) and scores (up to 12 digits).</div>
 </td><td class="summaryTableOwnerCol">GameScoresProxy</td>
 </tr>
 </table>
@@ -508,7 +509,24 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public override function toString():String</code><p> </p><p></p>
+<code>public override function toString():String</code><p>
+  Generates a displayable list of initials (up to 10 chars) and scores (up to 12 digits).
+  
+  </p><p>
+  The character and digit limits are arbitrary for this toString implementation. 
+  Override this method to implement custom formats.
+  </p>
+
+  <p>
+  The following is a sample of the type of output toString produces:  
+<div class='listing'><pre>
+    1. Mr. Yellow : 999,999,999,999
+    2. Mr. Green  :       1,234,567
+    3. Ms. Red    :              89
+    4. Ms. Magent :               0
+</pre></div>
+  </p>
+  <p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>

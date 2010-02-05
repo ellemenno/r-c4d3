@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="ScoreEntry,com.pixeldroid.r_c4d3.scores.ScoreEntry,label,value,accepted,clone,setAccepted,toString" name="keywords">
+<meta content="ScoreEntry,com.pixeldroid.r_c4d3.scores.ScoreEntry,label,value,accepted,clone,toString" name="keywords">
 <title>com.pixeldroid.r_c4d3.scores.ScoreEntry</title>
 </head>
 <body>
@@ -39,7 +39,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
+ Value Object for storing scores associated with player data.
+ Designed for use with IGameScoreProxy implementors.
+ 
  <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../interfaces/IGameScoresProxy.html" target="">com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy</a>
+</div>
 <br>
 <hr>
 </div>
@@ -52,17 +61,18 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#accepted">accepted</a> : Boolean<div class="summaryTableDescription">[read-only]
-  </div>
+  When submitted to an IGameScoresProxy, this flag will be set indicating 
+  whether the score was accepted into the high score list (true) or not (false).</div>
 </td><td class="summaryTableOwnerCol">ScoreEntry</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#label">label</a> : String<div class="summaryTableDescription">
-  </div>
+  The player data (e.g.</div>
 </td><td class="summaryTableOwnerCol">ScoreEntry</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#value">value</a> : Number<div class="summaryTableDescription">
-  </div>
+  The score.</div>
 </td><td class="summaryTableOwnerCol">ScoreEntry</td>
 </tr>
 </table>
@@ -79,7 +89,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#ScoreEntry()">ScoreEntry</a>(value:Number, label:String = null)</div>
 <div class="summaryTableDescription">
-  </div>
+  Constructor.</div>
 </td><td class="summaryTableOwnerCol">ScoreEntry</td>
 </tr>
 <tr class="">
@@ -94,17 +104,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#setAccepted()">setAccepted</a>(value:Boolean, authorization:<a href="../interfaces/IGameScoresProxy.html">IGameScoresProxy</a>):void</div>
-<div class="summaryTableDescription">
-  </div>
-</td><td class="summaryTableOwnerCol">ScoreEntry</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
 <a class="signatureLink" href="#toString()">toString</a>():String</div>
 <div class="summaryTableDescription">
-  </div>
+  Returns a simple human readable string.</div>
 </td><td class="summaryTableOwnerCol">ScoreEntry</td>
 </tr>
 </table>
@@ -124,6 +126,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>accepted:Boolean</code>&nbsp;&nbsp;[read-only]<p>
+  When submitted to an IGameScoresProxy, this flag will be set indicating 
+  whether the score was accepted into the high score list (true) or not (false).
   </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get accepted():Boolean</code>
@@ -137,6 +141,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var label:String</code><p>
+  The player data (e.g. initials).
   </p></div>
 <a name="value"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -146,6 +151,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var value:Number</code><p>
+  The score.
   </p></div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
@@ -157,16 +163,20 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function ScoreEntry(value:Number, label:String = null)</code><p>
+  Constructor.
+  
   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">value</span>:Number</code></td>
+<td width="20px"></td><td><code><span class="label">value</span>:Number</code> &mdash; Initial score value (optional)
+  </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">label</span>:String</code> (default = <code>null</code>)<code></code></td>
+<td width="20px"></td><td><code><span class="label">label</span>:String</code> (default = <code>null</code>)<code></code> &mdash; Initial player data (optional)
+  </td>
 </tr>
 </table>
 </div>
@@ -188,27 +198,6 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="setAccepted()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">setAccepted</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function setAccepted(value:Boolean, authorization:<a href="../interfaces/IGameScoresProxy.html">IGameScoresProxy</a>):void</code><p>
-  </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">value</span>:Boolean</code></td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
-<tr>
-<td width="20px"></td><td><code><span class="label">authorization</span>:<a href="../interfaces/IGameScoresProxy.html">IGameScoresProxy</a></code></td>
-</tr>
-</table>
-</div>
 <a name="toString()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -217,6 +206,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function toString():String</code><p>
+  Returns a simple human readable string.
   </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
