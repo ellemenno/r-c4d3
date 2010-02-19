@@ -168,6 +168,7 @@ package com.pixeldroid.r_c4d3.game
 			removeChild(gameLayer);
 			
 			removeEventListener(Event.ENTER_FRAME, onFrame);
+			Notifier.removeListener(Signals.GET_CONFIG, getConfig);
 			
 			controls = null;
 			
@@ -189,6 +190,9 @@ package com.pixeldroid.r_c4d3.game
 			gameLayer = addChild(new Sprite()) as Sprite;
 			debugLayer = addChild(new Sprite()) as Sprite;
 			
+			// listen for requests to receive config proxy
+			Notifier.addListener(Signals.GET_CONFIG, getConfig);
+			
 			// rest of initialization happens when scores and controls proxies are set
 			
 			return true;
@@ -203,6 +207,12 @@ package com.pixeldroid.r_c4d3.game
 			
 			Notifier.send(Signals.GAME_TICK, dt);
 			lastTime = now;
+		}
+		
+		protected function getConfig(callback:Function):void
+		{
+			// provide config proxy reference to callback
+			callback(config);
 		}
 		
 		

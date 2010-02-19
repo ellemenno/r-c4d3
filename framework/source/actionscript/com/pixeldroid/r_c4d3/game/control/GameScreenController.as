@@ -69,24 +69,28 @@ package com.pixeldroid.r_c4d3.game.control
 		public function shutDown():Boolean
 		{
 			C.out(this, "shutDown()");
+			removeListeners();
 			
 			// shut down current screen and remove it from its container
 			if (!currentScreen.shutDown()) throw new Error("ERROR: " +currentScreen.type +" unable to shut down");
 			screenContainer.removeChild(currentScreen as DisplayObject);
-			screenContainer = null;
 			
+			screenContainer = null;
+			controlsProxy = null;
+			
+			return true;
+		}
+		protected function removeListeners():void
+		{
 			// remove listeners from controls proxy and prep for garbage collection
 			controlsProxy.removeEventListener(JoyHatEvent.JOY_HAT_MOTION, onHatMotion);
 			controlsProxy.removeEventListener(JoyButtonEvent.JOY_BUTTON_MOTION, onButtonMotion);
-			controlsProxy = null;
 			
 			// remove listeners from messaging service
 			Notifier.removeListener(Signals.ATTRACT_LOOP_BEGIN, nextScreen);
 			Notifier.removeListener(Signals.SCREEN_GO_NEXT, nextScreen);
 			Notifier.removeListener(Signals.GAME_BEGIN, gameBegin);
 			Notifier.removeListener(Signals.GAME_TICK, gameTick);
-			
-			return true;
 		}
 		
 		/** @inheritDoc */
@@ -94,7 +98,12 @@ package com.pixeldroid.r_c4d3.game.control
 		{
 			C.out(this, "initialize()");
 			currentScreen = screenContainer.addChild(screenFactory.getScreen(screenFactory.loopStartScreenType) as DisplayObject) as ScreenBase;
+			addListeners();			
 			
+			return true;
+		}
+		protected function addListeners():void
+		{
 			// attach listeners to controls proxy
 			controlsProxy.addEventListener(JoyHatEvent.JOY_HAT_MOTION, onHatMotion);
 			controlsProxy.addEventListener(JoyButtonEvent.JOY_BUTTON_MOTION, onButtonMotion);
@@ -104,8 +113,6 @@ package com.pixeldroid.r_c4d3.game.control
 			Notifier.addListener(Signals.SCREEN_GO_NEXT, nextScreen);
 			Notifier.addListener(Signals.GAME_BEGIN, gameBegin);
 			Notifier.addListener(Signals.GAME_TICK, gameTick);
-			
-			return true;
 		}
 		
 		
@@ -114,13 +121,13 @@ package com.pixeldroid.r_c4d3.game.control
 		protected function onHatMotion(e:JoyHatEvent):void
 		{
 			try { currentScreen.onHatMotion(e); }
-			catch (e:Error) { C.out(this, "onHatMotion - Error: " +e); }
+			catch (e:Error) { handleError(e); }
 		}
 		
 		protected function onButtonMotion(e:JoyButtonEvent):void
 		{
 			try { currentScreen.onButtonMotion(e); }
-			catch (e:Error) { C.out(this, "onButtonMotion - Error: " +e); }
+			catch (e:Error) { handleError(e); }
 		}
 		
 		
@@ -129,7 +136,7 @@ package com.pixeldroid.r_c4d3.game.control
 		protected function gameTick(dt:int):void
 		{
 			try { currentScreen.onUpdateRequest(dt); }
-			catch (e:Error) { C.out(this, "gameTick - Error: " +e); }
+			catch (e:Error) { handleError(e); }
 		}
 		
 		protected function nextScreen():void
@@ -148,6 +155,12 @@ package com.pixeldroid.r_c4d3.game.control
 		
 		
 		// utility
+		protected function handleError(e:Error):void
+		{
+			C.out(this, e.getStackTrace());
+			removeListeners();
+		}
+		
 		protected function setCurrentScreen(screen:ScreenBase):void
 		{
 			var prevScreen:String = currentScreen.type;
