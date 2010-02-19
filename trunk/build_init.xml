@@ -17,17 +17,8 @@ Looks for and sets common properties used by all the build files in the r-c4d3 p
 	<condition property="exe" value=".exe">
 		<os family="windows"/>
 	</condition>
-	<condition property="exe" value=".app">
-		<and>
-			<os family="unix"/>
-			<os family="mac"/>
-		</and>
-	</condition>
 	<condition property="exe" value="">
-		<and>
-			<os family="unix"/>
-			<not><os family="mac"/></not>
-		</and>
+		<os family="unix"/>
 	</condition>
 
 	<!-- Set 3 character os label -->
