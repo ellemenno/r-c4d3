@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../../print.css" type="text/css" media="print">
-<meta content="ScreenBase,com.pixeldroid.r_c4d3.game.view.screen.ScreenBase,_type,previousFrameRate,timeElapsed,type,backgroundColor,clear,initialize,onButtonMotion,onFirstScreen,onHatMotion,onUpdateRequest,shutDown" name="keywords">
+<meta content="ScreenBase,com.pixeldroid.r_c4d3.game.view.screen.ScreenBase,_type,configProxy,previousFrameRate,timeElapsed,type,backgroundColor,clear,initialize,onButtonMotion,onFirstScreen,onHatMotion,onUpdateRequest,receiveConfig,shutDown" name="keywords">
 <title>com.pixeldroid.r_c4d3.game.view.screen.ScreenBase</title>
 </head>
 <body>
@@ -83,6 +83,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#backgroundColor">backgroundColor</a> : uint<div class="summaryTableDescription">[write-only] 
   Fills the screen (to stage dimensions) with the provided color.</div>
+</td><td class="summaryTableOwnerCol">ScreenBase</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#configProxy">configProxy</a> : <a href="../../../interfaces/IGameConfigProxy.html">IGameConfigProxy</a>
+<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">ScreenBase</td>
 </tr>
 <tr class="">
@@ -173,6 +178,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   Prompt to provide first on-screen view.</div>
 </td><td class="summaryTableOwnerCol">ScreenBase</td>
 </tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#receiveConfig()">receiveConfig</a>(value:<a href="../../../interfaces/IGameConfigProxy.html">IGameConfigProxy</a>):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">ScreenBase</td>
+</tr>
 </table>
 </div>
 <script type="text/javascript" language="javascript">
@@ -195,6 +207,15 @@ showHideInherited();
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;protected function set backgroundColor(value:uint):void</code>
 <br>
+</div>
+<a name="configProxy"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">configProxy</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var configProxy:<a href="../../../interfaces/IGameConfigProxy.html">IGameConfigProxy</a></code>
 </div>
 <a name="previousFrameRate"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -328,6 +349,20 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">dt</span>:int</code> &mdash; Time elapsed (ms) </td>
+</tr>
+</table>
+</div>
+<a name="receiveConfig()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">receiveConfig</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function receiveConfig(value:<a href="../../../interfaces/IGameConfigProxy.html">IGameConfigProxy</a>):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">value</span>:<a href="../../../interfaces/IGameConfigProxy.html">IGameConfigProxy</a></code></td>
 </tr>
 </table>
 </div>
