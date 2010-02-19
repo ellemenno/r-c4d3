@@ -33,7 +33,6 @@ package preloader
 		// IDisposable interface
 		public function initialize():Boolean
 		{
-			C.out(this, "initialize - hello", true);
 			progressBar = Shape(addChild(new Shape()));
 			progressBar.x = 0;
 			progressBar.y = stage.stageHeight * .5 - 2;

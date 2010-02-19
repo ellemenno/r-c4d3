@@ -143,7 +143,7 @@ package
 		protected function onXmlComplete(e:Event):void
 		{
 			xmlLoaded = true;
-			C.out(this, "onXmlComplete", true);
+			//C.out(this, "onXmlComplete", true);
 			configProxy = createConfigProxy(xmlLoader.data);
 			
 			controlsProxy = createControlsProxy(configProxy);
@@ -180,7 +180,7 @@ package
 		protected function onSwfComplete(e:Event):void
 		{
 			swfLoaded = true;
-			C.out(this, "onSwfComplete", true);
+			C.out(this, "onSwfComplete");
 			if (splashDone) finalizeLoad();
 		}
 
@@ -210,7 +210,7 @@ package
 		protected function onPreloaderClosed(e:Event):void
 		{
 			splashDone = true;
-			C.out(this, "onPreloaderClosed", true);
+			//C.out(this, "onPreloaderClosed", true);
 			if (swfLoaded) finalizeLoad();
 		}
 
