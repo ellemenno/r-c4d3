@@ -8,8 +8,11 @@ package com.pixeldroid.r_c4d3.game.view.screen
 	
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
+	import com.pixeldroid.r_c4d3.game.control.Notifier;
+	import com.pixeldroid.r_c4d3.game.control.Signals;
 	import com.pixeldroid.r_c4d3.interfaces.IControllable;
 	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
+	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
 	import com.pixeldroid.r_c4d3.interfaces.ITypable;
 	import com.pixeldroid.r_c4d3.interfaces.IUpdatable;
 	
@@ -24,6 +27,7 @@ package com.pixeldroid.r_c4d3.game.view.screen
 	{
 		
 		protected var _type:String;
+		protected var configProxy:IGameConfigProxy;
 		protected var timeElapsed:int;
 		protected var previousFrameRate:Number;
 		
@@ -123,6 +127,7 @@ package com.pixeldroid.r_c4d3.game.view.screen
 			C.out(this, "(base) initialize()");
 			timeElapsed = 0;
 			previousFrameRate = stage.frameRate;
+			Notifier.send(Signals.GET_CONFIG, receiveConfig);
 			onFirstScreen();
 			
 			return true;
@@ -149,6 +154,10 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		{
 			timeElapsed += dt;
 		}
+
+		
+		// callback to receive config proxy requested via notification in initialize
+		protected function receiveConfig(value:IGameConfigProxy):void { configProxy = value; }
 		
 	}
 }
