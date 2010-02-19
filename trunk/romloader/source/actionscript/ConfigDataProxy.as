@@ -139,7 +139,7 @@ package
 		/** @inheritDoc */
 		public function getPropertyValue(propertyName:String):String
 		{
-			return xmlData..properties.(attribute("name") == propertyName).toString();
+			return xmlData..properties.property.(attribute("name") == propertyName).toString();
 		}
 
 		/** @inheritDoc */
@@ -151,12 +151,14 @@ package
 		*/
 		public function toString():String
 		{
-			var s:String = "\nrom configuration";
+			var s:String = "";
 			s += "\n  loggingEnabled ? " +loggingEnabled;
+			s += "\n  statsEnabled ? " +statsEnabled;
 			s += "\n  romUrl: " +romUrl;
-			s += "\n  xmlString - - - - -\n";
+			s += "\n  gameId: " +gameId;
+			s += "\n  xmlString:  - - - - - - -\n\n";
 			s += xmlString;
-			s += "\n  - - - - - - - - - -\n\n";
+			s += "\n- - - - - - - - - - - - - -\n\n";
 			return s;
 		}
 		
