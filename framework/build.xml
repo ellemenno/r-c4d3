@@ -45,12 +45,12 @@ Tasks to build and package the r-c4d3 as3 framework.
 			/>
 	</target>
 	
-    <target name="haxe" depends="clean, compile" if="haxe.exe"
+    <target name="haxe" depends="clean, compile" if="haxe.haxe"
 		description="generate hx-classes from the r-c4d3.swc">
 		
 		<mkdir dir="${dir.target}/temp"/>
 		<unzip src="${dir.target}/r-c4d3.swc" dest="${dir.target}/temp"/>
-    	<exec executable="${haxe.exe}" dir="${dir.target}" failonerror="false"
+    	<exec executable="${haxe.haxe}" dir="${dir.target}" failonerror="false"
 			resultproperty="exitcode" errorproperty="exiterror">
 			<arg line="--gen-hx-classes '${dir.target}/temp/library.swf'"/>
 		</exec>

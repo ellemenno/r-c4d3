@@ -13,12 +13,38 @@ Looks for and sets common properties used by all the build files in the r-c4d3 p
 	</target>
 	
 
-	<!-- Set convenience suffixes for executables across platforms. -->
+	<!-- Set convenience suffixes for application executables across platforms. -->
 	<condition property="exe" value=".exe">
 		<os family="windows"/>
 	</condition>
+	<condition property="exe" value=".app">
+		<and>
+			<os family="unix"/>
+			<os family="mac"/>
+		</and>
+	</condition>
 	<condition property="exe" value="">
-		<os family="unix"/>
+		<and>
+			<os family="unix"/>
+			<not><os family="mac"/></not>
+		</and>
+	</condition>
+
+	<!-- Set convenience suffixes for command line tools across platforms. -->
+	<condition property="cli" value=".exe">
+		<os family="windows"/>
+	</condition>
+	<condition property="cli" value="">
+		<and>
+			<os family="unix"/>
+			<os family="mac"/>
+		</and>
+	</condition>
+	<condition property="cli" value="">
+		<and>
+			<os family="unix"/>
+			<not><os family="mac"/></not>
+		</and>
 	</condition>
 
 	<!-- Set 3 character os label -->
@@ -83,26 +109,25 @@ ${msg.props}
 	<property name="flex.bin" value="${FLEX_HOME}/bin"/>
 	<fail unless="flex.bin">${FLEX_HOME}/bin could not be found</fail>
 	
-	<property name="flex.asdoc" value="${flex.bin}/asdoc${exe}"/>
-	<fail unless="flex.asdoc">asdoc{exe} could not be found in ${flex.bin}</fail>
+	<property name="flex.asdoc" value="${flex.bin}/asdoc${cli}"/>
+	<fail unless="flex.asdoc">asdoc{cli} could not be found in ${flex.bin}</fail>
 	
-	<property name="flex.compc" value="${flex.bin}/compc${exe}"/>
-	<fail unless="flex.compc">compc{exe} could not be found in ${flex.bin}</fail>
+	<property name="flex.compc" value="${flex.bin}/compc${cli}"/>
+	<fail unless="flex.compc">compc{cli} could not be found in ${flex.bin}</fail>
 	
-	<property name="flex.mxmlc" value="${flex.bin}/mxmlc${exe}"/>
-	<fail unless="flex.mxmlc">mxmlc${exe} could not be found in ${flex.bin}</fail>
-
+	<property name="flex.mxmlc" value="${flex.bin}/mxmlc${cli}"/>
+	<fail unless="flex.mxmlc">mxmlc${cli} could not be found in ${flex.bin}</fail>
 	
-	<property name="haxe.exe" value="${HAXE_HOME}/haxe${exe}"/>
 	<!-- Try to warn (but not fail) when haxe.exe isn't available -->
+	<property name="haxe.haxe" value="${HAXE_HOME}/haxe${cli}"/>
 	<!--	 HACK: -->
 	<!--	 Ant doesn't support conditional echoing. -->
 	<!--	 So we are relying on an echo level hack to make it happen: -->
 	<!--		 debug level echos will typically not display (unless running ant in debug mode). -->
 	<!--		 warning level echos typically will. -->
-	<!--	 So we choose debug when haxe.exe is available, and warning when not. -->
+	<!--	 So we choose debug when haxe.haxe is available, and warning when not. -->
 	<condition property="haxe_not_found" value="debug" else="warning">
-		<available file="${haxe.exe}"/>
+		<available file="${haxe.haxe}"/>
 	</condition>
 	
 	<echo level="${haxe_not_found}">${NL}
@@ -111,6 +136,7 @@ haXe targets will NOT be built.
 
 To build haXe targets, set the HAXE_HOME property to a valid path for the haXe compiler's parent folder.
 The current value of $${HAXE_HOME} is ${HAXE_HOME}
+The path that failed to resolve for the haxe executable is ${haxe.haxe}
 ${msg.props}
 	</echo>
 	<echo level="debug">${NL}
