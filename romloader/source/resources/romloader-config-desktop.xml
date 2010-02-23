@@ -21,12 +21,10 @@
 	<!-- not defining key mappings, using default values from romloader -->
 	<keymappings />
 	
-	<!-- custom properties go here, e.g.
-		<properties>
-			<property name="fullScreen">false</property>
-		</properties>
-	-->
-	<properties />
+	<!-- custom properties go here -->
+	<properties>
+		<property name="fullScreen">true</property>
+	</properties>
 
 
 </configuration>
