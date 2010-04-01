@@ -1,36 +1,29 @@
 _currently_
-== Focus 002: alpha ==
-  * *roms* moderately complex game
-  * *roms* game with [http://code.google.com/p/polygonal/wiki/Motor2 motor2] physics integration
-  * *roms* [http://www.craftymind.com/guimark/ GUIMark] / [http://en.wikipedia.org/wiki/Windows_System_Assessment_Tool FlashSAT] score
-  * *romloader* ui for runtime keymapping
-  * user manual wiki pages (about components, framework architecture, simple game walkthru)
+=== Focus 003: docs v1 ===
+  * user manual wiki pages
+  ** detail page for each component
+  ** framework architecture diagrams
+  ** simple game creation walkthru, soup to nuts
+  ** faq
   * *framework* API documentation review
-  * *framework* examples pulled into docs
-  * *framework* unit tests
-  * *framework* issue identification and resolution
-  * *framework* add trackball to joystick types for mouse support
-
-== Focus 001: barebones ==
+  * *framework* unit test examples imported by docs
   * *romloader* document / simplify exe creation
   * *shared* config files for [http://www.electracode.com/4/joy2key/JoyToKey%20English%20Version.htm JoyTokey] and [http://xpadder.com/ xpadder]
-  * ~~*framework* stabilize~~
-  * ~~*romloader* desktop win / osx / nix~~
-  * ~~project summary links to romloaders~~
-  * ~~*roms* control test~~
-  * ~~*roms* simple game~~
 
-== Focus 000: setup ==
-  * ~~create ohloh account and integrat widgets~~
-  * ~~determine usable file structure (ref [http://www.gradle.org/0.8/docs/userguide/java_plugin.html#N1158A gradle], [http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html maven])~~
-  * ~~*framework* build scripts~~
-  * ~~*framework* mime types set for asdoc~~
-  * ~~project summary links to api docs~~
+== Focus 002: alpha ==
+  * *framework* add trackball to joystick types for mouse support
+  * *roms* moderately complex game with [http://code.google.com/p/polygonal/wiki/Motor2 motor2] or [http://www.box2dflash.org/ box2d] physics integration
+  * *roms* [http://www.craftymind.com/guimark/ GUIMark] / [http://en.wikipedia.org/wiki/Windows_System_Assessment_Tool FlashSAT] score
+  * *romloader* ui for runtime keymapping
+  * *all* update to flex4
+  * *framework* unit tests
+  * *framework* issue identification and resolution
 
 ----
 _queueing up_
-=== Focus 003: r-c4d3 portal v1 ===
+=== Focus 00?: r-c4d3 portal v1 ===
   * *romloader* web, r-c4d3 portal
+  * *romloader* desktop nix
   * *installation* provide usable release
   * *menushell* validate old project files
   * *menu* update to as3 and current framework
@@ -56,3 +49,19 @@ _queueing up_
   * code quality dashboard page
   * google viz [http://code.google.com/apis/visualization/documentation/gallery.html widgets]
   * *roms* more examples in more languages (_esp._ haxe, canvas, java)
+
+----
+_previously_
+== Focus 001: barebones ==
+  * ~~*framework* stabilize~~
+  * ~~*romloader* desktop win / osx~~
+  * ~~project summary links to romloaders~~
+  * ~~*roms* control test~~
+  * ~~*roms* simple game~~
+
+== Focus 000: setup ==
+  * ~~create ohloh account and integrat widgets~~
+  * ~~determine usable file structure (ref [http://www.gradle.org/0.8/docs/userguide/java_plugin.html#N1158A gradle], [http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html maven])~~
+  * ~~*framework* build scripts~~
+  * ~~*framework* mime types set for asdoc~~
+  * ~~project summary links to api docs~~
