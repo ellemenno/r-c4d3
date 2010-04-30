@@ -13,14 +13,17 @@ package com.pixeldroid.r_c4d3.controls
 	
 	/**
 	An implementation of IGameControlsProxy for the R_C4D3 system.
+	
 	<p>
 	Maps keyboard events to JoyHat and JoyButton events.
 	</p>
+	
 	<p>
 	Keys initialize to the default R_C4D3 values, but can be customized via 
-	<code>setKeys()</code> and queried via 
-	<code>joystickGetHatKey()</code> and <code>joystickGetButtonKey()</code>
+	<code>setKeys()</code> and queried via <code>joystickGetHatKey()</code> and 
+	<code>joystickGetButtonKey()</code>
 	</p>
+	
 	<p>
 	Uses hard-coded path from PathConstants to return to menu
 	</p>
@@ -39,16 +42,15 @@ package com.pixeldroid.r_c4d3.controls
 		public function RC4D3GameControlsProxy()
 		{
 			super();
-			setDefaultCodes();
 		}
 		
 		
-		protected function setDefaultCodes():void
-		{
-			setKeys(0, 49,50,51,52,53,54,55,56);
-			setKeys(1, 81,87,69,82,84,89,85,73);
-			setKeys(2, 65,83,68,70,71,72,74,75);
-			setKeys(3, 90,88,67,86,66,78,77,188);
+		override protected function setDefaultCodes():void
+		{                                         //     r u l d x a b c
+			setKeys(0, 49,50,51,52,53,54,55,56);  // p1: 1 2 3 4 5 6 7 8
+			setKeys(1, 81,87,69,82,84,89,85,73);  // p2: q w e r t y u i
+			setKeys(2, 65,83,68,70,71,72,74,75);  // p3: a s d f g h j k
+			setKeys(3, 90,88,67,86,66,78,77,188); // p4: z x c v b n m ,
 		}
 
 		

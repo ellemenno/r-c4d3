@@ -10,24 +10,26 @@ package com.pixeldroid.r_c4d3.scores
 	
 
 	/**
-	* Base class for high score storage and retrieval.
-	*
-	* <ul>
-	* <li>Scores are kept in descending order (highest first)</li>
-	* <li>Ties are allowed (same score, different initials), 
-	*     duplicates are not (first in wins)</li>
-	* </ul>
+	Base class for high score storage and retrieval.
+	
+	<ul>
+	<li>Scores are kept in descending order (highest first)</li>
+	<li>Ties are allowed (same score, different initials), 
+	    duplicates are not (first in wins)</li>
+	</ul>
 	*/
 	public class GameScoresProxy extends EventDispatcher implements IGameScoresProxy
 	{
 		
 		/** Least number of characters a valid id may contain */
-		public static const GAMEID_MIN:int = 4;
+		static public const GAMEID_MIN:int = 4;
 		
 		/** Most number of characters a valid id may contain */
-		public static const GAMEID_MAX:int = 32;
+		static public const GAMEID_MAX:int = 32;
 		
-		private var _gameId:String; // subclasses access via gameId getter
+		/** Most scores to store */
+		static public const MAX_SCORES_DEFAULT:int = 10;
+		
 		
 		protected var MAX_SCORES:int;
 		
@@ -36,15 +38,18 @@ package com.pixeldroid.r_c4d3.scores
 		
 		protected var storeEvent:ScoreEvent;
 		protected var retrieveEvent:ScoreEvent;
+
+		
+		private var _gameId:String; // subclasses access via gameId getter
 		
 		
 		
 		/**
-		* Constructor.
-		* 
-		* @param id A unique identifier for this set of scores and initials.
-		* Must be at least GAMEID_MIN characters long, but no longer than GAMEID_MAX.
-		* @param maxScores The maximum number of entries to store (up to 100)
+		Constructor.
+		
+		@param id A unique identifier for this set of scores and initials.
+		Must be at least GAMEID_MIN characters long, but no longer than GAMEID_MAX.
+		@param maxScores The maximum number of entries to store (up to 100)
 		*/
 		public function GameScoresProxy(id:String, maxScores:int=10)
 		{
@@ -55,8 +60,6 @@ package com.pixeldroid.r_c4d3.scores
 			
 			storeEvent = new ScoreEvent(ScoreEvent.SAVE);
 			retrieveEvent = new ScoreEvent(ScoreEvent.LOAD);
-			
-			initialize();
 		}
 		
 		
@@ -79,14 +82,14 @@ package com.pixeldroid.r_c4d3.scores
 		
 		
 		/**
-		* Read the scores and initials from the storage medium.
-		* <strong>To be overridden by subclasses</strong>
+		Read the scores and initials from the storage medium.
+		<strong>To be overridden by subclasses</strong>
 		*/
 		public function load():void { clear(); /* sub-classes should override this method */ }
 		
 		/**
-		* Write the scores and initials to the storage medium.
-		* <strong>To be overridden by subclasses</strong>
+		Write the scores and initials to the storage medium.
+		<strong>To be overridden by subclasses</strong>
 		*/
 		public function store():void { /* sub-classes should override this method */ }
 		
@@ -195,7 +198,8 @@ package com.pixeldroid.r_c4d3.scores
 </listing>
 		</p>
 		*/
-		override public function toString():String {
+		override public function toString():String
+		{
 			var s:String = "";
 			var n:int = scores.length;
 			var s1:String, s2:String, s3:String;
@@ -210,11 +214,6 @@ package com.pixeldroid.r_c4d3.scores
 		}
 		
 		
-		
-		/** @private */
-		protected function initialize():void {
-			load(); // TODO: handle possibility of collision when scores are added to remote proxy while load is still happening
-		}
 		
 		/** @private */
 		protected function isApprovedChars(s:String):Boolean
