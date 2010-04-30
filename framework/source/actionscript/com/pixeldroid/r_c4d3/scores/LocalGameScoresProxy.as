@@ -1,5 +1,6 @@
 
-package com.pixeldroid.r_c4d3.scores {
+package com.pixeldroid.r_c4d3.scores
+{
 	
 	import flash.net.SharedObject;
 	import flash.net.SharedObjectFlushStatus;
@@ -14,15 +15,18 @@ package com.pixeldroid.r_c4d3.scores {
 	
 	@see com.pixeldroid.r_c4d3.scores.GameScoresProxy
 	*/
-	public class LocalGameScoresProxy extends GameScoresProxy {
+	public class LocalGameScoresProxy extends GameScoresProxy
+	{
 	
 	
 		/**
 		Constructor.
+		
 		@param id A unique identifier for this set of scores and initials
 		@param maxScores The maximum number of entries to store
 		*/
-		public function LocalGameScoresProxy(id:String, maxScores:int=10) {
+		public function LocalGameScoresProxy(id:String, maxScores:int=10)
+		{
 			super(id, maxScores);
 		}
 		
@@ -32,7 +36,8 @@ package com.pixeldroid.r_c4d3.scores {
 		Retrieve the scores from local storage.
 		<p>Dispatches <code>com.pixeldroid.r_c4d3.scores.ScoreEvent.LOAD</code></p>
 		*/
-		override public function load():void {
+		override public function load():void
+		{
 			if (!gameId) throw new Error("Error: openScoresTable() must be called prior to calling load");
 			
 			var message:String;
@@ -58,7 +63,8 @@ package com.pixeldroid.r_c4d3.scores {
 		Submit the scores to local storage.
 		<p>Dispatches <code>com.pixeldroid.r_c4d3.scores.ScoreEvent.SAVE</code></p>
 		*/
-		override public function store():void {
+		override public function store():void
+		{
 			if (!gameId) throw new Error("Error: openScoresTable() must be called prior to calling store");
 			
 			var LSO:SharedObject = SharedObject.getLocal(gameId);
@@ -75,7 +81,7 @@ package com.pixeldroid.r_c4d3.scores {
 		
 		
 		
-		private function get emptyScoreList():Object { return { scores:[], initials:[] }; }
+		protected function get emptyScoreList():Object { return { scores:[], initials:[] }; }
 	
 	}
 	
