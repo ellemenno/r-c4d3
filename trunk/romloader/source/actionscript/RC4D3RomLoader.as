@@ -58,7 +58,7 @@ package
 				configProxy.gameId, 
 				configProxy.getPropertyValue("scoreServer"),
 				GameScoresProxy.MAX_SCORES_DEFAULT,
-				true
+				configProxy.loggingEnabled
 			);
 		}
 		
