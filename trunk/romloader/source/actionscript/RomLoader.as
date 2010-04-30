@@ -31,7 +31,14 @@ package
 	
 	<p>
 	Loads a valid IGameRom SWF and provides access to an IGameConfigProxy, 
-	IGameControlsProxy, and an IGameScoresProxy. 
+	IGameControlsProxy, and an IGameScoresProxy.
+	</p>
+	
+	<p>
+	Subclasses can overide the protected proxy creation methods to supply various implementations:
+	@see #createConfigProxy
+	@see #createControlsProxy
+	@see #createScoresProxy
 	</p>
 	
 	<p>
@@ -40,6 +47,7 @@ package
 	named <code>romloader-config.xml</code> (subclasses can override the 
 	configFile getter to expect a different position or get the url from 
 	flashVars). See ConfigDataProxy for the xml format expected.
+	@see ConfigDataProxy
 	</p>
 	
 	<p>Note: <i>
@@ -181,7 +189,7 @@ package
 		{
 			swfLoaded = true;
 			C.out(this, "onSwfComplete");
-			if (splashDone) finalizeLoad();
+			if (splashDone) finalizeLoad(configProxy, controlsProxy, highScoresProxy);
 		}
 
 		
@@ -211,7 +219,7 @@ package
 		{
 			splashDone = true;
 			//C.out(this, "onPreloaderClosed", true);
-			if (swfLoaded) finalizeLoad();
+			if (swfLoaded) finalizeLoad(configProxy, controlsProxy, highScoresProxy);
 		}
 
 
@@ -372,7 +380,7 @@ package
 
 		
 		/** @private */
-		protected function finalizeLoad():void
+		protected function finalizeLoad(configProxy:IGameConfigProxy, controlsProxy:IGameControlsProxy, highScoresProxy:IGameScoresProxy):void
 		{
 			C.out(this, "finalizeLoad");
 			_removeListeners();

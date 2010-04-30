@@ -34,13 +34,16 @@ package
 			&lt;/keymappings&gt;
 			
 			&lt;!-- arbitrary property values --&gt;
-			&lt;property name="scoreServer"&gt;http://scores.foo.com&lt;/property&gt;
+			&lt;property name="fullScreen"&gt;true&lt;/property&gt;&lt;!-- for DesktopRomLoader --&gt;
+			&lt;property name="scoreServer"&gt;http://scores.foo.com&lt;/property&gt;&lt;!-- for RC4D3RomLoader --&gt;
 			&lt;property name="foo"&gt;foo value&lt;/property&gt;
 			&lt;property name="bar"&gt;bar value&lt;/property&gt;
 			&lt;property name="bat"&gt;bat value&lt;/property&gt;
 
 		&lt;/configuration&gt;
 		</listing>
+		
+		@see com.pixeldroid.r_c4d3.interfaces.IGameRom#setConfigProxy
 	*/
 	public class ConfigDataProxy implements IGameConfigProxy
 	{

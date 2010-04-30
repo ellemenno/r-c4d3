@@ -40,10 +40,10 @@ package
 		
 		
 		/** @inheritDoc */
-		override protected function createControlsProxy(configData:IGameConfigProxy):IGameControlsProxy
+		override protected function createControlsProxy(configProxy:IGameConfigProxy):IGameControlsProxy
 		{
 			var k:KeyboardGameControlsProxy = new KeyboardGameControlsProxy();
-			var d:IGameConfigProxy = configData; // shorthand for next few lines
+			var d:IGameConfigProxy = configProxy; // shorthand for next few lines
 			
 			if (d.p1HasKeys) k.setKeys(0, d.p1U, d.p1R, d.p1D, d.p1L, d.p1X, d.p1A, d.p1B, d.p1C); else C.out(this, "no keys for p1");
 			if (d.p2HasKeys) k.setKeys(1, d.p2U, d.p2R, d.p2D, d.p2L, d.p2X, d.p2A, d.p2B, d.p2C); else C.out(this, "no keys for p2");
@@ -54,9 +54,9 @@ package
 		}
 		
 		/** @inheritDoc */
-		override protected function createScoresProxy(configData:IGameConfigProxy):IGameScoresProxy
+		override protected function createScoresProxy(configProxy:IGameConfigProxy):IGameScoresProxy
 		{
-			return new LocalGameScoresProxy(configData.gameId);
+			return new LocalGameScoresProxy(configProxy.gameId);
 		}
 		
 		/** @inheritDoc */
