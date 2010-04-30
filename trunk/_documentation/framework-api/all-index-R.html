@@ -96,28 +96,39 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 <td width="20"></td><td>
  Extends the (abstract) GameScoresProxy base class to
  store high scores and initials on a remote server,
- using a web service that accepts the following parameters:<ul>
+ using a web service that accepts the following parameters:
+ <ul>
  <li><code>game</code> : <i>String</i> Unique game id</li>
  <li><code>format</code> : <i>String</i> "json" or "vrml"</li>
  <li><code>data</code> : <i>String</i> Score data--as json string--to store; omission or empty value for data triggers retrieval</li>
  </ul>
- and returns the following data:<ul>
+ 
+ and returns the following data:
+ <ul>
  <li><code>type</code>: <i>String</i> "get" or "set"</li>
  <li><code>success</code> : <i>Boolean</i></li>
  <li><code>message</code> : <i>String</i></li>
  <li><code>data</code> : <i>String</i> Score data as json string</li>
  </ul>
-  Notes:<ul>
+ 
+ Notes:<ul>
  <li>Requires <code>com.adobe.serialization.json.JSON</code></li>
+ </ul>
  
  </td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteGameScoresProxy.html#RemoteGameScoresProxy()">RemoteGameScoresProxy</a>(id, accessUrl, maxScores) &mdash; Constructor in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteGameScoresProxy.html">RemoteGameScoresProxy</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteGameScoresProxy.html#RemoteGameScoresProxy()">RemoteGameScoresProxy</a>(id, accessUrl, maxScores, isLogged) &mdash; Constructor in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteGameScoresProxy.html">RemoteGameScoresProxy</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
   Constructor.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteGameScoresProxy.html#_remoteUrl">_remoteUrl</a> &mdash; Property in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteGameScoresProxy.html">RemoteGameScoresProxy</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteGameScoresProxy.html#remoteUrl">remoteUrl</a> &mdash; Property in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteGameScoresProxy.html">RemoteGameScoresProxy</a></td>
@@ -168,6 +179,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("RÂ
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/GameScoresProxy.html#retrieveEvent">retrieveEvent</a> &mdash; Property in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/GameScoresProxy.html">GameScoresProxy</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteGameScoresProxy.html#retrieveRequest">retrieveRequest</a> &mdash; Property in class com.pixeldroid.r_c4d3.scores.<a onclick="javascript:loadClassListFrame('com/pixeldroid/r_c4d3/scores/class-list.html');" href="com/pixeldroid/r_c4d3/scores/RemoteGameScoresProxy.html">RemoteGameScoresProxy</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>

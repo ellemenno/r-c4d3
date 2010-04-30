@@ -83,9 +83,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#DataEvent()">DataEvent</a>(type:String)</div>
+<a class="signatureLink" href="#DataEvent()">DataEvent</a>(type:String, bubbles:Boolean = false, cancelable:Boolean = false)</div>
 <div class="summaryTableDescription">
-  Creates a new DataEvent instance for a specific data event type.</div>
+  Constructor.</div>
 </td><td class="summaryTableOwnerCol">DataEvent</td>
 </tr>
 <tr class="">
@@ -153,14 +153,30 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function DataEvent(type:String)</code><p>
-  Creates a new DataEvent instance for a specific data event type.
+<code>public function DataEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false)</code><p>
+  Constructor.
   
-  </p><span class="label">Parameters</span>
+  </p><p>
+  Creates a new DataEvent instance for a specific data event type.
+  </p>
+  
+  <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">type</span>:String</code> &mdash; The data event flavor, e.g. <code>DataEvent.READY</code>
   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">bubbles</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">cancelable</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
 </tr>
 </table>
 </div>
