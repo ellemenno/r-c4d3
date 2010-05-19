@@ -2,7 +2,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
 //  ADOBE SYSTEMS INCORPORATED
-//  Copyright 2005-2007 Adobe Systems Incorporated
+//  Copyright 2005-2008 Adobe Systems Incorporated
 //  All Rights Reserved.
 //
 //  NOTICE: Adobe permits you to use, modify, and distribute this file
@@ -15,6 +15,7 @@
 	width: 100%;
 }
 .titleTableTitle {
+	white-space: nowrap;
 	padding-left: 15px;
 	padding-right: 5px;
 	font-size: 13px;
@@ -55,7 +56,7 @@
 	padding-right: 5px;
 }
 .titleTableSubNav {
-	white-space: nowrap;
+	//white-space: nowrap;
 	font-size: 12px;
 }
 .titleTableRow3 {
@@ -119,9 +120,9 @@
 	display: none;
 }
 	
-* html {
+/** html {
 	overflow-y:scroll;
-}
+}*/
 
 img {
 	border:0;
@@ -351,7 +352,7 @@ html>body .summaryTable {
 body {
 	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
 	color: #ffffff;
-	background-color:#333333;
+	background-color: #333333;
 	margin: 0px;
 	padding: 0px;
 }
@@ -382,7 +383,7 @@ th	{
 }
 
 table {
-	background-color: 333333;
+	background-color: #333333;
 }
 
 table.withBorder {
@@ -508,15 +509,11 @@ h5 {
     color: #878787;
 }
 .flashonly {
-    display:none;
     color: #ffffff;
 }
 .flexonly {
+    display:none;
     color: #ffffff;
-}
-.flashOnlyX {
-	display:none;
-	color: #00CCFF;
 }
 .hide {
 	display:none;
@@ -565,4 +562,20 @@ html>body .listing pre
 .pageTop
 {
 	height:10px;
+}
+
+.hideInheritedSkinState {
+	display: none;
+}
+
+.showInheritedSkinState {
+	display: inline;
+}
+
+.hideInheritedSkinPart {
+	display: none;
+}
+
+.showInheritedSkinPart {
+	display: inline;
 }
