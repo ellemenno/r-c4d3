@@ -55,11 +55,14 @@ package com.pixeldroid.r_c4d3.scores
 		{
 			super();
 			
-			MAX_SCORES = Math.min(100, maxScores);
-			if(id) openScoresTable(id);
+			scores = [];
+			initials = [];
 			
 			storeEvent = new ScoreEvent(ScoreEvent.SAVE);
 			retrieveEvent = new ScoreEvent(ScoreEvent.LOAD);
+			
+			MAX_SCORES = Math.min(100, maxScores);
+			if(id) openScoresTable(id);
 		}
 		
 		

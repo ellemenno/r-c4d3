@@ -133,11 +133,11 @@ package com.pixeldroid.r_c4d3.controls
 		Pretty print a 4-bit int.
 		
 		@example The following code prints the bitfield value of a JoyHatEvent:
-		<listing version="3.0">
-		function onHatEvent(e:JoyHatEvent):void {
-		    trace(e.bit4ToString(e.value));
-		}
-		</listing>
+<listing version="3.0">
+function onHatEvent(e:JoyHatEvent):void {
+	trace(e.bit4ToString(e.value));
+}
+</listing>
 		*/
 		public function bit4ToString(n:int):String
 		{

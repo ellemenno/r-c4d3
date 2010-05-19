@@ -34,8 +34,9 @@ Top level build file for all r-c4d3 framework tests.
     	<echo message="compiling ${src.main}"/>
     	<exec executable="${flex.mxmlc}" failonerror="true">
 			<arg line="${src.main}"/>
-			<arg line="-sp=./"/>
-			<arg line="-sp=../../source/actionscript"/>
+			<arg line="-sp='./'"/>
+			<arg line="-sp='../../source/actionscript'"/>
+			<arg line="-static-link-runtime-shared-libraries='true'"/><!-- to use 3.0 font embedding -->
 		</exec>
 	</target>
 	

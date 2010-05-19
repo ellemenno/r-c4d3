@@ -175,7 +175,7 @@ package com.pixeldroid.r_c4d3.controls
 		Retrieves the key code currently assigned to trigger the given button.
 		
 		@paramjoystick A reference to the IJoystick to get the keycode value from.
-		@param button A KeyboardGameControlsProxy constant (<code>BTN_*</code>) 
+		@param button A KeyboardGameControlsProxy constant (<code>BTN_* </code>) 
 		representing the button to get the keycode value for.
 		*/
 		public function joystickGetButtonKey(joystick:IJoystick, button:int):uint
@@ -236,7 +236,7 @@ package com.pixeldroid.r_c4d3.controls
 		Retrieves the key code currently assigned to trigger the given hat direction.
 		
 		@param	joystick A reference to the IJoystick to get the keycode value from.
-		@param button A KeyboardGameControlsProxy constant (<code>HAT_*</code>) 
+		@param button A KeyboardGameControlsProxy constant (<code>HAT_* </code>) 
 		representing the hat direction to get the keycode value for.
 		*/
 		public function joystickGetHatKey(joystick:IJoystick, direction:int):uint
@@ -374,7 +374,7 @@ package com.pixeldroid.r_c4d3.controls
 		Provide custom key code assignment for a specific hat direction.
 		
 		@param playerIndex zero based index indicating which player joystick to set codes for.
-		@param hat A KeyboardGameControlsProxy constant (<code>HAT_*</code>) 
+		@param hat A KeyboardGameControlsProxy constant (<code>HAT_* </code>) 
 		representing the hat direction to get the keycode value for.
 		@param keyCode Keycode for hat direction
 		*/
@@ -393,7 +393,7 @@ package com.pixeldroid.r_c4d3.controls
 		Provide custom key code assignment for a specific button.
 		
 		@param playerIndex zero based index indicating which player joystick to set codes for.
-		@param button A KeyboardGameControlsProxy constant (<code>BTN_*</code>) 
+		@param button A KeyboardGameControlsProxy constant (<code>BTN_* </code>) 
 		representing the button to get the keycode value for.
 		@param keyCode Keycode for button
 		*/
@@ -485,7 +485,7 @@ package com.pixeldroid.r_c4d3.controls
 		}
 		
 		
-		
+		/** @inheritdoc */
 		override public function toString():String
 		{
 			var s:String = "[KeyboardGameControlsProxy]";

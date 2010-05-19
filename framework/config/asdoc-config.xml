@@ -43,12 +43,6 @@
 		<!-- metadata.publisher: A publisher's name to store in the SWF metadata-->
 		<publisher>pixeldroid.com</publisher>
 	</metadata>
-	
-	<!-- target-player: specifies the version of the player the application is targeting. Features requiring a later version will not be compiled into the application. The minimum value supported is "9.0.0".-->
-	<target-player>9.0.124</target-player>
-	
-	<!-- use-network: toggle whether the SWF is flagged for access to network resources-->
-	<use-network>true</use-network>
 
 	<!-- benchmark: output performance benchmark-->
 	<benchmark>true</benchmark>
@@ -60,14 +54,8 @@
 	<warnings>true</warnings>
 	
 	<compiler>
-		<!-- compiler.debug: generates a movie that is suitable for debugging-->
-		<debug>false</debug>
-	
 		<!-- compiler.verbose-stacktraces: save callstack information to the SWF for debugging-->
 		<verbose-stacktraces>false</verbose-stacktraces>
-		
-		<!-- compiler.optimize: Enable post-link SWF optimization-->
-		<optimize>true</optimize>
 		
 		<!-- compiler.library-path: list of SWC files or directories that contain SWC files
 		<library-path append="true">

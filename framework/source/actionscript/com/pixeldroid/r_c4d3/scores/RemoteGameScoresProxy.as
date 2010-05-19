@@ -173,8 +173,7 @@ package com.pixeldroid.r_c4d3.scores
 			var serverResponse:Object = e.data;
 			switch (serverResponse.type) {
 				case ("set") :
-					if (serverResponse.success == true) /*no-op*/;
-					else C.out(this, "communication error: " +serverResponse.message);
+					if (serverResponse.success != true) C.out(this, "communication error: " +serverResponse.message);
 					
 					storeEvent.success = serverResponse.success;
 					storeEvent.message = serverResponse.message;

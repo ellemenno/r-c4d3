@@ -13,36 +13,36 @@ package com.pixeldroid.r_c4d3.tools.framerate {
 	
 	
 	/**
-	* Monitors frame rate. It graphs timed averages against a target rate.
-	* 
-	* @example The following code shows a simple fps meter instantiation: 
-	* see the constructor documentation for more options:
-	* <listing version="3.0" >
-	* package {
-	*    import com.pixeldroid.tools.framerate.FpsMeter;
-	*    import flash.display.Sprite;
-	*
-	*    public class MyFpsMeterExample extends Sprite {
-	*       public function MyFpsMeterExample() {
-	*          super();
-	*          var fps:FpsMeter = new FpsMeter();
-	*          addChild(fps);
-	*          fps.targetRate = 30;
-	*       }
-	*    }
-	* }
-	* </listing>
-	*
-	* <p>
-	* This class embeds a distributable font named "PixelHugger.ttf",
-	* Copyright pixelhugger.com.
-	* </p>
-	* 
-	* @see http://www.pixelhugger.com/fonts.php
+	Monitors frame rate. It graphs timed averages against a target rate.
+	
+	<p>
+	This class embeds a distributable font named "PixelHugger.ttf",
+	Copyright pixelhugger.com.
+	</p>
+	
+	@see http://www.pixelhugger.com/fonts.php
+	
+	@example The following code shows a simple fps meter instantiation: 
+	see the constructor documentation for more options:
+<listing version="3.0" >
+package {
+   import com.pixeldroid.tools.framerate.FpsMeter;
+   import flash.display.Sprite;
+
+   public class MyFpsMeterExample extends Sprite {
+	  public function MyFpsMeterExample() {
+		 super();
+		 var fps:FpsMeter = new FpsMeter();
+		 addChild(fps);
+		 fps.targetRate = 30;
+	  }
+   }
+}
+</listing>
 	*/
 	public class FpsMeter extends Sprite {
 		
-		[Embed(source="PixelHugger.ttf", fontName="FONT")]
+		[Embed(mimeType="application/x-font", source="PixelHugger.ttf", fontName="FONT", embedAsCFF="false")]
 		private static var FONT:Class;
 		
 		private static const NUM_METERS:uint = 3;
