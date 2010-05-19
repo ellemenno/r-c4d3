@@ -12,7 +12,6 @@ package com.pixeldroid.r_c4d3.game.view.screen
 	
 	/**
 	Creates screens for the attract loop and manages their advancement order.
-	</p>
 	
 	<p>
 	This base implementation is designed to be extended and overidden to 

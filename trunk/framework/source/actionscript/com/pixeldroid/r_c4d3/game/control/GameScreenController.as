@@ -28,12 +28,13 @@ package com.pixeldroid.r_c4d3.game.control
 	
 	<p>
 	Listens for the following signals:
+	</p>
 	<ul>
 	<li>ATTRACT_LOOP_BEGIN (start the attract loop)</li>
 	<li>SCREEN_GO_NEXT (advance to next screen in the attract loop)</li>
 	<li>GAME_BEGIN (jump to the setup screen)</li>
 	<li>GAME_TICK (ask the current screen to update)</li>
-	</p>
+	</ul>
 	
 	@see com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory
 	@see com.pixeldroid.r_c4d3.game.control.Signals

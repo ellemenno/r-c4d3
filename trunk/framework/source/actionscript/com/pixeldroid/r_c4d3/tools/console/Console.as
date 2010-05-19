@@ -13,55 +13,55 @@ package com.pixeldroid.r_c4d3.tools.console {
 	import flash.utils.getTimer;
 	
 	/**
-	* Implements a simple on-screen display for viewing run-time text messages.
-	*
-	* <p>
-	* New messages accumulate at the bottom of the console, 
-	* old messages roll off the top.
-	* </p>
-	*
-	* <p>
-	* The console can be hidden, shown, paused, resumed, and cleared. Text in the console is selectable 
-	* so it can be copied to the clipboard.
-	* </p>
-	*
-	* <p>
-	* The buffer size is also configurable. As the buffer fills up, oldest lines are discarded first. 
-	* </p>
-	*
-	* <p>
-	* The console is scrollable by dragging a selection inside it with the cursor, 
-	* or clicking to give it focus and using the arrow keys, but does not provide a scrollbar.
-	* </p>
-	*
-	* @example The following code shows a simple console instantiation; 
-	* see the constructor documentation for more options:
-	* <listing version="3.0" >
-	* package {
-	*    import com.pixeldroid.tools.console.Console;
-	*    import flash.display.Sprite;
-	*
-	*    public class MyConsoleExample extends Sprite {
-	*       public function MyConsoleExample() {
-	*          super();
-	*          var C:Console = new Console();
-	*          addChild(C);
-	*          C.out("Hello World");
-	*       }
-	*    }
-	* }
-	* </listing>
-	*
-	* <p>
-	* This class embeds a distributable font named "VeraMono.ttf",
-	* Copyright 2003 by Bitstream, Inc.
-	* </p>
-	* 
-	* @see http://www.gnome.org/fonts/
+	Implements a simple on-screen display for viewing run-time text messages.
+	
+	<p>
+	New messages accumulate at the bottom of the console, 
+	old messages roll off the top.
+	</p>
+	
+	<p>
+	The console can be hidden, shown, paused, resumed, and cleared. Text in the console is selectable 
+	so it can be copied to the clipboard.
+	</p>
+	
+	<p>
+	The buffer size is also configurable. As the buffer fills up, oldest lines are discarded first. 
+	</p>
+	
+	<p>
+	The console is scrollable by dragging a selection inside it with the cursor, 
+	or clicking to give it focus and using the arrow keys, but does not provide a scrollbar.
+	</p>
+	
+	<p>
+	This class embeds a distributable font named "VeraMono.ttf",
+	Copyright 2003 by Bitstream, Inc.
+	</p>
+	
+	@see http://www.gnome.org/fonts/
+	
+	@example The following code shows a simple console instantiation; 
+	see the constructor documentation for more options:
+<listing version="3.0" >
+package {
+   import com.pixeldroid.r_c4d3.tools.console.Console;
+   import flash.display.Sprite;
+
+   public class MyConsoleExample extends Sprite {
+	  protected const C:Console = new Console();
+	  public function MyConsoleExample() {
+		 super();
+		 addChild(C);
+		 C.out("Hello World");
+	  }
+   }
+}
+</listing>
 	*/
 	public class Console extends Sprite {
 		
-		[Embed(source="VeraMono.ttf", fontName="FONT_CONSOLE")]
+		[Embed(mimeType="application/x-font", source="VeraMono.ttf", fontName="FONT_CONSOLE", embedAsCFF="false")]
 		protected static var FONT_CONSOLE:Class;
 
 		protected static const WIDTH:Number = 780;

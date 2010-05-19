@@ -12,15 +12,13 @@
 	-->
 	
 	<!-- include-sources: a list of directories and source files to include in the output SWC-->
-	<!-- !! (relative to the directory compc is invoked from)-->
+	<!-- (relative to this file's location)-->
 	<include-sources>
-		<path-element>./source/actionscript</path-element>
+		<path-element>../source/actionscript</path-element>
 	</include-sources>
 	
-	<!-- link-report: Output a XML-formatted report of all definitions linked into the application.-->
-	<!-- (relative to this file's location)
-	<link-report>../target/docs/r-c4d3-links.xml</link-report>
-	-->
+	<!-- static-link-runtime-shared-libraries: statically link the libraries specified by the -runtime-shared-libraries-path option.-->
+	<static-link-runtime-shared-libraries>true</static-link-runtime-shared-libraries>
 	
 	<metadata>
 		<!-- metadata.title: The default title to store in the SWF metadata-->
@@ -43,9 +41,6 @@
 		<!-- metadata.publisher: A publisher's name to store in the SWF metadata-->
 		<publisher>pixeldroid.com</publisher>
 	</metadata>
-	
-	<!-- target-player: specifies the version of the player the application is targeting. Features requiring a later version will not be compiled into the application. The minimum value supported is "9.0.0".-->
-	<target-player>9.0.124</target-player>
 	
 	<!-- use-network: toggle whether the SWF is flagged for access to network resources-->
 	<use-network>true</use-network>

@@ -5,24 +5,22 @@ package
 	import flash.utils.getTimer;
 
 	/**
-
-		Mini logger.
-		
-		<p>
-		trace replacement.
-		</p>
-		
-		@example Usage:
-		<listing version="3.0">
-		C.enabled = true; // just once
-		C.out(this, "bar bat baz");
-		</listing>
-		
-		@example Usage (forced trace):
-		<listing version="3.0">
-		C.out(this, "foo happened!", true); // temporary override of enabled
-		</listing>
-
+	Mini logger.
+	
+	<p>
+	trace replacement.
+	</p>
+	
+	@example Usage:
+<listing version="3.0">
+C.enabled = true; // just once
+C.out(this, "bar bat baz");
+</listing>
+	
+	@example Usage (forced trace):
+<listing version="3.0">
+C.out(this, "foo happened!", true); // temporary override of enabled
+</listing>
 	*/
 	final public class C
 	{
