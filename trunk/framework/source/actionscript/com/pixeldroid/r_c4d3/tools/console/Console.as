@@ -71,6 +71,7 @@ package {
 		protected static const FONT_SIZE:Number = 9;
 		protected static const BACK_ALPHA:Number = .8;
 		protected static const BUFFER_SIZE:int = 64;
+		protected static const LEADING:int = 2;
 		
 		protected var background:Shape;
 		protected var console:TextField;
@@ -96,7 +97,8 @@ package {
 			fgColor:uint = FORE_COLOR,
 			txtSize:Number = FONT_SIZE,
 			bgAlpha:Number = BACK_ALPHA,
-			buffer:int = BUFFER_SIZE
+			buffer:int = BUFFER_SIZE,
+			leading:int = LEADING
 		) {
 			super();
 			
@@ -113,6 +115,7 @@ package {
 			format.color = fgColor;
 			format.size = txtSize;
 			format.align = TextFormatAlign.LEFT;
+			format.leading = leading;
 			
 			console = new TextField();
 			console.antiAliasType = (txtSize > 24) ? AntiAliasType.NORMAL : AntiAliasType.ADVANCED;
