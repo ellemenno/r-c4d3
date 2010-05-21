@@ -13,7 +13,13 @@ Top level build file for all r-c4d3 framework tests.
 	
     <target name="build" description="&gt; this is the main task">
     	<antcall target="compile-test">
+    		<param value="com/pixeldroid/r_c4d3/scores/LocalGameScoresProxyTest.as" name="src.main"/>
+    	</antcall>
+    	<antcall target="compile-test">
     		<param value="com/pixeldroid/r_c4d3/scores/GameScoresProxyTest.as" name="src.main"/>
+    	</antcall>
+    	<antcall target="compile-test">
+    		<param value="com/pixeldroid/r_c4d3/scores/GameIdValidationTest.as" name="src.main"/>
     	</antcall>
     	<antcall target="compile-test">
     		<param value="com/pixeldroid/r_c4d3/game/control/SignalTest.as" name="src.main"/>

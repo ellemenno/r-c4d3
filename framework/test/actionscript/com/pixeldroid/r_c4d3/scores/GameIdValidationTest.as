@@ -35,12 +35,10 @@ package com.pixeldroid.r_c4d3.scores
 		private function checkNames():void
 		{
 			var names:Array = [
-				"abc", "abc.def", "abc_def", "abc-def", "123", 
-				"9*9", "!yea", "^_^", "<>", ":)", "", "_", "a@b",
+				"abc", "abc.def", "abc_def", "abc-def", "123456", "..9*9", 
+				"..!yea", "..^_^", "<<>>", ":):)", "", "____", "a@bb",
 				"A A A", "longer.than.thirty-two.characters."
 			];
-			C.out("''.length = " + ("".length));
-			C.out("names[10].length = " + (names[10].length));
 			var n:int = names.length;
 			var gp:GameScoresProxy;
 			for (var i:int = 0; i < n; i++)
@@ -48,9 +46,9 @@ package com.pixeldroid.r_c4d3.scores
 				try 
 				{ 
 					gp = new GameScoresProxy(names[i]); 
-					C.out(names[i] +" passes");
+					C.out("- " +names[i]);
 				}
-				catch (e:Error) { C.out(names[i] +" fails"); }
+				catch (e:Error) { C.out("X " +names[i] +" " +e); }
 			}
 		}
 		
