@@ -62,7 +62,8 @@ package com.pixeldroid.r_c4d3.scores
 			retrieveEvent = new ScoreEvent(ScoreEvent.LOAD);
 			
 			MAX_SCORES = Math.min(100, maxScores);
-			if(id) openScoresTable(id);
+			
+			openScoresTable(id);
 		}
 		
 		
@@ -70,14 +71,11 @@ package com.pixeldroid.r_c4d3.scores
 		/** @inheritdoc */
 		public function openScoresTable(gameId:String):void
 		{
-			if (gameId.length >= GAMEID_MIN 
-				&& gameId.length <= GAMEID_MAX 
-				&& isApprovedChars(gameId)
-			)
-			{
-				_gameId = gameId;
-			}
-			else throw new Error("Error: invalid game id '" +gameId+"'");
+			if (!isValidLength(gameId)) throw new Error("invalid length for game id '" +gameId+"'.");
+			if (!isValidChars(gameId))  throw new Error("invalid chars for game id '" +gameId+"'.");
+			
+			// else ok
+			_gameId = gameId;
 		}
 		
 		/** @inheritdoc */
@@ -219,7 +217,14 @@ package com.pixeldroid.r_c4d3.scores
 		
 		
 		/** @private */
-		protected function isApprovedChars(s:String):Boolean
+		protected function isValidLength(s:String):Boolean
+		{
+			// verify length of id is within set limits
+			return ((s.length >= GAMEID_MIN) && (s.length <= GAMEID_MAX));
+		}
+		
+		/** @private */
+		protected function isValidChars(s:String):Boolean
 		{
 			// verify lack of any characters not in approved list
 			var invalid:RegExp = /[^a-zA-Z0-9\._-]/;
@@ -248,7 +253,32 @@ package com.pixeldroid.r_c4d3.scores
 			return ss;
 		}
 		
-		/** @private */
+		/** 
+		Score insertion algorithm.
+		Override for alternate implementations.
+		
+		<p>
+		This implementation allows ties, but not duplicates, 
+		as per the following rules:
+		<ul>
+		<li>S and I must match in length (let's call that L)</li>
+		<li>If L < max, the list is not yet full; candidate will always be allowed</li>
+		<li>If L == max, the list is full; candidate will only be allowed if the following are true:
+			<ul>
+			<li>the candidate score is >= the lowest score in the list</li>
+			<li>if the candidate score is equal to another score already in the list, 
+			the candidate initial must be different</li>
+			</ul></li>
+		<li>When the candidate is added to a full list, the lowest score is removed</li>
+		</ul>
+		</p>
+		
+		@param score Numeric score; candidate for insertion
+		@param initial String associated with score
+		@param S array of numeric scores
+		@param I array of string initials
+		@param max Upper limit for total number of scores and initials
+		*/
 		protected function _insert(score:Number, initial:String, S:Array, I:Array, max:uint):Boolean 
 		{
 			if (S.length != I.length) throw new Error("Number of scores does not match number of initials");
