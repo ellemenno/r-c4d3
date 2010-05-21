@@ -8,8 +8,10 @@ package com.pixeldroid.r_c4d3.scores
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
+	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
 	import com.pixeldroid.r_c4d3.scores.GameScoresProxy;
 	import com.pixeldroid.r_c4d3.scores.ScoreEntry;
+	import com.pixeldroid.r_c4d3.scores.ScoreEvent;
 	import com.pixeldroid.r_c4d3.tools.console.Console;
 	
 	
@@ -17,24 +19,41 @@ package com.pixeldroid.r_c4d3.scores
     public class GameScoresProxyTest extends Sprite
 	{
 	
-		private var C:Console;
-		private var scores:GameScoresProxy;
+		protected var C:Console;
+		protected var scores:IGameScoresProxy;
 		
 		
 		public function GameScoresProxyTest():void
 		{
 			super();
-			addChildren();
+			C = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
+			
+			scores = createScoresProxy();
+			scores.addEventListener(ScoreEvent.SAVE, onSave);
+			scores.addEventListener(ScoreEvent.LOAD, onLoad);
+			
 			addEventListener(Event.ENTER_FRAME, onFrame);
 		}
 		
-		private function addChildren():void
+		
+		
+		protected function createScoresProxy():IGameScoresProxy
 		{
-			C = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
-			scores = new GameScoresProxy("GameScoresProxyTest");
+			return new GameScoresProxy("GameScoresProxyTest");
 		}
 		
-		private function onFrame(e:Event):void
+		protected function onSave(e:ScoreEvent):void
+		{
+			C.out(e.toString());
+		}
+		
+		protected function onLoad(e:ScoreEvent):void
+		{
+			C.out(e.toString());
+		}
+		
+		
+		protected function onFrame(e:Event):void
 		{
 			C.out("\n" +scores.toString());
 			C.out(" ");
@@ -49,7 +68,7 @@ package com.pixeldroid.r_c4d3.scores
 			scores.insertEntries( makeEntries(s, i) );
 		}
 		
-		private function makeEntries(s:Number=NaN, i:String=null):Array/*ScoreEntry*/
+		protected function makeEntries(s:Number=NaN, i:String=null):Array/*ScoreEntry*/
 		{
 			var A:Array = [];
 			var score:Number;
@@ -66,12 +85,12 @@ package com.pixeldroid.r_c4d3.scores
 			return A;
 		}
 		
-		private function rnd(hi:int, lo:int=0):int
+		protected function rnd(hi:int, lo:int=0):int
 		{
 			return Math.floor(Math.random()*(hi-lo)) + lo;
 		}
 		
-		private function str(length:int):String
+		protected function str(length:int):String
 		{
 			var alpha:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 			var string:String = "";
