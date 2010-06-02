@@ -98,7 +98,7 @@ Looks for and sets common properties used by all the build files in the r-c4d3 p
 Please set the FLEX_HOME property to a valid path for the Flex SDK on your machine.
 ${msg.props}
 	</fail>
-	
+
 	<!-- Otherwise derive some properties from FLEX_HOME or fail trying -->
 	<property name="flex.libs" value="${FLEX_HOME}/lib"/>
 	<fail unless="flex.libs">${FLEX_HOME}/lib could not be found</fail>
@@ -117,6 +117,20 @@ ${msg.props}
 	
 	<property name="flex.mxmlc" value="${flex.bin}/mxmlc${cli}"/>
 	<fail unless="flex.mxmlc">mxmlc${cli} could not be found in ${flex.bin}</fail>
+	
+	<!-- Fail when FLEXUNIT_HOME isn't set -->
+	<fail unless="FLEXUNIT_HOME">${NL}
+Please set the FLEXUNIT_HOME property to a valid path for the FlexUnit swc and jar libraries on your machine.
+${msg.props}
+	</fail>
+
+	<!-- Otherwise derive (possibly versioned) name of flexUnitTasks jar -->
+	<path id="flex-unit-tasks.jar.id"> 
+		<fileset dir="${FLEXUNIT_HOME}"> 
+			<include name="flexUnitTasks*.jar"/> 
+		</fileset> 
+	</path> 
+	<property name="FLEXUNIT_JAR" refid="flex-unit-tasks.jar.id"/>
 	
 	<!-- Try to warn (but not fail) when haxe.exe isn't available -->
 	<property name="haxe.haxe" value="${HAXE_HOME}/haxe${cli}"/>
