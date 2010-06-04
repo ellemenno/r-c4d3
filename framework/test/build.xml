@@ -12,12 +12,13 @@ Top level build file for all r-c4d3 framework tests.
 	<property name="dir.test" value="${basedir}"/>
 	<property name="dir.source" value="${basedir}/../source"/>
 	<property name="dir.config" value="${basedir}/../config"/>
-	<property name="dir.target" value="${basedir}/../target"/>
+	<property name="dir.target" value="${basedir}/../target/flexunit"/>
 	
 	<taskdef resource="flexUnitTasks.tasks" classpath="${FLEXUNIT_JAR}" />
 
 	
-    <target name="build" depends="compile, test, report" description="&gt; this is the main task" />
+    <target name="build" depends="compile, test, report" 
+		description="&gt; this is the main task: compile, test, report" />
 	
 	<target name="clean" description="remove the contents of ${dir.target}">
 		<delete failonerror="false" includeemptydirs="true">
@@ -26,35 +27,35 @@ Top level build file for all r-c4d3 framework tests.
 	</target>
 
 	<target name="compile" depends="clean" description="compiles TestRunner.swf">
-		<mkdir dir="${dir.target}/flexunit"/>
+		<mkdir dir="${dir.target}"/>
 		
     	<exec executable="${flex.mxmlc}" failonerror="true">
 			<arg line="'${dir.test}/actionscript/TestRunner.mxml'"/>
-			<arg line="-output='${dir.target}/flexunit/TestRunner.swf'"/>
+			<arg line="-output='${dir.target}/TestRunner.swf'"/>
 			<arg line="-load-config+='${dir.config}/flexunit-config.xml'"/>
 			<arg line="-library-path+='${FLEXUNIT_HOME}'"/>
 		</exec>
 	</target>
 
 	<target name="test" depends="compile" description="executes TestRunner.swf with flexunit task to generate test results">
-		<mkdir dir="${dir.target}/flexunit/results"/>
+		<mkdir dir="${dir.target}/results"/>
 		
 		<flexunit 
-			swf="${dir.target}/flexunit/TestRunner.swf" 
-			toDir="${dir.target}/flexunit/results" 
+			swf="${dir.target}/TestRunner.swf" 
+			toDir="${dir.target}/results" 
 			localTrusted="true" 
 			verbose="true" 
 			/>
 	</target>
 
 	<target name="report" depends="test" description="runs junitreport task to crate reports from test results">
-		<mkdir dir="${dir.target}/flexunit/reports"/>
+		<mkdir dir="${dir.target}/reports"/>
 		
-		<junitreport todir="${dir.target}/flexunit/reports">
-			<fileset dir="${dir.target}/flexunit/results">
+		<junitreport todir="${dir.target}/reports">
+			<fileset dir="${dir.target}/results">
 				<include name="TEST-*.xml" />
 			</fileset>
-			<report format="frames" todir="${dir.target}/flexunit/reports/html" />
+			<report format="frames" todir="${dir.target}/reports/html" />
 		</junitreport>
 	</target>
 		
