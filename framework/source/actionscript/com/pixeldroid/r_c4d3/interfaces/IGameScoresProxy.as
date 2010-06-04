@@ -91,27 +91,48 @@ package com.pixeldroid.r_c4d3.interfaces
 		
 		
 		/**
-		Retrieve the currently active game id.
+		The currently active game id.
 		*/
 		function get gameId():String;
 		
+		
 		/**
-		Retrieve the total number of slots allocated for score storage (maximium of 100, default of 10).
+		The total number of slots allocated for score storage.
 		
 		<p>
-		Read only, set via the HighScores constructor. See length for the 
-		actual number of scores currently in the high scores table.
+		Set via the HighScores constructor.
+		</p>
+		
+		<p>
+		See <code>length</code> for the number of scores currently entered in the high scores table.
 		</p>
 		
 		@see #length
 		*/
-		function get totalScores():int;
+		function get capacity():int;
 		
 		
 		/**
-		Retrieve the total number of entries currently in the score list.
+		The number of score entries currently in the score list.
+		
+		<p>
+		This is the number of filled slots in the score list, and may be 
+		less than <code>capacity</code>
+		</p>
+		
+		@see #capacity
 		*/
 		function get length():uint;
+		
+		
+		/**
+		The number of unfilled slots in the score list.
+		
+		<p>
+		This value is equivalent to <code>capacity - length</code>
+		</p>
+		*/
+		function get emptySlots():int;
 		
 		
 		/**
