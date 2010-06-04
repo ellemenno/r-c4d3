@@ -23,11 +23,11 @@ package com.pixeldroid.r_c4d3.scores
 		Constructor.
 		
 		@param id A unique identifier for this set of scores and initials
-		@param maxScores The maximum number of entries to store
+		@param capacity The total number of entries that may be stored (up to GameScoresProxy.ENTRIES_MAX)
 		*/
-		public function LocalGameScoresProxy(id:String, maxScores:int=10)
+		public function LocalGameScoresProxy(id:String, capacity:int=10)
 		{
-			super(id, maxScores);
+			super(id, capacity);
 		}
 		
 		

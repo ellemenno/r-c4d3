@@ -58,13 +58,13 @@ package com.pixeldroid.r_c4d3.scores
 		
 		@param id A unique identifier for this set of scores and initials
 		@param accessUrl The storage webservice URL
-		@param maxScores The maximum number of entries to store
+		@param capacity The total number of entries that may be stored (up to GameScoresProxy.ENTRIES_MAX)
 		@param isLogged Whether server messages should be trace logged
 		*/
-		public function RemoteGameScoresProxy(id:String, accessUrl:String=null, maxScores:int=10, isLogged:Boolean=false)
+		public function RemoteGameScoresProxy(id:String, accessUrl:String=null, capacity:int=10, isLogged:Boolean=false)
 		{
 			if (accessUrl) remoteUrl = accessUrl;
-			super(id, maxScores);
+			super(id, capacity);
 			
 			showMessages = isLogged;
 			
@@ -183,8 +183,8 @@ package com.pixeldroid.r_c4d3.scores
 				case ("get") :
 					if ((serverResponse.success == true))
 					{
-						this.scores = serverResponse.data.scores;
-						this.initials = serverResponse.data.initials;
+						scores = serverResponse.data.scores;
+						initials = serverResponse.data.initials;
 					}
 					else C.out(this, "communication error: " +serverResponse.message);
 					

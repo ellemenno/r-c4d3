@@ -27,11 +27,11 @@ package com.pixeldroid.r_c4d3.scores
 		/** Most number of characters a valid id may contain */
 		static public const GAMEID_MAX:int = 32;
 		
-		/** Most scores to store */
-		static public const MAX_SCORES_DEFAULT:int = 10;
+		/** Upper limit of number of entries allowed */
+		static public const ENTRIES_MAX:int = 100;
 		
 		
-		protected var MAX_SCORES:int;
+		protected var NUM_ENTRIES:int;
 		
 		protected var scores:Array;
 		protected var initials:Array;
@@ -49,20 +49,18 @@ package com.pixeldroid.r_c4d3.scores
 		
 		@param id A unique identifier for this set of scores and initials.
 		Must be at least GAMEID_MIN characters long, but no longer than GAMEID_MAX.
-		@param maxScores The maximum number of entries to store (up to 100)
+		@param capacity The total number of entries that may be stored (up to ENTRIES_MAX)
 		*/
-		public function GameScoresProxy(id:String, maxScores:int=10)
+		public function GameScoresProxy(id:String, capacity:int=10)
 		{
 			super();
-			
-			scores = [];
-			initials = [];
 			
 			storeEvent = new ScoreEvent(ScoreEvent.SAVE);
 			retrieveEvent = new ScoreEvent(ScoreEvent.LOAD);
 			
-			MAX_SCORES = Math.min(100, maxScores);
+			NUM_ENTRIES = Math.min(ENTRIES_MAX, capacity);
 			
+			clear();
 			openScoresTable(id);
 		}
 		
@@ -103,41 +101,45 @@ package com.pixeldroid.r_c4d3.scores
 		
 		
 		/** @inheritdoc */
-		public function get length():uint { return scores.length; }
-		
-		/** @inheritdoc */
 		public function get gameId():String { return _gameId; }
 		
 		/** @inheritdoc */
-		public function get totalScores():int { return MAX_SCORES; }
+		public function get capacity():int { return NUM_ENTRIES; }
+		
+		/** @inheritdoc */
+		public function get length():uint { return scores.length; }
+		
+		/** @inheritdoc */
+		public function get emptySlots():int { return NUM_ENTRIES - scores.length; }
+		
 		
 		/** @inheritdoc */
 		public function getScore(i:int):Number 
 		{
-			if (0 <= i && i < MAX_SCORES) return (i < scores.length) ? scores[i] : NaN;
-			throw new Error("Invalid index: " +i +", valid range is 0 - " +(MAX_SCORES-1));
+			if (0 <= i && i < NUM_ENTRIES) return (i < scores.length) ? scores[i] : NaN;
+			throw new Error("Invalid index: " +i +", valid range is 0 - " +(NUM_ENTRIES-1));
 		}
 		
 		/** @inheritdoc */
 		public function getAllScores():Array 
 		{
 			var A:Array = scores.slice();
-			while (A.length < MAX_SCORES) A.push(NaN);
+			while (A.length < NUM_ENTRIES) A.push(NaN);
 			return A; 
 		}
 		
 		/** @inheritdoc */
 		public function getInitials(i:int):String 
 		{
-			if (0 <= i && i < MAX_SCORES) return (i < initials.length) ? initials[i] : null;
-			throw new Error("Invalid index: " +i +", valid range is 0 - " +(MAX_SCORES-1));
+			if (0 <= i && i < NUM_ENTRIES) return (i < initials.length) ? initials[i] : null;
+			throw new Error("Invalid index: " +i +", valid range is 0 - " +(NUM_ENTRIES-1));
 		}
 		
 		/** @inheritdoc */
 		public function getAllInitials():Array 
 		{ 
 			var A:Array = initials.slice();
-			while (A.length < MAX_SCORES) A.push(null);
+			while (A.length < NUM_ENTRIES) A.push(null);
 			return A; 
 		}
 
@@ -159,7 +161,7 @@ package com.pixeldroid.r_c4d3.scores
 				A.push(e);
 				j++;
 			}
-			while (j++ < MAX_SCORES) { A.push(null); }
+			while (j++ < NUM_ENTRIES) { A.push(null); }
 			
 			return A; 
 		}
@@ -171,12 +173,12 @@ package com.pixeldroid.r_c4d3.scores
 			if (!entries || entries.length == 0) return; // nothing to do
 			
 			var index:Array = entries.sortOn("value", Array.DESCENDING | Array.RETURNINDEXEDARRAY | Array.NUMERIC);
-			var n:int = Math.min(entries.length, MAX_SCORES);
+			var n:int = Math.min(entries.length, NUM_ENTRIES);
 			var e:ScoreEntry;
 			for (var j:int = 0; j < n; j++)
 			{
 				e = ScoreEntry(entries[index[j]]);
-				e.setAccepted(_insert(e.value, e.label, scores, initials, MAX_SCORES), this);
+				e.setAccepted(_insert(e.value, e.label, scores, initials, NUM_ENTRIES), this);
 			}
 		}
 		
@@ -258,20 +260,20 @@ package com.pixeldroid.r_c4d3.scores
 		Override for alternate implementations.
 		
 		<p>
-		This implementation allows ties, but not duplicates, 
-		as per the following rules:
+		This implementation allows ties, but not duplicates, per the following rules:
+		</p>
+		
 		<ul>
 		<li>S and I must match in length (let's call that L)</li>
-		<li>If L < max, the list is not yet full; candidate will always be allowed</li>
+		<li>If L &lt; max, the list is not yet full; candidate will always be allowed</li>
 		<li>If L == max, the list is full; candidate will only be allowed if the following are true:
 			<ul>
-			<li>the candidate score is >= the lowest score in the list</li>
+			<li>the candidate score is &gt;= the lowest score in the list</li>
 			<li>if the candidate score is equal to another score already in the list, 
 			the candidate initial must be different</li>
 			</ul></li>
 		<li>When the candidate is added to a full list, the lowest score is removed</li>
 		</ul>
-		</p>
 		
 		@param score Numeric score; candidate for insertion
 		@param initial String associated with score
