@@ -64,8 +64,9 @@
 // in some class responsible for showing the score on screen:
 Notifier.addListener("update.score", onUpdateScore);
 function onUpdateScore(newScore:Number):void { score.text = newScore.toString(); }
+
 // in some other class responsible for calculating the score:
 var newScore:Number = oldScore + 5;
 Notifier.send("update.score", newScore);
 </pre></div>
-	</div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Copyleft 2010 Pixeldroid</footer><br/>Wed May 19 2010, 01:34 AM -04:00  </center></div></body></html><!--Copyleft 2010 Pixeldroid<br/>Wed May 19 2010, 01:34 AM -04:00  -->
+	</div><br/><br/><hr><br/><p></p><center class="copyright"><footer>Copyleft 2010 Pixeldroid</footer><br/>Fri Jun 4 2010, 02:59 AM -04:00  </center></div></body></html><!--Copyleft 2010 Pixeldroid<br/>Fri Jun 4 2010, 02:59 AM -04:00  -->
