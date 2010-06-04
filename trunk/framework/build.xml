@@ -39,11 +39,11 @@ Tasks to build and package the r-c4d3 as3 framework.
 	</target>
 	
 	<target name="test" description="calls the build task of ${basedir}/test/build.xml">
-		<ant dir="${dir.test}" inheritall="false" />
+		<ant dir="${dir.test}" target="build" inheritall="false" />
 	</target>
 	
 	<target name="example" description="calls the build task of ${basedir}/example/build.xml">
-		<ant dir="${dir.example}" inheritall="false" />
+		<ant dir="${dir.example}" target="build" inheritall="false" />
 	</target>
 	
     <target name="haxe" depends="clean, compile" if="haxe.haxe"
