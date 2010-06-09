@@ -38,7 +38,7 @@ package com.pixeldroid.r_c4d3.scores
 		*/
 		override public function load():void
 		{
-			if (!gameId) throw new Error("Error: openScoresTable() must be called prior to calling load");
+			if (!gameId) throw new Error("openScoresTable() must be called prior to calling load");
 			
 			var message:String;
 			var LSO:SharedObject = SharedObject.getLocal(gameId);
@@ -65,7 +65,7 @@ package com.pixeldroid.r_c4d3.scores
 		*/
 		override public function store():void
 		{
-			if (!gameId) throw new Error("Error: openScoresTable() must be called prior to calling store");
+			if (!gameId) throw new Error("openScoresTable() must be called prior to calling store");
 			
 			var LSO:SharedObject = SharedObject.getLocal(gameId);
 			if (LSO.data.scoreList == null) LSO.data.scoreList = emptyScoreList;
