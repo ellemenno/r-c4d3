@@ -44,7 +44,7 @@ $usage = <<<EOD
 	<ul>
 	<li>&emsp;&ensp;0 &ensp;<i>no error</i></li>
 	<li>-999 &ensp;<i>access denied</i></li>
-	<li>-100 &ensp;<i>illegal game id</i> - must be 32 characters or less, using only letters A-Z,a-z and numbers 0-9</li>
+	<li>-100 &ensp;<i>illegal game id</i> - must be 32 characters or less, using only letters A-Z,a-z,.,_,- and numbers 0-9</li>
 	<li>-200 &ensp;<i>file unable to be read</i> - the file may not exist yet</li>
 	<li>-300 &ensp;<i>file unable to be written</i> - you may not have write permissions for the file</li>
 	</ul>
@@ -198,7 +198,7 @@ if ( $permission == $NONE ) {
 }
 
 // bail on invalid file name
-if ( !preg_match("/^[A-Za-z0-9]{1,32}$/", $game) ) { 
+if ( !preg_match("/^[A-Za-z0-9\._-]{1,32}$/", $game) ) { 
 	print( new_result($format, $mode, FALSE, "invalid game id '$game'", $ILLEGAL_ID, "") );
 	return;
 }
