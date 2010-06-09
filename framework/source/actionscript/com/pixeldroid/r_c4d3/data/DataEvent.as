@@ -35,7 +35,7 @@ package com.pixeldroid.r_c4d3.data
 		/**
 		Additional information from the event broadcaster.
 		*/
-		public var message:Object;
+		public var message:String;
 
 
 

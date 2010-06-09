@@ -21,9 +21,9 @@ package com.pixeldroid.r_c4d3.interfaces
 	
 	/**
 	Dispatched when the score posting or retrieval process fails.
-	@eventType com.pixeldroid.data.DataEvent.ERROR
+	@eventType com.pixeldroid.r_c4d3.data.DataEvent.ERROR
 	*/
-	[Event(name="ERROR", type="com.pixeldroid.data.DataEvent")]
+	[Event(name="ERROR", type="com.pixeldroid.r_c4d3.data.DataEvent")]
 
 
 	/**

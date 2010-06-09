@@ -111,8 +111,8 @@ package com.pixeldroid.r_c4d3.scores
 		*/
 		override public function load():void
 		{
-			if (!gameId) throw new Error("Error: openScoresTable() must be called prior to calling load");
-			if (!retrieveRequest) throw new Error("Error - remoteUrl must be set before calling load");
+			if (!gameId) throw new Error("openScoresTable() must be called prior to calling load");
+			if (!retrieveRequest) throw new Error("remoteUrl must be set before calling load");
 			
 			var rVar:URLVariables = new URLVariables();
 			rVar.format = "json";
@@ -133,8 +133,8 @@ package com.pixeldroid.r_c4d3.scores
 		*/
 		override public function store():void
 		{
-			if (!gameId) throw new Error("Error: openScoresTable() must be called prior to calling store");
-			if (!retrieveRequest) throw new Error("Error - remoteUrl must be set before calling store");
+			if (!gameId) throw new Error("openScoresTable() must be called prior to calling store");
+			if (!retrieveRequest) throw new Error("remoteUrl must be set before calling store");
 			
 			var sVar:URLVariables = new URLVariables();
 			sVar.format = "json";

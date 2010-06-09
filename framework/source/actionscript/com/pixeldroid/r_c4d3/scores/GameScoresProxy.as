@@ -84,7 +84,7 @@ package com.pixeldroid.r_c4d3.scores
 		Read the scores and initials from the storage medium.
 		<strong>To be overridden by subclasses</strong>
 		*/
-		public function load():void { clear(); /* sub-classes should override this method */ }
+		public function load():void { /* sub-classes should override this method */ }
 		
 		/**
 		Write the scores and initials to the storage medium.

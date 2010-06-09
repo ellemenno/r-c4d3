@@ -12,6 +12,9 @@ package com.pixeldroid.r_c4d3.scores
 	
 	public class ScoreInsertion {
 		
+		//TODO: test opening a new high score table
+		//TODO: test clear
+		
 		[Test]
 		public function emptyEntriesAreValid():void
 		{
