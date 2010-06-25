@@ -42,14 +42,14 @@ package com.pixeldroid.r_c4d3.scores {
 		
 		@param type The score event flavor, e.g. <code>ScoreEvent.SAVE</code>
 		*/
-		public function ScoreEvent(type:String) {
-			super(type); // bubbles and cancelable are optional
+		public function ScoreEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false) {
+			super(type, bubbles, cancelable);
 		}
 		
 		/** @inheritDoc */
 		public override function clone():Event {
 			// override clone so the event can be redispatched
-			var e:ScoreEvent = new ScoreEvent(type);
+			var e:ScoreEvent = new ScoreEvent(type, bubbles, cancelable);
 			e.success = success;
 			e.message = message;
 			return e;
