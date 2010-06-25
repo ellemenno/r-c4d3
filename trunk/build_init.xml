@@ -117,6 +117,13 @@ ${msg.props}
 	
 	<property name="flex.mxmlc" value="${flex.bin}/mxmlc${cli}"/>
 	<fail unless="flex.mxmlc">mxmlc${cli} could not be found in ${flex.bin}</fail>
+
+	<path id="flex-tasks.jar.id"> 
+		<fileset dir="${FLEX_HOME}/ant/lib"> 
+			<include name="flexTasks.jar"/> 
+		</fileset> 
+	</path> 
+	<property name="FLEXTASK_JAR" refid="flex-tasks.jar.id"/>
 	
 	<!-- Fail when FLEXUNIT_HOME isn't set -->
 	<fail unless="FLEXUNIT_HOME">${NL}
