@@ -21,6 +21,7 @@ package
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
 	
 	import ConfigDataProxy;
+	import ContextMenuUtil;
 	import preloader.IPreloader;
 	import preloader.NullPreloader;
 
@@ -63,6 +64,8 @@ package
 	*/
 	public class RomLoader extends Sprite
 	{
+		protected const semver:String = SEMVER::v;
+		
 		protected var romLoader:Loader;
 		protected var xmlLoader:URLLoader;
 		
@@ -86,6 +89,7 @@ package
 		public function RomLoader()
 		{
 			super();
+			ContextMenuUtil.addItem(this, productLabel +" v" +semver);
 			
 			romLoader = Loader(addChild(new Loader()));
 			romLoader.visible = false;
@@ -442,6 +446,11 @@ package
 			Sprite(splashScreen).removeEventListener(Event.CLOSE, onPreloaderClosed);
 			
 			removeListeners(); // ask subclasses to clean up their listeners
+		}
+		
+		protected function get productLabel():String
+		{
+			return "R-C4D3 Rom Loader";
 		}
 	}
 }

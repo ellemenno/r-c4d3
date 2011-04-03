@@ -82,6 +82,12 @@ package
 				stage.displayState = StageDisplayState.FULL_SCREEN;
 			}
 		}
+		
+		override protected function get productLabel():String
+		{
+			return "R-C4D3 Desktop Rom Loader";
+		}
+
 
 
 	}
