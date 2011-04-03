@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="r-c4d3.romloader-as3" default="-usage" basedir="./">
+<project name="r-c4d3.romloader-as3" default="-usage" basedir=".">
 
 <description>
 Tasks to build and package the r-c4d3 romloaders.
 </description>
 	
-	<property name="dir.trunk" value=".."/>
-	<import file="../build_init.xml"/>
+	<property name="dir.trunk" location=".."/>
+	<import file="${dir.trunk}/build_init.xml"/>
 	
-	<property name="dir.source" value="${basedir}/source"/>
-	<property name="dir.config" value="${basedir}/config"/>
-	<property name="dir.target" value="${basedir}/target"/>
+	<property name="semver.major" value="0"/>
+	<property name="semver.minor" value="1"/>
 	
-	<property name="dir.documentation" value="${basedir}/../_documentation/romloader-api"/>
-	<property name="dir.releases" value="${basedir}/../_releases"/>
+	<property name="dir.source" location="${basedir}/source"/>
+	<property name="dir.config" location="${basedir}/config"/>
+	<property name="dir.target" location="${basedir}/target"/>
+	
+	<property name="dir.documentation" location="${dir.trunk}/_documentation/romloader-api"/>
+	<property name="dir.releases" location="${dir.trunk}/_releases"/>
 	
 	
 	
@@ -27,30 +30,39 @@ Tasks to build and package the r-c4d3 romloaders.
 		</delete>
 	</target>
 	
+    <target name="version" 	description="sets semver property">
+		<semver project="romloader" major="${semver.major}" minor="${semver.minor}" />
+		<property name="semver.romloader.quoted" value="'${semver.romloader}'" />
+		<property name="semver.romloader.define" value='-define+=SEMVER::v,"${semver.romloader.quoted}"' />
+	</target>
+	
     <target name="compile" depends="compile-desktop, compile-web, compile-rc4d3" 
 		description="compile-desktop, compile-web, compile-rc4d3"/>
 	
-    <target name="compile-desktop" depends="clean" description="compile the desktop romloader">
+    <target name="compile-desktop" depends="clean, version" description="compile the desktop romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
 			<arg line="'${dir.source}/actionscript/DesktopRomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-desktop.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_desktop.xml'"/>
+			<arg line="${semver.romloader.define}"/>
 		</exec>
 	</target>
 	
-    <target name="compile-web" depends="clean" description="compile the web-based romloader">
+    <target name="compile-web" depends="clean, version" description="compile the web-based romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
 			<arg line="'${dir.source}/actionscript/WebRomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-web.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_web.xml'"/>
+			<arg line="${semver.romloader.define}"/>
 		</exec>
 	</target>
 	
-    <target name="compile-rc4d3" depends="clean" description="compile the web-based r-c4d3 romloader">
+    <target name="compile-rc4d3" depends="clean, version" description="compile the web-based r-c4d3 romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
 			<arg line="'${dir.source}/actionscript/RC4D3RomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-rc4d3.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_web.xml'"/>
+			<arg line="${semver.romloader.define}"/>
 		</exec>
 	</target>
 	
@@ -108,7 +120,11 @@ Tasks to build and package the r-c4d3 romloaders.
 		</copy>
 	</target>
 	
-	<target name="get-revision" if="SVN_ANT_HOME">
+	<target name="get-revision">
+		<echo message="v${semver.romloader}" />
+	</target>
+	
+	<!--target name="get-revision" if="SVN_ANT_HOME">
 		<path id="svn.classpath"> 
 			<fileset dir="${SVN_ANT_HOME}"> 
 				<include name="**/*.jar"/> 
@@ -121,7 +137,7 @@ Tasks to build and package the r-c4d3 romloaders.
 			<wcVersion path="${basedir}"/>
 		</svn>
 		<echo message="v.${revision.max}"/>
-	</target>
+	</target-->
 	
 	<target name="add-projectors" depends="get-revision" unless="skip.add.projectors" description="prepares romloader swf for conversion to projector">
 		<mkdir dir="${dir.target}/temp-desktop-projectors"/>

@@ -67,6 +67,12 @@ package
 		{
 			return new LoadBarPreloader();
 		}
+				
+		override protected function get productLabel():String
+		{
+			return "R-C4D3 Cabinet Rom Loader";
+		}
+
 
 
 	}
