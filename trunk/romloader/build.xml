@@ -30,7 +30,7 @@ Tasks to build and package the r-c4d3 romloaders.
 		</delete>
 	</target>
 	
-    <target name="version" 	description="sets semver property">
+    <target name="version" description="sets semver property">
 		<semver project="romloader" major="${semver.major}" minor="${semver.minor}" />
 		<property name="semver.romloader.quoted" value="'${semver.romloader}'" />
 		<property name="semver.romloader.define" value='-define+=SEMVER::v,"${semver.romloader.quoted}"' />
@@ -44,6 +44,7 @@ Tasks to build and package the r-c4d3 romloaders.
 			<arg line="'${dir.source}/actionscript/DesktopRomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-desktop.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_desktop.xml'"/>
+			<arg line="-static-link-runtime-shared-libraries='true'"/>
 			<arg line="${semver.romloader.define}"/>
 		</exec>
 	</target>
@@ -53,6 +54,7 @@ Tasks to build and package the r-c4d3 romloaders.
 			<arg line="'${dir.source}/actionscript/WebRomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-web.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_web.xml'"/>
+			<arg line="-static-link-runtime-shared-libraries='true'"/>
 			<arg line="${semver.romloader.define}"/>
 		</exec>
 	</target>
@@ -62,11 +64,12 @@ Tasks to build and package the r-c4d3 romloaders.
 			<arg line="'${dir.source}/actionscript/RC4D3RomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-rc4d3.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_web.xml'"/>
+			<arg line="-static-link-runtime-shared-libraries='true'"/>
 			<arg line="${semver.romloader.define}"/>
 		</exec>
 	</target>
 	
-    <target name="document" depends="clean" description="create asdoc for the romloader classes">
+    <target name="document" depends="clean, version" description="create asdoc for the romloader classes">
 		<mkdir dir="${dir.target}/asdoc"/>
 		<tstamp>
 			<format property="date.year" pattern="yyyy"/>
@@ -75,6 +78,7 @@ Tasks to build and package the r-c4d3 romloaders.
 			<arg line="-output='${dir.target}/asdoc'"/>
 			<arg line="-footer='Copyleft ${date.year} Pixeldroid'"/>
 			<arg line="-load-config+='${dir.config}/asdoc-config.xml'"/>
+			<arg line="${semver.romloader.define}"/>
 		</exec>
 		<zip destfile="${dir.target}/romloader-api.zip" basedir="${dir.target}/asdoc"/>
 		<copy todir="${dir.documentation}" failonerror="false">
@@ -121,7 +125,7 @@ Tasks to build and package the r-c4d3 romloaders.
 	</target>
 	
 	<target name="get-revision">
-		<echo message="v${semver.romloader}" />
+		<echo message="R-C4D3 RomLoader v${semver.romloader}" />
 	</target>
 	
 	<!--target name="get-revision" if="SVN_ANT_HOME">
@@ -139,7 +143,7 @@ Tasks to build and package the r-c4d3 romloaders.
 		<echo message="v.${revision.max}"/>
 	</target-->
 	
-	<target name="add-projectors" depends="get-revision" unless="skip.add.projectors" description="prepares romloader swf for conversion to projector">
+	<target name="add-projectors" depends="version, get-revision" unless="skip.add.projectors" description="prepares romloader swf for conversion to projector">
 		<mkdir dir="${dir.target}/temp-desktop-projectors"/>
 		<copy file="${dir.target}/romloader-desktop.swf" todir="${dir.target}/temp-desktop-projectors"/>
 		<input>
@@ -152,7 +156,9 @@ Naming for this OS should be:
   romloader-desktop-debug${exe} 
 
 Meta data to insert (apply [debug] when appropriate):
-  file version    : 0.${revision.max}.0.0
+
+Win
+  file version    : ${semver.romloader}
   file description: [Debug version of ]Desktop Rom Loader for R-C4D3 flash game roms
   legal copyright : Copyleft ${date.year} Pixeldroid
   product name    : R-C4D3 Desktop Rom Loader[ (debug)]
@@ -160,9 +166,27 @@ Meta data to insert (apply [debug] when appropriate):
   (disable menu bar)
   app title       : R-C4D3 Rom Loader[ (debug)]
 
+OSX
+  add R.C4D3.icns to contents/Resources
+  update contents/Info.plist
+    CFBundleGetInfoString : Debug version of Desktop Rom Loader for R-C4D3 flash game roms v0.1.7
+    CFBundleIconFile : R.C4D3
+    CFBundleLongVersionString : R-C4D3 Desktop Rom Loader v0.1.7 (debug)
+    CFBundleName : R-C4D3 Desktop Rom Loader (debug)
+    CFBundleShortVersionString : 0.1.7
+    NSHumanReadableCopyright : Copyleft 2011 Pixeldroid
+
 Press Enter when ready...
 		</input>
+		
 		<delete file="${dir.target}/temp-desktop-projectors/romloader-desktop.swf"/>
+		<!-- 
+		
+note: need to shell out to zip to retain permissions on OSX
+use ditto?
+see http://hints.macworld.com/article.php?story=20031118111144197
+
+		-->
 		<zip 
 			destfile="${dir.releases}/romloader-desktop-${os}.zip"
 			basedir="${dir.target}/temp-desktop-projectors"
