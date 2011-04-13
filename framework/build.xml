@@ -9,6 +9,9 @@ Tasks to build and package the r-c4d3 as3 framework.
 	<property name="dir.trunk" value=".."/>
 	<import file="../build_init.xml"/>
 	
+	<property name="semver.major" value="0"/>
+	<property name="semver.minor" value="3"/>
+	
 	<property name="dir.source" value="${basedir}/source"/>
 	<property name="dir.config" value="${basedir}/config"/>
 	<property name="dir.target" value="${basedir}/target"/>
@@ -22,7 +25,7 @@ Tasks to build and package the r-c4d3 as3 framework.
 	<property file="build.properties"/>
 	
 	
-    <target name="build" depends="compile, test, haxe, example, document, release" 
+    <target name="build" depends="compile, haxe, example, document, release" 
 		description="&gt; this is the main task: compile, haxe, example, document, release"/>
 	
 	<target name="clean" description="remove the contents of ${dir.target}">
@@ -31,10 +34,32 @@ Tasks to build and package the r-c4d3 as3 framework.
 		</delete>
 	</target>
 	
-    <target name="compile" depends="clean" description="compile the r-c4d3.swc">
+    <target name="version" description="sets semver and compile date properties">
+		<semver project="framework" major="${semver.major}" minor="${semver.minor}" />
+		<!--
+		strings must be double-qouted, see:
+		http://blogs.adobe.com/flexdoc/files/flexdoc/conditionalcompilation.pdf
+		-->
+		<property name="semver.framework.quoted" value="'${semver.framework}'" />
+		<property name="version.year.quoted" value="'${date.year}'" />
+		<property name="version.month.quoted" value="'${date.month}'" />
+		<property name="version.day.quoted" value="'${date.day}'" />
+		<property name="version.hour.quoted" value="'${date.hour}'" />
+		<property name="version.minute.quoted" value="'${date.minute}'" />
+		<property name="version.second.quoted" value="'${date.second}'" />
+	</target>
+	
+    <target name="compile" depends="clean, version" description="compile the r-c4d3.swc">
     	<exec executable="${flex.compc}" failonerror="true">
-			<arg line="-output='${dir.target}/r-c4d3.swc'"/>
-			<arg line="-load-config+='${dir.config}/compc-config.xml'"/>
+			<arg line='-output="${dir.target}/r-c4d3.swc"'/>
+			<arg line='-load-config+="${dir.config}/compc-config.xml"'/>
+			<arg line='-define+=VERSION::semver,"${semver.framework.quoted}"'/>
+			<arg line='-define+=VERSION::year,"${version.year.quoted}"'/>
+			<arg line='-define+=VERSION::month,"${version.month.quoted}"'/>
+			<arg line='-define+=VERSION::day,"${version.day.quoted}"'/>
+			<arg line='-define+=VERSION::hour,"${version.hour.quoted}"'/>
+			<arg line='-define+=VERSION::minute,"${version.minute.quoted}"'/>
+			<arg line='-define+=VERSION::second,"${version.second.quoted}"'/>
 		</exec>
 	</target>
 	
@@ -75,15 +100,19 @@ Tasks to build and package the r-c4d3 as3 framework.
 		<echo message="${exiterror}"/>
 	</target>
 	
-    <target name="document" depends="clean" description="create asdoc for the framework api">
+    <target name="document" depends="clean, version" description="create asdoc for the framework api">
 		<mkdir dir="${dir.target}/asdoc"/>
-		<tstamp>
-			<format property="date.year" pattern="yyyy"/>
-		</tstamp>
     	<exec executable="${flex.asdoc}">
 			<arg line="-output='${dir.target}/asdoc'"/>
 			<arg line="-footer='Copyleft ${date.year} Pixeldroid'"/>
 			<arg line="-load-config+='${dir.config}/asdoc-config.xml'"/>
+			<arg line='-define+=VERSION::semver,"${semver.framework.quoted}"'/>
+			<arg line='-define+=VERSION::year,"${version.year.quoted}"'/>
+			<arg line='-define+=VERSION::month,"${version.month.quoted}"'/>
+			<arg line='-define+=VERSION::day,"${version.day.quoted}"'/>
+			<arg line='-define+=VERSION::hour,"${version.hour.quoted}"'/>
+			<arg line='-define+=VERSION::minute,"${version.minute.quoted}"'/>
+			<arg line='-define+=VERSION::second,"${version.second.quoted}"'/>
 		</exec>
 		<zip destfile="${dir.target}/framework-api.zip" basedir="${dir.target}/asdoc"/>
 		<copy todir="${dir.documentation}" failonerror="false">

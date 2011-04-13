@@ -10,6 +10,9 @@ package com.pixeldroid.r_c4d3.tools.console
 	
 	import com.pixeldroid.r_c4d3.tools.console.Console;
 	
+	import com.pixeldroid.r_c4d3.Version;
+	import com.pixeldroid.r_c4d3.tools.contextmenu.ContextMenuUtil;
+	
 	
 	[SWF(width="600", height="400", frameRate="3", backgroundColor="#000000")]
     public class ConsoleTest extends Sprite
@@ -21,14 +24,19 @@ package com.pixeldroid.r_c4d3.tools.console
 		public function ConsoleTest():void
 		{
 			super();
-			addChildren();
+			addVersion();
+			
+			C = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
+			C.out(Version.productInfo);
+			C.out("Hello, World, random gibberish to follow..");
+			
 			addEventListener(Event.ENTER_FRAME, onFrame);
 		}
 		
-		private function addChildren():void
+		private function addVersion():void
 		{
-			C = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
-			C.out("Hello, World, random gibberish to follow..");
+			ContextMenuUtil.addItem(this, Version.productInfo, false);
+			ContextMenuUtil.addItem(this, Version.buildInfo, false);
 		}
 		
 		private function onFrame(e:Event):void

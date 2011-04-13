@@ -14,6 +14,9 @@ package com.pixeldroid.r_c4d3.scores
 	import com.pixeldroid.r_c4d3.scores.ScoreEvent;
 	import com.pixeldroid.r_c4d3.tools.console.Console;
 	
+	import com.pixeldroid.r_c4d3.Version;
+	import com.pixeldroid.r_c4d3.tools.contextmenu.ContextMenuUtil;
+	
 	
 	[SWF(width="600", height="400", frameRate="1", backgroundColor="#000000")]
     public class GameScoresProxyTest extends Sprite
@@ -26,7 +29,10 @@ package com.pixeldroid.r_c4d3.scores
 		public function GameScoresProxyTest():void
 		{
 			super();
+			addVersion();
+			
 			C = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
+			C.out(Version.productInfo);
 			
 			scores = createScoresProxy();
 			scores.addEventListener(ScoreEvent.SAVE, onSave);
@@ -36,6 +42,12 @@ package com.pixeldroid.r_c4d3.scores
 		}
 		
 		
+		
+		private function addVersion():void
+		{
+			ContextMenuUtil.addItem(this, Version.productInfo, false);
+			ContextMenuUtil.addItem(this, Version.buildInfo, false);
+		}
 		
 		protected function createScoresProxy():IGameScoresProxy
 		{

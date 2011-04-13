@@ -12,6 +12,9 @@ package com.pixeldroid.r_c4d3.scores
 	import com.pixeldroid.r_c4d3.scores.ScoreEntry;
 	import com.pixeldroid.r_c4d3.tools.console.Console;
 	
+	import com.pixeldroid.r_c4d3.Version;
+	import com.pixeldroid.r_c4d3.tools.contextmenu.ContextMenuUtil;
+	
 	
 	[SWF(width="600", height="400", frameRate="1", backgroundColor="#000000")]
     public class GameIdValidationTest extends Sprite
@@ -23,13 +26,18 @@ package com.pixeldroid.r_c4d3.scores
 		public function GameIdValidationTest():void
 		{
 			super();
-			addChildren();
+			addVersion();
+			
+			C = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
+			C.out(Version.productInfo);
+			
 			checkNames();
 		}
 		
-		private function addChildren():void
+		private function addVersion():void
 		{
-			C = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
+			ContextMenuUtil.addItem(this, Version.productInfo, false);
+			ContextMenuUtil.addItem(this, Version.buildInfo, false);
 		}
 		
 		private function checkNames():void

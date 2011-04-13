@@ -9,6 +9,9 @@ package com.pixeldroid.r_c4d3.tools.perfmon
 	
 	import com.pixeldroid.r_c4d3.tools.perfmon.PerfMon;
 	
+	import com.pixeldroid.r_c4d3.Version;
+	import com.pixeldroid.r_c4d3.tools.contextmenu.ContextMenuUtil;
+	
 	
 	[SWF(width="600", height="400", frameRate="100", backgroundColor="#000000")]
     public class PerfMonTest extends Sprite
@@ -20,7 +23,14 @@ package com.pixeldroid.r_c4d3.tools.perfmon
 		public function PerfMonTest():void
 		{
 			super();
+			addVersion();
 			addChildren();
+		}
+		
+		private function addVersion():void
+		{
+			ContextMenuUtil.addItem(this, Version.productInfo, false);
+			ContextMenuUtil.addItem(this, Version.buildInfo, false);
 		}
 		
 		private function addChildren():void
