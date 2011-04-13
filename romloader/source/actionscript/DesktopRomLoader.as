@@ -83,11 +83,10 @@ package
 			}
 		}
 		
-		override protected function get productLabel():String
+		override protected function get productVersion():String
 		{
-			return "R-C4D3 Desktop Rom Loader";
+			return "R-C4D3 Desktop Rom Loader v" +semver;
 		}
-
 
 
 	}

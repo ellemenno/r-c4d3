@@ -64,12 +64,11 @@ package
 		{
 			return new LoadBarPreloader();
 		}
-				
-		override protected function get productLabel():String
+		
+		override protected function get productVersion():String
 		{
-			return "R-C4D3 Web Rom Loader";
+			return "R-C4D3 Web Rom Loader v" +semver;
 		}
-
 
 
 	}

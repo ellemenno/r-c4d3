@@ -57,7 +57,7 @@ package
 			return new RemoteGameScoresProxy(
 				configProxy.gameId, 
 				configProxy.getPropertyValue("scoreServer"),
-				GameScoresProxy.MAX_SCORES_DEFAULT,
+				GameScoresProxy.ENTRIES_MAX,
 				configProxy.loggingEnabled
 			);
 		}
@@ -67,12 +67,11 @@ package
 		{
 			return new LoadBarPreloader();
 		}
-				
-		override protected function get productLabel():String
+		
+		override protected function get productVersion():String
 		{
-			return "R-C4D3 Cabinet Rom Loader";
+			return "R-C4D3 Cabinet Rom Loader v" +semver;
 		}
-
 
 
 	}

@@ -13,15 +13,16 @@ package
 	import flash.net.URLRequest;
 	import flash.utils.getQualifiedClassName;
 	
+	import com.pixeldroid.r_c4d3.Version;
 	import com.pixeldroid.r_c4d3.interfaces.HaxeSideDoor;
 	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
 	import com.pixeldroid.r_c4d3.interfaces.IGameRom;
 	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.tools.contextmenu.ContextMenuUtil;
 	
 	import ConfigDataProxy;
-	import ContextMenuUtil;
 	import preloader.IPreloader;
 	import preloader.NullPreloader;
 
@@ -64,8 +65,6 @@ package
 	*/
 	public class RomLoader extends Sprite
 	{
-		protected const semver:String = SEMVER::v;
-		
 		protected var romLoader:Loader;
 		protected var xmlLoader:URLLoader;
 		
@@ -81,6 +80,8 @@ package
 		protected var xmlBytesTotal:int;
 		protected var xmlLoaded:Boolean;
 		protected var splashDone:Boolean;
+		
+		protected const semver:String = SEMVER::v; //command line: -define+=SEMVER::v,"'major.minor.patch'"
 
 		
 		/**
@@ -89,7 +90,7 @@ package
 		public function RomLoader()
 		{
 			super();
-			ContextMenuUtil.addItem(this, productLabel +" v" +semver);
+			addVersionInfo();
 			
 			romLoader = Loader(addChild(new Loader()));
 			romLoader.visible = false;
@@ -102,7 +103,6 @@ package
 			_addListeners();
 			openPreloader();
 		}
-
 		
 		/** @private */
 		protected function addChildren():void
@@ -380,6 +380,34 @@ package
 			// base implementation does nothing.
 			return null;
 		}
+
+		/**
+			Adds version and copyright info to context menu
+		*/
+		protected function addVersionInfo():void
+		{
+			ContextMenuUtil.addItem(this, productVersion);
+			ContextMenuUtil.addItem(this, copyLeft);
+			ContextMenuUtil.addItem(this, frameworkVersion);
+		}
+		
+		/**
+			Returns the application version string
+		*/
+		protected function get productVersion():String
+		{
+			return "R-C4D3 Rom Loader v" +semver;
+		}
+		
+		private function get copyLeft():String
+		{
+			return "CopyLeft "+Version.year +" Pixeldroid";
+		}
+		
+		private function get frameworkVersion():String
+		{
+			return "(framework v" +Version.semver +")";
+		}
 		
 
 		
@@ -448,9 +476,5 @@ package
 			removeListeners(); // ask subclasses to clean up their listeners
 		}
 		
-		protected function get productLabel():String
-		{
-			return "R-C4D3 Rom Loader";
-		}
 	}
 }
