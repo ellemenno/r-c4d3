@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="r-c4d3.framework.example" default="-usage" basedir="./">
+<project name="r-c4d3.framework.example" default="-usage" basedir=".">
 
 <description>
 Top level build file for all r-c4d3 framework examples.
 </description>
 	
-	<property name="dir.trunk" value="../.."/>
+	<property name="dir.trunk" location="../.."/>
 	<import file="${dir.trunk}/build_init.xml"/>
 	
-	<property name="dir.source.example" value="${basedir}/actionscript"/>
-	<property name="dir.source.framework" value="../source/actionscript"/>
+	<property name="dir.example.source" location="${basedir}/actionscript"/>
+	<property name="dir.framework" location=".."/>
+	<property name="dir.framework.lib" location="../target"/>
 	
-	<target name="build" description="&gt; this is the main task">
-		<antcall target="compile-example">
-			<param value="com/pixeldroid/r_c4d3/scores/LocalGameScoresProxyTest.as" name="src.main"/>
-		</antcall>
-		<antcall target="compile-example">
-			<param value="com/pixeldroid/r_c4d3/scores/GameScoresProxyTest.as" name="src.main"/>
-		</antcall>
-		<antcall target="compile-example">
-			<param value="com/pixeldroid/r_c4d3/scores/GameIdValidationTest.as" name="src.main"/>
-		</antcall>
-		<antcall target="compile-example">
-			<param value="com/pixeldroid/r_c4d3/tools/console/ConsoleTest.as" name="src.main"/>
-		</antcall>
-		<antcall target="compile-example">
-			<param value="com/pixeldroid/r_c4d3/tools/framerate/FpsMeterTest.as" name="src.main"/>
-		</antcall>
-		<antcall target="compile-example">
-			<param value="com/pixeldroid/r_c4d3/tools/perfmon/PerfMonTest.as" name="src.main"/>
-		</antcall>
+	
+	<target name="-check-framework">
+		<available property="framework.available" file="${dir.framework.lib}/r-c4d3.swc"/>
 	</target>
 	
-	
-	<target name="compile-example" description="reusable task to compile examples via the provided 'src.main' params">
-		<echo message="compiling ${src.main}"/>
-		<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="'${dir.source.example}/${src.main}'"/>
-			<arg line="-sp='${dir.source.example}'"/>
-			<arg line="-sp='${dir.source.framework}'"/>
-			<arg line="-static-link-runtime-shared-libraries='true'"/><!-- to use 3.0 font embedding -->
-		</exec>
+	<target name="compile-framework" unless="${framework.available}" depends="-check-framework">
+		<ant dir="${dir.framework}" target="compile" inheritall="false" />
 	</target>
+	
+	<target name="build" description="&gt; this is the main task" depends="compile-framework">
+		<compile-example file="com/pixeldroid/r_c4d3/scores/LocalGameScoresProxyTest.as"/>
+		<compile-example file="com/pixeldroid/r_c4d3/scores/GameScoresProxyTest.as"/>
+		<compile-example file="com/pixeldroid/r_c4d3/scores/GameIdValidationTest.as"/>
+		<compile-example file="com/pixeldroid/r_c4d3/tools/console/ConsoleTest.as"/>
+		<compile-example file="com/pixeldroid/r_c4d3/tools/framerate/FpsMeterTest.as"/>
+		<compile-example file="com/pixeldroid/r_c4d3/tools/perfmon/PerfMonTest.as"/>
+	</target>
+	
+	<macrodef name="compile-example">
+		<attribute name="file"/>
+		<sequential>
+			<echo message="compiling @{file}"/>
+			<exec executable="${flex.mxmlc}" failonerror="true">
+				<arg line="'${dir.example.source}/@{file}'"/>
+				<arg line="-sp='${dir.example.source}'"/>
+				<arg line="-l='${dir.framework.lib}'"/>
+				<arg line="-static-link-runtime-shared-libraries='true'"/><!-- to use 3.0 font embedding -->
+			</exec>
+		</sequential>
+	</macrodef>
 	
 </project>
 

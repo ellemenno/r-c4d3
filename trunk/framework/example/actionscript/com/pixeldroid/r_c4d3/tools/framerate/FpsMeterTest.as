@@ -9,6 +9,9 @@ package com.pixeldroid.r_c4d3.tools.framerate
 	
 	import com.pixeldroid.r_c4d3.tools.framerate.FpsMeter;
 	
+	import com.pixeldroid.r_c4d3.Version;
+	import com.pixeldroid.r_c4d3.tools.contextmenu.ContextMenuUtil;
+	
 	
 	[SWF(width="600", height="400", frameRate="100", backgroundColor="#000000")]
     public class FpsMeterTest extends Sprite
@@ -20,8 +23,15 @@ package com.pixeldroid.r_c4d3.tools.framerate
 		public function FpsMeterTest():void
 		{
 			super();
+			addVersion();
 			addChildren();
 			fps.startMonitoring();
+		}
+		
+		private function addVersion():void
+		{
+			ContextMenuUtil.addItem(this, Version.productInfo, false);
+			ContextMenuUtil.addItem(this, Version.buildInfo, false);
 		}
 		
 		private function addChildren():void
