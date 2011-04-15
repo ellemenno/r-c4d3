@@ -6,6 +6,13 @@
 Looks for and sets common properties used by all the build files in the r-c4d3 project.
 </description>
 	
+	<!-- Set convenience proerties for time-of-build values. -->
+	<tstamp><format property="date.year" pattern="yyyy"/></tstamp>
+	<tstamp><format property="date.month" pattern="MM"/></tstamp>
+	<tstamp><format property="date.day" pattern="dd"/></tstamp>
+	<tstamp><format property="date.hour" pattern="HH"/></tstamp>
+	<tstamp><format property="date.minute" pattern="mm"/></tstamp>
+	<tstamp><format property="date.second" pattern="ss"/></tstamp>
 	
 	<!-- Set convenience suffixes for application executables across platforms. -->
 	<condition property="exe" value=".exe">
@@ -113,12 +120,16 @@ ${msg.props}
 	<property name="flex.mxmlc" value="${flex.bin}/mxmlc${cli}"/>
 	<fail unless="flex.mxmlc">mxmlc${cli} could not be found in ${flex.bin}</fail>
 
+	<!-- Define a resource property for the flexTasks jar -->
 	<path id="flex-tasks.jar.id"> 
 		<fileset dir="${FLEX_HOME}/ant/lib"> 
-			<include name="flexTasks.jar"/> 
+			<include name="flexTasks.jar" /> 
 		</fileset> 
 	</path> 
-	<property name="FLEXTASK_JAR" refid="flex-tasks.jar.id"/>
+	<property name="FLEXTASK_JAR" refid="flex-tasks.jar.id" />
+	<fail unless="FLEXTASK_JAR">${NL}Could not locate flexTasks.jar in expected location: ${FLEX_HOME}/ant/lib.</fail>
+
+	<taskdef resource="flexTasks.tasks" classpath="${FLEXTASK_JAR}" />
 	
 	<!-- Fail when FLEXUNIT_HOME isn't set
 	<fail unless="FLEXUNIT_HOME">${NL}
@@ -185,6 +196,25 @@ See ${basedir}/build_init.xml for details.
 			
 			<dynamic-property name="semver.@{project}" value="@{major}.@{minor}.${build.number}"/>
 			<echo message="semver.@{project} is set"/>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="run-rom" description="opens IGameRom file using R-C4D3 romloader">
+		<attribute name="dir" default=""/>
+		<attribute name="file" default=""/>
+		<attribute name="bin" default="${dir.trunk}/_releases/romloader-desktop-${os}"/>
+		<sequential>
+			<echo message="- - run-rom macro - -"/>
+			<echo message="installing '@{file}' for romloader to open"/>
+			
+			<copy file="@{dir}/@{file}" tofile="@{bin}/rom.swf" overwrite="true"/>
+			<copy file="@{dir}/romloader-config.xml" todir="@{bin}" overwrite="true"/>
+				
+			<exec osfamily="windows" spawn="true" executable="@{bin}/romloader-desktop-debug${exe}" />
+			
+			<exec osfamily="mac" spawn="true" executable="open">
+				<arg line="-n -a @{bin}/romloader-desktop-debug${exe}"/>
+			</exec>
 		</sequential>
 	</macrodef>
 	
