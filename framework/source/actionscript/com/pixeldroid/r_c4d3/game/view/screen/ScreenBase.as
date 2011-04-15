@@ -10,10 +10,10 @@ package com.pixeldroid.r_c4d3.game.view.screen
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	import com.pixeldroid.r_c4d3.game.control.Signals;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenTypeEnumerator;
 	import com.pixeldroid.r_c4d3.interfaces.IControllable;
 	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
 	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
-	import com.pixeldroid.r_c4d3.interfaces.ITypable;
 	import com.pixeldroid.r_c4d3.interfaces.IUpdatable;
 	
 	
@@ -23,10 +23,10 @@ package com.pixeldroid.r_c4d3.game.view.screen
 	
 	@see com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory
 	*/
-	public class ScreenBase extends Sprite implements ITypable, IDisposable, IControllable, IUpdatable
+	public class ScreenBase extends Sprite implements IDisposable, IControllable, IUpdatable
 	{
 		
-		protected var _type:String;
+		protected var _type:ScreenTypeEnumerator;
 		protected var configProxy:IGameConfigProxy;
 		protected var timeElapsed:int;
 		protected var previousFrameRate:Number;
@@ -86,14 +86,14 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		
 		// ITypable interface
 		/** @inheritDoc */
-		public function set type(value:String):void
+		public function set type(value:ScreenTypeEnumerator):void
 		{
 			C.out(this, "(base) set type() - " +value);
 			_type = value;
 		}
 		
 		/** @inheritDoc */
-		public function get type():String
+		public function get type():ScreenTypeEnumerator
 		{
 			return _type;
 		}

@@ -11,6 +11,7 @@ package com.pixeldroid.r_c4d3.game.control
 	import com.pixeldroid.r_c4d3.game.control.Signals;
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenTypeEnumerator;
 	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory;
@@ -32,12 +33,14 @@ package com.pixeldroid.r_c4d3.game.control
 	<ul>
 	<li>ATTRACT_LOOP_BEGIN (start the attract loop)</li>
 	<li>SCREEN_GO_NEXT (advance to next screen in the attract loop)</li>
+	<li>SCREEN_GO_TO (advance to a specific screen, identified by type)</li>
 	<li>GAME_BEGIN (jump to the setup screen)</li>
 	<li>GAME_TICK (ask the current screen to update)</li>
 	</ul>
 	
 	@see com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory
 	@see com.pixeldroid.r_c4d3.game.control.Signals
+	@see com.pixeldroid.r_c4d3.game.view.screen.ScreenTypeEnumerator
 	*/
 	public class GameScreenController implements IDisposable
 	{
@@ -88,8 +91,9 @@ package com.pixeldroid.r_c4d3.game.control
 			controlsProxy.removeEventListener(JoyButtonEvent.JOY_BUTTON_MOTION, onButtonMotion);
 			
 			// remove listeners from messaging service
-			Notifier.removeListener(Signals.ATTRACT_LOOP_BEGIN, nextScreen);
+			Notifier.removeListener(Signals.ATTRACT_LOOP_BEGIN, attractLoopBegin);
 			Notifier.removeListener(Signals.SCREEN_GO_NEXT, nextScreen);
+			Notifier.removeListener(Signals.SCREEN_GO_TO, toScreen);
 			Notifier.removeListener(Signals.GAME_BEGIN, gameBegin);
 			Notifier.removeListener(Signals.GAME_TICK, gameTick);
 		}
@@ -110,8 +114,9 @@ package com.pixeldroid.r_c4d3.game.control
 			controlsProxy.addEventListener(JoyButtonEvent.JOY_BUTTON_MOTION, onButtonMotion);
 			
 			// attach listeners to messaging service
-			Notifier.addListener(Signals.ATTRACT_LOOP_BEGIN, nextScreen);
+			Notifier.addListener(Signals.ATTRACT_LOOP_BEGIN, attractLoopBegin);
 			Notifier.addListener(Signals.SCREEN_GO_NEXT, nextScreen);
+			Notifier.addListener(Signals.SCREEN_GO_TO, toScreen);
 			Notifier.addListener(Signals.GAME_BEGIN, gameBegin);
 			Notifier.addListener(Signals.GAME_TICK, gameTick);
 		}
@@ -143,8 +148,20 @@ package com.pixeldroid.r_c4d3.game.control
 		protected function nextScreen():void
 		{
 			C.out(this, "nextScreen()");
-			var nextType:String = screenFactory.getNextScreenType(currentScreen.type);
+			var nextType:ScreenTypeEnumerator = screenFactory.getNextScreenType(currentScreen.type);
 			setCurrentScreen(screenFactory.getScreen(nextType));
+		}
+		
+		protected function toScreen(nextType:ScreenTypeEnumerator):void
+		{
+			C.out(this, "toScreen() - nextType: " +nextType);
+			setCurrentScreen(screenFactory.getScreen(nextType));
+		}
+		
+		protected function attractLoopBegin():void
+		{
+			C.out(this, "attractLoopBegin()");
+			setCurrentScreen(screenFactory.getScreen(screenFactory.loopStartScreenType));
 		}
 		
 		protected function gameBegin():void
@@ -164,7 +181,7 @@ package com.pixeldroid.r_c4d3.game.control
 		
 		protected function setCurrentScreen(screen:ScreenBase):void
 		{
-			var prevScreen:String = currentScreen.type;
+			var prevScreen:ScreenTypeEnumerator = currentScreen.type;
 			
 			var isShutDown:Boolean = currentScreen.shutDown();
 			if (!isShutDown) throw new Error("ERROR: " +prevScreen +" unable to shut down");

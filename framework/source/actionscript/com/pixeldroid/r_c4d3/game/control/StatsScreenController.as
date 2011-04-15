@@ -11,6 +11,7 @@ package com.pixeldroid.r_c4d3.game.control
 	import com.pixeldroid.r_c4d3.game.control.Signals;
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenType;
 	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
 	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory;
@@ -79,7 +80,7 @@ package com.pixeldroid.r_c4d3.game.control
 		{
 			C.out(this, "initialize()");
 			
-			stats = screenContainer.addChild(screenFactory.getScreen(screenFactory.DEBUG) as DisplayObject) as ScreenBase;
+			stats = screenContainer.addChild(screenFactory.getScreen(ScreenType.DEBUG) as DisplayObject) as ScreenBase;
 			stats.initialize();
 			
 			// attach listeners to controls proxy

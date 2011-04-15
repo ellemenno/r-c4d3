@@ -7,6 +7,8 @@ package com.pixeldroid.r_c4d3.game.view.screen
 	import com.pixeldroid.r_c4d3.game.view.screen.DebugScreen;
 	import com.pixeldroid.r_c4d3.game.view.screen.NullScreen;
 	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenType;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenTypeEnumerator;
 	import com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory;
 	
 	
@@ -26,33 +28,26 @@ package com.pixeldroid.r_c4d3.game.view.screen
 	{
 		/** Screen cache */
 		protected var screens:ResourcePool = new ResourcePool();
-			
-		/** @inheritDoc */ public function get GAME():String { return "GAME" }
-		/** @inheritDoc */ public function get HELP():String { return "HELP" }
-		/** @inheritDoc */ public function get NULL():String { return "NULL" }
-		/** @inheritDoc */ public function get SCORES():String { return "SCORES" }
-		/** @inheritDoc */ public function get SETUP():String { return "SETUP" }
-		/** @inheritDoc */ public function get TITLE():String { return "TITLE" }
-		/** @inheritDoc */ public function get DEBUG():String { return "DEBUG" }
 		
 		/** @inheritDoc */
-		public function get loopStartScreenType():String { return NULL; }
+		public function get loopStartScreenType():ScreenTypeEnumerator { return ScreenType.TITLE; }
 		
 		/** @inheritDoc */
-		public function get gameStartScreenType():String { return SETUP; }
+		public function get gameStartScreenType():ScreenTypeEnumerator { return ScreenType.SETUP; }
 
 		/** @inheritDoc */
-		public function getNextScreenType(currentType:String):String
+		public function getNextScreenType(currentType:ScreenTypeEnumerator):ScreenTypeEnumerator
 		{
-			var nextType:String;
+			var nextType:ScreenTypeEnumerator;
 			switch (currentType)
 			{
-				case NULL  : nextType = TITLE;  break;
-				case TITLE : nextType = HELP;   break;
-				case HELP  : nextType = SETUP;  break;
-				case SETUP : nextType = GAME;   break;
-				case GAME  : nextType = SCORES; break;
-				case SCORES: nextType = TITLE;  break;
+				case ScreenType.NULL  : nextType = loopStartScreenType; break;
+				
+				case ScreenType.TITLE : nextType = ScreenType.HELP;   break;
+				case ScreenType.HELP  : nextType = ScreenType.SETUP;  break;
+				case ScreenType.SETUP : nextType = ScreenType.GAME;   break;
+				case ScreenType.GAME  : nextType = ScreenType.SCORES; break;
+				case ScreenType.SCORES: nextType = ScreenType.TITLE;  break;
 				
 				default:
 				throw new Error("unrecognized screen type '" +currentType +"'");
@@ -62,10 +57,13 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		}
 		
 		/** @inheritDoc */
-		public function getScreen(type:String):ScreenBase
+		public function getScreen(type:ScreenTypeEnumerator):ScreenBase
 		{
+			// new screens won't have type set; doing it here so overriders of
+			// retrieveScreen don't have to remember to
 			var screen:ScreenBase = retrieveScreen(type);
 			screen.type = type;
+			
 			return screen;
 		}
 		
@@ -79,19 +77,19 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		of NullScreen and DebugScreen.
 		</p>
 		*/
-		protected function retrieveScreen(type:String):ScreenBase
+		protected function retrieveScreen(type:ScreenTypeEnumerator):ScreenBase
 		{
 			var screen:ScreenBase;
 			switch (type)
 			{
-				case GAME   : 
-				case HELP   : 
-				case NULL   : 
-				case SCORES : 
-				case SETUP  : 
-				case TITLE  : screen = screens.retrieve(NullScreen, type) as ScreenBase; break;
+				case ScreenType.GAME   : 
+				case ScreenType.HELP   : 
+				case ScreenType.NULL   : 
+				case ScreenType.SCORES : 
+				case ScreenType.SETUP  : 
+				case ScreenType.TITLE  : screen = screens.retrieve(NullScreen, type) as ScreenBase; break;
 				
-				case DEBUG  : screen = screens.retrieve(DebugScreen, type) as ScreenBase; break;
+				case ScreenType.DEBUG  : screen = screens.retrieve(DebugScreen, type) as ScreenBase; break;
 				
 				default: throw new Error("unsupported screen type: " +type); break;
 			}

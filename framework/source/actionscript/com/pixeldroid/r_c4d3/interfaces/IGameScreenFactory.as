@@ -2,6 +2,7 @@
 package com.pixeldroid.r_c4d3.interfaces
 {
 	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.view.screen.ScreenTypeEnumerator;
 	
 
 	/**
@@ -11,45 +12,37 @@ package com.pixeldroid.r_c4d3.interfaces
 	Implementors of this interface can be provided to the GameScreenController.
 	</p>
 	
-	@see com.pixeldroid.r_c4d3.game.control.GameScreenController
+	@see com.pixeldroid.r_c4d3.game.view.screen.ScreenType
 	@see com.pixeldroid.r_c4d3.game.view.screen.ScreenBase
+	@see com.pixeldroid.r_c4d3.game.control.GameScreenController
 	*/
 	public interface IGameScreenFactory
 	{
-		/** Screen type representing the gameplay screen */ function get GAME():String;
-		/** Screen type representing the instructions screen */ function get HELP():String;
-		/** Screen type representing the null screen */ function get NULL():String;
-		/** Screen type representing the high scores screen */ function get SCORES():String;
-		/** Screen type representing the player setup screen */ function get SETUP():String;
-		/** Screen type representing the title screen */ function get TITLE():String;
-		/** Screen type representing the performance stats screen */ function get DEBUG():String;
-
 		
 		/**
 		Retrieve the type of screen that begins the attract loop sequence 
-		(usually NULL).
+		(default is ScreenType.TITLE).
 		*/
-		function get loopStartScreenType():String;
+		function get loopStartScreenType():ScreenTypeEnumerator;
 		
 		/**
 		Retrieve the type of screen to jump to when exiting the attract loop 
-		sequence and starting game play (usually SETUP or GAME).
+		sequence and starting game play (default is ScreenType.SETUP).
 		*/
-		function get gameStartScreenType():String;
+		function get gameStartScreenType():ScreenTypeEnumerator;
 		
 		/**
-		Retrieve the type of screen that follows the provided type in the 
-		attract loop sequence.
+		Retrieve the type of screen to jump to when leaving the provided type.
 		
-		@param currentType A valid IGameScreenFactory type
+		@param currentType The type enumerator for the screen preceeding the desired screen
 		*/
-		function getNextScreenType(currentType:String):String;
+		function getNextScreenType(currentType:ScreenTypeEnumerator):ScreenTypeEnumerator;
 		
 		/**
 		Retrieve the screen implementation associated with the provided type. 
 		
-		@param type A valid IGameScreenFactory type
+		@param type The type enumerator associated with the screen instance
 		*/
-		function getScreen(type:String):ScreenBase;
+		function getScreen(type:ScreenTypeEnumerator):ScreenBase;
 	}
 }
