@@ -30,16 +30,21 @@ Tasks to build and package the r-c4d3 romloaders.
 		</delete>
 	</target>
 	
+	<target name="build-number">
+		<increment-build />
+	</target>
+	
     <target name="version" description="sets semver property">
 		<semver project="romloader" major="${semver.major}" minor="${semver.minor}" />
 		<property name="semver.romloader.quoted" value="'${semver.romloader}'" />
 		<property name="semver.romloader.define" value='-define+=SEMVER::v,"${semver.romloader.quoted}"' />
+		<echo message="R-C4D3 RomLoader v${semver.romloader}" />
 	</target>
 	
     <target name="compile" depends="compile-desktop, compile-web, compile-rc4d3" 
 		description="compile-desktop, compile-web, compile-rc4d3"/>
 	
-    <target name="compile-desktop" depends="clean, version" description="compile the desktop romloader">
+    <target name="compile-desktop" depends="clean, build-number, version" description="compile the desktop romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
 			<arg line="'${dir.source}/actionscript/DesktopRomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-desktop.swf'"/>
@@ -49,7 +54,7 @@ Tasks to build and package the r-c4d3 romloaders.
 		</exec>
 	</target>
 	
-    <target name="compile-web" depends="clean, version" description="compile the web-based romloader">
+    <target name="compile-web" depends="clean, build-number, version" description="compile the web-based romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
 			<arg line="'${dir.source}/actionscript/WebRomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-web.swf'"/>
@@ -59,7 +64,7 @@ Tasks to build and package the r-c4d3 romloaders.
 		</exec>
 	</target>
 	
-    <target name="compile-rc4d3" depends="clean, version" description="compile the web-based r-c4d3 romloader">
+    <target name="compile-rc4d3" depends="clean, build-number, version" description="compile the web-based r-c4d3 romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
 			<arg line="'${dir.source}/actionscript/RC4D3RomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-rc4d3.swf'"/>
@@ -124,30 +129,22 @@ Tasks to build and package the r-c4d3 romloaders.
 		</copy>
 	</target>
 	
-	<target name="get-revision">
-		<echo message="R-C4D3 RomLoader v${semver.romloader}" />
+
+	<target name="add-projectors" unless="skip.add.projectors" depends="projectors-zip-win, projectors-zip-osx"
+		description="step through conversion of desktop swf to projectors, then zip and release">
+		<copy file="${dir.target}/romloader-desktop-${os}.zip" todir="${dir.releases}" overwrite="true"/>
+	</target>
+
+	<target name="projectors-clean" depends="version">
+		<mkdir dir="${dir.target}/temp-desktop-projectors"/>
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${dir.target}/temp-desktop-projectors" includes="**/*"/>
+		</delete>
+		<copy file="${dir.target}/romloader-desktop.swf" todir="${dir.target}/temp-desktop-projectors"/>
 	</target>
 	
-	<!--target name="get-revision" if="SVN_ANT_HOME">
-		<path id="svn.classpath"> 
-			<fileset dir="${SVN_ANT_HOME}"> 
-				<include name="**/*.jar"/> 
-			</fileset> 
-		</path>
-		
-		<taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" classpathref="svn.classpath"/>
-		
-		<svn javahl="false">
-			<wcVersion path="${basedir}"/>
-		</svn>
-		<echo message="v.${revision.max}"/>
-	</target-->
-	
-	<target name="add-projectors" depends="version, get-revision" unless="skip.add.projectors" description="prepares romloader swf for conversion to projector">
-		<mkdir dir="${dir.target}/temp-desktop-projectors"/>
-		<copy file="${dir.target}/romloader-desktop.swf" todir="${dir.target}/temp-desktop-projectors"/>
-		<input>
-
+	<target name="projectors-instrux-pre" depends="projectors-clean">
+		<echo>
 In temp-desktop-projectors,
 please create projectors from romloader-desktop.swf for supported OSes.
 
@@ -156,42 +153,57 @@ Naming for this OS should be:
   romloader-desktop-debug${exe} 
 
 Meta data to insert (apply [debug] when appropriate):
+		</echo>
+	</target>
 
+	<target name="projectors-instrux-win" if="isWin" depends="projectors-instrux-pre">
+		<echo>
 Win
+  open exes in versiown
+  change icon to /shared/src/icons/R.C4D3.ico
   file version    : ${semver.romloader}
   file description: [Debug version of ]Desktop Rom Loader for R-C4D3 flash game roms
   legal copyright : Copyleft ${date.year} Pixeldroid
   product name    : R-C4D3 Desktop Rom Loader[ (debug)]
   company name    : pixeldroid.com
-  (disable menu bar)
-  app title       : R-C4D3 Rom Loader[ (debug)]
+		</echo>
+	</target>
 
+	<target name="projectors-instrux-osx" if="isOsx" depends="projectors-instrux-pre">
+		<echo>
 OSX
-  add R.C4D3.icns to contents/Resources
+  add /shared/src/icons/R.C4D3.icns to contents/Resources
   update contents/Info.plist
-    CFBundleGetInfoString : Debug version of Desktop Rom Loader for R-C4D3 flash game roms v0.1.7
-    CFBundleIconFile : R.C4D3
-    CFBundleLongVersionString : R-C4D3 Desktop Rom Loader v0.1.7 (debug)
-    CFBundleName : R-C4D3 Desktop Rom Loader (debug)
-    CFBundleShortVersionString : 0.1.7
-    NSHumanReadableCopyright : Copyleft 2011 Pixeldroid
+    CFBundleGetInfoString      : [Debug version of ]Desktop Rom Loader for R-C4D3 flash game roms v${semver.romloader}
+    CFBundleIconFile           : R.C4D3
+    CFBundleLongVersionString  : R-C4D3 Desktop Rom Loader v${semver.romloader}[ (debug)]
+    CFBundleName               : R-C4D3 Desktop Rom Loader[ (debug)]
+    CFBundleShortVersionString : ${semver.romloader}
+    CFBundleVersion            : ${semver.romloader}
+    NSHumanReadableCopyright   : Copyleft ${date.year} Pixeldroid
+		</echo>
+	</target>
 
+	<target name="projectors-pause" depends="projectors-instrux-win,projectors-instrux-osx">
+		<input>
 Press Enter when ready...
 		</input>
 		
 		<delete file="${dir.target}/temp-desktop-projectors/romloader-desktop.swf"/>
-		<!-- 
-		
-note: need to shell out to zip to retain permissions on OSX
-use ditto?
-see http://hints.macworld.com/article.php?story=20031118111144197
-
-		-->
+	</target>
+	
+	<target name="projectors-zip-win" if="isWin" depends="projectors-pause">
 		<zip 
-			destfile="${dir.releases}/romloader-desktop-${os}.zip"
 			basedir="${dir.target}/temp-desktop-projectors"
-			update="true"
+			destfile="${dir.target}/romloader-desktop-${os}.zip"
 			/>
+	</target>
+	
+	<target name="projectors-zip-osx" if="isOsx" depends="projectors-pause">
+		<exec osfamily="mac" spawn="false" executable="ditto">
+			<!-- see http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/ditto.1.html -->
+			<arg line="-c -k --sequesterRsrc ${dir.target}/temp-desktop-projectors ${dir.target}/romloader-desktop-${os}.zip"/>
+		</exec>
 	</target>
 
 </project>
