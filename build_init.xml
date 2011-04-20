@@ -242,6 +242,7 @@ See ${basedir}/build_init.xml for details.
 	
 	<!-- Define global targets -->
 	<target name="-usage"> <!-- not providing description to avoid showing up in -projecthelp -->
+		<echo message="${ant.project.name}" />
 		<java classname="org.apache.tools.ant.Main">
 			<arg value="-projecthelp" />
 		</java>

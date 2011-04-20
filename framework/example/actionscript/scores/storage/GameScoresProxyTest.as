@@ -19,7 +19,7 @@ package
     public class GameScoresProxyTest extends Sprite
 	{
 	
-		protected var C:Console;
+		protected var console:Console;
 		protected var scores:IGameScoresProxy;
 		
 		
@@ -28,8 +28,10 @@ package
 			super();
 			addVersion();
 			
-			C = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
-			C.out(Version.productInfo);
+			console = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
+			C.enable(console);
+			
+			C.out(this, Version.productInfo);
 			
 			scores = createScoresProxy();
 			scores.addEventListener(ScoreEvent.SAVE, onSave);
@@ -53,19 +55,19 @@ package
 		
 		protected function onSave(e:ScoreEvent):void
 		{
-			C.out(e.toString());
+			C.out(this, e.toString());
 		}
 		
 		protected function onLoad(e:ScoreEvent):void
 		{
-			C.out(e.toString());
+			C.out(this, e.toString());
 		}
 		
 		
 		protected function onFrame(e:Event):void
 		{
-			C.out("\n" +scores.toString());
-			C.out(" ");
+			C.out(this, "\n" +scores.toString());
+			C.out(this, " ");
 			
 			var i:String;
 			var s:Number;
@@ -89,8 +91,8 @@ package
 				initials = (i == null) ? str(3) : i;
 				A.push(new ScoreEntry(score, initials));
 			}
-			C.out(A.toString());
-			C.out(" ");
+			C.out(this, A.toString());
+			C.out(this, " ");
 			return A;
 		}
 		

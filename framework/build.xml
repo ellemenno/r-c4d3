@@ -34,6 +34,10 @@ Tasks to build and package the r-c4d3 as3 framework.
 		</delete>
 	</target>
 	
+	<target name="build-number">
+		<increment-build />
+	</target>
+	
     <target name="version" description="sets semver and compile date properties">
 		<semver project="framework" major="${semver.major}" minor="${semver.minor}" />
 		<!--
@@ -47,9 +51,10 @@ Tasks to build and package the r-c4d3 as3 framework.
 		<property name="version.hour.quoted" value="'${date.hour}'" />
 		<property name="version.minute.quoted" value="'${date.minute}'" />
 		<property name="version.second.quoted" value="'${date.second}'" />
+		<echo message="${ant.project.name} v${semver.framework}" />
 	</target>
 	
-    <target name="compile" depends="clean, version" description="compile the r-c4d3.swc">
+    <target name="compile" depends="clean, build-number, version" description="compile the r-c4d3.swc">
     	<exec executable="${flex.compc}" failonerror="true">
 			<arg line='-output="${dir.target}/r-c4d3.swc"'/>
 			<arg line='-load-config+="${dir.config}/compc-config.xml"'/>
