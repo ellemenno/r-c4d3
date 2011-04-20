@@ -17,7 +17,7 @@ package
     public class GameIdValidationTest extends Sprite
 	{
 	
-		private var C:Console;
+		private var console:Console;
 		
 		
 		public function GameIdValidationTest():void
@@ -25,8 +25,10 @@ package
 			super();
 			addVersion();
 			
-			C = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
-			C.out(Version.productInfo);
+			console = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
+			C.enable(console);
+			
+			C.out(this, Version.productInfo);
 			
 			checkNames();
 		}
@@ -51,9 +53,9 @@ package
 				try 
 				{ 
 					gp = new GameScoresProxy(names[i]); 
-					C.out("- " +names[i]);
+					C.out(this, "- " +names[i]);
 				}
-				catch (e:Error) { C.out("X " +names[i] +" " +e); }
+				catch (e:Error) { C.out(this, "X " +names[i] +" " +e); }
 			}
 		}
 		

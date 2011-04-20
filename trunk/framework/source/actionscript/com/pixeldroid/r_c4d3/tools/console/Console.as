@@ -6,6 +6,7 @@ package com.pixeldroid.r_c4d3.tools.console {
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.text.AntiAliasType;
+	import flash.text.GridFitType;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
@@ -35,11 +36,11 @@ package com.pixeldroid.r_c4d3.tools.console {
 	</p>
 	
 	<p>
-	This class embeds a distributable font named "VeraMono.ttf",
-	Copyright 2003 by Bitstream, Inc.
+	This class embeds a distributable font named "ProggyTiny.ttf",
+	Copyright 2004 by Tristan Grimmer.
 	</p>
 	
-	@see http://www.gnome.org/fonts/
+	@see http://proggyfonts.com/index.php?menu=download
 	
 	@example The following code shows a simple console instantiation; 
 	see the constructor documentation for more options:
@@ -49,11 +50,29 @@ package {
    import flash.display.Sprite;
 
    public class MyConsoleExample extends Sprite {
-	  protected const C:Console = new Console();
+	  public var console:Console = new Console();
 	  public function MyConsoleExample() {
 		 super();
-		 addChild(C);
-		 C.out("Hello World");
+		 addChild(console);
+		 console.log("Hello World");
+	  }
+   }
+}
+</listing>
+	
+	@example The console may be used in conjunction with the C logger:
+<listing version="3.0" >
+package {
+   import com.pixeldroid.r_c4d3.tools.console.Console;
+   import flash.display.Sprite;
+
+   public class MyConsoleLoggingExample extends Sprite {
+	  private var console:Console = new Console();
+	  public function MyConsoleExample() {
+		 super();
+		 addChild(console);
+		 C.enable(console);
+		 C.out("Hello World"); // C.outs for all classes will log to console now
 	  }
    }
 }
@@ -61,14 +80,14 @@ package {
 	*/
 	public class Console extends Sprite {
 		
-		[Embed(mimeType="application/x-font", source="VeraMono.ttf", fontName="FONT_CONSOLE", embedAsCFF="false")]
+		[Embed(mimeType="application/x-font", source="ProggyTiny.ttf", fontName="FONT_CONSOLE", embedAsCFF="false")]
 		protected static var FONT_CONSOLE:Class;
 
 		protected static const WIDTH:Number = 780;
 		protected static const HEIGHT:Number = 200;
 		protected static const BACK_COLOR:uint = 0x000000;
 		protected static const FORE_COLOR:uint = 0xffffff;
-		protected static const FONT_SIZE:Number = 9;
+		protected static const FONT_SIZE:Number = 16;
 		protected static const BACK_ALPHA:Number = .8;
 		protected static const BUFFER_SIZE:int = 64;
 		protected static const LEADING:int = 2;
@@ -119,6 +138,7 @@ package {
 			
 			console = new TextField();
 			console.antiAliasType = (txtSize > 24) ? AntiAliasType.NORMAL : AntiAliasType.ADVANCED;
+			console.gridFitType = GridFitType.PIXEL;
 			console.embedFonts = true;
 			console.defaultTextFormat = format;
 			console.multiline = true;
@@ -138,11 +158,11 @@ package {
 
 
 		/**
-		* Send a message to the console.
+		* Append a message to the console.
 		*/
-		public function out(msg:String):void {
+		public function log(value:String):void {
 			if (loggingPaused == false) {
-				console.appendText(formatMessage(msg) +"\n");
+				console.appendText(value +"\n");
 				var overage:int = console.numLines - bufferMax;
 				if (overage > 0) console.replaceText(0, console.getLineOffset(overage), "");
 				console.scrollV = console.maxScrollV;
@@ -162,7 +182,7 @@ package {
 		* Pause the console. Messages received while paused are ignored.
 		*/
 		public function pause():void {
-			out("<PAUSE>");
+			log("<PAUSE>");
 			loggingPaused = true;
 		}
 	
@@ -172,7 +192,7 @@ package {
 		*/
 		public function resume():void {
 			loggingPaused = false;
-			out("<RESUME>");
+			log("<RESUME>");
 		}
 	
 	
@@ -193,13 +213,6 @@ package {
 
 		
 		/**
-		* Override to provide custom formatting
-		*/
-		protected function formatMessage(msg:String):String {
-			return pad(getTimer().toString()) +" " +msg;
-		}
-		
-		/**
 		* Override to change keyboard shortcuts.
 		* By default:
 		* <ul>
@@ -218,22 +231,17 @@ package {
 		}
 		
 		protected function registerKeyhandler(e:Event):void {
-			out(": : : : : : : : : : : : : :");
-			out(": tick (`) toggles hide");
-			out(": ctrl-tick toggles pause");
-			out(": ctrl-bkspc clears");
-			out("");
+			log(": : : : : : : : : : : : : :");
+			log(": tick (`) toggles hide");
+			log(": ctrl-tick toggles pause");
+			log(": ctrl-bkspc clears");
+			log("");
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 		}
 		
 		protected function toggleLog():void { (loggingPaused == true) ? resume() : pause(); }
 		
 		protected function toggleVis():void { (visible == false) ? show() : hide(); }
-		
-		protected function pad(s:String, p:uint = 8):String {
-			while(s.length < p) { s = "0" +s; }
-			return s;
-		}
 		
 	}
 

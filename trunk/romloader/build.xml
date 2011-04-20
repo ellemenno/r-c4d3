@@ -38,7 +38,7 @@ Tasks to build and package the r-c4d3 romloaders.
 		<semver project="romloader" major="${semver.major}" minor="${semver.minor}" />
 		<property name="semver.romloader.quoted" value="'${semver.romloader}'" />
 		<property name="semver.romloader.define" value='-define+=SEMVER::v,"${semver.romloader.quoted}"' />
-		<echo message="R-C4D3 RomLoader v${semver.romloader}" />
+		<echo message="${ant.project.name} v${semver.framework}" />
 	</target>
 	
     <target name="compile" depends="compile-desktop, compile-web, compile-rc4d3" 

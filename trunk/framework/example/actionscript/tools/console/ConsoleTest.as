@@ -15,7 +15,7 @@ package
     public class ConsoleTest extends Sprite
 	{
 	
-		private var C:Console;
+		private var console:Console;
 		
 		
 		public function ConsoleTest():void
@@ -23,9 +23,20 @@ package
 			super();
 			addVersion();
 			
-			C = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
-			C.out(Version.productInfo);
-			C.out("Hello, World, random gibberish to follow..");
+			console = addChild(new Console(stage.stageWidth, stage.stageHeight)) as Console;
+			C.enable(console);
+			
+			C.out(this, Version.productInfo);
+			C.out(this, "-+-+-+-+-+-+-+-+-+-+-+-+-+");
+			C.out(this, "~!@#$%^&*()_+|QWERTYUIOP{}");
+			C.out(this, "`1234567890-=\\qwertyuiop[]");
+			C.out(this, " _ _ ASDFGHJKL:\"ZXCVBNM<>?");
+			C.out(this, "- -  asdfghjkl;'zxcvbnm,./");
+			C.out(this, ".,;:|'`.,;:|'`.,;:|'`.,;:|");
+			C.out(this, "..........................");
+			a();
+			C.out(this, "..........................");
+			C.out(this, "Hello, World, random gibberish to follow..");
 			
 			addEventListener(Event.ENTER_FRAME, onFrame);
 		}
@@ -38,7 +49,7 @@ package
 		
 		private function onFrame(e:Event):void
 		{
-			C.out(makeMessage(r(50,15)));
+			C.out(this, makeMessage(r(50,15)));
 		}
 		
 		private function makeMessage(length:int):String
@@ -48,6 +59,10 @@ package
 			while (s.length < length) s += alpha.charAt(r(alpha.length));
 			return s;
 		}
+		
+		private function a():void { b(); }
+		private function b():void { c(); }
+		private function c():void { C.out(this, C.stackTrace); }
 		
 		private function r(hi:int, lo:int=0):int
 		{

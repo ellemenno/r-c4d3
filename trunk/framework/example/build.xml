@@ -22,24 +22,31 @@ Top level build file for all r-c4d3 framework examples.
 		<ant dir="${dir.framework}" target="compile" inheritall="false" />
 	</target>
 	
+	<target name="console">
+		<ant dir="${dir.framework}" target="compile" inheritall="false" />
+		<echo message=" " />
+		<compile-example path="tools/console" file="ConsoleTest.as"/>
+	</target>
+	
 	<target name="build" description="&gt; this is the main task" depends="compile-framework">
-		<compile-example file="com/pixeldroid/r_c4d3/scores/LocalGameScoresProxyTest.as"/>
-		<compile-example file="com/pixeldroid/r_c4d3/scores/GameScoresProxyTest.as"/>
-		<compile-example file="com/pixeldroid/r_c4d3/scores/GameIdValidationTest.as"/>
-		<compile-example file="com/pixeldroid/r_c4d3/tools/console/ConsoleTest.as"/>
-		<compile-example file="com/pixeldroid/r_c4d3/tools/framerate/FpsMeterTest.as"/>
-		<compile-example file="com/pixeldroid/r_c4d3/tools/perfmon/PerfMonTest.as"/>
+		<compile-example path="scores/storage" file="GameScoresProxyTest.as"/>
+		<compile-example path="scores/storage" file="LocalGameScoresProxyTest.as"/>
+		<compile-example path="scores/validation" file="GameIdValidationTest.as"/>
+		<compile-example path="tools/console" file="ConsoleTest.as"/>
+		<compile-example path="tools/framerate" file="FpsMeterTest.as"/>
+		<compile-example path="tools/perfmon" file="PerfMonTest.as"/>
 	</target>
 	
 	<macrodef name="compile-example">
+		<attribute name="path"/>
 		<attribute name="file"/>
 		<sequential>
 			<echo message="compiling @{file}"/>
 			<exec executable="${flex.mxmlc}" failonerror="true">
-				<arg line="'${dir.example.source}/@{file}'"/>
-				<arg line="-sp='${dir.example.source}'"/>
+				<arg line="'${dir.example.source}/@{path}/@{file}'"/>
+				<arg line="-sp='${dir.example.source}/@{path}'"/>
 				<arg line="-l='${dir.framework.lib}'"/>
-				<arg line="-static-link-runtime-shared-libraries='true'"/><!-- to use 3.0 font embedding -->
+				<arg line="-static-link-runtime-shared-libraries='true'"/>
 			</exec>
 		</sequential>
 	</macrodef>
