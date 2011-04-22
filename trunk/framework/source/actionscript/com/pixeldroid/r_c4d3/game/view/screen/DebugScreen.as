@@ -5,9 +5,11 @@ package com.pixeldroid.r_c4d3.game.view.screen
 	
 	import flash.display.Sprite;
 	
+	import com.pixeldroid.r_c4d3.Version;
 	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
 	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
 	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.tools.console.Console;
 	import com.pixeldroid.r_c4d3.tools.framerate.FpsMeter;
 	import com.pixeldroid.r_c4d3.tools.perfmon.PerfMon;
 	
@@ -29,6 +31,7 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		protected var graphs:Sprite;
 		protected var fps:FpsMeter;
 		protected var pm:PerfMon;
+		protected var console:Console;
 		
 		
 		public function DebugScreen():void
@@ -47,6 +50,10 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		
 		override protected function onFirstScreen():void
 		{
+			console = addChild(new Console(stage.stageWidth, stage.stageHeight/3)) as Console;
+			C.enable(console);
+			C.out(this, Version.productInfo);
+			
 			graphs = addChild(new Sprite) as Sprite;
 			
 			fps = graphs.addChild(new FpsMeter()) as FpsMeter;
@@ -64,6 +71,7 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		override public function shutDown():Boolean
 		{
 			fps.stopMonitoring();
+			console.clear();
 			
 			return super.shutDown();
 		}
