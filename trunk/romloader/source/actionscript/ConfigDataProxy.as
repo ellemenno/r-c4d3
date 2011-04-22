@@ -64,8 +64,6 @@ package
 		{
 			xmlString = sourceXml;
 			xmlData = new XML(xmlString);
-			C.enabled = loggingEnabled;
-			C.out(this, toString());
 		}
 		
 		
