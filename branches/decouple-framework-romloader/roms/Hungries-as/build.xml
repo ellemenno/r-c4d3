@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3.roms.Hungries-as3" default="-usage" basedir="./">
+
+<description>
+Build file for the AS3 Hungries rom.
+</description>
+	
+	<property name="game.name" value="Hungries"/>
+	
+	<property name="dir.trunk" value="../.."/>
+	<import file="${dir.trunk}/build_init.xml"/>
+	<import file="../build_roms.xml"/>
+
+</project>
+

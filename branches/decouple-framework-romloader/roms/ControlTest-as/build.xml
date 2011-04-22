@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3.roms.ControlTest-as3" default="-usage" basedir="./">
+
+<description>
+Build file for the AS3 Control Test rom.
+</description>
+	
+	<property name="game.name" value="ControlTest"/>
+	
+	<property name="dir.trunk" value="../.."/>
+	<import file="${dir.trunk}/build_init.xml"/>
+	<import file="../build_roms.xml"/>
+
+</project>
+
