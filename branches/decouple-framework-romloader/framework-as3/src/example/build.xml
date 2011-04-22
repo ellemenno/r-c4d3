@@ -6,50 +6,17 @@
 Top level build file for all r-c4d3 framework examples.
 </description>
 	
-	<property name="dir.trunk" location="../.."/>
+	<property name="dir.trunk" location="../../.."/>
 	<import file="${dir.trunk}/build_init.xml"/>
 	
 	<property name="dir.example.source" location="${basedir}/actionscript"/>
-	<property name="dir.framework" location=".."/>
-	<property name="dir.framework.lib" location="../target"/>
 	
 	
-	<target name="-check-framework">
-		<available property="framework.available" file="${dir.framework.lib}/r-c4d3.swc"/>
+	<target name="build" description="&gt; this is the main task">
+		<!-- <ant dir="${dir.example.source}/game/GetToTheSpot" target="build" inheritall="false" /> -->
+		<ant dir="${dir.example.source}/scores" target="build" inheritall="false" />
+		<ant dir="${dir.example.source}/tools" target="build" inheritall="false" />
 	</target>
-	
-	<target name="compile-framework" unless="${framework.available}" depends="-check-framework">
-		<ant dir="${dir.framework}" target="compile" inheritall="false" />
-	</target>
-	
-	<target name="console">
-		<ant dir="${dir.framework}" target="compile" inheritall="false" />
-		<echo message=" " />
-		<compile-example path="tools/console" file="ConsoleTest.as"/>
-	</target>
-	
-	<target name="build" description="&gt; this is the main task" depends="compile-framework">
-		<compile-example path="scores/storage" file="GameScoresProxyTest.as"/>
-		<compile-example path="scores/storage" file="LocalGameScoresProxyTest.as"/>
-		<compile-example path="scores/validation" file="GameIdValidationTest.as"/>
-		<compile-example path="tools/console" file="ConsoleTest.as"/>
-		<compile-example path="tools/framerate" file="FpsMeterTest.as"/>
-		<compile-example path="tools/perfmon" file="PerfMonTest.as"/>
-	</target>
-	
-	<macrodef name="compile-example">
-		<attribute name="path"/>
-		<attribute name="file"/>
-		<sequential>
-			<echo message="compiling @{file}"/>
-			<exec executable="${flex.mxmlc}" failonerror="true">
-				<arg line="'${dir.example.source}/@{path}/@{file}'"/>
-				<arg line="-sp='${dir.example.source}/@{path}'"/>
-				<arg line="-l='${dir.framework.lib}'"/>
-				<arg line="-static-link-runtime-shared-libraries='true'"/>
-			</exec>
-		</sequential>
-	</macrodef>
 	
 </project>
 

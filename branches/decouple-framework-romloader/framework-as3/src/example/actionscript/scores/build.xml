@@ -6,7 +6,7 @@
 Build file for example score tests.
 </description>
 	
-	<property name="dir.trunk" location="../../../.."/>
+	<property name="dir.trunk" location="../../../../.."/>
 	<import file="${dir.trunk}/build_init.xml"/>
 	
 	<property name="dir.framework.lib" location="${dir.trunk}/_releases"/>
@@ -28,7 +28,7 @@ Build file for example score tests.
 				<arg line="'@{folder}/@{file}'"/>
 				<arg line="-sp='@{folder}'"/>
 				<arg line="-l='@{lib}'"/>
-				<arg line="-static-link-runtime-shared-libraries='true'"/><!-- to use 3.0 font embedding -->
+				<arg line="-static-link-runtime-shared-libraries='true'"/>
 			</exec>
 		</sequential>
 	</macrodef>

@@ -6,7 +6,7 @@
 Simplistic game compliant with the IGameRom interface.
 </description>
 	
-	<property name="dir.trunk" location="../../../../.."/>
+	<property name="dir.trunk" location="../../../../../.."/>
 	
 	<!-- set trunk before import, since build will be evaluated from this files location, not build-init's -->
 	<import file="${dir.trunk}/build_init.xml"/>
@@ -17,6 +17,8 @@ Simplistic game compliant with the IGameRom interface.
 	
 	<property name="example.name" value="GetToTheSpot"/>
 	
+
+	<target name="build" description="&gt; this is the main task" depends="compile, run" />
 	
 	<target name="readme" description="prints example details">
 		<loadfile property="readme.message" srcFile="readme.txt"/>

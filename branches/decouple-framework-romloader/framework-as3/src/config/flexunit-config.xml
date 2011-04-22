@@ -3,7 +3,7 @@
 	
 	<!-- output: the filename of the SWC library to create-->
 	<!-- (relative to this file's location)
-	<output>../target/r-c4d3.swc</output>
+	<output>../../target/r-c4d3.swc</output>
 	-->
 	
 	<!-- default-size: default application size (may be overridden by root attributes in the application)
@@ -14,7 +14,7 @@
 	
 	<!-- link-report: Output a XML-formatted report of all definitions linked into the application.-->
 	<!-- (relative to this file's location)
-	<link-report>../target/docs/r-c4d3-links.xml</link-report>
+	<link-report>../../target/docs/r-c4d3-links.xml</link-report>
 	-->
 	
 	<!-- static-link-runtime-shared-libraries: statically link the libraries specified by the -runtime-shared-libraries-path option.-->
@@ -69,19 +69,16 @@
 		<!-- or continuous integration build machine -->
 		<headless-server>true</headless-server>
 		
-		<!-- compiler.library-path: list of SWC files or directories that contain SWC files
+		<!-- compiler.library-path: list of SWC files or directories that contain SWC files-->
+		<!-- (relative to this file's location)-->
 		<library-path append="true">
-			<path-element>libs</path-element>
-			<path-element>libs/player</path-element>
-			<path-element>libs/player/{targetPlayerMajorVersion}</path-element>
-			<path-element>locale/{locale}</path-element>
+			<path-element>../main/swc</path-element>
 		</library-path>
-		-->
 		
 		<!-- compiler.source-path: list of path elements that form the roots of ActionScript class hierarchies-->
 		<!-- (relative to this file's location)-->
 		<source-path>
-			<path-element>../source/actionscript</path-element>
+			<path-element>../main/actionscript</path-element>
 			<path-element>../test/actionscript</path-element>
 		</source-path>
 	</compiler>

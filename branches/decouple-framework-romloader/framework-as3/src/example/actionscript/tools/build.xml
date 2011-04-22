@@ -6,7 +6,7 @@
 Build file for example tool tests.
 </description>
 	
-	<property name="dir.trunk" location="../../../.."/>
+	<property name="dir.trunk" location="../../../../.."/>
 	<import file="${dir.trunk}/build_init.xml"/>
 	
 	<property name="dir.framework.lib" location="${dir.trunk}/_releases"/>

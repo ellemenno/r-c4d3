@@ -12,8 +12,9 @@ Tasks to build and package the r-c4d3 romloaders.
 	<property name="semver.major" value="0"/>
 	<property name="semver.minor" value="1"/>
 	
-	<property name="dir.source" location="${basedir}/source"/>
-	<property name="dir.config" location="${basedir}/config"/>
+	<property name="dir.config" location="${basedir}/src/config"/>
+	<property name="dir.source" location="${basedir}/src/main"/>
+	
 	<property name="dir.target" location="${basedir}/target"/>
 	
 	<property name="dir.documentation" location="${dir.trunk}/_documentation/romloader-api"/>
@@ -35,10 +36,10 @@ Tasks to build and package the r-c4d3 romloaders.
 	</target>
 	
     <target name="version" description="sets semver property">
-		<semver project="romloader" major="${semver.major}" minor="${semver.minor}" />
-		<property name="semver.romloader.quoted" value="'${semver.romloader}'" />
-		<property name="semver.romloader.define" value='-define+=SEMVER::v,"${semver.romloader.quoted}"' />
-		<echo message="${ant.project.name} v${semver.framework}" />
+		<semver project="romloader-as3" major="${semver.major}" minor="${semver.minor}" />
+		<property name="semver.romloader-as3.quoted" value="'${semver.romloader-as3}'" />
+		<property name="semver.romloader-as3.define" value='-define+=SEMVER::v,"${semver.romloader-as3.quoted}"' />
+		<echo message="${ant.project.name} v${semver.romloader-as3}" />
 	</target>
 	
     <target name="compile" depends="compile-desktop, compile-web, compile-rc4d3" 
@@ -50,7 +51,7 @@ Tasks to build and package the r-c4d3 romloaders.
 			<arg line="-output='${dir.target}/romloader-desktop.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_desktop.xml'"/>
 			<arg line="-static-link-runtime-shared-libraries='true'"/>
-			<arg line="${semver.romloader.define}"/>
+			<arg line="${semver.romloader-as3.define}"/>
 		</exec>
 	</target>
 	
@@ -60,7 +61,7 @@ Tasks to build and package the r-c4d3 romloaders.
 			<arg line="-output='${dir.target}/romloader-web.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_web.xml'"/>
 			<arg line="-static-link-runtime-shared-libraries='true'"/>
-			<arg line="${semver.romloader.define}"/>
+			<arg line="${semver.romloader-as3.define}"/>
 		</exec>
 	</target>
 	
@@ -70,7 +71,7 @@ Tasks to build and package the r-c4d3 romloaders.
 			<arg line="-output='${dir.target}/romloader-rc4d3.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_web.xml'"/>
 			<arg line="-static-link-runtime-shared-libraries='true'"/>
-			<arg line="${semver.romloader.define}"/>
+			<arg line="${semver.romloader-as3.define}"/>
 		</exec>
 	</target>
 	
@@ -83,7 +84,7 @@ Tasks to build and package the r-c4d3 romloaders.
 			<arg line="-output='${dir.target}/asdoc'"/>
 			<arg line="-footer='Copyleft ${date.year} Pixeldroid'"/>
 			<arg line="-load-config+='${dir.config}/asdoc-config.xml'"/>
-			<arg line="${semver.romloader.define}"/>
+			<arg line="${semver.romloader-as3.define}"/>
 		</exec>
 		<zip destfile="${dir.target}/romloader-api.zip" basedir="${dir.target}/asdoc"/>
 		<copy todir="${dir.documentation}" failonerror="false">
@@ -161,7 +162,7 @@ Meta data to insert (apply [debug] when appropriate):
 Win
   open exes in versiown
   change icon to /shared/src/icons/R.C4D3.ico
-  file version    : ${semver.romloader}
+  file version    : ${semver.romloader-as3}
   file description: [Debug version of ]Desktop Rom Loader for R-C4D3 flash game roms
   legal copyright : Copyleft ${date.year} Pixeldroid
   product name    : R-C4D3 Desktop Rom Loader[ (debug)]
@@ -174,12 +175,12 @@ Win
 OSX
   add /shared/src/icons/R.C4D3.icns to contents/Resources
   update contents/Info.plist
-    CFBundleGetInfoString      : [Debug version of ]Desktop Rom Loader for R-C4D3 flash game roms v${semver.romloader}
+    CFBundleGetInfoString      : [Debug version of ]Desktop Rom Loader for R-C4D3 flash game roms v${semver.romloader-as3}
     CFBundleIconFile           : R.C4D3
-    CFBundleLongVersionString  : R-C4D3 Desktop Rom Loader v${semver.romloader}[ (debug)]
+    CFBundleLongVersionString  : R-C4D3 Desktop Rom Loader v${semver.romloader-as3}[ (debug)]
     CFBundleName               : R-C4D3 Desktop Rom Loader[ (debug)]
-    CFBundleShortVersionString : ${semver.romloader}
-    CFBundleVersion            : ${semver.romloader}
+    CFBundleShortVersionString : ${semver.romloader-as3}
+    CFBundleVersion            : ${semver.romloader-as3}
     NSHumanReadableCopyright   : Copyleft ${date.year} Pixeldroid
 		</echo>
 	</target>
