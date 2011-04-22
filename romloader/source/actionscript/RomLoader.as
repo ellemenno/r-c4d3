@@ -155,7 +155,6 @@ package
 		protected function onXmlComplete(e:Event):void
 		{
 			xmlLoaded = true;
-			//C.out(this, "onXmlComplete", true);
 			configProxy = createConfigProxy(xmlLoader.data);
 			
 			controlsProxy = createControlsProxy(configProxy);
@@ -192,7 +191,6 @@ package
 		protected function onSwfComplete(e:Event):void
 		{
 			swfLoaded = true;
-			C.out(this, "onSwfComplete");
 			if (splashDone) finalizeLoad(configProxy, controlsProxy, highScoresProxy);
 		}
 
@@ -222,7 +220,6 @@ package
 		protected function onPreloaderClosed(e:Event):void
 		{
 			splashDone = true;
-			//C.out(this, "onPreloaderClosed", true);
 			if (swfLoaded) finalizeLoad(configProxy, controlsProxy, highScoresProxy);
 		}
 
@@ -243,8 +240,8 @@ package
 		/** @private */
 		protected function loadSwf():void
 		{
-			try { romLoader.load(new URLRequest(configProxy.romUrl)); }
-			catch(e:Error) { C.out(this, "Error - rom could not be loaded: " +e); }
+			// will throw error if load cannot be completed
+			romLoader.load(new URLRequest(configProxy.romUrl));
 		}
 
 		/*
@@ -278,7 +275,6 @@ package
 			{
 				if (HaxeSideDoor.romInstance && HaxeSideDoor.romInstance is IGameRom) gameRom = IGameRom(HaxeSideDoor.romInstance);
 			}
-			else trace("extractGameRom() - Error: content is not a valid rom (" +getQualifiedClassName(extractGameRom) +")");
 			
 			return gameRom;
 		}
@@ -312,7 +308,6 @@ package
 		*/
 		protected function onIoError(e:IOErrorEvent):void
 		{
-			trace("IO Error: " +e);
 			closePreloader();
 		}
 
@@ -323,7 +318,6 @@ package
 		*/
 		protected function onSecurityError(e:SecurityErrorEvent):void
 		{
-			trace("Security Error: " +e);
 			closePreloader();
 		}
 		
@@ -414,7 +408,6 @@ package
 		/** @private */
 		protected function finalizeLoad(configProxy:IGameConfigProxy, controlsProxy:IGameControlsProxy, highScoresProxy:IGameScoresProxy):void
 		{
-			C.out(this, "finalizeLoad");
 			_removeListeners();
 			
 			if (romLoader.content)
@@ -425,19 +418,15 @@ package
 				var gameRom:IGameRom = extractGameRom(romLoader.content);
 				if (gameRom)
 				{
-					C.out(this, "finalizeLoad() - valid game rom found, sending over config proxy, controls proxy and scores proxy")
-					
 					gameRom.setConfigProxy(configProxy);
 					gameRom.setControlsProxy(controlsProxy);
 					gameRom.setScoresProxy(highScoresProxy);
 					
 					romLoader.visible = true; // reveal container
 					
-					C.out(this, "finalizeLoad() - game should be ready, calling enterAttractLoop()")
 					gameRom.enterAttractLoop();
 				}
 			}
-			else C.out(this, "finalizeLoad() - Error: content unable to be loaded");
 		}
 		
 		/** @private */
