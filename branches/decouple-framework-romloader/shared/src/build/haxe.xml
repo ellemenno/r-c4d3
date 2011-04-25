@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3.haxe" default="-usage" basedir="./">
+
+<description>
+Initialization of haxe tools for the r-c4d3 project.
+</description>
+	
+	<!-- Try to warn (but not fail) when haxe.exe isn't available -->
+	<property name="haxe.haxe" value="${HAXE_HOME}/haxe${cli}"/>
+	<!--	 HACK: -->
+	<!--	 Ant doesn't support conditional echoing. -->
+	<!--	 So we are relying on an echo level hack to make it happen: -->
+	<!--		 debug level echos will typically not display (unless running ant in debug mode). -->
+	<!--		 warning level echos typically will. -->
+	<!--	 So we choose debug when haxe.haxe is available, and warning when not. -->
+	<condition property="haxe_not_found" value="debug" else="warning">
+		<available file="${haxe.haxe}"/>
+	</condition>
+	
+	<echo level="${haxe_not_found}">${NL}
+The haxe executable could not be located, possibly because the HAXE_HOME property was not set.
+haXe targets will NOT be built.
+
+To build haXe targets, set the HAXE_HOME property to a valid path for the haXe compiler's parent folder.
+The current value of $${HAXE_HOME} is ${HAXE_HOME}
+The path that failed to resolve for the haxe executable is ${haxe.haxe}
+${msg.props}
+	</echo>
+	<echo level="debug">${NL}
+The above message about your haxe property may be a false warning if you ran Ant in debug mode.
+Run in a non-debug level to find out for sure (sorry, this is a hack so that haXe is not required for all builds).
+See ${basedir}/build_init.xml for details.
+	</echo>
+
+</project>
