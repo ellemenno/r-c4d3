@@ -7,7 +7,7 @@ Tasks to build and package the r-c4d3 romloaders.
 </description>
 	
 	<property name="dir.trunk" location=".."/>
-	<import file="${dir.trunk}/build_init.xml"/>
+	<import file="${dir.trunk}/shared/src/build/init.xml"/>
 	
 	<property name="semver.major" value="0"/>
 	<property name="semver.minor" value="1"/>

@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="r-c4d3 components" default="-usage" basedir="./">
+<project name="r-c4d3" default="-usage" basedir=".">
 
 <description>
 Top level build file for all components of the r-c4d3 platform.
 </description>
 	
-	<import file="build_init.xml"/>
+	<property name="dir.trunk" location="${basedir}"/>
+	<import file="${dir.trunk}/shared/src/build/init.xml"/>
 	
-    <target name="build" depends="framework, romloader, roms" 
-		description="&gt; this is the main task: framework, romloader, roms"/>
+	
+    <target name="build" depends="build-as3" 
+		description="&gt; this is the main task: build-as3"/>
 	
 		
-	<target name="framework" description="calls the build task of ${basedir}/framework/build.xml">
+    <target name="build-as3" depends="framework-as3, romloader-as3, roms-as3" 
+		description="builds as3 components: framework-as3, romloader-as3, roms-as3"/>
+		
+	<target name="framework-as3" description="calls the build task of ${dir.trunk}/framework-as3/build.xml">
 		<ant
-			antfile="${basedir}/framework/build.xml"
-			dir="${basedir}/framework"
+			antfile="${dir.trunk}/framework-as3/build.xml"
+			dir="${dir.trunk}/framework-as3"
 			target="build"
 			inheritall="false"
 			/>
 	</target>
 			
-	<target name="romloader" description="calls the build task of ${basedir}/romloader/build.xml">
+	<target name="romloader-as3" description="calls the build task of ${dir.trunk}/romloader-as3/build.xml">
 		<ant
-			antfile="${basedir}/romloader/build.xml"
-			dir="${basedir}/romloader"
+			antfile="${dir.trunk}/romloader-as3/build.xml"
+			dir="${dir.trunk}/romloader-as3"
 			target="build"
 			inheritall="false"
 			>
@@ -32,10 +37,10 @@ Top level build file for all components of the r-c4d3 platform.
 		</ant>
 	</target>
 			
-	<target name="roms" description="calls the build task of ${basedir}/roms/build.xml">
+	<target name="roms-as3" description="calls the build task of ${dir.trunk}/roms-as3/build.xml">
 		<ant
-			antfile="${basedir}/roms/build.xml"
-			dir="${basedir}/roms"
+			antfile="${dir.trunk}/roms-as3/build.xml"
+			dir="${dir.trunk}/roms-as3"
 			target="build"
 			inheritall="false"
 			/>
