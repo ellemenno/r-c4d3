@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3.properties" default="-usage" basedir="./">
+
+<description>
+Common properties used by all the build files in the r-c4d3 project.
+</description>
+
+	<!-- Set convenience proerties for time-of-build values. -->
+	<tstamp><format property="date.year" pattern="yyyy"/></tstamp>
+	<tstamp><format property="date.month" pattern="MM"/></tstamp>
+	<tstamp><format property="date.day" pattern="dd"/></tstamp>
+	<tstamp><format property="date.hour" pattern="HH"/></tstamp>
+	<tstamp><format property="date.minute" pattern="mm"/></tstamp>
+	<tstamp><format property="date.second" pattern="ss"/></tstamp>
+	
+	<!-- Set platform indicators. -->
+	<condition property="isWin" value="true">
+		<os family="windows"/>
+	</condition>
+	<condition property="isOsx" value="true">
+		<and>
+			<os family="unix"/>
+			<os family="mac"/>
+		</and>
+	</condition>
+	<condition property="isUnix" value="true">
+		<and>
+			<os family="unix"/>
+			<not><os family="mac"/></not>
+		</and>
+	</condition>
+	
+	<!-- Set convenience suffixes for application executables across platforms. -->
+	<condition property="exe" value=".exe">
+		<os family="windows"/>
+	</condition>
+	<condition property="exe" value=".app">
+		<and>
+			<os family="unix"/>
+			<os family="mac"/>
+		</and>
+	</condition>
+	<condition property="exe" value="">
+		<and>
+			<os family="unix"/>
+			<not><os family="mac"/></not>
+		</and>
+	</condition>
+
+	<!-- Set convenience suffixes for command line tools across platforms. -->
+	<condition property="cli" value=".exe">
+		<os family="windows"/>
+	</condition>
+	<condition property="cli" value="">
+		<and>
+			<os family="unix"/>
+			<os family="mac"/>
+		</and>
+	</condition>
+	<condition property="cli" value="">
+		<and>
+			<os family="unix"/>
+			<not><os family="mac"/></not>
+		</and>
+	</condition>
+
+	<!-- Set 3 character os label -->
+	<condition property="os" value="win">
+		<os family="windows"/>
+	</condition>
+	<condition property="os" value="osx">
+		<and>
+			<os family="unix"/>
+			<os family="mac"/>
+		</and>
+	</condition>
+	<condition property="os" value="nix">
+		<and>
+			<os family="unix"/>
+			<not><os family="mac"/></not>
+		</and>
+	</condition>
+	
+	
+	<!-- this may be overridden by defining prior to import file -->
+	<property name="dir.trunk" location="${basedir}"/>
+	
+	<!--
+	Look for override .properties files in some convenient locations.
+	First definition wins, so start local and move to global
+	-->
+	<property name="props.loc01" location="${basedir}/build.properties"/>
+	<property name="props.loc02" location="${dir.trunk}/config/${user.name}.properties"/>
+	<property name="props.loc03" location="${dir.trunk}/build.properties"/>
+	<property name="props.loc04" location="${user.home}/${ant.project.name}.properties"/>
+	<property name="props.loc05" location="${user.home}/build.properties"/>
+	
+	<property file="${props.loc01}"/>
+	<property file="${props.loc02}"/>
+	<property file="${props.loc03}"/>
+	<property file="${props.loc04}"/>
+	<property file="${props.loc05}"/>
+	
+	<property name="NL" value="${line.separator}" />
+	<property name="msg.props.01" value="${NL}Property files can be defined in any of these places (and are checked in this order):" />
+	<property name="msg.props.02" value="	1) ${props.loc01}" />
+	<property name="msg.props.03" value="	2) ${props.loc02}" />
+	<property name="msg.props.04" value="	3) ${props.loc03}" />
+	<property name="msg.props.05" value="	4) ${props.loc04}" />
+	<property name="msg.props.06" value="	5) ${props.loc05}" />
+	<property name="msg.props.07" value="${NL}Properties are defined in those files by using lines like the following:" />
+	<property name="msg.props.08" value="${NL}e.g. Windows:${NL}${NL}FLEX_HOME=C:/Program Files/flex" />
+	<property name="msg.props.09" value="${NL}e.g. OS X / Linux:${NL}${NL}FLEX_HOME=/usr/local/share/flexsdk" />
+	<property name="msg.props.10" value="${NL}Paths in properties files should always use forward slashs (/), even on Windows." />
+	<property name="msg.props" value="${msg.props.01}${NL}${msg.props.02}${NL}${msg.props.03}${NL}${msg.props.04}${NL}${msg.props.05}${NL}${msg.props.06}${NL}${msg.props.07}${NL}${msg.props.08}${NL}${msg.props.09}${NL}${msg.props.10}${NL}" />
+
+</project>
