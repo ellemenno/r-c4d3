@@ -7,9 +7,8 @@
 	-->
 	
 	<!-- link-report: Output a XML-formatted report of all definitions linked into the application.-->
-	<!-- (relative to this file's location)
+	<!-- (relative to this file's location)-->
 	<link-report>../target/docs/r-c4d3-links.xml</link-report>
-	-->
 	
 	<!-- include-sources: a list of directories and source files to include in the output SWC-->
 	<!-- (relative to this file's location)-->
