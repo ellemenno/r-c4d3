@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 
 <flex-config>
 	
@@ -69,7 +70,6 @@
 			<path-element>../swc</path-element>
 		</library-path>
 		
-		
 		<!-- compiler.source-path: list of path elements that form the roots of ActionScript class hierarchies-->
 		<!-- (relative to this file's location)-->
 		<source-path>
@@ -78,4 +78,5 @@
 	</compiler>
 	
 </flex-config>
+
 
