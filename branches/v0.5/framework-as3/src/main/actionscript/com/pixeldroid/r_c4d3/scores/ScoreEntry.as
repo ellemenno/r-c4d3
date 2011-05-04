@@ -3,6 +3,7 @@ package com.pixeldroid.r_c4d3.scores
 {
 	
 	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.interfaces.IScoreEntry;
 
 	/**
 	Value Object for storing scores associated with player data.
@@ -10,22 +11,12 @@ package com.pixeldroid.r_c4d3.scores
 	
 	@see com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy
 	*/
-	public class ScoreEntry 
+	public class ScoreEntry implements IScoreEntry
 	{
 		
+		private var _value:Number = 0;
+		private var _label:String = "";
 		private var _accepted:Boolean = false;
-		
-	
-		/**
-		The score.
-		*/
-		public var value:Number;
-	
-		/**
-		The player data (e.g. initials).
-		*/
-		public var label:String;
-
 
 		
 		/**
@@ -34,17 +25,22 @@ package com.pixeldroid.r_c4d3.scores
 		@param value Initial score value (optional)
 		@param value Initial player data (optional)
 		*/
-		public function ScoreEntry(value:Number=NaN, label:String=null) {
-			if (!isNaN(value)) this.value = value;
-			if (label != null) this.label = label;
+		public function ScoreEntry(number:Number=NaN, string:String=null) {
+			if (!isNaN(number)) _value = number;
+			if (string != null) _label = string;
 		}
 
 		
+		/** @inheritDoc */
+		public function set value(number:Number):void { _value = number; }
+		public function get value():Number { return _value; }
+	
+		/** @inheritDoc */
+		public function set label(string:String):void { _label = string; }
+		public function get label():String { return _label; }
+
 		
-		/**
-		When submitted to an IGameScoresProxy, this flag will be set indicating 
-		whether the score was accepted into the high score list (true) or not (false).
-		*/
+		/** @inheritDoc */
 		public function get accepted():Boolean { return _accepted; }
 	
 		/**
@@ -56,19 +52,15 @@ package com.pixeldroid.r_c4d3.scores
 			else _accepted = value;
 		}
 		
-		/**
-		* @inheritDoc
-		*/
-		public function clone():ScoreEntry {
-			return new ScoreEntry(value, label);
+		/** @inheritDoc */
+		public function clone():IScoreEntry {
+			return new ScoreEntry(_value, _label);
 		}
 		
-		/**
-		Returns a simple human readable string.
-		*/
+		/** @inheritDoc */
 		public function toString():String 
 		{
-			return value +" " +label;
+			return _value +" " +_label;
 		}		
 	}
 }

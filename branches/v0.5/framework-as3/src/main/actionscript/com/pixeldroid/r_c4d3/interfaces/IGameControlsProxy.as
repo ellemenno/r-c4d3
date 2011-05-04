@@ -6,7 +6,6 @@ package com.pixeldroid.r_c4d3.interfaces
 	import flash.events.IEventDispatcher;
 	import flash.geom.Point;
 
-	import com.pixeldroid.r_c4d3.controls.JoyEventStateEnum;
 	import com.pixeldroid.r_c4d3.interfaces.IJoystick;
 	
 	
