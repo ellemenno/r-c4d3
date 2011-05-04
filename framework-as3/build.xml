@@ -12,15 +12,15 @@ Tasks to build and package the r-c4d3 as3 framework.
 	<property name="semver.major" value="0"/>
 	<property name="semver.minor" value="4"/>
 	
-	<property name="dir.source" value="${basedir}/source"/>
-	<property name="dir.config" value="${basedir}/config"/>
+	<property name="dir.source" value="${basedir}/src/main/actionscript"/>
+	<property name="dir.config" value="${basedir}/src/main/config"/>
 	<property name="dir.target" value="${basedir}/target"/>
 	
-	<property name="dir.test" value="${basedir}/test"/>
-	<property name="dir.example" value="${basedir}/example"/>
+	<property name="dir.test" value="${basedir}/src/test"/>
+	<property name="dir.example" value="${basedir}/src/example"/>
 	
-	<property name="dir.documentation" value="${basedir}/../_documentation/framework-api"/>
-	<property name="dir.releases" value="${basedir}/../_releases"/>
+	<property name="dir.documentation" value="${dir.trunk}/_documentation/framework-api"/>
+	<property name="dir.releases" value="${dir.trunk}/_releases"/>
 	
 	<property file="build.properties"/>
 	
