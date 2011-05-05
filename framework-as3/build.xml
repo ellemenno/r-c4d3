@@ -16,17 +16,12 @@ Tasks to build and package the r-c4d3 as3 framework.
 	<property name="dir.config" value="${basedir}/src/main/config"/>
 	<property name="dir.target" value="${basedir}/target"/>
 	
-	<property name="dir.test" value="${basedir}/src/test"/>
-	<property name="dir.example" value="${basedir}/src/example"/>
-	
 	<property name="dir.documentation" value="${dir.trunk}/_documentation/framework-api"/>
 	<property name="dir.releases" value="${dir.trunk}/_releases"/>
 	
-	<property file="build.properties"/>
 	
-	
-    <target name="build" depends="compile, haxe, example, document, release" 
-		description="&gt; this is the main task: compile, haxe, example, document, release"/>
+    <target name="build" depends="compile, document, release" 
+		description="&gt; this is the main task: compile, document, release"/>
 	
 	<target name="clean" description="remove the contents of ${dir.target}">
 		<delete failonerror="false" includeemptydirs="true">
@@ -43,6 +38,7 @@ Tasks to build and package the r-c4d3 as3 framework.
 		<!--
 		strings must be double-qouted, see:
 		http://blogs.adobe.com/flexdoc/files/flexdoc/conditionalcompilation.pdf
+		note: can use &quot;
 		-->
 		<property name="semver.framework.quoted" value="'${semver.framework}'" />
 		<property name="version.year.quoted" value="'${date.year}'" />
@@ -54,9 +50,9 @@ Tasks to build and package the r-c4d3 as3 framework.
 		<echo message="${ant.project.name} v${semver.framework}" />
 	</target>
 	
-    <target name="compile" depends="clean, build-number, version" description="compile the r-c4d3.swc">
+    <target name="compile" depends="clean, build-number, version" description="compile the swc">
     	<exec executable="${flex.compc}" failonerror="true">
-			<arg line='-output="${dir.target}/r-c4d3.swc"'/>
+			<arg line='-output="${dir.target}/${ant.project.name}.swc"'/>
 			<arg line='-load-config+="${dir.config}/compc-config.xml"'/>
 			<arg line='-define+=VERSION::semver,"${semver.framework.quoted}"'/>
 			<arg line='-define+=VERSION::year,"${version.year.quoted}"'/>
@@ -65,44 +61,10 @@ Tasks to build and package the r-c4d3 as3 framework.
 			<arg line='-define+=VERSION::hour,"${version.hour.quoted}"'/>
 			<arg line='-define+=VERSION::minute,"${version.minute.quoted}"'/>
 			<arg line='-define+=VERSION::second,"${version.second.quoted}"'/>
+		<!--
+			<arg line='-load-config+="${dir.config}/version-config.xml"'/>
+		-->
 		</exec>
-	</target>
-	
-	<target name="test" description="calls the build task of ${basedir}/test/build.xml">
-		<ant dir="${dir.test}" target="build" inheritall="false" />
-	</target>
-	
-	<target name="example" description="calls the build task of ${basedir}/example/build.xml">
-		<ant dir="${dir.example}" target="build" inheritall="false" />
-	</target>
-	
-    <target name="haxe" depends="clean, compile" if="haxe.haxe"
-		description="generate hx-classes from the r-c4d3.swc">
-		
-		<mkdir dir="${dir.target}/temp"/>
-		<unzip src="${dir.target}/r-c4d3.swc" dest="${dir.target}/temp"/>
-    	<exec executable="${haxe.haxe}" dir="${dir.target}" failonerror="false"
-			resultproperty="exitcode" errorproperty="exiterror">
-			<arg line="--gen-hx-classes '${dir.target}/temp/library.swf'"/>
-		</exec>
-		<delete dir="${dir.target}/temp"/>
-		
-		<!-- Only finish if the haxe execution was successful. -->
-		<!-- If we tried to finish anyways, the build would fail due to nonexistent files. -->
-		<condition property="doHaxeFinish">
-			<equals arg1="${exitcode}" arg2="0" trim="true"/>
-		</condition>
-		<antcall target="haxe.finish"/>
-		<antcall target="haxe.fail"/>
-	</target>
-	
-	<target name="haxe.finish" if="doHaxeFinish">
-		<zip destfile="${dir.target}/framework-hxclasses.zip" basedir="${dir.target}/hxclasses"/>
-	</target>
-	
-	<target name="haxe.fail" unless="doHaxeFinish">
-		<echo message="Failed to generate hx-classes. The error given by haXe is as follows:"/>
-		<echo message="${exiterror}"/>
 	</target>
 	
     <target name="document" depends="clean, version" description="create asdoc for the framework api">
@@ -118,8 +80,11 @@ Tasks to build and package the r-c4d3 as3 framework.
 			<arg line='-define+=VERSION::hour,"${version.hour.quoted}"'/>
 			<arg line='-define+=VERSION::minute,"${version.minute.quoted}"'/>
 			<arg line='-define+=VERSION::second,"${version.second.quoted}"'/>
+		<!--
+			<arg line='-load-config+="${dir.config}/version-config.xml"'/>
+		-->
 		</exec>
-		<zip destfile="${dir.target}/framework-api.zip" basedir="${dir.target}/asdoc"/>
+		<zip destfile="${dir.target}/${ant.project.name}.zip" basedir="${dir.target}/asdoc"/>
 		<copy todir="${dir.documentation}" failonerror="false">
 			<fileset dir="${dir.target}/asdoc">
 				<include name="**/*"/>
