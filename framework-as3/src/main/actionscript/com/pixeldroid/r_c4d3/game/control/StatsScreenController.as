@@ -3,18 +3,16 @@
 package com.pixeldroid.r_c4d3.game.control
 {
 
+	import com.pixeldroid.r_c4d3.api.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.api.events.JoyButtonEvent;
+	import com.pixeldroid.r_c4d3.api.events.JoyHatEvent;
+	import com.pixeldroid.r_c4d3.api.IDisposable;
+	import com.pixeldroid.r_c4d3.game.screen.IGameScreenFactory;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenType;
+	
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
-	
-	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
-	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
-	import com.pixeldroid.r_c4d3.game.control.Signals;
-	import com.pixeldroid.r_c4d3.game.control.Notifier;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenType;
-	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
-	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory;
 	
 	
 	

@@ -1,17 +1,17 @@
 
 
-package com.pixeldroid.r_c4d3.game.view.screen
+package com.pixeldroid.r_c4d3.game.screen
 {
 	
-	import flash.display.Sprite;
-	
 	import com.pixeldroid.r_c4d3.Version;
-	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
-	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.api.events.JoyButtonEvent;
+	import com.pixeldroid.r_c4d3.api.events.JoyHatEvent;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenBase;
 	import com.pixeldroid.r_c4d3.tools.console.Console;
 	import com.pixeldroid.r_c4d3.tools.framerate.FpsMeter;
 	import com.pixeldroid.r_c4d3.tools.perfmon.PerfMon;
+	
+	import flash.display.Sprite;
 	
 	/**
 	A ScreenBase implementation to provide on-screen performance statistics.

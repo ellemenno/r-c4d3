@@ -1,15 +1,15 @@
 
 
-package com.pixeldroid.r_c4d3.game.view.screen
+package com.pixeldroid.r_c4d3.game.screen
 {
 	
 	import com.pixeldroid.r_c4d3.data.ResourcePool;
-	import com.pixeldroid.r_c4d3.game.view.screen.DebugScreen;
-	import com.pixeldroid.r_c4d3.game.view.screen.NullScreen;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenType;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenTypeEnumerator;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory;
+	import com.pixeldroid.r_c4d3.game.screen.DebugScreen;
+	import com.pixeldroid.r_c4d3.game.screen.NullScreen;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenType;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenTypeEnumerator;
+	import com.pixeldroid.r_c4d3.game.screen.IGameScreenFactory;
 	
 	
 	/**

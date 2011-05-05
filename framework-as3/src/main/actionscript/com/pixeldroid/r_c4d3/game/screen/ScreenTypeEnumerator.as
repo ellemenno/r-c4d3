@@ -1,8 +1,8 @@
 
 
-package com.pixeldroid.r_c4d3.game.view.screen
+package com.pixeldroid.r_c4d3.game.screen
 {
-	import com.pixeldroid.r_c4d3.data.Enumerator;
+	import com.pixeldroid.r_c4d3.api.Enumerator;
 	
 	/**
 	Enumerator for screen types.

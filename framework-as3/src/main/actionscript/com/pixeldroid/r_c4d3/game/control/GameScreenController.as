@@ -3,18 +3,16 @@
 package com.pixeldroid.r_c4d3.game.control
 {
 
+	import com.pixeldroid.r_c4d3.api.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.api.events.JoyButtonEvent;
+	import com.pixeldroid.r_c4d3.api.events.JoyHatEvent;
+	import com.pixeldroid.r_c4d3.api.IDisposable;
+	import com.pixeldroid.r_c4d3.game.screen.IGameScreenFactory;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenTypeEnumerator;
+	
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
-	
-	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
-	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
-	import com.pixeldroid.r_c4d3.game.control.Signals;
-	import com.pixeldroid.r_c4d3.game.control.Notifier;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenTypeEnumerator;
-	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
-	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory;
 	
 	
 	
@@ -148,7 +146,7 @@ package com.pixeldroid.r_c4d3.game.control
 		protected function nextScreen():void
 		{
 			C.out(this, "nextScreen()");
-			var nextType:ScreenTypeEnumerator = screenFactory.getNextScreenType(currentScreen.type);
+			var nextType:ScreenTypeEnumerator = screenFactory.getNextScreenType(currentScreen.type) as ScreenTypeEnumerator;
 			setCurrentScreen(screenFactory.getScreen(nextType));
 		}
 		

@@ -3,14 +3,12 @@
 package com.pixeldroid.r_c4d3.game.control
 {
 
-	import flash.events.Event;
-
-	import com.pixeldroid.r_c4d3.data.DataEvent;
-	import com.pixeldroid.r_c4d3.game.control.Signals;
+	import com.pixeldroid.r_c4d3.api.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.api.events.DataEvent;
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
-	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
-	import com.pixeldroid.r_c4d3.scores.ScoreEvent;
+	import com.pixeldroid.r_c4d3.api.IDisposable;
+	
+	import flash.events.Event;
 	
 	
 	
@@ -53,8 +51,8 @@ package com.pixeldroid.r_c4d3.game.control
 			C.out(this, "shutDown()");
 			
 			// remove listeners from scores proxy and prep for garbage collection
-			scoresProxy.removeEventListener(ScoreEvent.LOAD, onScoresLoaded);
-			scoresProxy.removeEventListener(ScoreEvent.SAVE, onScoresSaved);
+			scoresProxy.removeEventListener(DataEvent.LOAD, onScoresLoaded);
+			scoresProxy.removeEventListener(DataEvent.SAVE, onScoresSaved);
 			scoresProxy.removeEventListener(DataEvent.ERROR, onScoresError);
 			
 			scoresProxy = null;
@@ -70,8 +68,8 @@ package com.pixeldroid.r_c4d3.game.control
 			C.out(this, "initialize()");
 			
 			// attach listeners to proxy
-			scoresProxy.addEventListener(ScoreEvent.LOAD, onScoresLoaded);
-			scoresProxy.addEventListener(ScoreEvent.SAVE, onScoresSaved);
+			scoresProxy.addEventListener(DataEvent.LOAD, onScoresLoaded);
+			scoresProxy.addEventListener(DataEvent.SAVE, onScoresSaved);
 			scoresProxy.addEventListener(DataEvent.ERROR, onScoresError);
 			
 			Notifier.addListener(Signals.SCORES_RETRIEVE, retrieveScores);
@@ -110,7 +108,7 @@ package com.pixeldroid.r_c4d3.game.control
 			scoresProxy.load();
 		}
 		
-		protected function submitScores(entries:Array/*ScoreEntry*/):void
+		protected function submitScores(entries:Array/*IScoreEntry*/):void
 		{
 			C.out(this, "submitScores() - received " +entries);
 			scoresProxy.insertEntries(entries); // acceptance values modified in place
