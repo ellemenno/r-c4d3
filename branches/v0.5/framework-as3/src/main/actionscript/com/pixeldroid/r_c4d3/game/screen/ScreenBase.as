@@ -1,20 +1,20 @@
 
 
-package com.pixeldroid.r_c4d3.game.view.screen
+package com.pixeldroid.r_c4d3.game.screen
 {
+	
+	import com.pixeldroid.r_c4d3.api.IControllable;
+	import com.pixeldroid.r_c4d3.api.IDisposable;
+	import com.pixeldroid.r_c4d3.api.IGameConfigProxy;
+	import com.pixeldroid.r_c4d3.api.events.JoyButtonEvent;
+	import com.pixeldroid.r_c4d3.api.events.JoyHatEvent;
+	import com.pixeldroid.r_c4d3.game.control.Notifier;
+	import com.pixeldroid.r_c4d3.game.control.Signals;
+	import com.pixeldroid.r_c4d3.game.screen.IScreen;
+	import com.pixeldroid.r_c4d3.game.screen.IUpdatable;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
-	
-	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
-	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
-	import com.pixeldroid.r_c4d3.game.control.Notifier;
-	import com.pixeldroid.r_c4d3.game.control.Signals;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenTypeEnumerator;
-	import com.pixeldroid.r_c4d3.interfaces.IControllable;
-	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
-	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IUpdatable;
 	
 	
 	
@@ -23,7 +23,7 @@ package com.pixeldroid.r_c4d3.game.view.screen
 	
 	@see com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory
 	*/
-	public class ScreenBase extends Sprite implements IDisposable, IControllable, IUpdatable
+	public class ScreenBase extends Sprite implements IScreen, IControllable, IDisposable, IUpdatable
 	{
 		
 		protected var _type:ScreenTypeEnumerator;
@@ -84,7 +84,7 @@ package com.pixeldroid.r_c4d3.game.view.screen
 		}
 		
 		
-		// ITypable interface
+		// IScreen interface
 		/** @inheritDoc */
 		public function set type(value:ScreenTypeEnumerator):void
 		{

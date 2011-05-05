@@ -1,8 +1,8 @@
 
-package com.pixeldroid.r_c4d3.interfaces
+package com.pixeldroid.r_c4d3.game.screen
 {
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenTypeEnumerator;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenTypeEnumerator;
 	
 
 	/**

@@ -1,32 +1,26 @@
 
-/*
-
-Asteroids
-
-*/
-
 package com.pixeldroid.r_c4d3.game
 {
 
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.system.Capabilities;
-	import flash.utils.getTimer;
-	import flash.utils.getQualifiedClassName;
-	
-	import com.pixeldroid.r_c4d3.controls.JoyEventStateEnum;
-	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
-	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameRom;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory;
+	import com.pixeldroid.r_c4d3.api.IDisposable;
+	import com.pixeldroid.r_c4d3.api.IGameConfigProxy;
+	import com.pixeldroid.r_c4d3.api.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.api.IGameRom;
+	import com.pixeldroid.r_c4d3.api.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.api.JoyEventStateEnumerator;
 	import com.pixeldroid.r_c4d3.game.control.GameScreenController;
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	import com.pixeldroid.r_c4d3.game.control.ScoreController;
 	import com.pixeldroid.r_c4d3.game.control.Signals;
 	import com.pixeldroid.r_c4d3.game.control.StatsScreenController;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenFactory;
+	import com.pixeldroid.r_c4d3.game.screen.IGameScreenFactory;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenFactory;
+	
+	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.system.Capabilities;
+	import flash.utils.getQualifiedClassName;
+	import flash.utils.getTimer;
 	
 	
 	/**
@@ -102,7 +96,7 @@ package com.pixeldroid.r_c4d3.game
 			
 			// activate players and enable event reporting (instead of actively polling)
 			for (var i:int = 0; i < 4; i++) controls.joystickOpen(i); // activate joystick for players 1 - 4
-			controls.joystickEventState(JoyEventStateEnum.ENABLE, stage); // enable event reporting
+			controls.joystickEventState(JoyEventStateEnumerator.ENABLE, stage); // enable event reporting
 			
 			// instantiate and initialize managers
 			screenManager = createGameScreenController(controls, gameLayer, screens);
