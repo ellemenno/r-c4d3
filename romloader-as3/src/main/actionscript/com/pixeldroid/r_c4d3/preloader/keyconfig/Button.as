@@ -1,5 +1,5 @@
 
-package preloader.keyconfig
+package com.pixeldroid.r_c4d3.preloader.keyconfig
 {
 	import flash.display.SimpleButton;
 	import flash.display.Sprite;
@@ -10,7 +10,7 @@ package preloader.keyconfig
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	
-	import preloader.keyconfig.ICanFocus;
+	import com.pixeldroid.r_c4d3.preloader.keyconfig.ICanFocus;
 
 	
 	public class Button extends SimpleButton implements ICanFocus

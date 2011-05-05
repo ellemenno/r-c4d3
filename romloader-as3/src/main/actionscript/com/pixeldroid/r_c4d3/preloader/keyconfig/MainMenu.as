@@ -1,17 +1,11 @@
 
-package preloader.keyconfig
+package com.pixeldroid.r_c4d3.preloader.keyconfig
 {
+	import com.pixeldroid.r_c4d3.romloader.controls.KeyboardGameControlsProxy;
+	
 	import flash.display.Stage;
-	import flash.events.FocusEvent; // TODO
+	import flash.events.FocusEvent;
 	import flash.events.MouseEvent;
-	import flash.text.TextField;
-	import flash.text.TextFormat;
-	import flash.text.TextFormatAlign;
-	
-	import com.pixeldroid.r_c4d3.controls.KeyboardGameControlsProxy;
-	
-	import preloader.keyconfig.Button;
-	import preloader.keyconfig.FullFrameSprite;
 
 	
 	public class MainMenu extends FullFrameSprite

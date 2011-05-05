@@ -1,17 +1,14 @@
 
-package preloader
+package com.pixeldroid.r_c4d3.preloader
 {
 
+	import com.pixeldroid.r_c4d3.api.IGameConfigProxy;
+	import com.pixeldroid.r_c4d3.api.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.api.IGameScoresProxy;
+	
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
-	
-	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
-
-	import ConfigDataProxy;
-	import preloader.IPreloader;
 	
 	
 	public class NullPreloader extends Sprite implements IPreloader

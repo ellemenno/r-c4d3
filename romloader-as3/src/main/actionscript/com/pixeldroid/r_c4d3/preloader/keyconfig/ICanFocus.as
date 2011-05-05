@@ -1,5 +1,5 @@
 
-package preloader.keyconfig
+package com.pixeldroid.r_c4d3.preloader.keyconfig
 {
 
 	public interface ICanFocus // No really, I can!  Honest!

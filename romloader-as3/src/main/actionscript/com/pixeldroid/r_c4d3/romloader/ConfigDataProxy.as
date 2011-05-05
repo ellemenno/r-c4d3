@@ -1,7 +1,7 @@
 
-package 
+package com.pixeldroid.r_c4d3.romloader 
 {
-	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
+	import com.pixeldroid.r_c4d3.api.IGameConfigProxy;
 
 	/**
 		ConfigDataProxy is a simple data structure front end to the romloader 
