@@ -4,12 +4,12 @@
 	
 	<!-- output: the filename of the SWC library to create-->
 	<!-- (relative to this file's location)
-	<output>../target/r-c4d3.swc</output>
+	<output>../target/r-c4d3.framework-as3.swc</output>
 	-->
 	
 	<!-- link-report: Output a XML-formatted report of all definitions linked into the application.-->
 	<!-- (relative to this file's location)-->
-	<link-report>../../../target/r-c4d3-links.xml</link-report>
+	<link-report>../../../target/framework-links.xml</link-report>
 	
 	<!-- include-sources: a list of directories and source files to include in the output SWC-->
 	<!-- (relative to this file's location)-->

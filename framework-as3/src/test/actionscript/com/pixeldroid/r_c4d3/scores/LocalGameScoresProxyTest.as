@@ -5,8 +5,7 @@ mxmlc com/pixeldroid/r_c4d3/scores/LocalGameScoresProxyTest.as -sp=./ -sp=../../
 */
 package com.pixeldroid.r_c4d3.scores
 {
-	import com.pixeldroid.r_c4d3.scores.ScoreEvent;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.api.IGameScoresProxy;
 	import com.pixeldroid.r_c4d3.scores.GameScoresProxy;
 	import com.pixeldroid.r_c4d3.scores.LocalGameScoresProxy;
 	
