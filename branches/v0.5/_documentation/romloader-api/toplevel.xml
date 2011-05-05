@@ -1,0 +1,2489 @@
+<asdoc>
+
+<classRec name='KeyLabels' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyLabels' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\controls\KeyLabels.as' namespace='com.pixeldroid.r_c4d3.romloader.controls' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	Provides human readable labels for keys that can be looked up by keycode.
+
+	]]></description>
+</classRec>
+<method name='getLabel' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyLabels/getLabel' isStatic='true' isFinal='false' isOverride='false'  param_names='keyCode' param_types='uint' param_defaults='undefined' result_type='String'>
+<description><![CDATA[
+
+		Get a human readable label for the key with the assigned <code>keyCode</code>.
+
+		]]></description>
+<param><![CDATA[keyCode number assigned to keyboard key by flash,
+
+		probably obtained from <code>KeyboardEvent.keyCode</code>
+
+		]]></param>
+<return><![CDATA[string label describing key represented by keyCode
+
+		]]></return>
+</method>
+<field name='LABELS' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyLabels/private:LABELS' type='Array' isStatic='true' isConst='true' defaultValue='unknown' >
+</field>
+<field name='UNDEFINED' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyLabels/private:UNDEFINED' type='String' isStatic='true' isConst='true' defaultValue='unknown key' >
+</field>
+<classRec name='KeypressFilter' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\controls\KeypressFilter.as' namespace='com.pixeldroid.r_c4d3.romloader.controls' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	Provides ability to filter key events before game controls proxy sees them.
+
+	
+
+	<p>
+
+	On some versions of linux flash player, there is a bug that causes
+
+	press-and-hold to be interpreted as many clicks.
+
+	</p>
+
+	
+
+	<p>
+
+	The pattern is release-press pairs being issued on the same frame; a sequence 
+
+	unlikely to be performed by any mere mortal. So here we accumulate events 
+
+	that occur in between frames, filter out duplicates, and pass on the uniques.
+
+	</p>
+
+	
+
+	]]></description>
+<see><![CDATA[https://bugs.adobe.com/jira/browse/FP-2369
+
+	]]></see>
+</classRec>
+<method name='KeypressFilter' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/KeypressFilter' isStatic='false' isFinal='false' isOverride='false'  param_names='keyDownCallback;keyUpCallback' param_types='Function;Function' param_defaults='undefined;undefined' result_type='void'>
+<description><![CDATA[
+
+		Constructor.
+
+		
+
+		]]></description>
+</method>
+<method name='_onFrame' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/protected:_onFrame' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:Event' param_defaults='undefined' result_type='void'>
+</method>
+<method name='_onKeyDown' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/protected:_onKeyDown' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:KeyboardEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='_onKeyUp' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/protected:_onKeyUp' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:KeyboardEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='isBogusKeyEvent' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/protected:isBogusKeyEvent' isStatic='false' isFinal='false' isOverride='false'  param_names='keyCode' param_types='uint' param_defaults='undefined' result_type='Boolean'>
+</method>
+<method name='onFrame' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/onFrame/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Function'>
+</method>
+<method name='onKeyDown' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/onKeyDown/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Function'>
+</method>
+<method name='onKeyUp' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/onKeyUp/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Function'>
+</method>
+<field name='eventQueue' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/protected:eventQueue' type='Array' isStatic='false' isConst='false' >
+</field>
+<field name='keyDown' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/protected:keyDown' type='Function' isStatic='false' isConst='false' >
+</field>
+<field name='keyUp' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/protected:keyUp' type='Function' isStatic='false' isConst='false' >
+</field>
+<field name='keysReleased' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/protected:keysReleased' type='Array' isStatic='false' isConst='false' >
+</field>
+<field name='nEvents' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/protected:nEvents' type='int' isStatic='false' isConst='false' >
+</field>
+<field name='nKeysReleased' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter/protected:nKeysReleased' type='int' isStatic='false' isConst='false' >
+</field>
+<classRec name='KeyboardJoystick' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\controls\KeyboardJoystick.as' namespace='com.pixeldroid.r_c4d3.romloader.controls' access='public' baseclass='Object' interfaces='com.pixeldroid.r_c4d3.api:IJoystick' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='KeyboardJoystick' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/KeyboardJoystick' isStatic='false' isFinal='false' isOverride='false'  param_names='systemIndex' param_types='int' param_defaults='undefined' result_type='*'>
+</method>
+<method name='getAxis' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/getAxis' isStatic='false' isFinal='false' isOverride='false'  param_names='index' param_types='int' param_defaults='undefined' result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='getButton' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/getButton' isStatic='false' isFinal='false' isOverride='false'  param_names='index' param_types='int' param_defaults='undefined' result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='getHat' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/getHat' isStatic='false' isFinal='false' isOverride='false'  param_names='index' param_types='int' param_defaults='undefined' result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='setAxis' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/setAxis' isStatic='false' isFinal='false' isOverride='false'  param_names='index;value' param_types='int;int' param_defaults='undefined;undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='setButton' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/setButton' isStatic='false' isFinal='false' isOverride='false'  param_names='index;pressed' param_types='int;Boolean' param_defaults='undefined;undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='setHat' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/setHat' isStatic='false' isFinal='false' isOverride='false'  param_names='index;bitField' param_types='int;int' param_defaults='undefined;undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='index' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/index/get' isStatic='false' isFinal='false' isOverride='false'  result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='systemName' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/systemName/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<field name='_index' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/private:_index' type='int' isStatic='false' isConst='false' >
+</field>
+<field name='axisX' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/private:axisX' type='int' isStatic='false' isConst='false' >
+</field>
+<field name='axisY' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/private:axisY' type='int' isStatic='false' isConst='false' >
+</field>
+<field name='button0' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/private:button0' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<field name='button1' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/private:button1' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<field name='button2' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/private:button2' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<field name='button3' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/private:button3' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<field name='hat0' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardJoystick/private:hat0' type='int' isStatic='false' isConst='false' >
+</field>
+<classRec name='KeyboardGameControlsProxy' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\controls\KeyboardGameControlsProxy.as' namespace='com.pixeldroid.r_c4d3.romloader.controls' access='public' baseclass='flash.events:EventDispatcher' interfaces='com.pixeldroid.r_c4d3.api:IGameControlsProxy' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	An implementation of IGameControlsProxy for keyboards.
+
+	
+
+	<p>
+
+	Maps keyboard events to JoyHat and JoyButton events.
+
+	</p>
+
+	
+
+	<p>
+
+	Keys can be customized via <code>setKeys()</code> and queried via 
+
+	<code>joystickGetHatKey()</code> and <code>joystickGetButtonKey()</code>
+
+	</p>
+
+	]]></description>
+</classRec>
+<method name='KeyboardGameControlsProxy' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/KeyboardGameControlsProxy' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+<description><![CDATA[
+
+		Constructor
+
+		]]></description>
+</method>
+<method name='checkJoystickIndex' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:checkJoystickIndex' isStatic='false' isFinal='false' isOverride='false'  param_names='index' param_types='int' param_defaults='undefined' result_type='void'>
+</method>
+<method name='createKeypressFilter' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:createKeypressFilter' isStatic='false' isFinal='false' isOverride='false'  result_type='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter'>
+</method>
+<method name='joystickClose' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickClose' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick' param_types='com.pixeldroid.r_c4d3.api:IJoystick' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickEventState' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickEventState' isStatic='false' isFinal='false' isOverride='false'  param_names='state;gameStage' param_types='com.pixeldroid.r_c4d3.api:JoyEventStateEnumerator;flash.display:Stage' param_defaults='undefined;undefined' result_type='com.pixeldroid.r_c4d3.api:JoyEventStateEnumerator'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickGetAxis' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickGetAxis' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick;axis' param_types='com.pixeldroid.r_c4d3.api:IJoystick;int' param_defaults='undefined;undefined' result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickGetBall' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickGetBall' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick;ball;displacement' param_types='com.pixeldroid.r_c4d3.api:IJoystick;int;flash.geom:Point' param_defaults='undefined;undefined;undefined' result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickGetButtonKey' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickGetButtonKey' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick;button' param_types='com.pixeldroid.r_c4d3.api:IJoystick;int' param_defaults='undefined;undefined' result_type='uint'>
+<description><![CDATA[ 
+
+		Retrieves the key code currently assigned to trigger the given button.
+
+		
+
+		]]></description>
+<param><![CDATA[button A KeyboardGameControlsProxy constant (<code>BTN_</code>) 
+
+		representing the button to get the keycode value for.
+
+		]]></param>
+<paramjoystick><![CDATA[A reference to the IJoystick to get the keycode value from.
+
+		]]></paramjoystick>
+</method>
+<method name='joystickGetButton' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickGetButton' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick;button' param_types='com.pixeldroid.r_c4d3.api:IJoystick;int' param_defaults='undefined;undefined' result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickGetHatKey' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickGetHatKey' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick;direction' param_types='com.pixeldroid.r_c4d3.api:IJoystick;int' param_defaults='undefined;undefined' result_type='uint'>
+<description><![CDATA[ 
+
+		Retrieves the key code currently assigned to trigger the given hat direction.
+
+		
+
+		]]></description>
+<param><![CDATA[joystick A reference to the IJoystick to get the keycode value from.
+
+		]]></param>
+<param><![CDATA[button A KeyboardGameControlsProxy constant (<code>HAT_</code>) 
+
+		representing the hat direction to get the keycode value for.
+
+		]]></param>
+</method>
+<method name='joystickGetHat' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickGetHat' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick;hat' param_types='com.pixeldroid.r_c4d3.api:IJoystick;int' param_defaults='undefined;undefined' result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickIndex' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickIndex' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick' param_types='com.pixeldroid.r_c4d3.api:IJoystick' param_defaults='undefined' result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickKeysDefined' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickKeysDefined' isStatic='false' isFinal='false' isOverride='false'  param_names='index' param_types='int' param_defaults='undefined' result_type='Boolean'>
+<description><![CDATA[
+
+		Determines whether keys have been defined for a specific joystick.
+
+		
+
+		]]></description>
+<param><![CDATA[index A zero-based index selecting the joystick to check
+
+		]]></param>
+</method>
+<method name='joystickName' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickName' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick' param_types='com.pixeldroid.r_c4d3.api:IJoystick' param_defaults='undefined' result_type='String'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickNumAxes' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickNumAxes' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick' param_types='com.pixeldroid.r_c4d3.api:IJoystick' param_defaults='undefined' result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickNumBalls' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickNumBalls' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick' param_types='com.pixeldroid.r_c4d3.api:IJoystick' param_defaults='undefined' result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickNumButtons' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickNumButtons' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick' param_types='com.pixeldroid.r_c4d3.api:IJoystick' param_defaults='undefined' result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickNumHats' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickNumHats' isStatic='false' isFinal='false' isOverride='false'  param_names='joystick' param_types='com.pixeldroid.r_c4d3.api:IJoystick' param_defaults='undefined' result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickOpened' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickOpened' isStatic='false' isFinal='false' isOverride='false'  param_names='index' param_types='int' param_defaults='undefined' result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='joystickOpen' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/joystickOpen' isStatic='false' isFinal='false' isOverride='false'  param_names='index' param_types='int' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.api:IJoystick'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='numJoysticks' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/numJoysticks' isStatic='false' isFinal='false' isOverride='false'  result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='onKeyDown' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:onKeyDown' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:KeyboardEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onKeyUp' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:onKeyUp' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:KeyboardEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='sendBtnPress' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:sendBtnPress' isStatic='false' isFinal='false' isOverride='false'  param_names='j;i' param_types='com.pixeldroid.r_c4d3.api:IJoystick;int' param_defaults='undefined;undefined' result_type='void'>
+</method>
+<method name='sendBtnRelease' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:sendBtnRelease' isStatic='false' isFinal='false' isOverride='false'  param_names='j;i' param_types='com.pixeldroid.r_c4d3.api:IJoystick;int' param_defaults='undefined;undefined' result_type='void'>
+</method>
+<method name='sendHatPress' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:sendHatPress' isStatic='false' isFinal='false' isOverride='false'  param_names='j;eventMask' param_types='com.pixeldroid.r_c4d3.api:IJoystick;int' param_defaults='undefined;undefined' result_type='void'>
+</method>
+<method name='sendHatRelease' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:sendHatRelease' isStatic='false' isFinal='false' isOverride='false'  param_names='j;eventMask' param_types='com.pixeldroid.r_c4d3.api:IJoystick;int' param_defaults='undefined;undefined' result_type='void'>
+</method>
+<method name='setButtonKey' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/setButtonKey' isStatic='false' isFinal='false' isOverride='false'  param_names='playerIndex;button;keyCode' param_types='uint;int;uint' param_defaults='undefined;undefined;undefined' result_type='void'>
+<description><![CDATA[
+
+		Provide custom key code assignment for a specific button.
+
+		
+
+		]]></description>
+<param><![CDATA[playerIndex zero based index indicating which player joystick to set codes for.
+
+		]]></param>
+<param><![CDATA[button A KeyboardGameControlsProxy constant (<code>BTN_</code>) 
+
+		representing the button to get the keycode value for.
+
+		]]></param>
+<param><![CDATA[keyCode Keycode for button
+
+		]]></param>
+</method>
+<method name='setDefaultCodes' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:setDefaultCodes' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='setHatKey' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/setHatKey' isStatic='false' isFinal='false' isOverride='false'  param_names='playerIndex;hat;keyCode' param_types='uint;int;uint' param_defaults='undefined;undefined;undefined' result_type='void'>
+<description><![CDATA[
+
+		Provide custom key code assignment for a specific hat direction.
+
+		
+
+		]]></description>
+<param><![CDATA[playerIndex zero based index indicating which player joystick to set codes for.
+
+		]]></param>
+<param><![CDATA[hat A KeyboardGameControlsProxy constant (<code>HAT_</code>) 
+
+		representing the hat direction to get the keycode value for.
+
+		]]></param>
+<param><![CDATA[keyCode Keycode for hat direction
+
+		]]></param>
+</method>
+<method name='setKeys' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/setKeys' isStatic='false' isFinal='false' isOverride='false'  param_names='playerIndex;r;u;l;d;x;a;b;c' param_types='uint;uint;uint;uint;uint;uint;uint;uint;uint' param_defaults='undefined;undefined;undefined;undefined;undefined;undefined;undefined;undefined;undefined' result_type='void'>
+<description><![CDATA[
+
+		Provide custom key code assignments for hat directions and buttons.
+
+		
+
+		]]></description>
+<param><![CDATA[playerIndex zero based index indicating which player joystick to set codes for.
+
+		]]></param>
+<param><![CDATA[r Keycode for hat right
+
+		]]></param>
+<param><![CDATA[u Keycode for hat up
+
+		]]></param>
+<param><![CDATA[l Keycode for hat left
+
+		]]></param>
+<param><![CDATA[d Keycode for hat down
+
+		]]></param>
+<param><![CDATA[x Keycode for button X (yellow)
+
+		]]></param>
+<param><![CDATA[a Keycode for button A (red)
+
+		]]></param>
+<param><![CDATA[b Keycode for button B (blue)
+
+		]]></param>
+<param><![CDATA[c Keycode for button C (green)
+
+		]]></param>
+</method>
+<method name='toString' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/toString' isStatic='false' isFinal='false' isOverride='true'  result_type='String'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<field name='BTN_A' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/BTN_A' type='int' isStatic='true' isConst='true' defaultValue='1' >
+<description><![CDATA[ Constant representing the red button (button A) ]]></description>
+</field>
+<field name='BTN_B' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/BTN_B' type='int' isStatic='true' isConst='true' defaultValue='2' >
+<description><![CDATA[ Constant representing the blue button (button B) ]]></description>
+</field>
+<field name='BTN_C' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/BTN_C' type='int' isStatic='true' isConst='true' defaultValue='3' >
+<description><![CDATA[ Constant representing the green button (button C) ]]></description>
+</field>
+<field name='BTN_X' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/BTN_X' type='int' isStatic='true' isConst='true' defaultValue='0' >
+<description><![CDATA[ Constant representing the yellow button (button X) ]]></description>
+</field>
+<field name='HAT_D' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/HAT_D' type='int' isStatic='true' isConst='true' defaultValue='2' >
+<description><![CDATA[ Constant representing hat down ]]></description>
+</field>
+<field name='HAT_L' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/HAT_L' type='int' isStatic='true' isConst='true' defaultValue='3' >
+<description><![CDATA[ Constant representing hat left ]]></description>
+</field>
+<field name='HAT_R' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/HAT_R' type='int' isStatic='true' isConst='true' defaultValue='1' >
+<description><![CDATA[ Constant representing hat right ]]></description>
+</field>
+<field name='HAT_U' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/HAT_U' type='int' isStatic='true' isConst='true' defaultValue='0' >
+<description><![CDATA[ Constant representing hat up ]]></description>
+</field>
+<field name='P1_A' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P1_A' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P1_B' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P1_B' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P1_C' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P1_C' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P1_D' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P1_D' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P1_L' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P1_L' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P1_R' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P1_R' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P1_U' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P1_U' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P1_X' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P1_X' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P2_A' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P2_A' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P2_B' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P2_B' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P2_C' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P2_C' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P2_D' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P2_D' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P2_L' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P2_L' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P2_R' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P2_R' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P2_U' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P2_U' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P2_X' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P2_X' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P3_A' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P3_A' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P3_B' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P3_B' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P3_C' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P3_C' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P3_D' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P3_D' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P3_L' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P3_L' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P3_R' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P3_R' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P3_U' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P3_U' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P3_X' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P3_X' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P4_A' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P4_A' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P4_B' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P4_B' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P4_C' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P4_C' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P4_D' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P4_D' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P4_L' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P4_L' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P4_R' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P4_R' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P4_U' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P4_U' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='P4_X' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:P4_X' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='_joystickEventState' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:_joystickEventState' type='com.pixeldroid.r_c4d3.api:JoyEventStateEnumerator' isStatic='false' isConst='false' >
+</field>
+<field name='gameStage' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:gameStage' type='flash.display:Stage' isStatic='false' isConst='false' >
+</field>
+<field name='joysticksDefined' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:joysticksDefined' type='Array' isStatic='false' isConst='false' >
+</field>
+<field name='joysticks' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:joysticks' type='Array' isStatic='false' isConst='false' >
+</field>
+<field name='keypressFilter' fullname='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy/protected:keypressFilter' type='com.pixeldroid.r_c4d3.romloader.controls:KeypressFilter' isStatic='false' isConst='false' >
+</field>
+<classRec name='RC4D3GameControlsProxy' fullname='com.pixeldroid.r_c4d3.romloader.controls:RC4D3GameControlsProxy' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\controls\RC4D3GameControlsProxy.as' namespace='com.pixeldroid.r_c4d3.romloader.controls' access='public' baseclass='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	An implementation of IGameControlsProxy for the R_C4D3 system.
+
+	
+
+	<p>
+
+	Maps keyboard events to JoyHat and JoyButton events.
+
+	</p>
+
+	
+
+	<p>
+
+	Keys initialize to the default R_C4D3 values, but can be customized via 
+
+	<code>setKeys()</code> and queried via <code>joystickGetHatKey()</code> and 
+
+	<code>joystickGetButtonKey()</code>
+
+	</p>
+
+	
+
+	<p>
+
+	Uses hard-coded path from PathConstants to return to menu
+
+	</p>
+
+	
+
+	]]></description>
+<see><![CDATA[com.pixeldroid.r_c4d3.controls.PathConstants
+
+	]]></see>
+</classRec>
+<method name='RC4D3GameControlsProxy' fullname='com.pixeldroid.r_c4d3.romloader.controls:RC4D3GameControlsProxy/RC4D3GameControlsProxy' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+<description><![CDATA[
+
+		Constructor
+
+		]]></description>
+</method>
+<method name='onKeyDown' fullname='com.pixeldroid.r_c4d3.romloader.controls:RC4D3GameControlsProxy/protected:onKeyDown' isStatic='false' isFinal='false' isOverride='true'  param_names='e' param_types='flash.events:KeyboardEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='setDefaultCodes' fullname='com.pixeldroid.r_c4d3.romloader.controls:RC4D3GameControlsProxy/protected:setDefaultCodes' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<field name='BTN_M' fullname='com.pixeldroid.r_c4d3.romloader.controls:RC4D3GameControlsProxy/private:BTN_M' type='int' isStatic='false' isConst='true' defaultValue='123.0' >
+</field>
+<classRec name='PathConstants' fullname='com.pixeldroid.r_c4d3.romloader:PathConstants' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\PathConstants.as' namespace='com.pixeldroid.r_c4d3.romloader' access='public' baseclass='Object' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	The PathConstants utility class is an all-static class
+
+	containing constants for working with paths in the R-C4D3 system.
+
+	
+
+	<p>
+
+	You do not create instances of PathConstants;
+
+	instead you refer to the static constants as 
+
+	<code>PathConstants.RETURN_TO_MENU</code>.
+
+	</p>
+
+	]]></description>
+</classRec>
+<field name='RETURN_TO_MENU' fullname='com.pixeldroid.r_c4d3.romloader:PathConstants/RETURN_TO_MENU' type='String' isStatic='true' isConst='true' defaultValue='../../menu/menu.html' >
+<description><![CDATA[
+
+		Defines the relative path from a game ROM to the menu front-end.
+
+		]]></description>
+</field>
+<classRec name='Version' fullname='com.pixeldroid.r_c4d3.romloader:Version' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\Version.as' namespace='com.pixeldroid.r_c4d3.romloader' access='public' baseclass='Object' isFinal='true' isDynamic='false' >
+<description><![CDATA[
+
+	Provides information about the build that includes this code
+
+		
+
+	<p>
+
+	Requires a compile-time definitions in the 
+
+	<code>VERSION</code> namespace; see example for details.
+
+	</p>
+
+	
+
+	]]></description>
+<example><![CDATA[The following code shows a sample compile-time definition for 
+
+	specifiying the semver string (note the double quoting required for strings):
+
+<listing version="3.0" >
+
+-define+=VERSION::semver,"'0.0.0'"
+
+</listing>
+
+	]]></example>
+<see><![CDATA[http://blogs.adobe.com/flexdoc/files/flexdoc/conditionalcompilation.pdf
+
+	
+
+	]]></see>
+</classRec>
+<field name='buildInfo' fullname='com.pixeldroid.r_c4d3.romloader:Version/buildInfo' type='String' isStatic='true' isConst='true' defaultValue='unknown' >
+<description><![CDATA[ Compilation time stamp ]]></description>
+</field>
+<field name='day' fullname='com.pixeldroid.r_c4d3.romloader:Version/day' type='String' isStatic='true' isConst='true' defaultValue='04' >
+<description><![CDATA[ Compilation day ]]></description>
+</field>
+<field name='hour' fullname='com.pixeldroid.r_c4d3.romloader:Version/hour' type='String' isStatic='true' isConst='true' defaultValue='23' >
+<description><![CDATA[ Compilation hour ]]></description>
+</field>
+<field name='minute' fullname='com.pixeldroid.r_c4d3.romloader:Version/minute' type='String' isStatic='true' isConst='true' defaultValue='00' >
+<description><![CDATA[ Compilation minute ]]></description>
+</field>
+<field name='month' fullname='com.pixeldroid.r_c4d3.romloader:Version/month' type='String' isStatic='true' isConst='true' defaultValue='05' >
+<description><![CDATA[ Compilation month ]]></description>
+</field>
+<field name='productInfo' fullname='com.pixeldroid.r_c4d3.romloader:Version/productInfo' type='String' isStatic='true' isConst='true' defaultValue='unknown' >
+<description><![CDATA[ Product version string ]]></description>
+</field>
+<field name='second' fullname='com.pixeldroid.r_c4d3.romloader:Version/second' type='String' isStatic='true' isConst='true' defaultValue='32' >
+<description><![CDATA[ Compilation second ]]></description>
+</field>
+<field name='semver' fullname='com.pixeldroid.r_c4d3.romloader:Version/semver' type='String' isStatic='true' isConst='true' defaultValue='0.1.19' >
+<description><![CDATA[
+
+		Semantic version.
+
+	
+
+		]]></description>
+<see><![CDATA[http://semver.org/
+
+		]]></see>
+</field>
+<field name='year' fullname='com.pixeldroid.r_c4d3.romloader:Version/year' type='String' isStatic='true' isConst='true' defaultValue='2011' >
+<description><![CDATA[ Compilation year ]]></description>
+</field>
+<classRec name='ConfigDataProxy' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\ConfigDataProxy.as' namespace='com.pixeldroid.r_c4d3.romloader' access='public' baseclass='Object' interfaces='com.pixeldroid.r_c4d3.api:IGameConfigProxy' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+		ConfigDataProxy is a simple data structure front end to the romloader 
+
+		xml configuration.
+
+		
+
+		]]></description>
+<example><![CDATA[Sample <code>romloader-config.xml</code>:
+
+		<listing version="3.0">
+
+		&lt;configuration&gt;
+
+			&lt;!-- trace logging on when true --&gt;
+
+			&lt;logging enabled="true" /&gt;
+
+
+
+			&lt;!-- performance stats on when true --&gt;
+
+			&lt;stats enabled="true" /&gt;
+
+
+
+			&lt;!-- rom to load, and its game id for scores storage --&gt;
+
+			&lt;rom file="../controls/ControlTestGameRom.swf" id="com_pixeldroid_controltest" /&gt;
+
+
+
+			&lt;!-- key mappings, player numbers start at 1 --&gt;
+
+			&lt;keymappings&gt;
+
+				&lt;joystick playerNumber="1"&gt;
+
+					&lt;hatRight keyCode="39" /&gt;
+
+					&lt;hatUp    keyCode="38" /&gt;
+
+					&lt;hatLeft  keyCode="37" /&gt;
+
+					&lt;hatDown  keyCode="40" /&gt;
+
+					&lt;buttonX  keyCode="17" /&gt;
+
+					&lt;buttonA  keyCode="46" /&gt;
+
+					&lt;buttonB  keyCode="35" /&gt;
+
+					&lt;buttonC  keyCode="34" /&gt;
+
+				&lt;/joystick&gt;
+
+			&lt;/keymappings&gt;
+
+			
+
+			&lt;!-- arbitrary property values --&gt;
+
+			&lt;property name="fullScreen"&gt;true&lt;/property&gt;&lt;!-- for DesktopRomLoader --&gt;
+
+			&lt;property name="scoreServer"&gt;http://scores.foo.com&lt;/property&gt;&lt;!-- for RC4D3RomLoader --&gt;
+
+			&lt;property name="foo"&gt;foo value&lt;/property&gt;
+
+			&lt;property name="bar"&gt;bar value&lt;/property&gt;
+
+			&lt;property name="bat"&gt;bat value&lt;/property&gt;
+
+
+
+		&lt;/configuration&gt;
+
+		</listing>
+
+		
+
+		]]></example>
+<see><![CDATA[com.pixeldroid.r_c4d3.interfaces.IGameRom#setConfigProxy
+
+	]]></see>
+</classRec>
+<method name='ConfigDataProxy' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/ConfigDataProxy' isStatic='false' isFinal='false' isOverride='false'  param_names='sourceXml' param_types='String' param_defaults='undefined' result_type='*'>
+<description><![CDATA[
+
+			Constructor
+
+		]]></description>
+</method>
+<method name='getPropertyValue' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/getPropertyValue' isStatic='false' isFinal='false' isOverride='false'  param_names='propertyName' param_types='String' param_defaults='undefined' result_type='String'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='playerKeyMapping' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/protected:playerKeyMapping' isStatic='false' isFinal='false' isOverride='false'  param_names='i' param_types='int' param_defaults='undefined' result_type='XMLList'>
+</method>
+<method name='toString' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/toString' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[
+
+			String print of current data
+
+		]]></description>
+</method>
+<method name='gameId' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/gameId/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='loggingEnabled' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/loggingEnabled/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p1A' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p1A/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p1B' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p1B/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p1C' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p1C/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p1D' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p1D/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p1HasKeys' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p1HasKeys/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p1L' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p1L/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p1R' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p1R/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p1U' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p1U/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p1X' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p1X/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p2A' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p2A/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p2B' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p2B/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p2C' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p2C/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p2D' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p2D/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p2HasKeys' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p2HasKeys/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p2L' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p2L/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p2R' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p2R/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p2U' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p2U/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p2X' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p2X/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p3A' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p3A/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p3B' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p3B/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p3C' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p3C/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p3D' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p3D/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p3HasKeys' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p3HasKeys/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p3L' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p3L/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p3R' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p3R/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p3U' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p3U/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p3X' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p3X/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p4A' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p4A/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p4B' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p4B/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p4C' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p4C/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p4D' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p4D/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p4HasKeys' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p4HasKeys/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p4L' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p4L/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p4R' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p4R/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p4U' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p4U/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='p4X' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/p4X/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='romUrl' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/romUrl/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='statsEnabled' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/statsEnabled/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='xmlString' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/xmlString/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+</method>
+<method name='xmlString' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/xmlString/set' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='String' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<field name='_gameId' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/protected:_gameId' type='String' isStatic='false' isConst='false' >
+</field>
+<field name='_loggingEnabled' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/protected:_loggingEnabled' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<field name='_romUrl' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/protected:_romUrl' type='String' isStatic='false' isConst='false' >
+</field>
+<field name='_statsEnabled' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/protected:_statsEnabled' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<field name='_xmlString' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/protected:_xmlString' type='String' isStatic='false' isConst='false' >
+</field>
+<field name='xmlData' fullname='com.pixeldroid.r_c4d3.romloader:ConfigDataProxy/protected:xmlData' type='XML' isStatic='false' isConst='false' >
+</field>
+<classRec name='RomLoader' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\RomLoader.as' namespace='com.pixeldroid.r_c4d3.romloader' access='public' baseclass='flash.display:Sprite' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	Base rom loader implementation.
+
+	
+
+	<p>
+
+	Loads a valid IGameRom SWF and provides access to an IGameConfigProxy, 
+
+	IGameControlsProxy, and an IGameScoresProxy.
+
+	</p>
+
+	
+
+	<p>
+
+	Subclasses can overide the protected proxy creation methods to supply various implementations:
+
+	</p>
+
+	
+
+	<p>
+
+	Configuration values are defined in a companion xml file that must 
+
+	live in the same folder as the 	DesktopRomLoaderForKeyboard SWF and be
+
+	named <code>romloader-config.xml</code> (subclasses can override the 
+
+	configFile getter to expect a different position or get the url from 
+
+	flashVars). See ConfigDataProxy for the xml format expected.
+
+	</p>
+
+	
+
+	<p>Note: <i>
+
+	Due to the way HaXe inserts top-level classes when compiling a SWF,
+
+	HaXe users must use the HaxeSideDoor to declare IGameRom compliance.
+
+	</i></p>
+
+	
+
+	]]></description>
+<see><![CDATA[#createConfigProxy
+
+	]]></see>
+<see><![CDATA[#createControlsProxy
+
+	]]></see>
+<see><![CDATA[#createScoresProxy
+
+	]]></see>
+<see><![CDATA[ConfigDataProxy
+
+	]]></see>
+<see><![CDATA[com.pixeldroid.api.IGameConfigProxy
+
+	]]></see>
+<see><![CDATA[com.pixeldroid.api.IGameControlsProxy
+
+	]]></see>
+<see><![CDATA[com.pixeldroid.api.IGameScoresProxy
+
+	]]></see>
+<see><![CDATA[com.pixeldroid.api.HaxeSideDoor
+
+	]]></see>
+</classRec>
+<method name='RomLoader' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/RomLoader' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+<description><![CDATA[
+
+		Constructor.
+
+		]]></description>
+</method>
+<method name='_addListeners' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:_addListeners' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='_removeListeners' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:_removeListeners' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='addChildren' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:addChildren' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='addListeners' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:addListeners' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[
+
+		 ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='addVersionInfo' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:addVersionInfo' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[
+
+			Adds version and copyright info to context menu
+
+		]]></description>
+</method>
+<method name='closePreloader' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:closePreloader' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='createConfigProxy' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:createConfigProxy' isStatic='false' isFinal='false' isOverride='false'  param_names='configData' param_types='String' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.api:IGameConfigProxy'>
+<description><![CDATA[
+
+			Provides the game configuration proxy instance.
+
+			Broken out for easy override.
+
+			
+
+			<p>
+
+			This base implementation provides a ConfigDataProxy instance.
+
+			</p>
+
+			
+
+			]]></description>
+<see><![CDATA[ConfigDataProxy
+
+		]]></see>
+</method>
+<method name='createControlsProxy' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:createControlsProxy' isStatic='false' isFinal='false' isOverride='false'  param_names='configProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.api:IGameControlsProxy'>
+<description><![CDATA[
+
+			Provides the game controls proxy instance.
+
+			Broken out for easy override.
+
+		]]></description>
+</method>
+<method name='createPreloader' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:createPreloader' isStatic='false' isFinal='false' isOverride='false'  result_type='com.pixeldroid.r_c4d3.preloader:IPreloader'>
+<description><![CDATA[
+
+			Provides the IPreloader instance to display during load.
+
+			Broken out for easy override.
+
+		]]></description>
+</method>
+<method name='createScoresProxy' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:createScoresProxy' isStatic='false' isFinal='false' isOverride='false'  param_names='configProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.api:IGameScoresProxy'>
+<description><![CDATA[
+
+			Provides the game scores proxy instance.
+
+			Broken out for easy override.
+
+		]]></description>
+</method>
+<method name='extractGameRom' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:extractGameRom' isStatic='false' isFinal='false' isOverride='false'  param_names='romLoaderContent' param_types='flash.display:DisplayObject' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.api:IGameRom'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='finalizeLoad' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:finalizeLoad' isStatic='false' isFinal='false' isOverride='false'  param_names='configProxy;controlsProxy;highScoresProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy;com.pixeldroid.r_c4d3.api:IGameControlsProxy;com.pixeldroid.r_c4d3.api:IGameScoresProxy' param_defaults='undefined;undefined;undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='loadSwf' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:loadSwf' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='loadXml' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:loadXml' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='onIoError' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:onIoError' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:IOErrorEvent' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+
+			Triggered when an IOError occurs.
+
+
+
+			Writes the IOErrorEvent.toString() to the tracelog.
+
+		]]></description>
+</method>
+<method name='onPreloadProgress' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:onPreloadProgress' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:ProgressEvent' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='onPreloaderClosed' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:onPreloaderClosed' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:Event' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='onPreloaderOpened' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:onPreloaderOpened' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:Event' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='onSecurityError' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:onSecurityError' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:SecurityErrorEvent' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+
+			Triggered when an SecurityError occurs.
+
+
+
+			Writes the SecurityErrorEvent.toString() to the tracelog.
+
+		]]></description>
+</method>
+<method name='onSwfComplete' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:onSwfComplete' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:Event' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='onSwfProgress' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:onSwfProgress' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:ProgressEvent' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='onXmlComplete' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:onXmlComplete' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:Event' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='onXmlProgress' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:onXmlProgress' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:ProgressEvent' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='openPreloader' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:openPreloader' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='removeListeners' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:removeListeners' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[
+
+		 ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='updateProgress' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:updateProgress' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='configUrl' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:configUrl/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[
+
+			Retrieves the url of the rom loader config file.
+
+		]]></description>
+</method>
+<method name='copyLeft' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/private:copyLeft/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+</method>
+<method name='productVersion' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:productVersion/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[
+
+			Returns the application version string
+
+		]]></description>
+</method>
+<field name='configProxy' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:configProxy' type='com.pixeldroid.r_c4d3.api:IGameConfigProxy' isStatic='false' isConst='false' >
+</field>
+<field name='controlsProxy' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:controlsProxy' type='com.pixeldroid.r_c4d3.api:IGameControlsProxy' isStatic='false' isConst='false' >
+</field>
+<field name='highScoresProxy' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:highScoresProxy' type='com.pixeldroid.r_c4d3.api:IGameScoresProxy' isStatic='false' isConst='false' >
+</field>
+<field name='romLoader' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:romLoader' type='flash.display:Loader' isStatic='false' isConst='false' >
+</field>
+<field name='splashDone' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:splashDone' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<field name='splashScreen' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:splashScreen' type='com.pixeldroid.r_c4d3.preloader:IPreloader' isStatic='false' isConst='false' >
+</field>
+<field name='swfBytesLoaded' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:swfBytesLoaded' type='int' isStatic='false' isConst='false' >
+</field>
+<field name='swfBytesTotal' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:swfBytesTotal' type='int' isStatic='false' isConst='false' >
+</field>
+<field name='swfLoaded' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:swfLoaded' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<field name='xmlBytesLoaded' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:xmlBytesLoaded' type='int' isStatic='false' isConst='false' >
+</field>
+<field name='xmlBytesTotal' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:xmlBytesTotal' type='int' isStatic='false' isConst='false' >
+</field>
+<field name='xmlLoaded' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:xmlLoaded' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<field name='xmlLoader' fullname='com.pixeldroid.r_c4d3.romloader:RomLoader/protected:xmlLoader' type='flash.net:URLLoader' isStatic='false' isConst='false' >
+</field>
+<interfaceRec name='ICanFocus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:ICanFocus' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\preloader\keyconfig\ICanFocus.as' namespace='com.pixeldroid.r_c4d3.preloader.keyconfig' access='public' baseClasses='Object' isFinal='false' isDynamic='false' >
+</interfaceRec>
+<method name='onFocusIn' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:ICanFocus/com.pixeldroid.r_c4d3.preloader.keyconfig:ICanFocus:onFocusIn' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='onFocusOut' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:ICanFocus/com.pixeldroid.r_c4d3.preloader.keyconfig:ICanFocus:onFocusOut' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='wantFocus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:ICanFocus/com.pixeldroid.r_c4d3.preloader.keyconfig:ICanFocus:wantFocus' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+</method>
+<classRec name='FullFrameSprite' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\preloader\keyconfig\FullFrameSprite.as' namespace='com.pixeldroid.r_c4d3.preloader.keyconfig' access='public' baseclass='flash.display:Sprite' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='FullFrameSprite' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/FullFrameSprite' isStatic='false' isFinal='false' isOverride='false'  param_names='rootStage' param_types='flash.display:Stage' param_defaults='undefined' result_type='*'>
+</method>
+<method name='_getNextFocus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/_getNextFocus' isStatic='false' isFinal='true' isOverride='false'  param_names='dir' param_types='int' param_defaults='1' result_type='void'>
+</method>
+<method name='_onFocusChange' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:_onFocusChange' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:FocusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='activate' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/activate' isStatic='false' isFinal='true' isOverride='false'  result_type='void'>
+</method>
+<method name='attemptFocusOut' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:attemptFocusOut' isStatic='false' isFinal='false' isOverride='false'  param_names='widget' param_types='Object' param_defaults='undefined' result_type='Boolean'>
+</method>
+<method name='attemptNewFocus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/attemptNewFocus' isStatic='false' isFinal='true' isOverride='false'  param_names='child;oldFocus' param_types='flash.display:DisplayObject;flash.display:InteractiveObject' param_defaults='undefined;undefined' result_type='Boolean'>
+</method>
+<method name='containsObject' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:containsObject' isStatic='false' isFinal='false' isOverride='false'  param_names='foo' param_types='Object' param_defaults='undefined' result_type='Boolean'>
+</method>
+<method name='deactivate' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/deactivate' isStatic='false' isFinal='true' isOverride='false'  result_type='void'>
+</method>
+<method name='finalize' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/finalize' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='fractionalX' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/fractionalX' isStatic='false' isFinal='true' isOverride='false'  param_names='numerator;denominator' param_types='Number;Number' param_defaults='undefined;undefined' result_type='Number'>
+</method>
+<method name='fractionalY' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/fractionalY' isStatic='false' isFinal='true' isOverride='false'  param_names='numerator;denominator' param_types='Number;Number' param_defaults='undefined;undefined' result_type='Number'>
+</method>
+<method name='getNextFocus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/getNextFocus' isStatic='false' isFinal='false' isOverride='false'  param_names='dir' param_types='int' param_defaults='1' result_type='void'>
+</method>
+<method name='getPrevFocus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/getPrevFocus' isStatic='false' isFinal='true' isOverride='false'  result_type='void'>
+</method>
+<method name='hasChild' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/hasChild' isStatic='false' isFinal='true' isOverride='false'  param_names='child' param_types='flash.display:DisplayObject' param_defaults='undefined' result_type='Boolean'>
+</method>
+<method name='isConfirmationKey' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:isConfirmationKey' isStatic='false' isFinal='false' isOverride='false'  param_names='keyCode' param_types='int' param_defaults='undefined' result_type='Boolean'>
+</method>
+<method name='onActivate' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/protected:onActivate' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='onAdded' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:onAdded' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:Event' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onDeactivate' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/protected:onDeactivate' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='onFocusChange' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/protected:onFocusChange' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:FocusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onFocusIn' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:onFocusIn' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:FocusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onFocusOut' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:onFocusOut' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:FocusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onKeyDown' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:onKeyDown' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:KeyboardEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onKeyUp' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:onKeyUp' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:KeyboardEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onMouseDown' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:onMouseDown' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:MouseEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onMouseFocusChange' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:onMouseFocusChange' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:FocusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onRemoved' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:onRemoved' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:Event' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onResize' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/onResize' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='focus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/focus/get' isStatic='false' isFinal='false' isOverride='false'  result_type='flash.display:InteractiveObject'>
+</method>
+<method name='rootStage' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/rootStage/get' isStatic='false' isFinal='true' isOverride='false'  result_type='flash.display:Stage'>
+</method>
+<method name='focus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/focus/set' isStatic='false' isFinal='false' isOverride='false'  param_names='val' param_types='flash.display:InteractiveObject' param_defaults='undefined' result_type='void'>
+</method>
+<field name='_rootStage' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:_rootStage' type='flash.display:Stage' isStatic='false' isConst='false' >
+</field>
+<field name='active' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:active' type='Boolean' isStatic='false' isConst='false' defaultValue='false' >
+</field>
+<field name='focusHandle' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:focusHandle' type='Array' isStatic='false' isConst='false' >
+</field>
+<field name='focusLock' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/private:focusLock' type='Boolean' isStatic='false' isConst='false' defaultValue='false' >
+</field>
+<field name='frameHeight' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/protected:frameHeight' type='int' isStatic='false' isConst='true' defaultValue='600' >
+</field>
+<field name='frameWidth' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite/protected:frameWidth' type='int' isStatic='false' isConst='true' defaultValue='800' >
+</field>
+<classRec name='Button' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\preloader\keyconfig\Button.as' namespace='com.pixeldroid.r_c4d3.preloader.keyconfig' access='public' baseclass='flash.display:SimpleButton' interfaces='com.pixeldroid.r_c4d3.preloader.keyconfig:ICanFocus' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='Button' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/Button' isStatic='false' isFinal='false' isOverride='false'  param_names='labelText' param_types='String' param_defaults='Submit' result_type='*'>
+</method>
+<method name='calcRounding' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:calcRounding' isStatic='false' isFinal='false' isOverride='false'  result_type='Number'>
+</method>
+<method name='draw' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:draw' isStatic='false' isFinal='false' isOverride='false'  param_names='sprite;outsideColor;insideColor' param_types='Button.as$75:ButtonSprite;int;int' param_defaults='undefined;undefined;undefined' result_type='void'>
+</method>
+<method name='finalize' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/finalize' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='focusIn' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:focusIn' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:FocusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='focusOut' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:focusOut' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:FocusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onDownEnterFrame' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:onDownEnterFrame' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:Event' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onFocusIn' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/onFocusIn' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='onFocusOut' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/onFocusOut' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='onFocusShift' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/onFocusShift' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:FocusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onMouseFocus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/onMouseFocus' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:FocusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onOverEnterFrame' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:onOverEnterFrame' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:Event' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onUpEnterFrame' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:onUpEnterFrame' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:Event' param_defaults='undefined' result_type='void'>
+</method>
+<method name='positionLabel' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:positionLabel' isStatic='false' isFinal='false' isOverride='false'  param_names='textField;sprite' param_types='flash.text:TextField;flash.display:Sprite' param_defaults='undefined;undefined' result_type='void'>
+</method>
+<method name='toString' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/toString' isStatic='false' isFinal='false' isOverride='true'  result_type='String'>
+</method>
+<method name='wantFocus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/wantFocus' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+</method>
+<method name='hasFocus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/hasFocus/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+</method>
+<method name='height' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/height/get' isStatic='false' isFinal='false' isOverride='true'  result_type='Number'>
+</method>
+<method name='width' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/width/get' isStatic='false' isFinal='false' isOverride='true'  result_type='Number'>
+</method>
+<method name='height' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/height/set' isStatic='false' isFinal='false' isOverride='true'  param_names='val' param_types='Number' param_defaults='undefined' result_type='void'>
+</method>
+<method name='width' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/width/set' isStatic='false' isFinal='false' isOverride='true'  param_names='val' param_types='Number' param_defaults='undefined' result_type='void'>
+</method>
+<field name='_hasFocus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:_hasFocus' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<field name='downSprite' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:downSprite' type='Button.as$75:ButtonSprite' isStatic='false' isConst='false' >
+</field>
+<field name='globalIndex' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:globalIndex' type='int' isStatic='true' isConst='false' defaultValue='0' >
+</field>
+<field name='h' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:h' type='Number' isStatic='false' isConst='false' defaultValue='0' >
+</field>
+<field name='index' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:index' type='int' isStatic='false' isConst='false' defaultValue='unknown' >
+</field>
+<field name='overSprite' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:overSprite' type='Button.as$75:ButtonSprite' isStatic='false' isConst='false' >
+</field>
+<field name='textField' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:textField' type='flash.text:TextField' isStatic='false' isConst='false' >
+</field>
+<field name='upSprite' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:upSprite' type='Button.as$75:ButtonSprite' isStatic='false' isConst='false' >
+</field>
+<field name='w' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:Button/private:w' type='Number' isStatic='false' isConst='false' defaultValue='0' >
+</field>
+<classRec name='SelectKeysMenu' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\preloader\keyconfig\SelectKeysMenu.as' namespace='com.pixeldroid.r_c4d3.preloader.keyconfig' access='public' baseclass='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='SelectKeysMenu' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/SelectKeysMenu' isStatic='false' isFinal='false' isOverride='false'  param_names='rootStage;controlsProxy;changeHeader' param_types='flash.display:Stage;com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy;Function' param_defaults='undefined;undefined;undefined' result_type='*'>
+</method>
+<method name='_assignKeyCode' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:_assignKeyCode' isStatic='false' isFinal='false' isOverride='false'  param_names='keyCode;playerIndex;keyId' param_types='uint;int;int' param_defaults='undefined;undefined;undefined' result_type='void'>
+</method>
+<method name='assignKeyCode' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:assignKeyCode' isStatic='false' isFinal='false' isOverride='false'  param_names='keyCode;keyId' param_types='uint;int' param_defaults='undefined;undefined' result_type='void'>
+</method>
+<method name='checkConflict' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:checkConflict' isStatic='false' isFinal='false' isOverride='false'  param_names='keyCode;player;keyId' param_types='uint;int;int' param_defaults='undefined;undefined;undefined' result_type='SelectKeysMenu.as$92:Conflict'>
+</method>
+<method name='checkConflicts' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:checkConflicts' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='clone' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:clone' isStatic='false' isFinal='false' isOverride='false'  param_names='source' param_types='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy'>
+</method>
+<method name='copyControls' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:copyControls' isStatic='false' isFinal='false' isOverride='false'  param_names='proxyFrom;proxyTo;player' param_types='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy;com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy;int' param_defaults='undefined;undefined;undefined' result_type='void'>
+</method>
+<method name='finalize' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/finalize' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<method name='foo' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:foo' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:FocusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='getHeader' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/getHeader' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+</method>
+<method name='getKeyCodeFromMem' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:getKeyCodeFromMem' isStatic='false' isFinal='false' isOverride='false'  param_names='keyId;playerIndex' param_types='int;int' param_defaults='undefined;undefined' result_type='uint'>
+</method>
+<method name='getKeyCode' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:getKeyCode' isStatic='false' isFinal='false' isOverride='false'  param_names='keyId;playerIndex;fromMem' param_types='int;int;Boolean' param_defaults='undefined;undefined;undefined' result_type='uint'>
+</method>
+<method name='getKeyLabel' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:getKeyLabel' isStatic='false' isFinal='false' isOverride='false'  param_names='keyId;playerIndex;fromMem' param_types='int;int;Boolean' param_defaults='undefined;undefined;true' result_type='String'>
+</method>
+<method name='getLocalKeyData' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:getLocalKeyData' isStatic='false' isFinal='false' isOverride='false'  param_names='keyId;playerIndex' param_types='int;int' param_defaults='undefined;undefined' result_type='Object'>
+</method>
+<method name='getNextFocus' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/getNextFocus' isStatic='false' isFinal='false' isOverride='true'  param_names='dir' param_types='int' param_defaults='1' result_type='void'>
+</method>
+<method name='humanReadable' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:humanReadable' isStatic='false' isFinal='false' isOverride='false'  param_names='keyCode' param_types='uint' param_defaults='undefined' result_type='String'>
+</method>
+<method name='invalidateKeyConfigData' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:invalidateKeyConfigData' isStatic='false' isFinal='false' isOverride='false'  param_names='playerIndex' param_types='int' param_defaults='undefined' result_type='void'>
+</method>
+<method name='invalidateText' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:invalidateText' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='isFocusOnFields' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:isFocusOnFields' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+</method>
+<method name='keyIdToControlType' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:keyIdToControlType' isStatic='false' isFinal='false' isOverride='false'  param_names='keyId' param_types='int' param_defaults='undefined' result_type='int'>
+</method>
+<method name='keyIdToSubId' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:keyIdToSubId' isStatic='false' isFinal='false' isOverride='false'  param_names='keyId' param_types='int' param_defaults='undefined' result_type='int'>
+</method>
+<method name='loadKeyConfigData' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:loadKeyConfigData' isStatic='false' isFinal='false' isOverride='false'  param_names='playerIndex' param_types='int' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onActivate' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/protected:onActivate' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<method name='onCancel' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:onCancel' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:MouseEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onDeactivate' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/protected:onDeactivate' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<method name='onDefault' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:onDefault' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:MouseEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onDone' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:onDone' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:MouseEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onKeyDown' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:onKeyDown' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:KeyboardEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onKeyUp' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:onKeyUp' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:KeyboardEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onResize' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/onResize' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<method name='setPlayer' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/setPlayer' isStatic='false' isFinal='true' isOverride='false'  param_names='playerIndex' param_types='int' param_defaults='undefined' result_type='void'>
+</method>
+<field name='BUTTON' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:BUTTON' type='int' isStatic='false' isConst='true' defaultValue='-1' >
+</field>
+<field name='HAT' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:HAT' type='int' isStatic='false' isConst='true' defaultValue='-2' >
+</field>
+<field name='cancelButton' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:cancelButton' type='com.pixeldroid.r_c4d3.preloader.keyconfig:Button' isStatic='false' isConst='false' >
+</field>
+<field name='changeHeader' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/changeHeader' type='Function' isStatic='false' isConst='false' >
+</field>
+<field name='conflictMsgs' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:conflictMsgs' type='Array' isStatic='false' isConst='false' >
+</field>
+<field name='controlDefaults' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:controlDefaults' type='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy' isStatic='false' isConst='false' >
+</field>
+<field name='controlsBackup' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:controlsBackup' type='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy' isStatic='false' isConst='false' >
+</field>
+<field name='controlsProxy' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:controlsProxy' type='com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy' isStatic='false' isConst='false' >
+</field>
+<field name='currentPlayer' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:currentPlayer' type='int' isStatic='false' isConst='false' defaultValue='-1' >
+</field>
+<field name='debugFmt' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:debugFmt' type='flash.text:TextFormat' isStatic='false' isConst='false' >
+</field>
+<field name='debugTxt' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:debugTxt' type='flash.text:TextField' isStatic='false' isConst='false' >
+</field>
+<field name='defaultsButton' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:defaultsButton' type='com.pixeldroid.r_c4d3.preloader.keyconfig:Button' isStatic='false' isConst='false' >
+</field>
+<field name='descriptions' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:descriptions' type='Array' isStatic='false' isConst='false' >
+</field>
+<field name='doneButton' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:doneButton' type='com.pixeldroid.r_c4d3.preloader.keyconfig:Button' isStatic='false' isConst='false' >
+</field>
+<field name='fromButtons' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:fromButtons' type='Boolean' isStatic='false' isConst='false' >
+</field>
+<field name='gotoMain' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/gotoMain' type='Function' isStatic='false' isConst='false' >
+</field>
+<field name='header' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/header' type='String' isStatic='false' isConst='false' defaultValue='Please select this character&apos;s controls.' >
+</field>
+<field name='nKeysPerPlayer' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:nKeysPerPlayer' type='int' isStatic='false' isConst='true' defaultValue='8' >
+</field>
+<field name='nPlayers' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:nPlayers' type='int' isStatic='false' isConst='true' defaultValue='4' >
+</field>
+<field name='selections' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:selections' type='Array' isStatic='false' isConst='false' >
+</field>
+<field name='usedKeyCodes' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu/private:usedKeyCodes' type='Array' isStatic='false' isConst='false' >
+</field>
+<classRec name='KeyConfigGui' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\preloader\keyconfig\KeyConfigGui.as' namespace='com.pixeldroid.r_c4d3.preloader.keyconfig' access='public' baseclass='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='KeyConfigGui' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/KeyConfigGui' isStatic='false' isFinal='false' isOverride='false'  param_names='rootStage;controlsProxy' param_types='flash.display:Stage;com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy' param_defaults='undefined;undefined' result_type='*'>
+</method>
+<method name='finalize' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/finalize' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<method name='getMode' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/getMode' isStatic='false' isFinal='true' isOverride='false'  result_type='int'>
+</method>
+<method name='getSpriteForMode' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/private:getSpriteForMode' isStatic='false' isFinal='false' isOverride='false'  param_names='_mode' param_types='int' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite'>
+</method>
+<method name='gotoConfig' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/gotoConfig' isStatic='false' isFinal='false' isOverride='false'  param_names='playerIndex' param_types='int' param_defaults='undefined' result_type='void'>
+</method>
+<method name='gotoDone' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/gotoDone' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='gotoMain' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/gotoMain' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='invalidateText' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/private:invalidateText' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='onActivate' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/protected:onActivate' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<method name='onDeactivate' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/protected:onDeactivate' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<method name='onHeaderChange' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/private:onHeaderChange' isStatic='false' isFinal='false' isOverride='false'  param_names='header' param_types='String' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onResize' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/onResize' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<method name='setMode' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/private:setMode' isStatic='false' isFinal='true' isOverride='false'  param_names='val' param_types='int' param_defaults='undefined' result_type='void'>
+</method>
+<field name='DONE' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/DONE' type='int' isStatic='false' isConst='true' defaultValue='2' >
+</field>
+<field name='KEY_CONFIG' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/KEY_CONFIG' type='int' isStatic='false' isConst='true' defaultValue='1' >
+</field>
+<field name='MAIN' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/MAIN' type='int' isStatic='false' isConst='true' defaultValue='0' >
+</field>
+<field name='doneSprite' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/private:doneSprite' type='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite' isStatic='false' isConst='false' >
+</field>
+<field name='informationText' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/private:informationText' type='flash.text:TextField' isStatic='false' isConst='false' >
+</field>
+<field name='loadProgressText' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/private:loadProgressText' type='flash.text:TextField' isStatic='false' isConst='false' >
+</field>
+<field name='mainMenu' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/private:mainMenu' type='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu' isStatic='false' isConst='false' >
+</field>
+<field name='mode' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/private:mode' type='int' isStatic='false' isConst='false' >
+</field>
+<field name='onConfigComplete' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/onConfigComplete' type='Function' isStatic='false' isConst='false' >
+</field>
+<field name='selectMenu' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:KeyConfigGui/private:selectMenu' type='com.pixeldroid.r_c4d3.preloader.keyconfig:SelectKeysMenu' isStatic='false' isConst='false' >
+</field>
+<classRec name='MainMenu' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\preloader\keyconfig\MainMenu.as' namespace='com.pixeldroid.r_c4d3.preloader.keyconfig' access='public' baseclass='com.pixeldroid.r_c4d3.preloader.keyconfig:FullFrameSprite' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='MainMenu' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/MainMenu' isStatic='false' isFinal='false' isOverride='false'  param_names='rootStage;controlsProxy;changeHeader' param_types='flash.display:Stage;com.pixeldroid.r_c4d3.romloader.controls:KeyboardGameControlsProxy;Function' param_defaults='undefined;undefined;undefined' result_type='*'>
+</method>
+<method name='_gotoConfig' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/private:_gotoConfig' isStatic='false' isFinal='false' isOverride='false'  param_names='playerIndex' param_types='int' param_defaults='undefined' result_type='void'>
+</method>
+<method name='finalize' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/finalize' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<method name='getHeader' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/getHeader' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+</method>
+<method name='onActivate' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/protected:onActivate' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<method name='onDeactivate' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/protected:onDeactivate' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<method name='onFocusChange' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/protected:onFocusChange' isStatic='false' isFinal='false' isOverride='true'  param_names='e' param_types='flash.events:FocusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onFocusIn' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/private:onFocusIn' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:FocusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onPlay' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/private:onPlay' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:MouseEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onResize' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/onResize' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+</method>
+<method name='p1config' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/private:p1config' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:MouseEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='p2config' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/private:p2config' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:MouseEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='p3config' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/private:p3config' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:MouseEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='p4config' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/private:p4config' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:MouseEvent' param_defaults='undefined' result_type='void'>
+</method>
+<field name='changeHeader' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/changeHeader' type='Function' isStatic='false' isConst='false' >
+</field>
+<field name='gotoConfig' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/gotoConfig' type='Function' isStatic='false' isConst='false' >
+</field>
+<field name='gotoDone' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/gotoDone' type='Function' isStatic='false' isConst='false' >
+</field>
+<field name='header' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/private:header' type='String' isStatic='true' isConst='true' defaultValue='Select a player&apos;s controls to modify.' >
+</field>
+<field name='playButton' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/private:playButton' type='com.pixeldroid.r_c4d3.preloader.keyconfig:Button' isStatic='false' isConst='false' >
+</field>
+<field name='playerButtons' fullname='com.pixeldroid.r_c4d3.preloader.keyconfig:MainMenu/private:playerButtons' type='Array' isStatic='false' isConst='false' >
+</field>
+<classRec name='ScoreEntry' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\scores\ScoreEntry.as' namespace='com.pixeldroid.r_c4d3.romloader.scores' access='public' baseclass='Object' interfaces='com.pixeldroid.r_c4d3.api:IScoreEntry' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	Value Object for storing scores associated with player data.
+
+	Designed for use with IGameScoreProxy implementors.
+
+	
+
+	]]></description>
+<see><![CDATA[com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy
+
+	]]></see>
+</classRec>
+<method name='ScoreEntry' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry/ScoreEntry' isStatic='false' isFinal='false' isOverride='false'  param_names='number;string' param_types='Number;String' param_defaults='unknown;null' result_type='*'>
+<description><![CDATA[
+
+		Constructor.
+
+		
+
+		]]></description>
+<param><![CDATA[value Initial score value (optional)
+
+		]]></param>
+<param><![CDATA[value Initial player data (optional)
+
+		]]></param>
+</method>
+<method name='clone' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry/clone' isStatic='false' isFinal='false' isOverride='false'  result_type='com.pixeldroid.r_c4d3.api:IScoreEntry'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='setAccepted' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry/setAccepted' isStatic='false' isFinal='false' isOverride='false'  param_names='value;authorization' param_types='Boolean;com.pixeldroid.r_c4d3.api:IGameScoresProxy' param_defaults='undefined;undefined' result_type='void'>
+<description><![CDATA[
+
+		]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='toString' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry/toString' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='accepted' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry/accepted/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='label' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry/label/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+</method>
+<method name='value' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry/value/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Number'>
+</method>
+<method name='label' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry/label/set' isStatic='false' isFinal='false' isOverride='false'  param_names='string' param_types='String' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<method name='value' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry/value/set' isStatic='false' isFinal='false' isOverride='false'  param_names='number' param_types='Number' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<inheritDoc><![CDATA[]]></inheritDoc>
+</method>
+<field name='_accepted' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry/private:_accepted' type='Boolean' isStatic='false' isConst='false' defaultValue='false' >
+</field>
+<field name='_label' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry/private:_label' type='String' isStatic='false' isConst='false' defaultValue='' >
+</field>
+<field name='_value' fullname='com.pixeldroid.r_c4d3.romloader.scores:ScoreEntry/private:_value' type='Number' isStatic='false' isConst='false' defaultValue='0' >
+</field>
+<classRec name='GameScoresProxy' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\scores\GameScoresProxy.as' namespace='com.pixeldroid.r_c4d3.romloader.scores' access='public' baseclass='flash.events:EventDispatcher' interfaces='com.pixeldroid.r_c4d3.api:IGameScoresProxy' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	Base class for high score storage and retrieval.
+
+	
+
+	<ul>
+
+	<li>Scores are kept in descending order (highest first)</li>
+
+	<li>Ties are allowed (same score, different initials), 
+
+	    duplicates are not (first in wins)</li>
+
+	</ul>
+
+	]]></description>
+</classRec>
+<method name='GameScoresProxy' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/GameScoresProxy' isStatic='false' isFinal='false' isOverride='false'  param_names='id;capacity' param_types='String;int' param_defaults='undefined;10' result_type='*'>
+<description><![CDATA[
+
+		Constructor.
+
+		
+
+		]]></description>
+<param><![CDATA[id A unique identifier for this set of scores and initials.
+
+		Must be at least GAMEID_MIN characters long, but no longer than GAMEID_MAX.
+
+		]]></param>
+<param><![CDATA[capacity The total number of entries that may be stored (up to ENTRIES_MAX)
+
+		]]></param>
+</method>
+<method name='_insert' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/protected:_insert' isStatic='false' isFinal='false' isOverride='false'  param_names='score;initial;S;I;max' param_types='Number;String;Array;Array;uint' param_defaults='undefined;undefined;undefined;undefined;undefined' result_type='Boolean'>
+<description><![CDATA[ 
+
+		Score insertion algorithm.
+
+		Override for alternate implementations.
+
+		
+
+		<p>
+
+		This implementation allows ties, but not duplicates, per the following rules:
+
+		</p>
+
+		
+
+		<ul>
+
+		<li>S and I must match in length (let's call that L)</li>
+
+		<li>If L &lt; max, the list is not yet full; candidate will always be allowed</li>
+
+		<li>If L == max, the list is full; candidate will only be allowed if the following are true:
+
+			<ul>
+
+			<li>the candidate score is &gt;= the lowest score in the list</li>
+
+			<li>if the candidate score is equal to another score already in the list, 
+
+			the candidate initial must be different</li>
+
+			</ul></li>
+
+		<li>When the candidate is added to a full list, the lowest score is removed</li>
+
+		</ul>
+
+		
+
+		]]></description>
+<param><![CDATA[score Numeric score; candidate for insertion
+
+		]]></param>
+<param><![CDATA[initial String associated with score
+
+		]]></param>
+<param><![CDATA[S array of numeric scores
+
+		]]></param>
+<param><![CDATA[I array of string initials
+
+		]]></param>
+<param><![CDATA[max Upper limit for total number of scores and initials
+
+		]]></param>
+</method>
+<method name='chunk' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/protected:chunk' isStatic='false' isFinal='false' isOverride='false'  param_names='s;x;c' param_types='String;Number;String' param_defaults='undefined;undefined;undefined' result_type='String'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='clear' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/clear' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='closeScoresTable' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/closeScoresTable' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='getAllEntries' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/getAllEntries' isStatic='false' isFinal='false' isOverride='false'  result_type='Array'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='getAllInitials' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/getAllInitials' isStatic='false' isFinal='false' isOverride='false'  result_type='Array'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='getAllScores' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/getAllScores' isStatic='false' isFinal='false' isOverride='false'  result_type='Array'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='getInitials' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/getInitials' isStatic='false' isFinal='false' isOverride='false'  param_names='i' param_types='int' param_defaults='undefined' result_type='String'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='getScore' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/getScore' isStatic='false' isFinal='false' isOverride='false'  param_names='i' param_types='int' param_defaults='undefined' result_type='Number'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='insertEntries' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/insertEntries' isStatic='false' isFinal='false' isOverride='false'  param_names='entries' param_types='Array' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='isValidChars' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/protected:isValidChars' isStatic='false' isFinal='false' isOverride='false'  param_names='s' param_types='String' param_defaults='undefined' result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='isValidLength' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/protected:isValidLength' isStatic='false' isFinal='false' isOverride='false'  param_names='s' param_types='String' param_defaults='undefined' result_type='Boolean'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='load' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/load' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[
+
+		Read the scores and initials from the storage medium.
+
+		<strong>To be overridden by subclasses</strong>
+
+		]]></description>
+</method>
+<method name='openScoresTable' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/openScoresTable' isStatic='false' isFinal='false' isOverride='false'  param_names='gameId' param_types='String' param_defaults='undefined' result_type='void'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='pad' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/protected:pad' isStatic='false' isFinal='false' isOverride='false'  param_names='s;x;c' param_types='String;Number;String' param_defaults='undefined;undefined;undefined' result_type='String'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='store' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/store' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+<description><![CDATA[
+
+		Write the scores and initials to the storage medium.
+
+		<strong>To be overridden by subclasses</strong>
+
+		]]></description>
+</method>
+<method name='toString' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/toString' isStatic='false' isFinal='false' isOverride='true'  result_type='String'>
+<description><![CDATA[
+
+		Generates a displayable list of initials (up to 10 chars) and scores (up to 12 digits).
+
+		
+
+		<p>
+
+		The character and digit limits are arbitrary for this toString implementation. 
+
+		Override this method to implement custom formats.
+
+		</p>
+
+
+
+		<p>
+
+		The following is a sample of the type of output toString produces:		
+
+<listing version="3.0" >
+
+    1. Mr. Yellow : 999,999,999,999
+
+    2. Mr. Green  :       1,234,567
+
+    3. Ms. Red    :              89
+
+    4. Ms. Magent :               0
+
+</listing>
+
+		</p>
+
+		]]></description>
+</method>
+<method name='capacity' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/capacity/get' isStatic='false' isFinal='false' isOverride='false'  result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='emptySlots' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/emptySlots/get' isStatic='false' isFinal='false' isOverride='false'  result_type='int'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='gameId' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/gameId/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='length' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/length/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<field name='ENTRIES_MAX' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/ENTRIES_MAX' type='int' isStatic='true' isConst='true' defaultValue='100' >
+<description><![CDATA[ Upper limit of number of entries allowed ]]></description>
+</field>
+<field name='GAMEID_MAX' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/GAMEID_MAX' type='int' isStatic='true' isConst='true' defaultValue='32' >
+<description><![CDATA[ Most number of characters a valid id may contain ]]></description>
+</field>
+<field name='GAMEID_MIN' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/GAMEID_MIN' type='int' isStatic='true' isConst='true' defaultValue='4' >
+<description><![CDATA[ Least number of characters a valid id may contain ]]></description>
+</field>
+<field name='NUM_ENTRIES' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/protected:NUM_ENTRIES' type='int' isStatic='false' isConst='false' >
+</field>
+<field name='_gameId' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/private:_gameId' type='String' isStatic='false' isConst='false' >
+</field>
+<field name='initials' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/protected:initials' type='Array' isStatic='false' isConst='false' >
+</field>
+<field name='retrieveEvent' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/protected:retrieveEvent' type='com.pixeldroid.r_c4d3.api.events:DataEvent' isStatic='false' isConst='false' >
+</field>
+<field name='scores' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/protected:scores' type='Array' isStatic='false' isConst='false' >
+</field>
+<field name='storeEvent' fullname='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy/protected:storeEvent' type='com.pixeldroid.r_c4d3.api.events:DataEvent' isStatic='false' isConst='false' >
+</field>
+<classRec name='LocalGameScoresProxy' fullname='com.pixeldroid.r_c4d3.romloader.scores:LocalGameScoresProxy' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\scores\LocalGameScoresProxy.as' namespace='com.pixeldroid.r_c4d3.romloader.scores' access='public' baseclass='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	Extends the (abstract) GameScoresProxy base class to
+
+	store high scores and initials on the local hard drive,	using a local SharedObject.
+
+	
+
+	]]></description>
+<see><![CDATA[com.pixeldroid.r_c4d3.scores.GameScoresProxy
+
+	]]></see>
+</classRec>
+<method name='LocalGameScoresProxy' fullname='com.pixeldroid.r_c4d3.romloader.scores:LocalGameScoresProxy/LocalGameScoresProxy' isStatic='false' isFinal='false' isOverride='false'  param_names='id;capacity' param_types='String;int' param_defaults='undefined;10' result_type='*'>
+<description><![CDATA[
+
+		Constructor.
+
+		
+
+		]]></description>
+<param><![CDATA[id A unique identifier for this set of scores and initials
+
+		]]></param>
+<param><![CDATA[capacity The total number of entries that may be stored (up to GameScoresProxy.ENTRIES_MAX)
+
+		]]></param>
+</method>
+<method name='load' fullname='com.pixeldroid.r_c4d3.romloader.scores:LocalGameScoresProxy/load' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+<description><![CDATA[
+
+		Retrieve the scores from local storage.
+
+		<p>Dispatches <code>com.pixeldroid.r_c4d3.scores.ScoreEvent.LOAD</code></p>
+
+		]]></description>
+</method>
+<method name='store' fullname='com.pixeldroid.r_c4d3.romloader.scores:LocalGameScoresProxy/store' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+<description><![CDATA[
+
+		Submit the scores to local storage.
+
+		<p>Dispatches <code>com.pixeldroid.r_c4d3.scores.ScoreEvent.SAVE</code></p>
+
+		]]></description>
+</method>
+<method name='emptyScoreList' fullname='com.pixeldroid.r_c4d3.romloader.scores:LocalGameScoresProxy/protected:emptyScoreList/get' isStatic='false' isFinal='false' isOverride='false'  result_type='Object'>
+</method>
+<classRec name='RemoteGameScoresProxy' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\scores\RemoteGameScoresProxy.as' namespace='com.pixeldroid.r_c4d3.romloader.scores' access='public' baseclass='com.pixeldroid.r_c4d3.romloader.scores:GameScoresProxy' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	Extends the (abstract) GameScoresProxy base class to
+
+	store high scores and initials on a remote server,
+
+	using a web service that accepts the following parameters:
+
+	<ul>
+
+	<li><code>game</code> : <i>String</i> Unique game id</li>
+
+	<li><code>format</code> : <i>String</i> "json" or "vrml"</li>
+
+	<li><code>data</code> : <i>String</i> Score data--as json string--to store; omission or empty value for data triggers retrieval</li>
+
+	</ul>
+
+	
+
+	and returns the following data:
+
+	<ul>
+
+	<li><code>type</code>: <i>String</i> "get" or "set"</li>
+
+	<li><code>success</code> : <i>Boolean</i></li>
+
+	<li><code>message</code> : <i>String</i></li>
+
+	<li><code>data</code> : <i>String</i> Score data as json string</li>
+
+	</ul>
+
+	
+
+	Notes:<ul>
+
+	<li>Requires <code>com.adobe.serialization.json.JSON</code></li>
+
+	</ul>
+
+	
+
+	]]></description>
+<see><![CDATA[com.pixeldroid.r_c4d3.scores.GameScoresProxy
+
+	]]></see>
+<see><![CDATA[com.adobe.serialization.json.JSON
+
+	]]></see>
+<see><![CDATA[http://code.google.com/p/as3corelib/
+
+	]]></see>
+</classRec>
+<method name='RemoteGameScoresProxy' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/RemoteGameScoresProxy' isStatic='false' isFinal='false' isOverride='false'  param_names='id;accessUrl;capacity' param_types='String;String;int' param_defaults='undefined;null;10' result_type='*'>
+<description><![CDATA[
+
+		Constructor.
+
+		
+
+		]]></description>
+<param><![CDATA[id A unique identifier for this set of scores and initials
+
+		]]></param>
+<param><![CDATA[accessUrl The storage webservice URL
+
+		]]></param>
+<param><![CDATA[capacity The total number of entries that may be stored (up to GameScoresProxy.ENTRIES_MAX)
+
+		]]></param>
+<param><![CDATA[isLogged Whether server messages should be trace logged
+
+		]]></param>
+</method>
+<method name='closeScoresTable' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/closeScoresTable' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+<description><![CDATA[ ]]></description>
+<inheritdoc><![CDATA[]]></inheritdoc>
+</method>
+<method name='load' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/load' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+<description><![CDATA[
+
+		Retrieve the scores from the server.
+
+		
+
+		<p>
+
+		Dispatches <code>com.pixeldroid.r_c4d3.scores.ScoreEvent.LOAD</code>
+
+		</p>
+
+		
+
+		]]></description>
+<see><![CDATA[com.pixeldroid.r_c4d3.scores.ScoreEvent
+
+		]]></see>
+</method>
+<method name='onDataSend' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/protected:onDataSend' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='flash.net:URLRequest' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onJsonError' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/protected:onJsonError' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='com.pixeldroid.r_c4d3.api.events:DataEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onJsonResponse' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/protected:onJsonResponse' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='com.pixeldroid.r_c4d3.api.events:DataEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='store' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/store' isStatic='false' isFinal='false' isOverride='true'  result_type='void'>
+<description><![CDATA[
+
+		Submit the scores to the server.
+
+		
+
+		<p>
+
+		Dispatches <code>com.pixeldroid.r_c4d3.scores.ScoreEvent.SAVE</code>
+
+		</p>
+
+		
+
+		]]></description>
+<see><![CDATA[com.pixeldroid.r_c4d3.scores.ScoreEvent
+
+		]]></see>
+</method>
+<method name='toJson' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/toJson' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[
+
+		Generates a valid JSON representation of the high scores table.
+
+		]]></description>
+</method>
+<method name='remoteUrl' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/remoteUrl/get' isStatic='false' isFinal='false' isOverride='false'  result_type='String'>
+<description><![CDATA[ ]]></description>
+<private><![CDATA[]]></private>
+</method>
+<method name='remoteUrl' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/remoteUrl/set' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='String' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+
+		Provide the high score storage webservice URL.
+
+		
+
+		]]></description>
+<param><![CDATA[value A URL to a webservice that supports <code>game</code> (string), 
+
+		<code>format ('json')</code> and <code>data</code> (string) query params
+
+		]]></param>
+</method>
+<field name='JL' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/protected:JL' type='com.pixeldroid.r_c4d3.romloader.data:JsonLoader' isStatic='false' isConst='false' >
+</field>
+<field name='_remoteUrl' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/protected:_remoteUrl' type='String' isStatic='false' isConst='false' >
+</field>
+<field name='retrieveRequest' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/protected:retrieveRequest' type='flash.net:URLRequest' isStatic='false' isConst='false' >
+</field>
+<field name='storeRequest' fullname='com.pixeldroid.r_c4d3.romloader.scores:RemoteGameScoresProxy/protected:storeRequest' type='flash.net:URLRequest' isStatic='false' isConst='false' >
+</field>
+<classRec name='ContextMenuUtil' fullname='com.pixeldroid.r_c4d3.romloader.contextmenu:ContextMenuUtil' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\contextmenu\ContextMenuUtil.as' namespace='com.pixeldroid.r_c4d3.romloader.contextmenu' access='public' baseclass='Object' isFinal='true' isDynamic='false' >
+<description><![CDATA[
+
+    Provides utility methods for manipulating the context menu
+
+    ]]></description>
+</classRec>
+<method name='addItem' fullname='com.pixeldroid.r_c4d3.romloader.contextmenu:ContextMenuUtil/addItem' isStatic='true' isFinal='false' isOverride='false'  param_names='owner;label;hideBuiltIn' param_types='flash.display:InteractiveObject;String;Boolean' param_defaults='undefined;undefined;true' result_type='flash.ui:ContextMenuItem'>
+<description><![CDATA[
+
+    	Adds a context menu item and returns a reference to it, e.g. for adding event listeners.
+
+    	
+
+    	]]></description>
+<param><![CDATA[owner The InteractiveObject instance whose context menu should be altered
+
+    	]]></param>
+<param><![CDATA[label The menu item label
+
+    	]]></param>
+<param><![CDATA[hideBuiltIn Whether to hide the suppressable built-in items. Not all built-in items can be hidden.
+
+    	]]></param>
+</method>
+<interfaceRec name='IPreloader' fullname='com.pixeldroid.r_c4d3.preloader:IPreloader' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\preloader\IPreloader.as' namespace='com.pixeldroid.r_c4d3.preloader' access='public' baseClasses='com.pixeldroid.r_c4d3.api:IDisposable' isFinal='false' isDynamic='false' >
+<metadata>
+	<Event owner='com.pixeldroid.r_c4d3.preloader:IPreloader' name='CLOSE' type='flash.events.Event' >
+<description><![CDATA[
+
+	Dispatched when the preloader is done, 
+
+	typically after it has completed some outro transition in reponse to load progress reaching 100%.
+
+	]]></description>
+<eventType><![CDATA[flash.events.Event.CLOSE
+
+	]]></eventType>
+<see><![CDATA[#progress
+
+	]]></see>
+	</Event>
+</metadata>
+<metadata>
+	<Event owner='com.pixeldroid.r_c4d3.preloader:IPreloader' name='OPEN' type='flash.events.Event' >
+<description><![CDATA[
+
+	Dispatched when the preloader is ready to receive progress updates, 
+
+	typically after it has completed some intro transition in response to <Code>open()</code>.
+
+	]]></description>
+<eventType><![CDATA[flash.events.Event.OPEN
+
+	]]></eventType>
+<see><![CDATA[#open
+
+	]]></see>
+	</Event>
+</metadata>
+</interfaceRec>
+<method name='onConfigData' fullname='com.pixeldroid.r_c4d3.preloader:IPreloader/com.pixeldroid.r_c4d3.preloader:IPreloader:onConfigData' isStatic='false' isFinal='false' isOverride='false'  param_names='configData;controlsProxy;scoresProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy;com.pixeldroid.r_c4d3.api:IGameControlsProxy;com.pixeldroid.r_c4d3.api:IGameScoresProxy' param_defaults='undefined;undefined;undefined' result_type='void'>
+</method>
+<method name='open' fullname='com.pixeldroid.r_c4d3.preloader:IPreloader/com.pixeldroid.r_c4d3.preloader:IPreloader:open' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='progress' fullname='com.pixeldroid.r_c4d3.preloader:IPreloader/com.pixeldroid.r_c4d3.preloader:IPreloader:progress/get' isStatic='false' isFinal='false' isOverride='false'  result_type='flash.events:ProgressEvent'>
+</method>
+<method name='progress' fullname='com.pixeldroid.r_c4d3.preloader:IPreloader/com.pixeldroid.r_c4d3.preloader:IPreloader:progress/set' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='flash.events:ProgressEvent' param_defaults='undefined' result_type='void'>
+</method>
+<classRec name='NullPreloader' fullname='com.pixeldroid.r_c4d3.preloader:NullPreloader' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\preloader\NullPreloader.as' namespace='com.pixeldroid.r_c4d3.preloader' access='public' baseclass='flash.display:Sprite' interfaces='com.pixeldroid.r_c4d3.preloader:IPreloader' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='NullPreloader' fullname='com.pixeldroid.r_c4d3.preloader:NullPreloader/NullPreloader' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+</method>
+<method name='initialize' fullname='com.pixeldroid.r_c4d3.preloader:NullPreloader/initialize' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+</method>
+<method name='onConfigData' fullname='com.pixeldroid.r_c4d3.preloader:NullPreloader/onConfigData' isStatic='false' isFinal='false' isOverride='false'  param_names='configProxy;controlsProxy;scoresProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy;com.pixeldroid.r_c4d3.api:IGameControlsProxy;com.pixeldroid.r_c4d3.api:IGameScoresProxy' param_defaults='undefined;undefined;undefined' result_type='void'>
+</method>
+<method name='open' fullname='com.pixeldroid.r_c4d3.preloader:NullPreloader/open' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='shutDown' fullname='com.pixeldroid.r_c4d3.preloader:NullPreloader/shutDown' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+</method>
+<method name='progress' fullname='com.pixeldroid.r_c4d3.preloader:NullPreloader/progress/get' isStatic='false' isFinal='false' isOverride='false'  result_type='flash.events:ProgressEvent'>
+</method>
+<method name='progress' fullname='com.pixeldroid.r_c4d3.preloader:NullPreloader/progress/set' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='flash.events:ProgressEvent' param_defaults='undefined' result_type='void'>
+</method>
+<field name='progressEvent' fullname='com.pixeldroid.r_c4d3.preloader:NullPreloader/protected:progressEvent' type='flash.events:ProgressEvent' isStatic='false' isConst='false' >
+</field>
+<classRec name='LoadBarPreloader' fullname='com.pixeldroid.r_c4d3.preloader:LoadBarPreloader' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\preloader\LoadBarPreloader.as' namespace='com.pixeldroid.r_c4d3.preloader' access='public' baseclass='flash.display:Sprite' interfaces='com.pixeldroid.r_c4d3.preloader:IPreloader' isFinal='false' isDynamic='false' >
+</classRec>
+<method name='LoadBarPreloader' fullname='com.pixeldroid.r_c4d3.preloader:LoadBarPreloader/LoadBarPreloader' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+</method>
+<method name='initialize' fullname='com.pixeldroid.r_c4d3.preloader:LoadBarPreloader/initialize' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+</method>
+<method name='onConfigData' fullname='com.pixeldroid.r_c4d3.preloader:LoadBarPreloader/onConfigData' isStatic='false' isFinal='false' isOverride='false'  param_names='configProxy;controlsProxy;scoresProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy;com.pixeldroid.r_c4d3.api:IGameControlsProxy;com.pixeldroid.r_c4d3.api:IGameScoresProxy' param_defaults='undefined;undefined;undefined' result_type='void'>
+</method>
+<method name='open' fullname='com.pixeldroid.r_c4d3.preloader:LoadBarPreloader/open' isStatic='false' isFinal='false' isOverride='false'  result_type='void'>
+</method>
+<method name='shutDown' fullname='com.pixeldroid.r_c4d3.preloader:LoadBarPreloader/shutDown' isStatic='false' isFinal='false' isOverride='false'  result_type='Boolean'>
+</method>
+<method name='progress' fullname='com.pixeldroid.r_c4d3.preloader:LoadBarPreloader/progress/get' isStatic='false' isFinal='false' isOverride='false'  result_type='flash.events:ProgressEvent'>
+</method>
+<method name='progress' fullname='com.pixeldroid.r_c4d3.preloader:LoadBarPreloader/progress/set' isStatic='false' isFinal='false' isOverride='false'  param_names='value' param_types='flash.events:ProgressEvent' param_defaults='undefined' result_type='void'>
+</method>
+<field name='progressBarOutline' fullname='com.pixeldroid.r_c4d3.preloader:LoadBarPreloader/protected:progressBarOutline' type='flash.display:Shape' isStatic='false' isConst='false' >
+</field>
+<field name='progressBar' fullname='com.pixeldroid.r_c4d3.preloader:LoadBarPreloader/protected:progressBar' type='flash.display:Shape' isStatic='false' isConst='false' >
+</field>
+<field name='progressEvent' fullname='com.pixeldroid.r_c4d3.preloader:LoadBarPreloader/protected:progressEvent' type='flash.events:ProgressEvent' isStatic='false' isConst='false' >
+</field>
+<classRec name='JsonLoader' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\com\pixeldroid\r_c4d3\romloader\data\JsonLoader.as' namespace='com.pixeldroid.r_c4d3.romloader.data' access='public' baseclass='flash.events:EventDispatcher' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	Creates JSON formatted http requests, monitors the load progress of the response, 
+
+	and dispatches events for response success and failure.
+
+	
+
+	Notes:
+
+	<ul>
+
+	<li>Requires <code>com.adobe.serialization.json.JSON</code></li>
+
+	</ul>
+
+	
+
+	]]></description>
+<see><![CDATA[DataEvent
+
+	]]></see>
+<see><![CDATA[http://code.google.com/p/as3corelib/
+
+	]]></see>
+<metadata>
+	<Event owner='com.pixeldroid.r_c4d3.romloader.data:JsonLoader' name='error' type='com.pixeldroid.r_c4d3.api.events.DataEvent' >
+<description><![CDATA[
+
+	Dispatched when the data retreival process has failed.
+
+	
+
+	]]></description>
+<eventType><![CDATA[com.pixeldroid.r_c4d3.data.DataEvent.ERROR
+
+	]]></eventType>
+	</Event>
+</metadata>
+<metadata>
+	<Event owner='com.pixeldroid.r_c4d3.romloader.data:JsonLoader' name='ready' type='com.pixeldroid.r_c4d3.api.events.DataEvent' >
+<description><![CDATA[
+
+	Dispatched when the data retreival process has completed.
+
+	
+
+	]]></description>
+<eventType><![CDATA[com.pixeldroid.r_c4d3.data.DataEvent.READY
+
+	]]></eventType>
+	</Event>
+</metadata>
+</classRec>
+<method name='JsonLoader' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/JsonLoader' isStatic='false' isFinal='false' isOverride='false'  param_names='request;eventsBubble;eventsCancel' param_types='flash.net:URLRequest;Boolean;Boolean' param_defaults='null;false;false' result_type='*'>
+<description><![CDATA[
+
+		Constructor.
+
+		
+
+		]]></description>
+<param><![CDATA[request An optional URLRequest to make immediately
+
+		]]></param>
+</method>
+<method name='configureListeners' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/protected:configureListeners' isStatic='false' isFinal='false' isOverride='false'  param_names='dispatcher' param_types='flash.events:IEventDispatcher' param_defaults='undefined' result_type='void'>
+</method>
+<method name='load' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/load' isStatic='false' isFinal='false' isOverride='false'  param_names='request' param_types='flash.net:URLRequest' param_defaults='undefined' result_type='void'>
+<description><![CDATA[
+
+		Attempt to load the provided URLRequest
+
+		
+
+		]]></description>
+<param><![CDATA[request URLRequest to make
+
+		]]></param>
+</method>
+<method name='onComplete' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/protected:onComplete' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:Event' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onHttpStatus' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/protected:onHttpStatus' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:HTTPStatusEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onIoError' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/protected:onIoError' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:IOErrorEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onOpen' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/protected:onOpen' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:Event' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onProgress' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/protected:onProgress' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:ProgressEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='onSecurityError' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/protected:onSecurityError' isStatic='false' isFinal='false' isOverride='false'  param_names='e' param_types='flash.events:SecurityErrorEvent' param_defaults='undefined' result_type='void'>
+</method>
+<method name='bytesLoaded' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/bytesLoaded/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[
+
+		Request the number of bytes loaded.
+
+		]]></description>
+</method>
+<method name='bytesTotal' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/bytesTotal/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[
+
+		Request the total number of bytes to load.
+
+		]]></description>
+</method>
+<method name='percent' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/percent/get' isStatic='false' isFinal='false' isOverride='false'  result_type='uint'>
+<description><![CDATA[
+
+		Request the load progress percent.
+
+		Results are (0 - 100).
+
+		]]></description>
+</method>
+<field name='UL' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/protected:UL' type='flash.net:URLLoader' isStatic='false' isConst='false' >
+</field>
+<field name='_bytesLoaded' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/protected:_bytesLoaded' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='_bytesTotal' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/protected:_bytesTotal' type='uint' isStatic='false' isConst='false' >
+</field>
+<field name='dataError' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/protected:dataError' type='com.pixeldroid.r_c4d3.api.events:DataEvent' isStatic='false' isConst='false' >
+</field>
+<field name='dataReady' fullname='com.pixeldroid.r_c4d3.romloader.data:JsonLoader/protected:dataReady' type='com.pixeldroid.r_c4d3.api.events:DataEvent' isStatic='false' isConst='false' >
+</field>
+<classRec name='DesktopRomLoader' fullname='DesktopRomLoader' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\DesktopRomLoader.as' namespace='' access='public' baseclass='com.pixeldroid.r_c4d3.romloader:RomLoader' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	Loads a valid IGameRom SWF and provides it access to 
+
+	a keyboard game controls proxy and a local high scores proxy.
+
+	
+
+	Notes:<ul>
+
+	<li><code>romloader-config.xml</code> can declare the custom property <code>fullScreen</code> with boolean value <code>true</true> to launch game in fullscreen mode</li>
+
+	<li>Requires <code>com.adobe.serialization.json.JSON</code></li>
+
+	</ul>
+
+
+
+	]]></description>
+<see><![CDATA[ConfigDataProxy
+
+	]]></see>
+<see><![CDATA[RomLoader
+
+	]]></see>
+<see><![CDATA[com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy
+
+	]]></see>
+<see><![CDATA[com.pixeldroid.r_c4d3.scores.LocalGameScoresProxy
+
+	]]></see>
+</classRec>
+<method name='DesktopRomLoader' fullname='DesktopRomLoader/DesktopRomLoader' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+<description><![CDATA[
+
+		Constructor.
+
+		
+
+		<p>
+
+		Creates a rom loader designed for local play and scores storage.
+
+		</p>
+
+		]]></description>
+</method>
+<method name='createControlsProxy' fullname='DesktopRomLoader/protected:createControlsProxy' isStatic='false' isFinal='false' isOverride='true'  param_names='configProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.api:IGameControlsProxy'>
+</method>
+<method name='createPreloader' fullname='DesktopRomLoader/protected:createPreloader' isStatic='false' isFinal='false' isOverride='true'  result_type='com.pixeldroid.r_c4d3.preloader:IPreloader'>
+</method>
+<method name='createScoresProxy' fullname='DesktopRomLoader/protected:createScoresProxy' isStatic='false' isFinal='false' isOverride='true'  param_names='configProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.api:IGameScoresProxy'>
+</method>
+<method name='finalizeLoad' fullname='DesktopRomLoader/protected:finalizeLoad' isStatic='false' isFinal='false' isOverride='true'  param_names='configProxy;controlsProxy;highScoresProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy;com.pixeldroid.r_c4d3.api:IGameControlsProxy;com.pixeldroid.r_c4d3.api:IGameScoresProxy' param_defaults='undefined;undefined;undefined' result_type='void'>
+</method>
+<method name='productVersion' fullname='DesktopRomLoader/protected:productVersion/get' isStatic='false' isFinal='false' isOverride='true'  result_type='String'>
+</method>
+<classRec name='WebRomLoader' fullname='WebRomLoader' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\WebRomLoader.as' namespace='' access='public' baseclass='com.pixeldroid.r_c4d3.romloader:RomLoader' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	Loads a valid IGameRom SWF and provides it access to 
+
+	a keyboard game controls proxy and a local high scores proxy.
+
+
+
+	]]></description>
+<see><![CDATA[RomLoader
+
+	]]></see>
+<see><![CDATA[com.pixeldroid.r_c4d3.proxies.KeyboardGameControlsProxy
+
+	]]></see>
+<see><![CDATA[com.pixeldroid.r_c4d3.scores.LocalGameScoresProxy
+
+	]]></see>
+</classRec>
+<method name='WebRomLoader' fullname='WebRomLoader/WebRomLoader' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+<description><![CDATA[
+
+		Constructor.
+
+		
+
+		<p>
+
+		Creates a rom loader designed for online play and local scores storage.
+
+		</p>
+
+		]]></description>
+</method>
+<method name='createControlsProxy' fullname='WebRomLoader/protected:createControlsProxy' isStatic='false' isFinal='false' isOverride='true'  param_names='configProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.api:IGameControlsProxy'>
+<description><![CDATA[ 
+
+			Provides the game controls proxy instance.
+
+			Broken out for easy override.
+
+		]]></description>
+</method>
+<method name='createPreloader' fullname='WebRomLoader/protected:createPreloader' isStatic='false' isFinal='false' isOverride='true'  result_type='com.pixeldroid.r_c4d3.preloader:IPreloader'>
+<description><![CDATA[ 
+
+			Provides the IPreloader instance to display during load.
+
+			Broken out for easy override.
+
+		]]></description>
+</method>
+<method name='createScoresProxy' fullname='WebRomLoader/protected:createScoresProxy' isStatic='false' isFinal='false' isOverride='true'  param_names='configProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.api:IGameScoresProxy'>
+<description><![CDATA[ 
+
+			Provides the game scores proxy instance.
+
+			Broken out for easy override.
+
+		]]></description>
+</method>
+<method name='productVersion' fullname='WebRomLoader/protected:productVersion/get' isStatic='false' isFinal='false' isOverride='true'  result_type='String'>
+</method>
+<classRec name='RC4D3RomLoader' fullname='RC4D3RomLoader' sourcefile='C:\eclipseworkspace\OSS\r-c4d3\trunk\romloader-as3\src\main\actionscript\RC4D3RomLoader.as' namespace='' access='public' baseclass='com.pixeldroid.r_c4d3.romloader:RomLoader' isFinal='false' isDynamic='false' >
+<description><![CDATA[
+
+	Loads a valid IGameRom SWF and provides it access to 
+
+	an RC4D3 game controls proxy and a remote high scores proxy.
+
+	
+
+	Notes:<ul>
+
+	<li><code>romloader-config.xml</code> must declare the custom property <code>scoreServer</code>, defining the score server url</li>
+
+	</ul>
+
+
+
+	]]></description>
+<see><![CDATA[ConfigDataProxy
+
+	]]></see>
+<see><![CDATA[RomLoader
+
+	]]></see>
+<see><![CDATA[com.pixeldroid.r_c4d3.proxies.RC4D3GameControlsProxy
+
+	]]></see>
+<see><![CDATA[com.pixeldroid.r_c4d3.scores.RemoteGameScoresProxy
+
+	]]></see>
+</classRec>
+<method name='RC4D3RomLoader' fullname='RC4D3RomLoader/RC4D3RomLoader' isStatic='false' isFinal='false' isOverride='false'  result_type='*'>
+<description><![CDATA[
+
+		Constructor.
+
+		
+
+		<p>
+
+		Creates a rom loader designed to interpret keyboard events as R_C4D3 game control events.
+
+		</p>
+
+		]]></description>
+</method>
+<method name='createControlsProxy' fullname='RC4D3RomLoader/protected:createControlsProxy' isStatic='false' isFinal='false' isOverride='true'  param_names='configProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.api:IGameControlsProxy'>
+<description><![CDATA[ 
+
+			Provides the game controls proxy instance.
+
+			Broken out for easy override.
+
+		]]></description>
+</method>
+<method name='createPreloader' fullname='RC4D3RomLoader/protected:createPreloader' isStatic='false' isFinal='false' isOverride='true'  result_type='com.pixeldroid.r_c4d3.preloader:IPreloader'>
+<description><![CDATA[ 
+
+			Provides the IPreloader instance to display during load.
+
+			Broken out for easy override.
+
+		]]></description>
+</method>
+<method name='createScoresProxy' fullname='RC4D3RomLoader/protected:createScoresProxy' isStatic='false' isFinal='false' isOverride='true'  param_names='configProxy' param_types='com.pixeldroid.r_c4d3.api:IGameConfigProxy' param_defaults='undefined' result_type='com.pixeldroid.r_c4d3.api:IGameScoresProxy'>
+<description><![CDATA[ 
+
+			Provides the game scores proxy instance.
+
+			Broken out for easy override.
+
+		]]></description>
+</method>
+<method name='productVersion' fullname='RC4D3RomLoader/protected:productVersion/get' isStatic='false' isFinal='false' isOverride='true'  result_type='String'>
+</method>
+</asdoc>
