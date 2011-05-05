@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3.gamerom-api-as3" default="-usage" basedir="./">
+
+<description>
+Tasks to build and package the r-c4d3 as3 gamerom api.
+</description>
+	
+	<property name="dir.trunk" value=".."/>
+	<import file="../build_init.xml"/>
+	
+	<property name="semver.major" value="0"/>
+	<property name="semver.minor" value="0"/>
+	
+	<property name="dir.source" value="${basedir}/src/main/actionscript"/>
+	<property name="dir.config" value="${basedir}/src/main/config"/>
+	<property name="dir.target" value="${basedir}/target"/>
+	
+	<property name="dir.framework.swc" value="${dir.trunk}/framework-as3/src/main/swc"/>
+	<property name="dir.romloader.swc" value="${dir.trunk}/romloader-as3/src/main/swc"/>
+	
+	<property name="dir.documentation" value="${dir.trunk}/_documentation/gamerom-api"/>
+	<property name="dir.releases" value="${dir.trunk}/_releases"/>
+	
+	
+    <target name="build" depends="compile, document, release" 
+		description="&gt; this is the main task: compile, document, release"/>
+	
+	<target name="clean" description="remove the contents of ${dir.target}">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${dir.target}" includes="**/*"/>
+		</delete>
+	</target>
+	
+	<target name="build-number">
+		<increment-build />
+	</target>
+	
+    <target name="version" description="sets semver and compile date properties">
+		<semver project="gameromapi" major="${semver.major}" minor="${semver.minor}" />
+		<!--
+		strings must be double-qouted, see:
+		http://blogs.adobe.com/flexdoc/files/flexdoc/conditionalcompilation.pdf
+		note: can use &quot;
+		-->
+		<property name="semver.gameromapi.quoted" value="'${semver.gameromapi}'" />
+		<property name="version.year.quoted" value="'${date.year}'" />
+		<property name="version.month.quoted" value="'${date.month}'" />
+		<property name="version.day.quoted" value="'${date.day}'" />
+		<property name="version.hour.quoted" value="'${date.hour}'" />
+		<property name="version.minute.quoted" value="'${date.minute}'" />
+		<property name="version.second.quoted" value="'${date.second}'" />
+		<echo message="${ant.project.name} v${semver.gameromapi}" />
+	</target>
+	
+    <target name="compile" depends="clean, build-number, version" description="compile the swc">
+    	<exec executable="${flex.compc}" failonerror="true">
+			<arg line='-output="${dir.target}/${ant.project.name}.swc"'/>
+			<arg line='-load-config+="${dir.config}/compc-config.xml"'/>
+			<arg line='-define+=VERSION::semver,"${semver.gameromapi.quoted}"'/>
+			<arg line='-define+=VERSION::year,"${version.year.quoted}"'/>
+			<arg line='-define+=VERSION::month,"${version.month.quoted}"'/>
+			<arg line='-define+=VERSION::day,"${version.day.quoted}"'/>
+			<arg line='-define+=VERSION::hour,"${version.hour.quoted}"'/>
+			<arg line='-define+=VERSION::minute,"${version.minute.quoted}"'/>
+			<arg line='-define+=VERSION::second,"${version.second.quoted}"'/>
+		<!--
+			<arg line='-load-config+="${dir.config}/version-config.xml"'/>
+		-->
+		</exec>
+	</target>
+	
+    <target name="document" depends="clean, version" description="create asdoc for the framework api">
+		<mkdir dir="${dir.target}/asdoc"/>
+    	<exec executable="${flex.asdoc}">
+			<arg line="-output='${dir.target}/asdoc'"/>
+			<arg line="-footer='Copyleft ${date.year} Pixeldroid'"/>
+			<arg line="-load-config+='${dir.config}/asdoc-config.xml'"/>
+			<arg line='-define+=VERSION::semver,"${semver.gameromapi.quoted}"'/>
+			<arg line='-define+=VERSION::year,"${version.year.quoted}"'/>
+			<arg line='-define+=VERSION::month,"${version.month.quoted}"'/>
+			<arg line='-define+=VERSION::day,"${version.day.quoted}"'/>
+			<arg line='-define+=VERSION::hour,"${version.hour.quoted}"'/>
+			<arg line='-define+=VERSION::minute,"${version.minute.quoted}"'/>
+			<arg line='-define+=VERSION::second,"${version.second.quoted}"'/>
+		<!--
+			<arg line='-load-config+="${dir.config}/version-config.xml"'/>
+		-->
+		</exec>
+		<zip destfile="${dir.target}/${ant.project.name}.zip" basedir="${dir.target}/asdoc"/>
+		<copy todir="${dir.documentation}" failonerror="false">
+			<fileset dir="${dir.target}/asdoc">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="release" description="copy zips to ${dir.releases} and dependent projects">
+		<copy todir="${dir.releases}" failonerror="false">
+			<fileset dir="${dir.target}">
+				<include name="**/*.swc"/>
+				<include name="**/*.zip"/>
+			</fileset>
+		</copy>
+		<copy file="${dir.target}/${ant.project.name}.swc" todir="${dir.framework.swc}"/>
+		<copy file="${dir.target}/${ant.project.name}.swc" todir="${dir.romloader.swc}"/>
+	</target>
+
+</project>
+
