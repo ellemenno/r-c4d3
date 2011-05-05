@@ -1,20 +1,18 @@
 
-package preloader
+package com.pixeldroid.r_c4d3.preloader
 {
 
 	import flash.events.ProgressEvent;
 	
-	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
-	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
-
-	import ConfigDataProxy;
+	import com.pixeldroid.r_c4d3.api.IDisposable;
+	import com.pixeldroid.r_c4d3.api.IGameConfigProxy;
+	import com.pixeldroid.r_c4d3.api.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.api.IGameScoresProxy;
 
 	
 	/**
 	Dispatched when the preloader is ready to receive progress updates, 
-	typically after it has completed some intro transition in response to <Code>open()</code>.
+	typically after it has completed some intro transition in response to <code>open()</code>.
 	@eventType flash.events.Event.OPEN
 	@see #open
 	*/

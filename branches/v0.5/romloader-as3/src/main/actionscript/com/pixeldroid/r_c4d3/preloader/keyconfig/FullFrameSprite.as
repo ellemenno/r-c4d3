@@ -1,5 +1,5 @@
 
-package preloader.keyconfig
+package com.pixeldroid.r_c4d3.preloader.keyconfig
 {
 	import flash.display.DisplayObject;
 	import flash.display.InteractiveObject;
@@ -11,7 +11,7 @@ package preloader.keyconfig
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	
-	import preloader.keyconfig.ICanFocus;
+	import com.pixeldroid.r_c4d3.preloader.keyconfig.ICanFocus;
 
 	
 	public class FullFrameSprite extends Sprite

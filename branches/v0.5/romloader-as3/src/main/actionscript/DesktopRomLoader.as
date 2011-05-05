@@ -2,20 +2,17 @@
 package 
 {
 
-	import flash.display.DisplayObject;
-	import flash.display.StageDisplayState;
-	import flash.events.Event;
+	import com.pixeldroid.r_c4d3.api.IGameConfigProxy;
+	import com.pixeldroid.r_c4d3.api.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.api.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.preloader.IPreloader;
+	import com.pixeldroid.r_c4d3.preloader.LoadBarPreloader;
+	import com.pixeldroid.r_c4d3.romloader.Version;
+	import com.pixeldroid.r_c4d3.romloader.controls.KeyboardGameControlsProxy;
+	import com.pixeldroid.r_c4d3.romloader.scores.LocalGameScoresProxy;
 	
-	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
-	import com.pixeldroid.r_c4d3.controls.KeyboardGameControlsProxy;
-	import com.pixeldroid.r_c4d3.scores.LocalGameScoresProxy;
-
-	import ConfigDataProxy;
-	import RomLoader;
-	import preloader.IPreloader;
-	import preloader.LoadBarPreloader;
+	import flash.display.StageDisplayState;
+	import com.pixeldroid.r_c4d3.romloader.RomLoader;
 	
 	
 	
@@ -24,7 +21,7 @@ package
 	a keyboard game controls proxy and a local high scores proxy.
 	
 	Notes:<ul>
-	<li><code>romloader-config.xml</code> can declare the custom property <code>fullScreen</code> with boolean value <code>true</true> to launch game in fullscreen mode</li>
+	<li><code>romloader-config.xml</code> can declare the custom property <code>fullScreen</code> with boolean value <code>true</code> to launch game in fullscreen mode</li>
 	<li>Requires <code>com.adobe.serialization.json.JSON</code></li>
 	</ul>
 
@@ -84,7 +81,7 @@ package
 		
 		override protected function get productVersion():String
 		{
-			return "R-C4D3 Desktop Rom Loader v" +semver;
+			return "R-C4D3 Desktop Rom Loader v" +Version.semver;
 		}
 
 

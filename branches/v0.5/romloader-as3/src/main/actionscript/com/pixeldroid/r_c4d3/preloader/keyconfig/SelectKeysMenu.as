@@ -1,9 +1,12 @@
 
-package preloader.keyconfig
+package com.pixeldroid.r_c4d3.preloader.keyconfig
 {
 	// TODO: What about setups where some players don't have controls?
 	
-	import flash.display.Shape;
+	import com.pixeldroid.r_c4d3.api.IJoystick;
+	import com.pixeldroid.r_c4d3.romloader.controls.KeyLabels;
+	import com.pixeldroid.r_c4d3.romloader.controls.KeyboardGameControlsProxy;
+	
 	import flash.display.Stage;
 	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
@@ -12,14 +15,6 @@ package preloader.keyconfig
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
-	import flash.utils.ByteArray;
-	
-	import com.pixeldroid.r_c4d3.interfaces.IJoystick;
-	import com.pixeldroid.r_c4d3.controls.KeyboardGameControlsProxy;
-	import com.pixeldroid.r_c4d3.controls.KeyLabels;
-	
-	import preloader.keyconfig.Button;
-	import preloader.keyconfig.FullFrameSprite;
 	
 	
 	public class SelectKeysMenu extends FullFrameSprite
@@ -861,11 +856,11 @@ package preloader.keyconfig
 	}
 }
 
+import com.pixeldroid.r_c4d3.preloader.keyconfig.ICanFocus;
+
 import flash.display.Stage;
 import flash.events.KeyboardEvent;
 import flash.text.TextField;
-
-import preloader.keyconfig.ICanFocus;
 	
 /*private*/ class KeyField extends TextField implements ICanFocus
 {

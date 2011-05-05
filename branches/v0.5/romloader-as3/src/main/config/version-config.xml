@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flex-config>
+	<compiler>
+		<!-- compiler.define: define a global AS3 conditional compilation definition-->
+		<!-- e.g. -define=CONFIG::debugging,true or -define+=CONFIG::debugging,true (to append to existing definitions in flex-config.xml)-->
+		<define append="true">
+			<name>VERSION::semver</name>
+			<value>@@semver.framework.quoted@@</value>
+		</define>
+		<define append="true">
+			<name>VERSION::year</name>
+			<value>@@version.year.quoted@@</value>
+		</define>
+		<define append="true">
+			<name>VERSION::month</name>
+			<value>@@version.month.quoted@@</value>
+		</define>
+		<define append="true">
+			<name>VERSION::day</name>
+			<value>@@version.day.quoted@@</value>
+		</define>
+		<define append="true">
+			<name>VERSION::hour</name>
+			<value>@@version.hour.quoted@@</value>
+		</define>
+		<define append="true">
+			<name>VERSION::minute</name>
+			<value>@@version.minute.quoted@@</value>
+		</define>
+		<define append="true">
+			<name>VERSION::second</name>
+			<value>@@version.second.quoted@@</value>
+		</define>
+	</compiler>
+</flex-config>

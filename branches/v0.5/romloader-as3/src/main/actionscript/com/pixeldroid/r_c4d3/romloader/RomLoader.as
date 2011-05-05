@@ -1,7 +1,17 @@
 
-package 
+package com.pixeldroid.r_c4d3.romloader 
 {
 
+	import com.pixeldroid.r_c4d3.api.HaxeSideDoor;
+	import com.pixeldroid.r_c4d3.api.IGameConfigProxy;
+	import com.pixeldroid.r_c4d3.api.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.api.IGameRom;
+	import com.pixeldroid.r_c4d3.api.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.preloader.IPreloader;
+	import com.pixeldroid.r_c4d3.preloader.NullPreloader;
+	import com.pixeldroid.r_c4d3.romloader.ConfigDataProxy;
+	import com.pixeldroid.r_c4d3.romloader.contextmenu.ContextMenuUtil;
+	
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.display.Sprite;
@@ -12,19 +22,6 @@ package
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.getQualifiedClassName;
-	
-	import com.pixeldroid.r_c4d3.Version;
-	import com.pixeldroid.r_c4d3.interfaces.HaxeSideDoor;
-	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
-	import com.pixeldroid.r_c4d3.interfaces.IGameRom;
-	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
-	import com.pixeldroid.r_c4d3.tools.contextmenu.ContextMenuUtil;
-	
-	import ConfigDataProxy;
-	import preloader.IPreloader;
-	import preloader.NullPreloader;
 
 	
 	
@@ -38,9 +35,6 @@ package
 	
 	<p>
 	Subclasses can overide the protected proxy creation methods to supply various implementations:
-	@see #createConfigProxy
-	@see #createControlsProxy
-	@see #createScoresProxy
 	</p>
 	
 	<p>
@@ -49,7 +43,6 @@ package
 	named <code>romloader-config.xml</code> (subclasses can override the 
 	configFile getter to expect a different position or get the url from 
 	flashVars). See ConfigDataProxy for the xml format expected.
-	@see ConfigDataProxy
 	</p>
 	
 	<p>Note: <i>
@@ -57,11 +50,14 @@ package
 	HaXe users must use the HaxeSideDoor to declare IGameRom compliance.
 	</i></p>
 	
-	@see com.pixeldroid.interfaces.IGameConfigProxy
-	@see com.pixeldroid.interfaces.IGameControlsProxy
-	@see com.pixeldroid.interfaces.IGameScoresProxy
+	@see #createConfigProxy
+	@see #createControlsProxy
+	@see #createScoresProxy
 	@see ConfigDataProxy
-	@see HaxeSideDoor
+	@see com.pixeldroid.api.IGameConfigProxy
+	@see com.pixeldroid.api.IGameControlsProxy
+	@see com.pixeldroid.api.IGameScoresProxy
+	@see com.pixeldroid.api.HaxeSideDoor
 	*/
 	public class RomLoader extends Sprite
 	{
@@ -80,8 +76,6 @@ package
 		protected var xmlBytesTotal:int;
 		protected var xmlLoaded:Boolean;
 		protected var splashDone:Boolean;
-		
-		protected const semver:String = SEMVER::v; //command line: -define+=SEMVER::v,"'major.minor.patch'"
 
 		
 		/**
@@ -382,7 +376,6 @@ package
 		{
 			ContextMenuUtil.addItem(this, productVersion);
 			ContextMenuUtil.addItem(this, copyLeft);
-			ContextMenuUtil.addItem(this, frameworkVersion);
 		}
 		
 		/**
@@ -390,17 +383,12 @@ package
 		*/
 		protected function get productVersion():String
 		{
-			return "R-C4D3 Rom Loader v" +semver;
+			return "R-C4D3 Rom Loader v" +Version.semver;
 		}
 		
 		private function get copyLeft():String
 		{
 			return "CopyLeft "+Version.year +" Pixeldroid";
-		}
-		
-		private function get frameworkVersion():String
-		{
-			return "(framework v" +Version.semver +")";
 		}
 		
 

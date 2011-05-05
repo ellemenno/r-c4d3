@@ -2,17 +2,16 @@
 package 
 {
 
-	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
-	import com.pixeldroid.r_c4d3.controls.RC4D3GameControlsProxy;
-	import com.pixeldroid.r_c4d3.scores.GameScoresProxy;
-	import com.pixeldroid.r_c4d3.scores.RemoteGameScoresProxy;
-
-	import ConfigDataProxy;
-	import RomLoader;
-	import preloader.IPreloader;
-	import preloader.LoadBarPreloader;
+	import com.pixeldroid.r_c4d3.api.IGameConfigProxy;
+	import com.pixeldroid.r_c4d3.api.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.api.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.preloader.IPreloader;
+	import com.pixeldroid.r_c4d3.preloader.LoadBarPreloader;
+	import com.pixeldroid.r_c4d3.romloader.Version;
+	import com.pixeldroid.r_c4d3.romloader.controls.RC4D3GameControlsProxy;
+	import com.pixeldroid.r_c4d3.romloader.scores.GameScoresProxy;
+	import com.pixeldroid.r_c4d3.romloader.scores.RemoteGameScoresProxy;
+	import com.pixeldroid.r_c4d3.romloader.RomLoader;
 	
 	
 	
@@ -57,8 +56,7 @@ package
 			return new RemoteGameScoresProxy(
 				configProxy.gameId, 
 				configProxy.getPropertyValue("scoreServer"),
-				GameScoresProxy.ENTRIES_MAX,
-				configProxy.loggingEnabled
+				GameScoresProxy.ENTRIES_MAX
 			);
 		}
 		
@@ -70,7 +68,7 @@ package
 		
 		override protected function get productVersion():String
 		{
-			return "R-C4D3 Cabinet Rom Loader v" +semver;
+			return "R-C4D3 Cabinet Rom Loader v" +Version.semver;
 		}
 
 
