@@ -12,8 +12,9 @@ Tasks to build and package the r-c4d3 romloaders.
 	<property name="semver.major" value="0"/>
 	<property name="semver.minor" value="1"/>
 	
-	<property name="dir.source" location="${basedir}/source"/>
-	<property name="dir.config" location="${basedir}/config"/>
+	<property name="dir.source" location="${basedir}/src/main/actionscript"/>
+	<property name="dir.config" location="${basedir}/src/main/config"/>
+	<property name="dir.resources" location="${basedir}/src/main/resources"/>
 	<property name="dir.target" location="${basedir}/target"/>
 	
 	<property name="dir.documentation" location="${dir.trunk}/_documentation/romloader-api"/>
@@ -37,8 +38,13 @@ Tasks to build and package the r-c4d3 romloaders.
     <target name="version" description="sets semver property">
 		<semver project="romloader" major="${semver.major}" minor="${semver.minor}" />
 		<property name="semver.romloader.quoted" value="'${semver.romloader}'" />
-		<property name="semver.romloader.define" value='-define+=SEMVER::v,"${semver.romloader.quoted}"' />
-		<echo message="${ant.project.name} v${semver.framework}" />
+		<property name="version.year.quoted" value="'${date.year}'" />
+		<property name="version.month.quoted" value="'${date.month}'" />
+		<property name="version.day.quoted" value="'${date.day}'" />
+		<property name="version.hour.quoted" value="'${date.hour}'" />
+		<property name="version.minute.quoted" value="'${date.minute}'" />
+		<property name="version.second.quoted" value="'${date.second}'" />
+		<echo message="${ant.project.name} v${semver.romloader}" />
 	</target>
 	
     <target name="compile" depends="compile-desktop, compile-web, compile-rc4d3" 
@@ -46,31 +52,58 @@ Tasks to build and package the r-c4d3 romloaders.
 	
     <target name="compile-desktop" depends="clean, build-number, version" description="compile the desktop romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="'${dir.source}/actionscript/DesktopRomLoader.as'"/>
+			<arg line="'${dir.source}/DesktopRomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-desktop.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_desktop.xml'"/>
 			<arg line="-static-link-runtime-shared-libraries='true'"/>
-			<arg line="${semver.romloader.define}"/>
+			<arg line='-define+=VERSION::semver,"${semver.romloader.quoted}"'/>
+			<arg line='-define+=VERSION::year,"${version.year.quoted}"'/>
+			<arg line='-define+=VERSION::month,"${version.month.quoted}"'/>
+			<arg line='-define+=VERSION::day,"${version.day.quoted}"'/>
+			<arg line='-define+=VERSION::hour,"${version.hour.quoted}"'/>
+			<arg line='-define+=VERSION::minute,"${version.minute.quoted}"'/>
+			<arg line='-define+=VERSION::second,"${version.second.quoted}"'/>
+		<!--
+			<arg line='-load-config+="${dir.config}/version-config.xml"'/>
+		-->
 		</exec>
 	</target>
 	
     <target name="compile-web" depends="clean, build-number, version" description="compile the web-based romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="'${dir.source}/actionscript/WebRomLoader.as'"/>
+			<arg line="'${dir.source}/WebRomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-web.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_web.xml'"/>
 			<arg line="-static-link-runtime-shared-libraries='true'"/>
-			<arg line="${semver.romloader.define}"/>
+			<arg line='-define+=VERSION::semver,"${semver.romloader.quoted}"'/>
+			<arg line='-define+=VERSION::year,"${version.year.quoted}"'/>
+			<arg line='-define+=VERSION::month,"${version.month.quoted}"'/>
+			<arg line='-define+=VERSION::day,"${version.day.quoted}"'/>
+			<arg line='-define+=VERSION::hour,"${version.hour.quoted}"'/>
+			<arg line='-define+=VERSION::minute,"${version.minute.quoted}"'/>
+			<arg line='-define+=VERSION::second,"${version.second.quoted}"'/>
+		<!--
+			<arg line='-load-config+="${dir.config}/version-config.xml"'/>
+		-->
 		</exec>
 	</target>
 	
     <target name="compile-rc4d3" depends="clean, build-number, version" description="compile the web-based r-c4d3 romloader">
     	<exec executable="${flex.mxmlc}" failonerror="true">
-			<arg line="'${dir.source}/actionscript/RC4D3RomLoader.as'"/>
+			<arg line="'${dir.source}/RC4D3RomLoader.as'"/>
 			<arg line="-output='${dir.target}/romloader-rc4d3.swf'"/>
 			<arg line="-load-config+='${dir.config}/mxmlc-config_web.xml'"/>
 			<arg line="-static-link-runtime-shared-libraries='true'"/>
-			<arg line="${semver.romloader.define}"/>
+			<arg line='-define+=VERSION::semver,"${semver.romloader.quoted}"'/>
+			<arg line='-define+=VERSION::year,"${version.year.quoted}"'/>
+			<arg line='-define+=VERSION::month,"${version.month.quoted}"'/>
+			<arg line='-define+=VERSION::day,"${version.day.quoted}"'/>
+			<arg line='-define+=VERSION::hour,"${version.hour.quoted}"'/>
+			<arg line='-define+=VERSION::minute,"${version.minute.quoted}"'/>
+			<arg line='-define+=VERSION::second,"${version.second.quoted}"'/>
+		<!--
+			<arg line='-load-config+="${dir.config}/version-config.xml"'/>
+		-->
 		</exec>
 	</target>
 	
@@ -83,7 +116,16 @@ Tasks to build and package the r-c4d3 romloaders.
 			<arg line="-output='${dir.target}/asdoc'"/>
 			<arg line="-footer='Copyleft ${date.year} Pixeldroid'"/>
 			<arg line="-load-config+='${dir.config}/asdoc-config.xml'"/>
-			<arg line="${semver.romloader.define}"/>
+			<arg line='-define+=VERSION::semver,"${semver.romloader.quoted}"'/>
+			<arg line='-define+=VERSION::year,"${version.year.quoted}"'/>
+			<arg line='-define+=VERSION::month,"${version.month.quoted}"'/>
+			<arg line='-define+=VERSION::day,"${version.day.quoted}"'/>
+			<arg line='-define+=VERSION::hour,"${version.hour.quoted}"'/>
+			<arg line='-define+=VERSION::minute,"${version.minute.quoted}"'/>
+			<arg line='-define+=VERSION::second,"${version.second.quoted}"'/>
+		<!--
+			<arg line='-load-config+="${dir.config}/version-config.xml"'/>
+		-->
 		</exec>
 		<zip destfile="${dir.target}/romloader-api.zip" basedir="${dir.target}/asdoc"/>
 		<copy todir="${dir.documentation}" failonerror="false">
@@ -98,25 +140,25 @@ Tasks to build and package the r-c4d3 romloaders.
 	
     <target name="package-desktop" description="collect the desktop romloader and dependencies into a zip file">
 		<mkdir dir="${dir.target}/temp-desktop"/>
-		<copy file="${dir.source}/resources/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop/romloader-config.xml"/>
-		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-desktop"/>
+		<copy file="${dir.resources}/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop/romloader-config.xml"/>
+		<copy file="${dir.resources}/rom.swf" todir="${dir.target}/temp-desktop"/>
 		<zip destfile="${dir.target}/romloader-desktop.zip" basedir="${dir.target}/temp-desktop"/>
 	</target>
 	
     <target name="package-web" description="collect the web-based romloader and dependencies into a zip file">
 		<mkdir dir="${dir.target}/temp-web"/>
-		<copy file="${dir.source}/resources/romloader-config-web.xml" tofile="${dir.target}/temp-web/romloader-config.xml"/>
-		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-web"/>
-		<copy file="${dir.source}/resources/index-web.html" todir="${dir.target}/temp-web"/>
+		<copy file="${dir.resources}/romloader-config-web.xml" tofile="${dir.target}/temp-web/romloader-config.xml"/>
+		<copy file="${dir.resources}/rom.swf" todir="${dir.target}/temp-web"/>
+		<copy file="${dir.resources}/index-web.html" todir="${dir.target}/temp-web"/>
 		<copy file="${dir.target}/romloader-web.swf" todir="${dir.target}/temp-web"/>
 		<zip destfile="${dir.target}/romloader-web.zip" basedir="${dir.target}/temp-web"/>
 	</target>
 	
     <target name="package-rc4d3" description="collect the web-based r-c4d3 romloader and dependencies into a zip file">
 		<mkdir dir="${dir.target}/temp-rc4d3"/>
-		<copy file="${dir.source}/resources/romloader-config-web.xml" tofile="${dir.target}/temp-rc4d3/romloader-config.xml"/>
-		<copy file="${dir.source}/resources/rom.swf" todir="${dir.target}/temp-rc4d3"/>
-		<copy file="${dir.source}/resources/index-rc4d3.html" todir="${dir.target}/temp-rc4d3"/>
+		<copy file="${dir.resources}/romloader-config-web.xml" tofile="${dir.target}/temp-rc4d3/romloader-config.xml"/>
+		<copy file="${dir.resources}/rom.swf" todir="${dir.target}/temp-rc4d3"/>
+		<copy file="${dir.resources}/index-rc4d3.html" todir="${dir.target}/temp-rc4d3"/>
 		<copy file="${dir.target}/romloader-rc4d3.swf" todir="${dir.target}/temp-rc4d3"/>
 		<zip destfile="${dir.target}/romloader-rc4d3.zip" basedir="${dir.target}/temp-rc4d3"/>
 	</target>
