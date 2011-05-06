@@ -12,12 +12,15 @@ Tasks to build and package the r-c4d3 as3 framework.
 	<property name="semver.major" value="0"/>
 	<property name="semver.minor" value="4"/>
 	
-	<property name="dir.source" value="${basedir}/src/main/actionscript"/>
-	<property name="dir.config" value="${basedir}/src/main/config"/>
-	<property name="dir.target" value="${basedir}/target"/>
+	<property name="dir.source" location="${basedir}/src/main/actionscript"/>
+	<property name="dir.config" location="${basedir}/src/main/config"/>
+	<property name="dir.target" location="${basedir}/target"/>
 	
-	<property name="dir.documentation" value="${dir.trunk}/_documentation/framework-api"/>
-	<property name="dir.releases" value="${dir.trunk}/_releases"/>
+	<property name="dir.documentation" location="${dir.trunk}/_documentation/framework"/>
+	<property name="dir.releases" location="${dir.trunk}/_releases"/>
+	
+	<property name="file.docs" location="${dir.target}/${ant.project.name}.docs.zip"/>
+	<property name="file.swc" location="${dir.target}/${ant.project.name}.swc"/>
 	
 	
     <target name="build" depends="compile, document, release" 
@@ -52,7 +55,7 @@ Tasks to build and package the r-c4d3 as3 framework.
 	
     <target name="compile" depends="clean, build-number, version" description="compile the swc">
     	<exec executable="${flex.compc}" failonerror="true">
-			<arg line='-output="${dir.target}/${ant.project.name}.swc"'/>
+			<arg line='-output="${file.swc}"'/>
 			<arg line='-load-config+="${dir.config}/compc-config.xml"'/>
 			<arg line='-define+=VERSION::semver,"${semver.framework.quoted}"'/>
 			<arg line='-define+=VERSION::year,"${version.year.quoted}"'/>
@@ -67,7 +70,7 @@ Tasks to build and package the r-c4d3 as3 framework.
 		</exec>
 	</target>
 	
-    <target name="document" depends="clean, version" description="create asdoc for the framework api">
+    <target name="document" depends="clean, version" description="generate asdoc">
 		<mkdir dir="${dir.target}/asdoc"/>
     	<exec executable="${flex.asdoc}">
 			<arg line="-output='${dir.target}/asdoc'"/>
@@ -84,7 +87,7 @@ Tasks to build and package the r-c4d3 as3 framework.
 			<arg line='-load-config+="${dir.config}/version-config.xml"'/>
 		-->
 		</exec>
-		<zip destfile="${dir.target}/${ant.project.name}.zip" basedir="${dir.target}/asdoc"/>
+		<zip destfile="${file.docs}" basedir="${dir.target}/asdoc"/>
 		<copy todir="${dir.documentation}" failonerror="false">
 			<fileset dir="${dir.target}/asdoc">
 				<include name="**/*"/>
@@ -93,12 +96,8 @@ Tasks to build and package the r-c4d3 as3 framework.
 	</target>
 	
 	<target name="release" description="copy zips to ${dir.releases}">
-		<copy todir="${dir.releases}" failonerror="false">
-			<fileset dir="${dir.target}">
-				<include name="**/*.swc"/>
-				<include name="**/*.zip"/>
-			</fileset>
-		</copy>
+		<copy todir="${dir.releases}/docs" file="${file.docs}"/>
+		<copy todir="${dir.releases}/swcs" file="${file.swc}"/>
 	</target>
 
 </project>
