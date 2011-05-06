@@ -1,1 +1,0 @@
-swfmill simple ${sound-name}.swfml ${sound-name}.swf
