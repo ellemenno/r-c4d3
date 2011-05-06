@@ -1,6 +1,0 @@
-Text for description in DesktopRomLoader is not valid.
-org.xml.sax.SAXParseException: The element type "code" must be terminated by the matching end-tag "</code>".
-
-Text for description in com.pixeldroid.r_c4d3.preloader:IPreloader is not valid.
-org.xml.sax.SAXParseException: The element type "Code" must be terminated by the matching end-tag "</Code>".
-
