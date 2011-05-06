@@ -145,7 +145,7 @@ Tasks to build and package the r-c4d3 romloaders.
 		<mkdir dir="${dir.target}/temp-desktop"/>
 		<copy file="${dir.resources}/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop/romloader-config.xml"/>
 		<copy file="${dir.resources}/rom.swf" todir="${dir.target}/temp-desktop"/>
-		<zip destfile="${dir.target}/romloader-desktop.zip" basedir="${dir.target}/temp-desktop"/>
+		<zip destfile="${dir.target}/romloaders/romloader-desktop.zip" basedir="${dir.target}/temp-desktop"/>
 	</target>
 	
     <target name="package-web" description="collect the web-based romloader and dependencies into a zip file">
@@ -154,7 +154,7 @@ Tasks to build and package the r-c4d3 romloaders.
 		<copy file="${dir.resources}/rom.swf" todir="${dir.target}/temp-web"/>
 		<copy file="${dir.resources}/index-web.html" todir="${dir.target}/temp-web"/>
 		<copy file="${dir.target}/romloader-web.swf" todir="${dir.target}/temp-web"/>
-		<zip destfile="${dir.target}/romloader-web.zip" basedir="${dir.target}/temp-web"/>
+		<zip destfile="${dir.target}/romloaders/romloader-web.zip" basedir="${dir.target}/temp-web"/>
 	</target>
 	
     <target name="package-rc4d3" description="collect the web-based r-c4d3 romloader and dependencies into a zip file">
@@ -163,20 +163,22 @@ Tasks to build and package the r-c4d3 romloaders.
 		<copy file="${dir.resources}/rom.swf" todir="${dir.target}/temp-rc4d3"/>
 		<copy file="${dir.resources}/index-rc4d3.html" todir="${dir.target}/temp-rc4d3"/>
 		<copy file="${dir.target}/romloader-rc4d3.swf" todir="${dir.target}/temp-rc4d3"/>
-		<zip destfile="${dir.target}/romloader-rc4d3.zip" basedir="${dir.target}/temp-rc4d3"/>
+		<zip destfile="${dir.target}/romloaders/romloader-rc4d3.zip" basedir="${dir.target}/temp-rc4d3"/>
 	</target>
 	
 	<target name="release" description="copy zips to ${dir.releases}">
 		<copy todir="${dir.releases}/docs" file="${file.docs}"/>
 		<copy todir="${dir.releases}/romloaders" overwrite="true" failonerror="false">
-			<fileset dir="${dir.target}" includes="**/*.zip"/>
+			<fileset dir="${dir.target}/romloaders" includes="**/*.zip"/>
 		</copy>
 	</target>
 	
 
-	<target name="add-projectors" unless="skip.add.projectors" depends="projectors-zip-win, projectors-zip-osx"
-		description="step through conversion of desktop swf to projectors, then zip and release">
-		<copy file="${dir.target}/romloader-desktop-${os}.zip" todir="${dir.releases}" overwrite="true"/>
+	<target name="add-projectors" unless="skip.add.projectors" description="step through conversion of desktop swf to projectors, then zip and release">
+		<!-- using antcall instead of depends, because dependencies would be executed before the unless is checked -->
+		<antcall target="projectors-zip-win"/>
+		<antcall target="projectors-zip-osx"/>
+		<copy file="${dir.target}/romloaders/romloader-desktop-${os}.zip" todir="${dir.releases}" overwrite="true"/>
 	</target>
 
 	<target name="projectors-clean" depends="version">
@@ -239,14 +241,14 @@ Press Enter when ready...
 	<target name="projectors-zip-win" if="isWin" depends="projectors-pause">
 		<zip 
 			basedir="${dir.target}/temp-desktop-projectors"
-			destfile="${dir.target}/romloader-desktop-${os}.zip"
+			destfile="${dir.target}/romloaders/romloader-desktop-${os}.zip"
 			/>
 	</target>
 	
 	<target name="projectors-zip-osx" if="isOsx" depends="projectors-pause">
 		<exec osfamily="mac" spawn="false" executable="ditto">
 			<!-- see http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/ditto.1.html -->
-			<arg line="-c -k --sequesterRsrc ${dir.target}/temp-desktop-projectors ${dir.target}/romloader-desktop-${os}.zip"/>
+			<arg line="-c -k --sequesterRsrc ${dir.target}/temp-desktop-projectors ${dir.target}/romloaders/romloader-desktop-${os}.zip"/>
 		</exec>
 	</target>
 

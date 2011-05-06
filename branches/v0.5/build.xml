@@ -14,12 +14,19 @@ Top level build file for all components of the r-c4d3 platform.
 		description="&gt; this is the main task: build-as3"/>
 	
 		
-    <target name="build-as3" depends="framework-as3, romloader-as3, roms-as3" 
-		description="builds as3 components: framework-as3, romloader-as3, roms-as3"/>
+    <target name="build-as3" depends="gamerom-api-as3, framework-as3, romloader-as3, roms-as3" 
+		description="builds as3 components: gamerom-api-as3, framework-as3, romloader-as3, roms-as3"/>
+		
+	<target name="gamerom-api-as3" description="calls the build task of ${dir.trunk}/gamerom-api-as3/build.xml">
+		<ant
+			dir="${dir.trunk}/gamerom-api-as3"
+			target="build"
+			inheritall="false"
+			/>
+	</target>
 		
 	<target name="framework-as3" description="calls the build task of ${dir.trunk}/framework-as3/build.xml">
 		<ant
-			antfile="${dir.trunk}/framework-as3/build.xml"
 			dir="${dir.trunk}/framework-as3"
 			target="build"
 			inheritall="false"
@@ -28,7 +35,6 @@ Top level build file for all components of the r-c4d3 platform.
 			
 	<target name="romloader-as3" description="calls the build task of ${dir.trunk}/romloader-as3/build.xml">
 		<ant
-			antfile="${dir.trunk}/romloader-as3/build.xml"
 			dir="${dir.trunk}/romloader-as3"
 			target="build"
 			inheritall="false"
@@ -39,7 +45,6 @@ Top level build file for all components of the r-c4d3 platform.
 			
 	<target name="roms-as3" description="calls the build task of ${dir.trunk}/roms-as3/build.xml">
 		<ant
-			antfile="${dir.trunk}/roms-as3/build.xml"
 			dir="${dir.trunk}/roms-as3"
 			target="build"
 			inheritall="false"
