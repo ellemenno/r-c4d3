@@ -46,7 +46,7 @@ package com.pixeldroid.r_c4d3.api
 		static public const second:String = VERSION::second;
 		
 		/** Product version string */
-		static public const productInfo:String = "R-C4D3 Framework v" +semver;
+		static public const productInfo:String = "R-C4D3 GameRom API v" +semver;
 		
 		/** Compilation time stamp */
 		static public const buildInfo:String = "compiled " +year +"/" +month +"/" +day +" " +hour +":" +minute +"." +second;
