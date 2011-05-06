@@ -91,10 +91,11 @@ Tasks to build and package the r-c4d3 as3 gamerom api.
 		-->
 		</exec>
 		<zip destfile="${file.docs}" basedir="${dir.target}/asdoc"/>
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${dir.documentation}" includes="**/*"/>
+		</delete>
 		<copy todir="${dir.documentation}" failonerror="false">
-			<fileset dir="${dir.target}/asdoc">
-				<include name="**/*"/>
-			</fileset>
+			<fileset dir="${dir.target}/asdoc" includes="**/*"/>
 		</copy>
 	</target>
 	
