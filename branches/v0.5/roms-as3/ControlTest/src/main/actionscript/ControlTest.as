@@ -22,13 +22,13 @@ package
 	import flash.text.TextFormatAlign;
 	import flash.text.AntiAliasType;
 	
-	import com.pixeldroid.r_c4d3.controls.JoyButtonEvent;
-	import com.pixeldroid.r_c4d3.controls.JoyEventStateEnum;
-	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
-	import com.pixeldroid.r_c4d3.interfaces.IGameConfigProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameControlsProxy;
-	import com.pixeldroid.r_c4d3.interfaces.IGameRom;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.api.events.JoyButtonEvent;
+	import com.pixeldroid.r_c4d3.api.JoyEventStateEnumerator;
+	import com.pixeldroid.r_c4d3.api.events.JoyHatEvent;
+	import com.pixeldroid.r_c4d3.api.IGameConfigProxy;
+	import com.pixeldroid.r_c4d3.api.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.api.IGameRom;
+	import com.pixeldroid.r_c4d3.api.IGameScoresProxy;
 	
 	import PlayerSet;
 
@@ -72,7 +72,7 @@ package
 		{
 			C.out(this, "setControlsProxy to " +value);
 			controls = value;
-			controls.joystickEventState(JoyEventStateEnum.ENABLE, stage); // enable event reporting
+			controls.joystickEventState(JoyEventStateEnumerator.ENABLE, stage); // enable event reporting
 			
 			controls.joystickOpen(0); // activate joystick for player 1
 			controls.joystickOpen(1); // activate joystick for player 2
