@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="r-c4d3.haxe" default="-usage" basedir="./">
+<project name="r-c4d3.shared.haxe" default="-usage" basedir="./">
 
 <description>
 Initialization of haxe tools for the r-c4d3 project.
