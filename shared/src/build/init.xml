@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="r-c4d3.init" default="-usage" basedir="./">
+<project name="r-c4d3.shared.init" default="-usage" basedir="./">
 
 <description>
 Initialization of the build environment for the r-c4d3 project.

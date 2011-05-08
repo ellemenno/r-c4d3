@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="r-c4d3.properties" default="-usage" basedir="./">
+<project name="r-c4d3.shared.properties" default="-usage" basedir="./">
 
 <description>
 Common properties used by all the build files in the r-c4d3 project.
