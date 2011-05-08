@@ -6,13 +6,20 @@ ControlTest
 A quick visual check that all the hook-ups are working for fourplayercontrol.
 This demo implements IGameRom and listens for events on the provided IGameControllerPRoxy
 
-mxmlc ControlTest.as -output=ControlTest.swf -default-size=800,600 -default-background-color=0x000000 -default-frame-rate=30 -library-path+=./ -source-path=./ -source-path=../../lib
-
 */
 
 package
 {
 
+	import com.pixeldroid.r_c4d3.api.IGameConfigProxy;
+	import com.pixeldroid.r_c4d3.api.IGameControlsProxy;
+	import com.pixeldroid.r_c4d3.api.IGameRom;
+	import com.pixeldroid.r_c4d3.api.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.api.JoyEventStateEnumerator;
+	import com.pixeldroid.r_c4d3.api.events.JoyButtonEvent;
+	import com.pixeldroid.r_c4d3.api.events.JoyHatEvent;
+	import com.pixeldroid.r_c4d3.game.model.Colors;
+	
 	import flash.display.GradientType;
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -20,24 +27,14 @@ package
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
-	import flash.text.AntiAliasType;
-	
-	import com.pixeldroid.r_c4d3.api.events.JoyButtonEvent;
-	import com.pixeldroid.r_c4d3.api.JoyEventStateEnumerator;
-	import com.pixeldroid.r_c4d3.api.events.JoyHatEvent;
-	import com.pixeldroid.r_c4d3.api.IGameConfigProxy;
-	import com.pixeldroid.r_c4d3.api.IGameControlsProxy;
-	import com.pixeldroid.r_c4d3.api.IGameRom;
-	import com.pixeldroid.r_c4d3.api.IGameScoresProxy;
-	
-	import PlayerSet;
 
+	import PlayerSet;
 	
 
 	public class ControlTest extends Sprite implements IGameRom
 	{
 
-		[Embed(source="../resources/fonts/Bamf Gradient.ttf", fontName="FONT_BAMF")]
+		[Embed(mimeType="application/x-font", source="../resources/fonts/Bamf Gradient.ttf", fontName="FONT_BAMF", embedAsCFF="false")]
 		private static const FONT_BAMF:Class;
 
 		private var P1:PlayerSet;
@@ -132,22 +129,22 @@ package
 			var h:uint = 600;
 
 			var S3:Shape = new Shape();
-			drawPlayerGradient(0xff0000, S3, w, h);
+			drawPlayerGradient(Colors.PLAYER_3, S3, w, h);
 			addChild(S3);
 			S3.x = 0 * w;
 
 			var S1:Shape = new Shape();
-			drawPlayerGradient(0xffff00, S1, w, h);
+			drawPlayerGradient(Colors.PLAYER_1, S1, w, h);
 			addChild(S1);
 			S1.x = 1 * w;
 
 			var S2:Shape = new Shape();
-			drawPlayerGradient(0x00ff00, S2, w, h);
+			drawPlayerGradient(Colors.PLAYER_2, S2, w, h);
 			addChild(S2);
 			S2.x = 2 * w;
 
 			var S4:Shape = new Shape();
-			drawPlayerGradient(0x0044ff, S4, w, h);
+			drawPlayerGradient(Colors.PLAYER_4, S4, w, h);
 			addChild(S4);
 			S4.x = 3 * w;
 		}
