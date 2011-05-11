@@ -26,7 +26,7 @@ package com.pixeldroid.r_c4d3.romloader.scores
 		static public const GAMEID_MIN:int = 4;
 		
 		/** Most number of characters a valid id may contain */
-		static public const GAMEID_MAX:int = 32;
+		static public const GAMEID_MAX:int = 256;
 		
 		/** Upper limit of number of entries allowed */
 		static public const ENTRIES_MAX:int = 100;
