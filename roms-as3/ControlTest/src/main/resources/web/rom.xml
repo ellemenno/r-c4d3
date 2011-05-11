@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="iso-8859-1"?>
 
-<rom gameUrl="controls.html" previewUrl="title.jpg">
+<rom gameUrl="index.html" previewUrl="title.jpg">
 	<title>Game Controls Check</title>
 	<author linkUrl="http://pixeldroid.com">pixeldroid</author>
 	<description>A systems check for the control setup</description>

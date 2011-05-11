@@ -19,7 +19,7 @@
 	
 	<metadata>
 		<!-- metadata.title: The default title to store in the SWF metadata-->
-		<title>Control Test ROM for R-C4D3 Framework</title>
+		<title>Control Test</title>
 		
 		<!-- metadata.date: The creation date to store in the SWF metadata-->
 		<!-- metadata.date usage:
@@ -27,9 +27,7 @@
 		-->
 		
 		<!-- metadata.description: The default description to store in the SWF metadata-->
-		<!-- metadata.description usage:
-		<description>http://www.adobe.com/products/flex</description>
-		-->
+		<description>A game ROM for the R-C4D3 Framework. see http://code.google.com/p/r-c4d3/</description>
 		
 		<!-- metadata.language: The language to store in the SWF metadata (i.e. EN, FR)-->
 		<language>EN</language>
@@ -42,7 +40,7 @@
 	</metadata>
 	
 	<!-- target-player: specifies the version of the player the application is targeting. Features requiring a later version will not be compiled into the application. The minimum value supported is "9.0.0".
-	<target-player>9.0.124</target-player>-->
+	<target-player>10.1.0</target-player>-->
 	
 	<!-- use-network: toggle whether the SWF is flagged for access to network resources-->
 	<use-network>true</use-network>
@@ -70,7 +68,6 @@
 		<!-- (relative to this file's location)-->
 		<library-path append="true">
 			<path-element>../swc</path-element>
-			<path-element>../../../../../_releases/swcs</path-element>
 		</library-path>
 		
 		<!-- compiler.source-path: list of path elements that form the roots of ActionScript class hierarchies-->
