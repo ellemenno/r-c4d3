@@ -26,7 +26,13 @@ Expects $${game.name} and $${dir.trunk} to be set before import.
 		</delete>
 	</target>
 	
-    <target name="compile" depends="clean" description="compile the ${game.name} rom">
+	<target name="get-swcs" description="collect swc dependencies">
+		<copy todir="${dir.source}/swc">
+			<fileset dir="${dir.releases}/swcs/" includes="*.swc"/>
+		</copy>
+	</target>
+	
+    <target name="compile" depends="clean, get-swcs" description="compile the ${game.name} rom">
     	<exec executable="${flex.mxmlc}" failonerror="true">
 			<arg line="'${dir.source}/actionscript/${game.name}.as'"/>
 			<arg line="-output='${dir.target}/rom.swf'"/>
@@ -82,7 +88,6 @@ Expects $${game.name} and $${dir.trunk} to be set before import.
 	<target name="launch" unless="skip.rom.launches" description="launch the rom in the desktop romloader">
 		<antcall target="package-desktop-debug"/>
 		<run-rom dir="${dir.target}/temp-desktop-debug" file="rom.swf" bin="${dir.target}/temp-desktop-debug" />
-		<!--exec executable="${dir.target}/temp-desktop/${game.name}${exe}" failonerror="false"/-->
 	</target>
 
 </project>
