@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- 
+	Config file for R-C4D3 romloader.
+	
 	for details of supported settings, see 
 	http://r-c4d3.googlecode.com/svn/trunk/_documentation/romloader-api/ConfigDataProxy.html 
 -->
@@ -12,7 +14,7 @@
 
 	<!-- rom to load -->
 	<rom file="./rom.swf" 
-	     id="r-c4d3.control-test.web" />
+	     id="pixeldroid.control-test.web" />
 
 	<!-- not defining key mappings, using default values from romloader -->
 	<keymappings />
