@@ -11,16 +11,16 @@ Top level build file for all r-c4d3 roms.
 
 
 	
-    <target name="build" description="&gt; this is the main task: nothing for now"/>
-    <!--target name="build" description="&gt; this is the main task">
-    	<antcall target="build-rom"><param value="Asteroids-as" name="rom.folder"/></antcall>
-    	<antcall target="build-rom"><param value="ControlTest-as" name="rom.folder"/></antcall>
-    	<antcall target="build-rom"><param value="Hungries-as" name="rom.folder"/></antcall>
-    </target-->
+    <target name="build" description="&gt; this is the main task">
+    	<!--antcall target="build-rom"><param value="Asteroids" name="rom.folder"/</antcall-->
+    	<antcall target="build-rom"><param value="ControlTest" name="rom.folder"/></antcall>
+    	<antcall target="build-rom"><param value="GetToTheSpot" name="rom.folder"/></antcall>
+    	<!--antcall target="build-rom"><param value="Hungries" name="rom.folder"/</antcall-->
+    </target>
 	
 	
     <target name="build-rom" description="reusable task to build rom indicated by the 'rom.folder' param">
-    	<echo message="compiling ${rom.folder}"/>
+    	<echo message="compiling ${rom.folder} rom"/>
 		<ant
 			antfile="${basedir}/${rom.folder}/build.xml"
 			dir="${basedir}/${rom.folder}"
