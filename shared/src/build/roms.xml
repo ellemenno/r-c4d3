@@ -45,10 +45,7 @@ Expects $${game.name} and $${dir.trunk} to be set before import.
     <target name="package" depends="package-desktop-release, package-web" 
 		description="package-desktop, package-web"/>
 	
-    <target name="package-desktop-release" description="collect the desktop release version and its dependencies into a zip file">
-		<mkdir dir="${dir.target}/temp-desktop-release"/>
-		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop-release"/>
-		<copy file="${dir.source}/resources/config/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop-release/romloader-config.xml"/>
+	<target name="get-romloader-release-win" if="isWin">
 		<unzip src="${dir.releases}/romloaders/romloader-desktop-${os}-release.zip" dest="${dir.target}/temp-desktop-release">
 			<patternset includes="romloader-desktop*"/>
 			<mapper type="glob" from="romloader-desktop*" to="${game.name}*"/>
@@ -56,10 +53,28 @@ Expects $${game.name} and $${dir.trunk} to be set before import.
 		<zip destfile="${dir.target}/${game.name}-desktop-${os}.zip" basedir="${dir.target}/temp-desktop-release"/>
 	</target>
 	
+	<target name="get-romloader-release-osx" if="isOsx">
+		<exec osfamily="mac" spawn="false" executable="ditto">
+			<arg line="-x -k ${dir.releases}/romloaders/romloader-desktop-${os}-release.zip ${dir.target}/temp-desktop-release"/>
+		</exec>
+		<move file="${dir.target}/temp-desktop-release/romloader-desktop.app" tofile="${dir.target}/temp-desktop-release/${game.name}.app"/>
+		<exec osfamily="mac" spawn="false" executable="ditto">
+			<arg line="-c -k --sequesterRsrc ${dir.target}/temp-desktop-release ${dir.target}/${game.name}-desktop-${os}.zip"/>
+		</exec>
+	</target>
+	
+    <target name="package-desktop-release" description="collect the desktop release version and its dependencies into a zip file">
+		<mkdir dir="${dir.target}/temp-desktop-release"/>
+		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop-release"/>
+		<copy file="${dir.source}/resources/config/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop-release/romloader-config.xml"/>
+		<!-- todo: antcall get-romloader-release-win / osx -->
+	</target>
+	
     <target name="package-desktop-debug" description="collect the desktop debug version and its dependencies for running">
 		<mkdir dir="${dir.target}/temp-desktop-debug"/>
 		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop-debug"/>
 		<copy file="${dir.source}/resources/config/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop-debug/romloader-config.xml"/>
+		<!-- todo: antcall get-romloader-release-win / osx -->
 		<unzip src="${dir.releases}/romloaders/romloader-desktop-${os}-debug.zip" dest="${dir.target}/temp-desktop-debug"/>
 	</target>
 	
