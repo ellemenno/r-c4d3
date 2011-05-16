@@ -19,6 +19,7 @@ Tasks to build and package the r-c4d3 romloaders.
 	
 	<property name="dir.documentation" location="${dir.trunk}/_documentation/romloader"/>
 	<property name="dir.releases" location="${dir.trunk}/_releases"/>
+	<property name="dir.shared" location="${dir.trunk}/shared"/>
 	
 	<property name="file.docs" location="${dir.target}/${ant.project.name}.docs.zip"/>
 	
@@ -183,7 +184,7 @@ Tasks to build and package the r-c4d3 romloaders.
 	</target>
 	
 
-	<target name="add-projectors" unless="skip.add.projectors" description="step through conversion of desktop swf to projectors, then zip and release">
+	<target name="add-projectors" unless="skip.add.projectors" depends="version" description="step through conversion of desktop swf to projectors, then zip and release">
 		<!-- using antcall instead of depends, because dependencies would be executed before the unless is checked -->
 		<antcall target="projectors-zip-win"/>
 		<antcall target="projectors-zip-osx"/>
@@ -269,6 +270,72 @@ Press Enter when ready...
 	
 	<target name="projectors-zip-osx" if="isOsx">
 		<antcall target="projectors-pause"/>
+		
+		<!-- see: http://unixjunkie.blogspot.com/2007/01/use-defaults-to-manipulate-any-plist.html -->
+		<property name="app.contents.debug" location="${dir.target}/temp-desktop-projectors-debug/romloader-desktop-debug.app/Contents"/>
+		<copy
+			todir="${app.contents.debug}/Resources"
+			file="${dir.shared}/src/icons/R.C4D3.icns"
+			/>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.debug}/Info CFBundleGetInfoString 'Debug version of Desktop Rom Loader for R-C4D3 flash game roms v${semver.romloader}'"/>
+		</exec>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.debug}/Info CFBundleIconFile 'R.C4D3'"/>
+		</exec>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.debug}/Info CFBundleLongVersionString 'R-C4D3 Desktop Rom Loader v${semver.romloader} debug'"/>
+		</exec>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.debug}/Info CFBundleName 'R-C4D3 Desktop Rom Loader debug'"/>
+		</exec>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.debug}/Info CFBundleShortVersionString '${semver.romloader}'"/>
+		</exec>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.debug}/Info CFBundleVersion '${semver.romloader}'"/>
+		</exec>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.debug}/Info NSHumanReadableCopyright 'Copyleft ${date.year} Pixeldroid'"/>
+		</exec>
+		<!--
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="read ${app.contents.debug}/Info"/>
+		</exec>
+		-->
+		
+		<property name="app.contents.release" location="${dir.target}/temp-desktop-projectors-release/romloader-desktop.app/Contents"/>
+		<copy
+			todir="${app.contents.release}/Resources"
+			file="${dir.shared}/src/icons/R.C4D3.icns"
+			/>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.release}/Info CFBundleGetInfoString 'Desktop Rom Loader for R-C4D3 flash game roms v${semver.romloader}'"/>
+		</exec>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.release}/Info CFBundleIconFile 'R.C4D3'"/>
+		</exec>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.release}/Info CFBundleLongVersionString 'R-C4D3 Desktop Rom Loader v${semver.romloader}'"/>
+		</exec>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.release}/Info CFBundleName 'R-C4D3 Desktop Rom Loader'"/>
+		</exec>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.release}/Info CFBundleShortVersionString '${semver.romloader}'"/>
+		</exec>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.release}/Info CFBundleVersion '${semver.romloader}'"/>
+		</exec>
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="write ${app.contents.release}/Info NSHumanReadableCopyright 'Copyleft ${date.year} Pixeldroid'"/>
+		</exec>
+		<!--
+		<exec osfamily="mac" spawn="false" executable="defaults">
+			<arg line="read ${app.contents.release}/Info"/>
+		</exec>
+		-->
+		
 		<!-- see http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/ditto.1.html -->
 		<exec osfamily="mac" spawn="false" executable="ditto">
 			<arg line="-c -k --sequesterRsrc ${dir.target}/temp-desktop-projectors-debug ${dir.target}/romloaders/romloader-desktop-${os}-debug.zip"/>
