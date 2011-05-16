@@ -271,7 +271,11 @@ Press Enter when ready...
 	<target name="projectors-zip-osx" if="isOsx">
 		<antcall target="projectors-pause"/>
 		
-		<!-- see: http://unixjunkie.blogspot.com/2007/01/use-defaults-to-manipulate-any-plist.html -->
+		<!-- see: 
+			http://unixjunkie.blogspot.com/2007/01/use-defaults-to-manipulate-any-plist.html
+			http://prowiki.isc.upenn.edu/wiki/Manipulating_Plists
+			http://developer.apple.com/library/mac/#DOCUMENTATION/Darwin/Reference/ManPages/man8/PlistBuddy.8.html
+			-->
 		<property name="app.contents.debug" location="${dir.target}/temp-desktop-projectors-debug/romloader-desktop-debug.app/Contents"/>
 		<copy
 			todir="${app.contents.debug}/Resources"
@@ -336,6 +340,11 @@ Press Enter when ready...
 		</exec>
 		-->
 		
+		<!-- TODO:
+		use applescript to open romloader and save as projector
+		http://www.mactech.com/articles/mactech/Vol.21/21.04/AppleScriptandJava/index.html
+		http://macdevcenter.com/pub/a/mac/2003/10/03/ant.html
+		-->
 		<!-- see http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/ditto.1.html -->
 		<exec osfamily="mac" spawn="false" executable="ditto">
 			<arg line="-c -k --sequesterRsrc ${dir.target}/temp-desktop-projectors-debug ${dir.target}/romloaders/romloader-desktop-${os}-debug.zip"/>
