@@ -37,6 +37,23 @@ Common macros available to all the build files in the r-c4d3 project.
 		</sequential>
 	</macrodef>
 	
+	<macrodef name="open" description="opens file with exe">
+		<attribute name="exe" default=""/>
+		<attribute name="file" default=""/>
+		<sequential>
+			<echo message="- - open macro - -"/>
+			<echo message="opening '@{file}' with '@{exe}'"/>
+			
+			<exec osfamily="windows" spawn="true" executable="cmd">
+				<arg line='/c start "" "@{exe}" @{file}'/>
+			</exec>
+			
+			<exec osfamily="mac" spawn="true" executable="open">
+				<arg line="-n -a @{exe} @{file}"/>
+			</exec>
+		</sequential>
+	</macrodef>
+	
 	<macrodef name="run-rom" description="opens IGameRom file using R-C4D3 romloader">
 		<attribute name="dir" default=""/>
 		<attribute name="file" default=""/>
