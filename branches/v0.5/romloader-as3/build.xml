@@ -249,6 +249,8 @@ OSX
 	</target>
 
 	<target name="projectors-pause" depends="projectors-instrux-win,projectors-instrux-osx">
+		<open file="${dir.target}/temp-desktop-projectors-debug/romloader-desktop.swf" exe="${FLASHPLAYER_DEBUG}"/>
+		<open file="${dir.target}/temp-desktop-projectors-release/romloader-desktop.swf" exe="${FLASHPLAYER_RELEASE}"/>
 		<input>
 Press Enter when ready...
 		</input>
