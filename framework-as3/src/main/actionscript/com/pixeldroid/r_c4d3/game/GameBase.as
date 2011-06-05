@@ -125,7 +125,7 @@ package com.pixeldroid.r_c4d3.game
 			scores.openScoresTable(config.gameId);
 			
 			// instantiate and initialize manager
-			scoreManager = new ScoreController(scores) as IDisposable;
+			scoreManager = createScoreController(scores);
 			if (scoreManager) scoreManager.initialize();
 			else C.out(this, "setScoresProxy - no scoreManager to initialize");
 		}
