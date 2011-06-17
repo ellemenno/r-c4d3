@@ -10,7 +10,7 @@ Build file for the AS3 Asteroids rom.
 	
 	<property name="dir.trunk" value="../.."/>
 	<import file="${dir.trunk}/build_init.xml"/>
-	<import file="../build_roms.xml"/>
+	<import file="${dir.trunk}/shared/src/build/roms.xml"/>
 
 </project>
 
