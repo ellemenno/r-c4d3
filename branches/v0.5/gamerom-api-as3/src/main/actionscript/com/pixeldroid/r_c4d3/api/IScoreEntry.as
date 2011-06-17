@@ -28,9 +28,14 @@ package com.pixeldroid.r_c4d3.api
 		
 		/**
 		When submitted to an IGameScoresProxy, this flag will be set indicating 
-		whether the score was accepted into the high score list (true) or not (false).
+		whether the entry was accepted into the high score list (true) or not (false).
 		*/
-		function get accepted():Boolean;
+		function get isAccepted():Boolean;
+		
+		/**
+		Used to set isAccepted flag.
+		*/
+		function setAccepted(boolean:Boolean):void;
 		
 		/**
 		Returns a duplicate score entry
@@ -38,7 +43,7 @@ package com.pixeldroid.r_c4d3.api
 		function clone():IScoreEntry;
 		
 		/**
-		Returns a simple human readable string.
+		Returns a simple human readable version of the entry.
 		*/
 		function toString():String;
 	}
