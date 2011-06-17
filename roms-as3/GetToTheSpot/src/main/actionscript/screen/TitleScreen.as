@@ -1,6 +1,6 @@
 
 
-package screen
+package screens
 {
 	
 	import flash.text.TextField;

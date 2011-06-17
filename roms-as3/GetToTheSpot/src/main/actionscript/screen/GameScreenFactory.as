@@ -1,6 +1,6 @@
 
 
-package
+package screens
 {
 	
 	import com.pixeldroid.r_c4d3.game.screen.ScreenBase;
@@ -8,10 +8,10 @@ package
 	import com.pixeldroid.r_c4d3.game.screen.ScreenType;
 	import com.pixeldroid.r_c4d3.game.screen.ScreenTypeEnumerator;
 	
-	import screen.GameScreen;
-	import screen.HelpScreen;
-	import screen.ScoresScreen;
-	import screen.TitleScreen;
+	import screens.GameScreen;
+	import screens.HelpScreen;
+	import screens.ScoresScreen;
+	import screens.TitleScreen;
 	
 	
 	
