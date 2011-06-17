@@ -27,7 +27,7 @@ package com.pixeldroid.r_c4d3.game.screen
 	public class ScreenFactory implements IGameScreenFactory
 	{
 		/** Screen cache */
-		protected var screens:ResourcePool = new ResourcePool();
+		protected var screenCache:ResourcePool = new ResourcePool();
 		
 		/** @inheritDoc */
 		public function get loopStartScreenType():ScreenTypeEnumerator { return ScreenType.TITLE; }
@@ -87,9 +87,9 @@ package com.pixeldroid.r_c4d3.game.screen
 				case ScreenType.NULL   : 
 				case ScreenType.SCORES : 
 				case ScreenType.SETUP  : 
-				case ScreenType.TITLE  : screen = screens.retrieve(NullScreen, type) as ScreenBase; break;
+				case ScreenType.TITLE  : screen = screenCache.retrieve(NullScreen, type) as ScreenBase; break;
 				
-				case ScreenType.DEBUG  : screen = screens.retrieve(DebugScreen, type) as ScreenBase; break;
+				case ScreenType.DEBUG  : screen = screenCache.retrieve(DebugScreen, type) as ScreenBase; break;
 				
 				default: throw new Error("unsupported screen type: " +type); break;
 			}
