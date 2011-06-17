@@ -43,10 +43,10 @@ package screens
 			var screen:ScreenBase;
 			switch (type)
 			{
-				case ScreenType.TITLE  : screen = screens.retrieve(TitleScreen, type) as ScreenBase; break;
-				case ScreenType.HELP   : screen = screens.retrieve(HelpScreen, type) as ScreenBase; break;
-				case ScreenType.GAME   : screen = screens.retrieve(GameScreen, type) as ScreenBase; break;
-				case ScreenType.SCORES : screen = screens.retrieve(ScoresScreen, type) as ScreenBase; break;
+				case ScreenType.TITLE  : screen = screenCache.retrieve(TitleScreen, type) as ScreenBase; break;
+				case ScreenType.HELP   : screen = screenCache.retrieve(HelpScreen, type) as ScreenBase; break;
+				case ScreenType.GAME   : screen = screenCache.retrieve(GameScreen, type) as ScreenBase; break;
+				case ScreenType.SCORES : screen = screenCache.retrieve(ScoresScreen, type) as ScreenBase; break;
 				
 				default: screen = super.retrieveScreen(type); break;
 			}
