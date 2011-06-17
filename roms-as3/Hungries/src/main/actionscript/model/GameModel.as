@@ -4,17 +4,17 @@ package model
 {
 	import flash.geom.Point;
 	
-	import com.pixeldroid.r_c4d3.api.events.JoyButtonEvent;
-	import com.pixeldroid.r_c4d3.api.events.JoyHatEvent;
 	import com.pixeldroid.r_c4d3.api.IControllable;
 	import com.pixeldroid.r_c4d3.api.IDisposable;
 	import com.pixeldroid.r_c4d3.api.IScoreEntry;
-	import com.pixeldroid.r_c4d3.api.IUpdatable;
 	import com.pixeldroid.r_c4d3.api.ScoreEntry;
+	import com.pixeldroid.r_c4d3.api.events.JoyButtonEvent;
+	import com.pixeldroid.r_c4d3.api.events.JoyHatEvent;
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	import com.pixeldroid.r_c4d3.game.control.Signals;
+	import com.pixeldroid.r_c4d3.game.screen.IUpdatable;
 	
-	import GameSignals;
+	import model.GameSignals;
 	import model.GlobalModel;
 	import model.GoodyModel;
 	import model.PlayerModel;

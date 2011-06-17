@@ -12,7 +12,7 @@ package
 	import com.pixeldroid.r_c4d3.game.screen.IGameScreenFactory;
 	
 	import model.GlobalModel;
-	import view.screen.GameScreenFactory;
+	import view.screens.GameScreenFactory;
 	
 	
 	

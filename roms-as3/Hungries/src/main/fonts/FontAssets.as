@@ -26,7 +26,7 @@ package
 		}
 
 		
-		[Embed(source="DeLarge.ttf", fontName="DeLarge")]
+		[Embed(mimeType="application/x-font", source="DeLarge.ttf", fontName="DeLarge", embedAsCFF="false")]
 		static private const DeLarge:Class;
 		
 		static public function deLarge(size:Number=120, color:uint=0xffffff, align:String=TextFormatAlign.LEFT):TextFormat
@@ -34,7 +34,7 @@ package
 			return createTextFormat("DeLarge", size, color, align);
 		}
 		
-		[Embed(source="TelegramaRender.ttf", fontName="TelegramaRender")]
+		[Embed(mimeType="application/x-font", source="TelegramaRender.ttf", fontName="TelegramaRender", embedAsCFF="false")]
 		static private const TelegramaRender:Class;
 		
 		static public function telegramaRender(size:Number=24, color:uint=0xffffff, align:String=TextFormatAlign.LEFT):TextFormat

@@ -10,7 +10,7 @@ package view.screens
 	import com.pixeldroid.r_c4d3.game.control.Signals;
 	import com.pixeldroid.r_c4d3.game.screen.ScreenBase;
 
-	import GameSignals;
+	import model.GameSignals;
 	import model.GameModel;
 	import model.GlobalModel;
 	import view.GameView;
@@ -64,7 +64,7 @@ package view.screens
 			removeChild(gameView);
 			gameView = null;
 			
-			// attach listeners to messaging service
+			// detach listeners from messaging service
 			Notifier.removeListener(GameSignals.GAME_OVER, gameOver);
 			
 			return super.shutDown();
