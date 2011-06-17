@@ -11,6 +11,7 @@ package screens
 	import flash.media.SoundTransform;
 	
 	import com.pixeldroid.r_c4d3.api.IScoreEntry;
+	import com.pixeldroid.r_c4d3.api.ScoreEntry;
 	import com.pixeldroid.r_c4d3.api.events.JoyHatEvent;
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	import com.pixeldroid.r_c4d3.game.control.Signals;
@@ -23,13 +24,13 @@ package screens
 	public class GameScreen extends ScreenBase
 	{
 		
-		private var player:Bitmap;
+		private var player:Sprite;
 		private var spot:Sprite;
 		
 		private var drag:Number = .98;
 		private var topSpeed:Number = 15; // pixels / sec
 		private var speedBonusMax:int = 10000;
-		private var timeLimit:int = 5; // sec
+		private var bonusTimeLimit:int = 5; // sec
 		private var bonusDecay:int;
 		
 		private var hed:Point; // heading
@@ -60,6 +61,9 @@ package screens
 		{
 			backgroundColor = 0x000000;
 			
+			var fps:Number = 60;
+			stage.frameRate = fps;
+			
 			spot = GraphicAssets.spot;
 			spot.x = stage.stageWidth * .5;
 			spot.y = stage.stageHeight * .5;
@@ -81,20 +85,21 @@ package screens
 			
 			sfxPickup = SoundAssets.pointsIncrease;
 			sfxTime = SoundAssets.timeUp;
-			//score = new ScoreEntry(0, "Player 1");
+			score = new ScoreEntry(0, "Player 1");
 			speedBonus = speedBonusMax;
-			bonusDecay = Math.floor(speedBonusMax / (timeLimit*60)); // 60 fps
+			bonusDecay = Math.floor(speedBonusMax / (bonusTimeLimit*fps)); // how much to drop each frame
 			
 			finished = false;
 			
+			C.out(this, "initialize() - frameRate: " +stage.frameRate);
 			return super.initialize();
 		}
 		
 		override public function shutDown():Boolean
 		{
-			//var scores:Array = [score];
-			//C.out(this, "shutDown() - sending scores to proxy: " +scores);
-			//Notifier.send(Signals.SCORES_SUBMIT, scores);
+			var scores:Array = [score];
+			C.out(this, "shutDown() - sending scores to proxy: " +scores);
+			Notifier.send(Signals.SCORES_SUBMIT, scores);
 			
 			removeChild(spot);
 			spot = null;
@@ -113,24 +118,27 @@ package screens
 			super.onUpdateRequest(dt);
 			
 			speedBonus = Math.max(0, speedBonus-bonusDecay);
+			//C.out(this, "time: " +timeElapsed +", bonus: " +speedBonus +", fps: " +stage.frameRate);
 			
 			updatePosition(dt);
 			
-			if (timeIsUp()) 
-			{
-				C.out(this, "time up!");
-				sfxTime.play();
-				finished = true;
-			}
-			else if (playerWins())
-			{
-				C.out(this, "player wins!");
-				sfxPickup.play();
-				score.value += 1 + speedBonus;
-				finished = true;
-			}
-			
 			if (finished) gameOver();
+			else
+			{
+				if (timeIsUp()) 
+				{
+					C.out(this, "onUpdateRequest() - time up!");
+					sfxTime.play();
+					finished = true;
+				}
+				else if (playerWins())
+				{
+					C.out(this, "onUpdateRequest() - player wins!");
+					sfxPickup.play();
+					score.value += 1 + speedBonus;
+					finished = true;
+				}
+			}
 			
 		}
 
@@ -163,7 +171,7 @@ package screens
 		
 		private function gameOver():void
 		{
-			C.out(this, "gameOver - sending SCREEN_GO_NEXT signal");
+			C.out(this, "gameOver() - sending SCREEN_GO_NEXT signal");
 			Notifier.send(Signals.SCREEN_GO_NEXT);
 		}
 		
@@ -171,13 +179,13 @@ package screens
 		{
 			var dx:Number = player.x - spot.x;
 			var dy:Number = player.y - spot.y;
-			var r:Number = spot.width/2 - player.width/2 - 5;
+			var r:Number = (spot.width/2 - player.width/2) * .85;
 			return Boolean( (dx*dx + dy*dy) < (r*r) );
 		}
 		
 		private function timeIsUp():Boolean
 		{
-			return Boolean(timeElapsed > 5*1000);
+			return Boolean(timeElapsed > 50*1000);
 		}
 		
 		private function updatePosition(dt:int):void
