@@ -4,8 +4,9 @@ package com.pixeldroid.r_c4d3.romloader.scores
 {
 	
 	import com.pixeldroid.r_c4d3.api.IGameScoresProxy;
+	import com.pixeldroid.r_c4d3.api.IScoreEntry;
+	import com.pixeldroid.r_c4d3.api.ScoreEntry;
 	import com.pixeldroid.r_c4d3.api.events.DataEvent;
-	import com.pixeldroid.r_c4d3.romloader.scores.ScoreEntry;
 	
 	import flash.events.EventDispatcher;
 	
@@ -37,6 +38,9 @@ package com.pixeldroid.r_c4d3.romloader.scores
 		protected var scores:Array;
 		protected var initials:Array;
 		
+		protected var emptyScore:Number;
+		protected var emptyLabel:String;
+		
 		protected var storeEvent:DataEvent;
 		protected var retrieveEvent:DataEvent;
 
@@ -61,8 +65,25 @@ package com.pixeldroid.r_c4d3.romloader.scores
 			
 			NUM_ENTRIES = Math.min(ENTRIES_MAX, capacity);
 			
+			var tempEntry:IScoreEntry = createEntry();
+			emptyScore = tempEntry.value;
+			emptyLabel = tempEntry.label;
+			
 			clear();
 			openScoresTable(id);
+		}
+		
+		/**
+		Factory method to encapsulate score entry creation
+		*/
+		protected function createEntry(number:Number=NaN, string:String=null):IScoreEntry
+		{
+			var entry:IScoreEntry = new ScoreEntry();
+			
+			if (!isNaN(number)) entry.value = number;
+			if (string != null) entry.label = string;
+			
+			return entry;
 		}
 		
 		
@@ -117,7 +138,7 @@ package com.pixeldroid.r_c4d3.romloader.scores
 		/** @inheritdoc */
 		public function getScore(i:int):Number 
 		{
-			if (0 <= i && i < NUM_ENTRIES) return (i < scores.length) ? scores[i] : NaN;
+			if (0 <= i && i < NUM_ENTRIES) return (i < scores.length) ? scores[i] : emptyScore;
 			throw new Error("Invalid index: " +i +", valid range is 0 - " +(NUM_ENTRIES-1));
 		}
 		
@@ -125,14 +146,14 @@ package com.pixeldroid.r_c4d3.romloader.scores
 		public function getAllScores():Array 
 		{
 			var A:Array = scores.slice();
-			while (A.length < NUM_ENTRIES) A.push(NaN);
+			while (A.length < NUM_ENTRIES) A.push(emptyScore);
 			return A; 
 		}
 		
 		/** @inheritdoc */
 		public function getInitials(i:int):String 
 		{
-			if (0 <= i && i < NUM_ENTRIES) return (i < initials.length) ? initials[i] : null;
+			if (0 <= i && i < NUM_ENTRIES) return (i < initials.length) ? initials[i] : emptyLabel;
 			throw new Error("Invalid index: " +i +", valid range is 0 - " +(NUM_ENTRIES-1));
 		}
 		
@@ -140,7 +161,7 @@ package com.pixeldroid.r_c4d3.romloader.scores
 		public function getAllInitials():Array 
 		{ 
 			var A:Array = initials.slice();
-			while (A.length < NUM_ENTRIES) A.push(null);
+			while (A.length < NUM_ENTRIES) A.push(emptyLabel);
 			return A; 
 		}
 
@@ -154,15 +175,15 @@ package com.pixeldroid.r_c4d3.romloader.scores
 			
 			var j:int = 0;
 			var n:int = S.length;
-			var e:ScoreEntry;
+			var e:IScoreEntry;
 			while (j < n) 
 			{
-				e = new ScoreEntry(S[j], I[j]);
-				e.setAccepted(true, this);
+				e = createEntry(S[j], I[j]);
+				e.setAccepted(true);
 				A.push(e);
 				j++;
 			}
-			while (j++ < NUM_ENTRIES) { A.push(null); }
+			while (j++ < NUM_ENTRIES) { A.push(createEntry()); }
 			
 			return A; 
 		}
@@ -175,11 +196,11 @@ package com.pixeldroid.r_c4d3.romloader.scores
 			
 			var index:Array = entries.sortOn("value", Array.DESCENDING | Array.RETURNINDEXEDARRAY | Array.NUMERIC);
 			var n:int = Math.min(entries.length, NUM_ENTRIES);
-			var e:ScoreEntry;
+			var e:IScoreEntry;
 			for (var j:int = 0; j < n; j++)
 			{
-				e = ScoreEntry(entries[index[j]]);
-				e.setAccepted(_insert(e.value, e.label, scores, initials, NUM_ENTRIES), this);
+				e = IScoreEntry(entries[index[j]]);
+				e.setAccepted(_insert(e.value, e.label, scores, initials, NUM_ENTRIES));
 			}
 		}
 		
