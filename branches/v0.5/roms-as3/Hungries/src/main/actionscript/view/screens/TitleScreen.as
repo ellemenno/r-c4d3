@@ -1,6 +1,6 @@
 
 
-package view.screen
+package view.screens
 {
 	
 	import flash.text.TextField;
@@ -8,7 +8,7 @@ package view.screen
 	
 	import com.pixeldroid.r_c4d3.game.control.Signals;
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenBase;
 	
 	import FontAssets;
 	
