@@ -9,9 +9,9 @@ package
 {
 
 	import com.pixeldroid.r_c4d3.game.GameBase;
-	import com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory;
+	import com.pixeldroid.r_c4d3.game.screen.IGameScreenFactory;
 	
-	import view.screen.AsteroidsScreenFactory;
+	import view.screens.AsteroidsScreenFactory;
 	
 	
 	
