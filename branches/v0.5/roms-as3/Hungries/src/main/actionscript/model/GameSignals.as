@@ -1,5 +1,5 @@
 
-package
+package model
 {
 	
 	public class GameSignals

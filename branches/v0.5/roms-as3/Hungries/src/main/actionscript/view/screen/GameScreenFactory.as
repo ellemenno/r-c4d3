@@ -41,10 +41,10 @@ package view.screen
 			var screen:ScreenBase;
 			switch (type)
 			{
-				case TITLE  : screen = screens.retrieve(TitleScreen, type) as ScreenBase; break;
-				case HELP   : screen = screens.retrieve(HelpScreen, type) as ScreenBase; break;
-				case GAME   : screen = screens.retrieve(GameScreen, type) as ScreenBase; break;
-				case SCORES : screen = screens.retrieve(ScoresScreen, type) as ScreenBase; break;
+				case TITLE  : screen = screenCache.retrieve(TitleScreen, type) as ScreenBase; break;
+				case HELP   : screen = screenCache.retrieve(HelpScreen, type) as ScreenBase; break;
+				case GAME   : screen = screenCache.retrieve(GameScreen, type) as ScreenBase; break;
+				case SCORES : screen = screenCache.retrieve(ScoresScreen, type) as ScreenBase; break;
 				
 				case NULL   : 
 				case DEBUG  : screen = super.retrieveScreen(type); break;

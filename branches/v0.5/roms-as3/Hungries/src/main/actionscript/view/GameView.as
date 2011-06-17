@@ -6,14 +6,14 @@ package view
 	import flash.display.Sprite;
 	import flash.geom.ColorTransform;
 	
+	import com.pixeldroid.r_c4d3.api.IDisposable;
+	import com.pixeldroid.r_c4d3.api.IUpdatable;
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	import com.pixeldroid.r_c4d3.game.model.Colors;
-	import com.pixeldroid.r_c4d3.interfaces.IDisposable;
-	import com.pixeldroid.r_c4d3.interfaces.IUpdatable;
 	
 	import GraphicAssets;
 	
-	import GameSignals;
+	import model.GameSignals;
 	import model.SpriteVO;
 	
 	
