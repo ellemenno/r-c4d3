@@ -1,15 +1,15 @@
 
 
-package view.screen
+package view.screens
 {
 	
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenFactory;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenFactory;
 	
-	import view.screen.GameScreen;
-	import view.screen.HelpScreen;
-	import view.screen.ScoresScreen;
-	import view.screen.TitleScreen;
+	import view.screens.GameScreen;
+	import view.screens.HelpScreen;
+	import view.screens.ScoresScreen;
+	import view.screens.TitleScreen;
 	
 	
 	

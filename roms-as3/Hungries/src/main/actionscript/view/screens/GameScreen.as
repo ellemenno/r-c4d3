@@ -1,14 +1,14 @@
 
 
-package view.screen
+package view.screens
 {
 
 	import flash.display.DisplayObject;
 	
-	import com.pixeldroid.r_c4d3.controls.JoyHatEvent;
+	import com.pixeldroid.r_c4d3.api.events.JoyHatEvent;
 	import com.pixeldroid.r_c4d3.game.control.Notifier;
 	import com.pixeldroid.r_c4d3.game.control.Signals;
-	import com.pixeldroid.r_c4d3.game.view.screen.ScreenBase;
+	import com.pixeldroid.r_c4d3.game.screen.ScreenBase;
 
 	import GameSignals;
 	import model.GameModel;
