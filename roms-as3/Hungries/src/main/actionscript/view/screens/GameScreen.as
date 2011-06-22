@@ -22,20 +22,13 @@ package view.screens
 		
 		private var gameModel:GameModel;
 		private var gameView:GameView;
-		private var gameIsOver:Boolean;
+		private var gameIsPlaying:Boolean = false;
 		
 		
-		public function GameScreen():void
+		override protected function customInitialization():Boolean
 		{
-			C.out(this, "constructor");
-			super();
-		}
-		
-		
-		
-		// IDisposable interface
-		override public function initialize():Boolean
-		{
+			C.out(this, "customInitialization() - setting frame rate to 60fps");
+			
 			backgroundColor = 0x000000;
 			
 			gameModel = new GameModel();
@@ -45,18 +38,18 @@ package view.screens
 			addChild(gameView);
 			gameView.initialize();
 			
-			gameIsOver = false;
-			
 			// attach listeners to messaging service
 			Notifier.addListener(GameSignals.GAME_OVER, gameOver);
 			
 			stage.frameRate = 60;
 			
-			return super.initialize();
+			return true;
 		}
 		
-		override public function shutDown():Boolean
+		override protected function customShutDown():Boolean
 		{
+			C.out(this, "customShutDown()");
+			
 			gameModel.shutDown();
 			gameModel = null;
 			
@@ -67,28 +60,28 @@ package view.screens
 			// detach listeners from messaging service
 			Notifier.removeListener(GameSignals.GAME_OVER, gameOver);
 			
-			return super.shutDown();
+			return true;
 		}
 
-		
-		
-		// IController interface (pass-thru)
-		override public function onUpdateRequest(dt:int):void
+		override protected function handleFirstScreen():void
 		{
-			if (!gameIsOver) 
+			gameIsPlaying = true;
+		}
+		
+		override protected function handleUpdateRequest(dt:int):void
+		{
+			if (gameIsPlaying) 
 			{
-				super.onUpdateRequest(dt);
-				
+				if (!gameModel || !gameView) C.out(this, "handleUpdateRequest() - model or view is null");
 				gameModel.onUpdateRequest(dt);
 				gameView.onUpdateRequest(dt);
 			}
 		}
 		
-		override public function onHatMotion(e:JoyHatEvent):void
+		override protected function handleHatMotion(e:JoyHatEvent):void
 		{
-			if (!gameIsOver) 
+			if (gameIsPlaying) 
 			{
-				super.onHatMotion(e);
 				if (GlobalModel.activePlayers[e.which] == true) gameModel.onHatMotion(e);
 			}
 		}
@@ -97,8 +90,8 @@ package view.screens
 		
 		private function gameOver():void
 		{
-			gameIsOver = true;
-			C.out(this, "gameOver - sending SCREEN_GO_NEXT signal");
+			gameIsPlaying = false;
+			C.out(this, "gameOver() - sending SCREEN_GO_NEXT signal");
 			Notifier.send(Signals.SCREEN_GO_NEXT);
 		}
 		

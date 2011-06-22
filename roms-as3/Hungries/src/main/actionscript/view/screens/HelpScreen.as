@@ -16,15 +16,7 @@ package view.screens
 	public class HelpScreen extends ScreenBase
 	{
 		
-		
-		public function HelpScreen():void
-		{
-			C.out(this, "constructor");
-			super();
-		}
-		
-		
-		override protected function onFirstScreen():void
+		override protected function handleFirstScreen():void
 		{
 			backgroundColor = 0x555555;
 			var text:String = "" +
@@ -37,17 +29,15 @@ package view.screens
 			textField.y = height*.5 - textField.height*.75;
 		}
 		
-		override public function onUpdateRequest(dt:int):void
+		override protected function handleUpdateRequest(dt:int):void
 		{
-			super.onUpdateRequest(dt);
-			
 			if (timeElapsed > 3*1000) timeOut();
 		}
 		
 		
 		private function timeOut():void
 		{
-			C.out(this, "timeOut - sending SCREEN_GO_NEXT signal");
+			C.out(this, "timeOut() - sending SCREEN_GO_NEXT signal");
 			Notifier.send(Signals.SCREEN_GO_NEXT);
 		}
 		

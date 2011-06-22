@@ -17,15 +17,7 @@ package view.screens
 	public class TitleScreen extends ScreenBase
 	{
 		
-		
-		public function TitleScreen():void
-		{
-			C.out(this, "constructor");
-			super();
-		}
-		
-		
-		override protected function onFirstScreen():void
+		override protected function handleFirstScreen():void
 		{
 			backgroundColor = 0x777777;
 			var title:TextField = addChild(FontAssets.createTextField("HUNGRIES", FontAssets.deLarge(120, 0xffffff, TextFormatAlign.CENTER), width)) as TextField;
@@ -33,17 +25,15 @@ package view.screens
 			title.y = height*.5 - title.height*.75;
 		}
 		
-		override public function onUpdateRequest(dt:int):void
+		override protected function handleUpdateRequest(dt:int):void
 		{
-			super.onUpdateRequest(dt);
-			
 			if (timeElapsed > 3*1000) timeOut();
 		}
 		
 		
 		private function timeOut():void
 		{
-			C.out(this, "timeOut - sending SCREEN_GO_NEXT signal");
+			C.out(this, "timeOut() - sending SCREEN_GO_NEXT signal");
 			Notifier.send(Signals.SCREEN_GO_NEXT);
 		}
 		
