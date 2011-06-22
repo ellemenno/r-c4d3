@@ -29,6 +29,7 @@ C.out(this, "foo happened!", true); // temporary override of enabled
 
 		static private var _enabled:Boolean;
 		static private var _logger:Object;
+		static private var prelog:String = "";
 		static private var nameMap:Dictionary = new Dictionary();
 
 		/**
@@ -41,7 +42,8 @@ C.out(this, "foo happened!", true); // temporary override of enabled
 			@param fullPath When true, prefix with entire classpath instead of just class name
 		*/
 		static public function out(origin:*, value:String, force:Boolean=false, fullPath:Boolean=false):void {
-			if (_enabled || force) _logger.log(format(origin, value, force));
+			if (_enabled || force) _logger.log(format(origin, value, force, fullPath));
+			else prelog += "\n" +format(origin, value, force, fullPath);
 		}
 		
 		/**
@@ -97,12 +99,15 @@ C.out(this, "foo happened!", true); // temporary override of enabled
 		
 		@param customLogger Optional handler for log messages (default is trace).
 		Must provide log(value:String) method.
+		@param prependPrelog Optional directive to log messages sent while disabled
 		*/
-		static public function enable(customLogger:Object=null):void
+		static public function enable(customLogger:Object=null, prependPrelog:Boolean=false):void
 		{
 			_enabled = true;
 			logger = (customLogger == null) ? _logger : customLogger;
 			out(C, "---{ [Trace Log Activated] }---");
+			if (prependPrelog) _logger.log("\n/ / start prelog / /" +prelog +"\n/ / end prelog / / /\n");
+			prelog = "";
 		}
 		
 		/**

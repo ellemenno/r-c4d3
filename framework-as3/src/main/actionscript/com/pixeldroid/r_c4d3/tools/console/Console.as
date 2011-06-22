@@ -1,5 +1,6 @@
 ﻿
-package com.pixeldroid.r_c4d3.tools.console {
+package com.pixeldroid.r_c4d3.tools.console
+{
 
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -12,6 +13,8 @@ package com.pixeldroid.r_c4d3.tools.console {
 	import flash.text.TextFormatAlign;
 	import flash.ui.Keyboard;
 	import flash.utils.getTimer;
+	
+	import com.pixeldroid.r_c4d3.tools.console.ConsoleProperties;
 	
 	/**
 	Implements a simple on-screen display for viewing run-time text messages.
@@ -82,15 +85,6 @@ package {
 		
 		[Embed(mimeType="application/x-font", source="ProggyTiny.ttf", fontName="FONT_CONSOLE", embedAsCFF="false")]
 		protected static var FONT_CONSOLE:Class;
-
-		protected static const WIDTH:Number = 780;
-		protected static const HEIGHT:Number = 200;
-		protected static const BACK_COLOR:uint = 0x000000;
-		protected static const FORE_COLOR:uint = 0xffffff;
-		protected static const FONT_SIZE:Number = 16;
-		protected static const BACK_ALPHA:Number = .8;
-		protected static const BUFFER_SIZE:int = 64;
-		protected static const LEADING:int = 2;
 		
 		protected var background:Shape;
 		protected var console:TextField;
@@ -101,43 +95,33 @@ package {
 		/**
 		* Create a new Console with optional parameters.
 		* 
-		* @param width Width of console (pixels)
-		* @param height Height of console (pixels)
-		* @param bgColor Console background color
-		* @param fgColor Console text color
-		* @param txtSize Console text size
-		* @param bgAlpha Console background alpha
-		* @param buffer Max number of recent lines to retain
+		* @param properties Optional instance of ConsoleProperties for custom settings
+		*
+		* @see com.pixeldroid.r_c4d3.tools.console.ConsoleProperties
 		*/
-		public function Console (
-			width:Number = WIDTH,
-			height:Number = HEIGHT,
-			bgColor:uint = BACK_COLOR, 
-			fgColor:uint = FORE_COLOR,
-			txtSize:Number = FONT_SIZE,
-			bgAlpha:Number = BACK_ALPHA,
-			buffer:int = BUFFER_SIZE,
-			leading:int = LEADING
-		) {
+		public function Console(properties:ConsoleProperties=null)
+		{
 			super();
+			
+			if (properties == null) properties = new ConsoleProperties();
 			
 			addEventListener(Event.ADDED_TO_STAGE, registerKeyhandler);
 		
 			background = new Shape();
-			background.graphics.beginFill(bgColor, bgAlpha);
-			background.graphics.drawRect(0, 0, width, height);
+			background.graphics.beginFill(properties.backColor, properties.backAlpha);
+			background.graphics.drawRect(0, 0, properties.width, properties.height);
 			background.graphics.endFill();
 			addChild(background);
 
 			var format:TextFormat = new TextFormat();
 			format.font = "FONT_CONSOLE";
-			format.color = fgColor;
-			format.size = txtSize;
+			format.color = properties.foreColor;
+			format.size = properties.fontSize;
 			format.align = TextFormatAlign.LEFT;
-			format.leading = leading;
+			format.leading = properties.leading;
 			
 			console = new TextField();
-			console.antiAliasType = (txtSize > 24) ? AntiAliasType.NORMAL : AntiAliasType.ADVANCED;
+			console.antiAliasType = (format.size > 24) ? AntiAliasType.NORMAL : AntiAliasType.ADVANCED;
 			console.gridFitType = GridFitType.PIXEL;
 			console.embedFonts = true;
 			console.defaultTextFormat = format;
@@ -146,12 +130,13 @@ package {
 			console.wordWrap = true;
 			addChild(console);
 			
-			console.width = width;
-			console.height = height;
+			console.width = properties.width;
+			console.height = properties.height;
+			
+			bufferMax = properties.bufferSize;
 			
 			loggingPaused = false;
 			first = true;
-			bufferMax = buffer;
 		}
 		
 		
@@ -159,6 +144,8 @@ package {
 
 		/**
 		* Append a message to the console.
+		*
+		* @param value Message to log
 		*/
 		public function log(value:String):void {
 			if (loggingPaused == false) {
@@ -167,6 +154,20 @@ package {
 				if (overage > 0) console.replaceText(0, console.getLineOffset(overage), "");
 				console.scrollV = console.maxScrollV;
 			}
+		}
+
+		
+		/**
+		* Retrieve human readable instructions for manipulating the console.
+		*/
+		public function get usage():String
+		{
+			var s:String = "";
+			s += "Console Usage :\n";
+			s += "  tick (`) toggles hide\n";
+			s += "  ctrl-tick toggles pause\n";
+			s += "  ctrl-bkspc clears";
+			return s;
 		}
 	
 	
@@ -220,6 +221,10 @@ package {
 		* <li>ctrl-tick toggles pause</li>
 		* <li>ctrl-bkspc clears</li>
 		* </ul>
+		*
+		* <p>
+		* If you overide this method, consider overriding the usage getter as well.
+		* </p>
 		*/
 		protected function keyDownHandler(e:KeyboardEvent):void {
 			if ("`" == String.fromCharCode(e.charCode))
@@ -231,10 +236,8 @@ package {
 		}
 		
 		protected function registerKeyhandler(e:Event):void {
-			log(": : : : : : : : : : : : : :");
-			log(": tick (`) toggles hide");
-			log(": ctrl-tick toggles pause");
-			log(": ctrl-bkspc clears");
+			log("");
+			log(usage);
 			log("");
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 		}
