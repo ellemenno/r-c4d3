@@ -20,36 +20,26 @@ package view.screens
 		protected var scores:TextField;
 		
 		
-		
-		public function ScoresScreen():void
+		override protected function customInitialization():Boolean
 		{
-			C.out(this, "constructor");
-			super();
-		}
-		
-		
-		// IDisposable interface
-		override public function shutDown():Boolean
-		{
-			C.out(this, "shutDown()");
-			
-			Notifier.removeListener(Signals.SCORES_READY, displayScores);
-			
-			return super.shutDown();
-		}
-		
-		override public function initialize():Boolean
-		{
-			C.out(this, "initialize()");
+			C.out(this, "customInitialization()");
 			
 			Notifier.addListener(Signals.SCORES_READY, displayScores);
-			
-			return super.initialize();
+			return true;
 		}
 		
-		override protected function onFirstScreen():void
+		override protected function customShutDown():Boolean
+		{
+			C.out(this, "customShutDown()");
+			
+			Notifier.removeListener(Signals.SCORES_READY, displayScores);
+			return true;
+		}
+		
+		override protected function handleFirstScreen():void
 		{
 			backgroundColor = 0x555555;
+			
 			var title:TextField = addChild(FontAssets.createTextField("High Scores", FontAssets.telegramaRender())) as TextField;
 			title.x = 15;
 			title.y = 15;
@@ -60,14 +50,12 @@ package view.screens
 			scores.y = 15 + title.y + title.height;
 			
 			// send request for scores
-			C.out(this, "onFirstScreen - sending SCREEN_RETRIEVE signal");
+			C.out(this, "handleFirstScreen() - sending SCREEN_RETRIEVE signal");
 			Notifier.send(Signals.SCORES_RETRIEVE);
 		}
 		
-		override public function onUpdateRequest(dt:int):void
+		override protected function handleUpdateRequest(dt:int):void
 		{
-			super.onUpdateRequest(dt);
-			
 			if (timeElapsed > 15*1000) timeOut();
 		}
 		
@@ -75,13 +63,13 @@ package view.screens
 		
 		private function displayScores(scoresProxy:IGameScoresProxy):void
 		{
-			C.out(this, "displayScores - displaying latest scores from proxy");
+			C.out(this, "displayScores() - displaying latest scores from proxy");
 			scores.text = scoresProxy.toString();
 		}
 		
 		private function timeOut():void
 		{
-			C.out(this, "timeOut - sending SCREEN_GO_NEXT signal");
+			C.out(this, "timeOut() - sending SCREEN_GO_NEXT signal");
 			Notifier.send(Signals.SCREEN_GO_NEXT);
 		}
 		
