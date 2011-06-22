@@ -23,12 +23,21 @@ package com.pixeldroid.r_c4d3.game.screen
 	
 	@see com.pixeldroid.r_c4d3.interfaces.IGameScreenFactory
 	*/
-	public class ScreenBase extends Sprite implements IScreen, IControllable, IDisposable, IUpdatable
+	public class ScreenBase extends Sprite implements IScreen, IUpdatable, IControllable, IDisposable
 	{
-		
+		/** Screen type. Used by the game screen factory */
 		protected var _type:ScreenTypeEnumerator;
-		protected var configProxy:IGameConfigProxy;
+		
+		/** Runtime configuration loaded from the romloader-config.xml */
+		protected var gameConfigProxy:IGameConfigProxy;
+		
+		/** Accumulated time elapsed since screen initialization */
 		protected var timeElapsed:int;
+		
+		/**
+		Frame rate prior to custom initialization. Will be restored during shutdown, 
+		freeing this screen to set its own rate temporarily.
+		*/
 		protected var previousFrameRate:Number;
 		
 		
@@ -36,13 +45,14 @@ package com.pixeldroid.r_c4d3.game.screen
 		/** Constructor. */
 		public function ScreenBase():void
 		{
-			C.out(this, "(base) constructor");
 			super();
 		}
 		
 		
+		// helper functions
+		
 		/** 
-		Fills the screen (to stage dimensions) with the provided color. 
+		Clears and fills the screen (to stage dimensions) with the provided color. 
 		@param value An rgb color integer
 		*/
 		protected function set backgroundColor(value:uint):void
@@ -70,18 +80,102 @@ package com.pixeldroid.r_c4d3.game.screen
 			}
 		}
 		
+		
+		// extension / customization api
+		
 		/**
-		Prompt to provide first on-screen view. 
+		Extension point for custom decommission of the screen. 
+		Designed to be overridden by subclasses. 
+		
+		@return true for success, false if an error has occurred
+		*/
+		protected function customShutDown():Boolean
+		{
+			// to be overridden
+			C.out(this, "(base) customShutDown()");
+			return true;
+		}
+		
+		/**
+		Extension point for custom initialization of the screen. 
+		Designed to be overridden by subclasses. 
+		
+		@return true for success, false if an error has occurred
+		*/
+		protected function customInitialization():Boolean
+		{
+			// to be overridden
+			C.out(this, "(base) customInitialization()");
+			return true;
+		}
+		
+		/**
+		Extension point for rendering first on-screen view. 
 		Designed to be overridden by subclasses. 
 		
 		<p>
-		Updates will be prompted via <code>onUpdateRequest</code>
+		Further updates will be prompted via <code>onUpdateRequest</code>
 		</p>
 		*/
-		protected function onFirstScreen():void
+		protected function handleFirstScreen():void
+		{
+			// to be overridden
+			C.out(this, "(base) handleFirstScreen()");
+		}
+		
+		/**
+		Extension point for handling joystick direction (hat) events. 
+		Designed to be overridden by subclasses. 
+		
+		@param e JoyHatEvent instance
+		*/
+		protected function handleHatMotion(e:JoyHatEvent):void
+		{
+			// to be overridden
+			C.out(this, "(base) handleHatMotion(): " +e);
+		}
+		
+		/**
+		Extension point for handling joystick button events. 
+		Designed to be overridden by subclasses. 
+		
+		@param e JoyButtonEvent instance
+		*/
+		protected function handleButtonMotion(e:JoyButtonEvent):void
+		{
+			// to be overridden
+			C.out(this, "(base) handleButtonMotion(): " +e);
+		}
+		
+		/**
+		Extension point for handling update requests. 
+		Designed to be overridden by subclasses. 
+		
+		<p>
+		<i>Note:</i> Total time elapsed since initialization is stored in the <code>timeElapsed</code> property
+		</p>
+		
+		@param dt Milliseconds elapsed since last update occurred
+		*/
+		protected function handleUpdateRequest(dt:int):void
 		{
 			// to be overridden
 		}
+		
+		/**
+		Extension point for accessing game configuration. 
+		Designed to be overridden by subclasses. 
+		
+		<p>
+		<i>Note:</i> When this function is called, the <code>gameConfigProxy</code> property has been set
+		</p>
+		*/
+		protected function handleGameConfig():void
+		{
+			// to be overridden
+			C.out(this, "(base) handleGameConfig() - config is ready");
+		}
+		
 		
 		
 		// IScreen interface
@@ -103,6 +197,8 @@ package com.pixeldroid.r_c4d3.game.screen
 		/** @inheritDoc */
 		public function shutDown():Boolean
 		{
+			var isReady:Boolean = customShutDown();
+			
 			clear();
 			stage.frameRate = previousFrameRate;
 			
@@ -116,21 +212,24 @@ package com.pixeldroid.r_c4d3.game.screen
 				t = (m > 0) ? m +"m " +(s - m*60) +"s" : s +"s";
 			}
 			
-			C.out(this, "(base) shutDown() - lifetime was " +t);
+			C.out(this, "(base) shutDown() - returning to " +previousFrameRate +"fps; lifetime was " +t);
 			
-			return true;
+			return isReady;
 		}
 		
 		/** @inheritDoc */
 		public function initialize():Boolean
 		{
 			C.out(this, "(base) initialize()");
+			
 			timeElapsed = 0;
 			previousFrameRate = stage.frameRate;
-			Notifier.send(Signals.GET_CONFIG, receiveConfig);
-			onFirstScreen();
+			Notifier.send(Signals.GET_CONFIG, onConfigReady);
 			
-			return true;
+			var isReady:Boolean = customInitialization();
+			handleFirstScreen();
+			
+			return isReady;
 		}
 		
 		
@@ -138,13 +237,13 @@ package com.pixeldroid.r_c4d3.game.screen
 		/** @inheritDoc */
 		public function onHatMotion(e:JoyHatEvent):void
 		{
-			C.out(this, "(base) onHatMotion: " +e);
+			handleHatMotion(e);
 		}
 		
 		/** @inheritDoc */
 		public function onButtonMotion(e:JoyButtonEvent):void
 		{
-			C.out(this, "base onButtonMotion: " +e);
+			handleButtonMotion(e);
 		}
 		
 		
@@ -153,11 +252,16 @@ package com.pixeldroid.r_c4d3.game.screen
 		public function onUpdateRequest(dt:int):void
 		{
 			timeElapsed += dt;
+			handleUpdateRequest(dt);
 		}
-
 		
 		// callback to receive config proxy requested via notification in initialize
-		protected function receiveConfig(value:IGameConfigProxy):void { configProxy = value; }
+		protected function onConfigReady(value:IGameConfigProxy):void
+		{
+			gameConfigProxy = value;
+			handleGameConfig();
+		}
+
 		
 	}
 }

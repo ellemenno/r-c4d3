@@ -8,6 +8,7 @@ package com.pixeldroid.r_c4d3.game.screen
 	import com.pixeldroid.r_c4d3.api.events.JoyHatEvent;
 	import com.pixeldroid.r_c4d3.game.screen.ScreenBase;
 	import com.pixeldroid.r_c4d3.tools.console.Console;
+	import com.pixeldroid.r_c4d3.tools.console.ConsoleProperties;
 	import com.pixeldroid.r_c4d3.tools.framerate.FpsMeter;
 	import com.pixeldroid.r_c4d3.tools.perfmon.PerfMon;
 	
@@ -36,24 +37,35 @@ package com.pixeldroid.r_c4d3.game.screen
 		
 		public function DebugScreen():void
 		{
-			C.out(this, "constructor");
 			super();
 		}
 		
 		
-		override public function initialize():Boolean
+		override protected function customInitialization():Boolean
 		{
-			numEvents = 0;
-			
-			return super.initialize();
-		}
-		
-		override protected function onFirstScreen():void
-		{
-			console = addChild(new Console(stage.stageWidth, stage.stageHeight/3)) as Console;
-			C.enable(console);
+			var cProps:ConsoleProperties = new ConsoleProperties();
+			cProps.width = stage.stageWidth;
+			cProps.height = stage.stageHeight;
+			cProps.bufferSize = 256;
+			console = addChild(new Console(cProps)) as Console;
+			C.enable(console, true); // prepend prelog
 			C.out(this, Version.productInfo);
 			
+			numEvents = 0;
+			
+			return true;
+		}
+		
+		override protected function customShutDown():Boolean
+		{
+			fps.stopMonitoring();
+			console.clear();
+			
+			return true;
+		}
+		
+		override protected function handleFirstScreen():void
+		{
 			graphs = addChild(new Sprite) as Sprite;
 			
 			fps = graphs.addChild(new FpsMeter()) as FpsMeter;
@@ -68,29 +80,19 @@ package com.pixeldroid.r_c4d3.game.screen
 			graphs.y = 15;
 		}
 		
-		override public function shutDown():Boolean
+		override protected function handleHatMotion(e:JoyHatEvent):void
 		{
-			fps.stopMonitoring();
-			console.clear();
-			
-			return super.shutDown();
+			numEvents++;
 		}
 		
-		override public function onUpdateRequest(dt:int):void
+		override protected function handleButtonMotion(e:JoyButtonEvent):void
 		{
-			super.onUpdateRequest(dt);
-			
+			numEvents++;
+		}
+		
+		override protected function handleUpdateRequest(dt:int):void
+		{
 			// update graphs
-		}
-		
-		override public function onHatMotion(e:JoyHatEvent):void
-		{
-			numEvents++;
-		}
-		
-		override public function onButtonMotion(e:JoyButtonEvent):void
-		{
-			numEvents++;
 		}
 		
 		

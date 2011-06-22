@@ -78,7 +78,7 @@ package com.pixeldroid.r_c4d3.game
 		/** @inheritDoc */
 		public function setConfigProxy(value:IGameConfigProxy):void
 		{
-			C.out(this, "setConfigProxy to " +getQualifiedClassName(value));
+			C.out(this, "setConfigProxy() - " +getQualifiedClassName(value));
 			if (!value) throw new Error("Error - expected IGameConfigProxy, got " +value);
 			
 			// store local ref to IGameConfigProxy
@@ -88,7 +88,7 @@ package com.pixeldroid.r_c4d3.game
 		/** @inheritDoc */
 		public function setControlsProxy(value:IGameControlsProxy):void
 		{
-			C.out(this, "setControlsProxy to " +getQualifiedClassName(value));
+			C.out(this, "setControlsProxy() - " +getQualifiedClassName(value));
 			if (!value) throw new Error("Error - expected IGameControlsProxy, got " +value);
 			
 			// store local ref to IGameControlsProxy
@@ -102,20 +102,12 @@ package com.pixeldroid.r_c4d3.game
 			screenManager = createGameScreenController(controls, gameLayer, screens);
 			if (!screenManager) throw new Error("createGameScreenController not implemented or returned null");
 			screenManager.initialize();
-			
-			// only create stats controller when in debug player and config says statsEnabled=true
-			if (Capabilities.isDebugger && config.statsEnabled == true)
-			{
-				statsManager = createStatsScreenController(controls, debugLayer, screens);
-				if (statsManager) statsManager.initialize();
-				else C.out(this, "setControlsProxy - no statsManager to initialize");
-			}
 		}
 		
 		/** @inheritDoc */
 		public function setScoresProxy(value:IGameScoresProxy):void
 		{
-			C.out(this, "setScoresProxy to " +getQualifiedClassName(value));
+			C.out(this, "setScoresProxy() - " +getQualifiedClassName(value));
 			if (!value) throw new Error("Error - expected IGameScoresProxy, got " +value);
 			
 			// store local ref to IGameScoresProxy
@@ -127,17 +119,25 @@ package com.pixeldroid.r_c4d3.game
 			// instantiate and initialize manager
 			scoreManager = createScoreController(scores);
 			if (scoreManager) scoreManager.initialize();
-			else C.out(this, "setScoresProxy - no scoreManager to initialize");
+			else C.out(this, "setScoresProxy() - no scoreManager to initialize");
 		}
 		
 		/** @inheritDoc */
 		public function enterAttractLoop():void
 		{
-			C.out(this, "enterAttractLoop");
+			C.out(this, "enterAttractLoop()");
 			
 			// initialize frame event reporting and timing
 			lastTime = getTimer();
 			addEventListener(Event.ENTER_FRAME, onFrame);
+			
+			// create stats controller, but only when in debug player and config says statsEnabled=true
+			if (Capabilities.isDebugger && config.statsEnabled == true)
+			{
+				statsManager = createStatsScreenController(controls, debugLayer, screens);
+				if (statsManager) statsManager.initialize();
+				else C.out(this, "enterAttractLoop() - no statsManager to initialize");
+			}
 			
 			// pass flow to game screen controller
 			Notifier.send(Signals.ATTRACT_LOOP_BEGIN);
