@@ -26,6 +26,8 @@ Expects $${game.name} and $${dir.trunk} to be set before import.
 		</delete>
 	</target>
 	
+	
+	
 	<target name="get-swcs" description="collect swc dependencies">
 		<copy todir="${dir.source}/swc">
 			<fileset dir="${dir.releases}/swcs/" includes="*.swc"/>
@@ -42,10 +44,12 @@ Expects $${game.name} and $${dir.trunk} to be set before import.
 		</exec>
 	</target>
 	
-    <target name="package" depends="package-desktop-release, package-web" 
-		description="package-desktop, package-web"/>
 	
-	<target name="get-romloader-release-win" if="isWin">
+	
+    <target name="package" depends="package-desktop-release, package-web" 
+		description="prepares release versions: package-desktop, package-web"/>
+	
+	<target name="package-romloader-release-win" if="isWin">
 		<unzip src="${dir.releases}/romloaders/romloader-desktop-${os}-release.zip" dest="${dir.target}/temp-desktop-release">
 			<patternset includes="romloader-desktop*"/>
 			<mapper type="glob" from="romloader-desktop*" to="${game.name}*"/>
@@ -53,7 +57,7 @@ Expects $${game.name} and $${dir.trunk} to be set before import.
 		<zip destfile="${dir.target}/${game.name}-desktop-${os}.zip" basedir="${dir.target}/temp-desktop-release"/>
 	</target>
 	
-	<target name="get-romloader-release-osx" if="isOsx">
+	<target name="package-romloader-release-osx" if="isOsx">
 		<exec osfamily="mac" spawn="false" executable="ditto">
 			<arg line="-x -k ${dir.releases}/romloaders/romloader-desktop-${os}-release.zip ${dir.target}/temp-desktop-release"/>
 		</exec>
@@ -67,15 +71,8 @@ Expects $${game.name} and $${dir.trunk} to be set before import.
 		<mkdir dir="${dir.target}/temp-desktop-release"/>
 		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop-release"/>
 		<copy file="${dir.source}/resources/config/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop-release/romloader-config.xml"/>
-		<!-- todo: antcall get-romloader-release-win / osx -->
-	</target>
-	
-    <target name="package-desktop-debug" description="collect the desktop debug version and its dependencies for running">
-		<mkdir dir="${dir.target}/temp-desktop-debug"/>
-		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop-debug"/>
-		<copy file="${dir.source}/resources/config/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop-debug/romloader-config.xml"/>
-		<!-- todo: antcall get-romloader-release-win / osx -->
-		<unzip src="${dir.releases}/romloaders/romloader-desktop-${os}-debug.zip" dest="${dir.target}/temp-desktop-debug"/>
+		<antcall target="package-romloader-release-win"/>
+		<antcall target="package-romloader-release-osx"/>
 	</target>
 	
     <target name="package-web" description="collect the web-based version and its dependencies into a zip file">
@@ -100,8 +97,28 @@ Expects $${game.name} and $${dir.trunk} to be set before import.
 		</copy>
 	</target>
 	
-	<target name="launch" unless="skip.rom.launches" description="launch the rom in the desktop romloader">
-		<antcall target="package-desktop-debug"/>
+	
+	
+	<target name="get-romloader-debug-win" if="isWin">
+		<unzip src="${dir.releases}/romloaders/romloader-desktop-${os}-debug.zip" dest="${dir.target}/temp-desktop-debug"/>
+	</target>
+	
+	<target name="get-romloader-debug-osx" if="isOsx">
+		<exec osfamily="mac" spawn="false" executable="ditto">
+			<arg line="-x -k ${dir.releases}/romloaders/romloader-desktop-${os}-debug.zip ${dir.target}/temp-desktop-debug"/>
+		</exec>
+	</target>
+
+    <target name="prepare-desktop-debug" description="collect the desktop debug version and its dependencies for running">
+		<mkdir dir="${dir.target}/temp-desktop-debug"/>
+		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop-debug"/>
+		<copy file="${dir.source}/resources/config/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop-debug/romloader-config.xml"/>
+		<antcall target="get-romloader-debug-win"/>
+		<antcall target="get-romloader-debug-osx"/>
+	</target>
+	
+	<target name="launch" unless="skip.rom.launches" description="launch the rom in the debug desktop romloader">
+		<antcall target="prepare-desktop-debug"/>
 		<run-rom dir="${dir.target}/temp-desktop-debug" file="rom.swf" bin="${dir.target}/temp-desktop-debug" />
 	</target>
 
