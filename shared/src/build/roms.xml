@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3.shared.roms" default="-usage">
+
+<description>
+Import file. $${basedir} should be set by importing script.
+Contains reusable tasks for building and deploying roms.
+Expects $${game.name} and $${dir.trunk} to be set before import.
+</description>
+	
+	<property name="dir.source" location="${basedir}/src/main"/>
+	<property name="dir.config" location="${basedir}/src/main/config"/>
+	<property name="dir.target" location="${basedir}/target"/>
+	
+	<property name="dir.releases" location="${dir.trunk}/_releases"/>
+
+	
+	
+    <target name="build" depends="compile, package, release, launch" 
+		description="&gt; this is the main task: compile, package, release"/>
+	
+	<target name="clean" description="remove the contents of ${dir.target}">
+		<delete failonerror="false" includeemptydirs="true">
+			<!-- excluding .swf and .swf.cache for incremental compilation -->
+			<fileset dir="${dir.target}" includes="**/*" excludes="*.swf*"/>
+		</delete>
+	</target>
+	
+	
+	
+	<target name="get-swcs" description="collect swc dependencies">
+		<copy todir="${dir.source}/swc">
+			<fileset dir="${dir.releases}/swcs/" includes="*.swc"/>
+		</copy>
+	</target>
+	
+    <target name="compile" depends="clean, get-swcs" description="compile the ${game.name} rom">
+    	<exec executable="${flex.mxmlc}" failonerror="true">
+			<arg line="'${dir.source}/actionscript/${game.name}.as'"/>
+			<arg line="-output='${dir.target}/rom.swf'"/>
+			<arg line="-load-config+='${dir.source}/config/mxmlc-config.xml'"/>
+			<arg line="-static-link-runtime-shared-libraries='true'"/>
+			<!--arg line="-compiler.incremental=true"/-->
+		</exec>
+	</target>
+	
+	
+	
+    <target name="package" depends="package-desktop-release, package-web" 
+		description="prepares release versions: package-desktop, package-web"/>
+	
+	<target name="package-romloader-release-win" if="isWin">
+		<unzip src="${dir.releases}/romloaders/romloader-desktop-${os}-release.zip" dest="${dir.target}/temp-desktop-release">
+			<patternset includes="romloader-desktop*"/>
+			<mapper type="glob" from="romloader-desktop*" to="${game.name}*"/>
+		</unzip>
+		<zip destfile="${dir.target}/${game.name}-desktop-${os}.zip" basedir="${dir.target}/temp-desktop-release"/>
+	</target>
+	
+	<target name="package-romloader-release-osx" if="isOsx">
+		<exec osfamily="mac" spawn="false" executable="ditto">
+			<arg line="-x -k ${dir.releases}/romloaders/romloader-desktop-${os}-release.zip ${dir.target}/temp-desktop-release"/>
+		</exec>
+		<move file="${dir.target}/temp-desktop-release/romloader-desktop.app" tofile="${dir.target}/temp-desktop-release/${game.name}.app"/>
+		<exec osfamily="mac" spawn="false" executable="ditto">
+			<arg line="-c -k --sequesterRsrc ${dir.target}/temp-desktop-release ${dir.target}/${game.name}-desktop-${os}.zip"/>
+		</exec>
+	</target>
+	
+    <target name="package-desktop-release" description="collect the desktop release version and its dependencies into a zip file">
+		<mkdir dir="${dir.target}/temp-desktop-release"/>
+		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop-release"/>
+		<copy file="${dir.source}/resources/config/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop-release/romloader-config.xml"/>
+		<antcall target="package-romloader-release-win"/>
+		<antcall target="package-romloader-release-osx"/>
+	</target>
+	
+    <target name="package-web" description="collect the web-based version and its dependencies into a zip file">
+		<mkdir dir="${dir.target}/temp-web"/>
+		<copy todir="${dir.target}/temp-web">
+			<fileset includes="**/*" dir="${dir.source}/resources/web"/>
+		</copy>
+		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-web"/>
+		<copy file="${dir.source}/resources/config/romloader-config-web.xml" tofile="${dir.target}/temp-web/romloader-config.xml"/>
+		<unzip src="${dir.releases}/romloaders/romloader-web.zip" dest="${dir.target}/temp-web">
+			<patternset includes="romloader-web.swf"/>
+			<mapper type="glob" from="romloader-web.swf" to="romloader.swf"/>
+		</unzip>
+		<zip destfile="${dir.target}/${game.name}-web.zip" basedir="${dir.target}/temp-web"/>
+	</target>
+	
+	<target name="release" description="copy zips to ${dir.releases}/roms">
+		<copy todir="${dir.releases}/roms" failonerror="false">
+			<fileset dir="${dir.target}">
+				<include name="**/*.zip"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	
+	
+	<target name="get-romloader-debug-win" if="isWin">
+		<unzip src="${dir.releases}/romloaders/romloader-desktop-${os}-debug.zip" dest="${dir.target}/temp-desktop-debug"/>
+	</target>
+	
+	<target name="get-romloader-debug-osx" if="isOsx">
+		<exec osfamily="mac" spawn="false" executable="ditto">
+			<arg line="-x -k ${dir.releases}/romloaders/romloader-desktop-${os}-debug.zip ${dir.target}/temp-desktop-debug"/>
+		</exec>
+	</target>
+
+    <target name="prepare-desktop-debug" description="collect the desktop debug version and its dependencies for running">
+		<mkdir dir="${dir.target}/temp-desktop-debug"/>
+		<copy file="${dir.target}/rom.swf" todir="${dir.target}/temp-desktop-debug"/>
+		<copy file="${dir.source}/resources/config/romloader-config-desktop.xml" tofile="${dir.target}/temp-desktop-debug/romloader-config.xml"/>
+		<antcall target="get-romloader-debug-win"/>
+		<antcall target="get-romloader-debug-osx"/>
+	</target>
+	
+	<target name="launch" unless="skip.rom.launches" description="launch the rom in the debug desktop romloader">
+		<antcall target="prepare-desktop-debug"/>
+		<run-rom dir="${dir.target}/temp-desktop-debug" file="rom.swf" bin="${dir.target}/temp-desktop-debug" />
+	</target>
+
+</project>
+

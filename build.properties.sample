@@ -1,11 +1,12 @@
 
-## Locate the installation of your Flex SDK.
+## Locate the installation of your Flex SDK and FlexUnit libraries.
 ## Use / instead of \ on Windows.
 
-FLEX_HOME=C:/flex/flex_sdk_4.0
+FLEX_HOME=C:/flex/flex-sdk-4.1
 FLEXUNIT_HOME=C:/flexUnit/flexunit-4.0-flex
 
-
-## Optional - locate the installation of your Haxe SDK.
+## Optional tool locations.
+FLASHPLAYER_DEBUG=C:/flashPlayer/fp10/debug/flashplayer.exe
+FLASHPLAYER_RELEASE=C:/flashPlayer/fp10/release/flashplayer.exe
 HAXE_HOME=C:/haxe/haxe-2.05-win
 

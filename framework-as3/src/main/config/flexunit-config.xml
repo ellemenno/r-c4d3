@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flex-config>
+	
+	<!-- output: the filename of the SWC library to create-->
+	<!-- (relative to this file's location)
+	<output>../target/r-c4d3.swc</output>
+	-->
+	
+	<!-- default-size: default application size (may be overridden by root attributes in the application)
+	<default-size>
+		<width>980</width>
+		<height>575</height>
+	</default-size>-->
+	
+	<!-- link-report: Output a XML-formatted report of all definitions linked into the application.-->
+	<!-- (relative to this file's location)
+	<link-report>../target/docs/r-c4d3-links.xml</link-report>
+	-->
+	
+	<!-- static-link-runtime-shared-libraries: statically link the libraries specified by the -runtime-shared-libraries-path option.-->
+	<static-link-runtime-shared-libraries>true</static-link-runtime-shared-libraries>
+	
+	<metadata>
+		<!-- metadata.title: The default title to store in the SWF metadata-->
+		<title>R-C4D3 Framework for ActionScript3</title>
+		
+		<!-- metadata.date: The creation date to store in the SWF metadata-->
+		<!-- metadata.date usage:
+		<date>text</date>
+		-->
+		
+		<!-- metadata.description: The default description to store in the SWF metadata-->
+		<description>http://code.google.com/p/r-c4d3/</description>
+		
+		<!-- metadata.language: The language to store in the SWF metadata (i.e. EN, FR)-->
+		<language>EN</language>
+		
+		<!-- metadata.creator: A creator's name to store in the SWF metadata-->
+		<creator>pixeldroid</creator>
+		
+		<!-- metadata.publisher: A publisher's name to store in the SWF metadata-->
+		<publisher>pixeldroid.com</publisher>
+	</metadata>
+	
+	<!-- use-network: toggle whether the SWF is flagged for access to network resources-->
+	<use-network>true</use-network>
+
+	<!-- benchmark: output performance benchmark-->
+	<benchmark>true</benchmark>
+	
+	<!-- version: display the build version of the program-->
+	<version>true</version>
+	
+	<!-- warnings: toggle the display of warnings-->
+	<warnings>true</warnings>
+	
+	<compiler>
+		<!-- compiler.debug: generates a movie that is suitable for debugging-->
+		<debug>false</debug>
+	
+		<!-- compiler.verbose-stacktraces: save callstack information to the SWF for debugging-->
+		<verbose-stacktraces>false</verbose-stacktraces>
+		
+		<!-- compiler.optimize: Enable post-link SWF optimization-->
+		<optimize>true</optimize>
+		
+		<!-- compiler.headless-server: Internally sets the Java property 'java.awt.headless', -->
+		<!-- allowing mxmlc to run on a machine without a display, e.g. web server -->
+		<!-- or continuous integration build machine -->
+		<headless-server>true</headless-server>
+		
+		<!-- compiler.library-path: list of SWC files or directories that contain SWC files
+		<library-path append="true">
+			<path-element>libs</path-element>
+			<path-element>libs/player</path-element>
+			<path-element>libs/player/{targetPlayerMajorVersion}</path-element>
+			<path-element>locale/{locale}</path-element>
+		</library-path>
+		-->
+		
+		<!-- compiler.source-path: list of path elements that form the roots of ActionScript class hierarchies-->
+		<!-- (relative to this file's location)-->
+		<source-path>
+			<path-element>../source/actionscript</path-element>
+			<path-element>../test/actionscript</path-element>
+		</source-path>
+	</compiler>
+	
+</flex-config>
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3.shared.init" default="-usage" basedir="./">
+
+<description>
+Initialization of the build environment for the r-c4d3 project.
+</description>
+	
+	<import file="${dir.trunk}/shared/src/build/properties.xml"/>
+	<import file="${dir.trunk}/shared/src/build/flex.xml"/>
+	<import file="${dir.trunk}/shared/src/build/haxe.xml"/>
+	<import file="${dir.trunk}/shared/src/build/macros.xml"/>
+	<import file="${dir.trunk}/shared/src/build/targets.xml"/>
+
+</project>

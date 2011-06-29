@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3.roms-as3.GetToTheSpot" default="-usage" basedir="./">
+
+<description>
+Build file for Get to the Spot, a simplistic game compliant with the IGameRom interface.
+</description>
+	
+	<property name="game.name" value="GetToTheSpot"/>
+	
+	<property name="dir.trunk" value="../.."/>
+	<import file="${dir.trunk}/build_init.xml"/>
+	<import file="${dir.trunk}/shared/src/build/roms.xml"/>
+
+</project>
+

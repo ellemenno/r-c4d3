@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3.gamerom-api-as3" default="-usage" basedir="./">
+
+<description>
+Tasks to build and package the r-c4d3 as3 gamerom api.
+</description>
+	
+	<property name="dir.trunk" value=".."/>
+	<import file="../build_init.xml"/>
+	
+	<property name="semver.major" value="0"/>
+	<property name="semver.minor" value="0"/>
+	
+	<property name="dir.source" location="${basedir}/src/main/actionscript"/>
+	<property name="dir.config" location="${basedir}/src/main/config"/>
+	<property name="dir.target" location="${basedir}/target"/>
+	
+	<property name="dir.framework.swc" location="${dir.trunk}/framework-as3/src/main/swc"/>
+	<property name="dir.romloader.swc" location="${dir.trunk}/romloader-as3/src/main/swc"/>
+	
+	<property name="dir.documentation" location="${dir.trunk}/_documentation/gamerom-api"/>
+	<property name="dir.releases" location="${dir.trunk}/_releases"/>
+	
+	<property name="file.docs" location="${dir.target}/${ant.project.name}.docs.zip"/>
+	<property name="file.swc" location="${dir.target}/${ant.project.name}.swc"/>
+	
+	
+    <target name="build" depends="compile, document, release" 
+		description="&gt; this is the main task: compile, document, release"/>
+	
+	<target name="clean" description="remove the contents of ${dir.target}">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${dir.target}" includes="**/*"/>
+		</delete>
+	</target>
+	
+	<target name="build-number">
+		<increment-build />
+	</target>
+	
+    <target name="version" description="sets semver and compile date properties">
+		<semver project="gameromapi" major="${semver.major}" minor="${semver.minor}" />
+		<!--
+		strings must be double-qouted, see:
+		http://blogs.adobe.com/flexdoc/files/flexdoc/conditionalcompilation.pdf
+		note: can use &quot;
+		-->
+		<property name="semver.gameromapi.quoted" value="'${semver.gameromapi}'" />
+		<property name="version.year.quoted" value="'${date.year}'" />
+		<property name="version.month.quoted" value="'${date.month}'" />
+		<property name="version.day.quoted" value="'${date.day}'" />
+		<property name="version.hour.quoted" value="'${date.hour}'" />
+		<property name="version.minute.quoted" value="'${date.minute}'" />
+		<property name="version.second.quoted" value="'${date.second}'" />
+		<echo message="${ant.project.name} v${semver.gameromapi}" />
+	</target>
+	
+    <target name="compile" depends="clean, build-number, version" description="compile the swc">
+    	<exec executable="${flex.compc}" failonerror="true">
+			<arg line='-output="${file.swc}"'/>
+			<arg line='-load-config+="${dir.config}/compc-config.xml"'/>
+			<arg line='-define+=VERSION::semver,"${semver.gameromapi.quoted}"'/>
+			<arg line='-define+=VERSION::year,"${version.year.quoted}"'/>
+			<arg line='-define+=VERSION::month,"${version.month.quoted}"'/>
+			<arg line='-define+=VERSION::day,"${version.day.quoted}"'/>
+			<arg line='-define+=VERSION::hour,"${version.hour.quoted}"'/>
+			<arg line='-define+=VERSION::minute,"${version.minute.quoted}"'/>
+			<arg line='-define+=VERSION::second,"${version.second.quoted}"'/>
+		<!--
+			<arg line='-load-config+="${dir.config}/version-config.xml"'/>
+		-->
+		</exec>
+	</target>
+	
+    <target name="document" depends="clean, version" description="generate asdoc">
+		<mkdir dir="${dir.target}/asdoc"/>
+    	<exec executable="${flex.asdoc}">
+			<arg line="-output='${dir.target}/asdoc'"/>
+			<arg line="-footer='Copyleft ${date.year} Pixeldroid'"/>
+			<arg line="-load-config+='${dir.config}/asdoc-config.xml'"/>
+			<arg line='-define+=VERSION::semver,"${semver.gameromapi.quoted}"'/>
+			<arg line='-define+=VERSION::year,"${version.year.quoted}"'/>
+			<arg line='-define+=VERSION::month,"${version.month.quoted}"'/>
+			<arg line='-define+=VERSION::day,"${version.day.quoted}"'/>
+			<arg line='-define+=VERSION::hour,"${version.hour.quoted}"'/>
+			<arg line='-define+=VERSION::minute,"${version.minute.quoted}"'/>
+			<arg line='-define+=VERSION::second,"${version.second.quoted}"'/>
+		<!--
+			<arg line='-load-config+="${dir.config}/version-config.xml"'/>
+		-->
+		</exec>
+		<zip destfile="${file.docs}" basedir="${dir.target}/asdoc"/>
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${dir.documentation}" includes="**/*"/>
+		</delete>
+		<copy todir="${dir.documentation}" failonerror="false">
+			<fileset dir="${dir.target}/asdoc" includes="**/*"/>
+		</copy>
+	</target>
+	
+	<target name="release" description="copy zips to ${dir.releases}">
+		<copy todir="${dir.releases}/docs" file="${file.docs}"/>
+		<copy todir="${dir.releases}/swcs" file="${file.swc}"/>
+		<copy todir="${dir.framework.swc}" file="${file.swc}"/>
+		<copy todir="${dir.romloader.swc}" file="${file.swc}"/>
+	</target>
+
+</project>
+
