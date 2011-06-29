@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="r-c4d3.shared.flex" default="-usage" basedir="./">
+
+<description>
+Initialization of flex tools for the r-c4d3 project.
+</description>
+	
+	<!-- Fail when FLEX_HOME isn't set -->
+	<fail unless="FLEX_HOME">${NL}
+Please set the FLEX_HOME property to a valid path for the Flex SDK on your machine.
+${msg.props}
+	</fail>
+
+	<!-- Otherwise derive some properties from FLEX_HOME or fail trying -->
+	<property name="flex.libs" value="${FLEX_HOME}/lib"/>
+	<fail unless="flex.libs">${FLEX_HOME}/lib could not be found</fail>
+	
+	<property name="flex.frameworks" value="${FLEX_HOME}/frameworks"/>
+	<fail unless="flex.frameworks">${FLEX_HOME}/frameworks could not be found</fail>
+	
+	<property name="flex.bin" value="${FLEX_HOME}/bin"/>
+	<fail unless="flex.bin">${FLEX_HOME}/bin could not be found</fail>
+	
+	<property name="flex.asdoc" value="${flex.bin}/asdoc${cli}"/>
+	<fail unless="flex.asdoc">asdoc{cli} could not be found in ${flex.bin}</fail>
+	
+	<property name="flex.compc" value="${flex.bin}/compc${cli}"/>
+	<fail unless="flex.compc">compc{cli} could not be found in ${flex.bin}</fail>
+	
+	<property name="flex.mxmlc" value="${flex.bin}/mxmlc${cli}"/>
+	<fail unless="flex.mxmlc">mxmlc${cli} could not be found in ${flex.bin}</fail>
+
+	<!-- Define a resource property for the flexTasks jar -->
+	<path id="flex-tasks.jar.id"> 
+		<fileset dir="${FLEX_HOME}/ant/lib"> 
+			<include name="flexTasks.jar" /> 
+		</fileset> 
+	</path> 
+	<property name="FLEXTASK_JAR" refid="flex-tasks.jar.id" />
+	<fail unless="FLEXTASK_JAR">${NL}Could not locate flexTasks.jar in expected location: ${FLEX_HOME}/ant/lib.</fail>
+
+	<taskdef resource="flexTasks.tasks" classpath="${FLEXTASK_JAR}" />
+	
+	<!-- Fail when FLEXUNIT_HOME isn't set
+	<fail unless="FLEXUNIT_HOME">${NL}
+Please set the FLEXUNIT_HOME property to a valid path for the FlexUnit swc and jar libraries on your machine.
+${msg.props}
+	</fail> -->
+
+	<!-- Otherwise derive (possibly versioned) name of flexUnitTasks jar
+	<path id="flex-unit-tasks.jar.id"> 
+		<fileset dir="${FLEXUNIT_HOME}"> 
+			<include name="flexUnitTasks*.jar"/> 
+		</fileset> 
+	</path> 
+	<property name="FLEXUNIT_JAR" refid="flex-unit-tasks.jar.id"/> -->
+
+</project>
