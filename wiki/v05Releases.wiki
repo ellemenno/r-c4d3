@@ -27,4 +27,4 @@
    * ~~remove hx-classes~~
    * ~~separate debug versions from release~~
   * review docs
-   * suggest [[Doc? app|http://www.airdoc.be/]], give urls
+   * suggest [http://www.airdoc.be/ Doc? app], give urls
