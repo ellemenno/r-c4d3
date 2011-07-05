@@ -14,11 +14,11 @@
    * ~~move examples out of framework into roms~~
    * ~~update existing roms~~
     * ~~add shared target to unzip os desktop romloader into shared~~
-    * ~~~ControlTest (r-c4d3 controls)~~
-    * ~~~GetToTheSpot (simplest playable game)~~
+    * ~~!ControlTest (r-c4d3 controls)~~
+    * ~~!GetToTheSpot (simplest playable game)~~
     * ~~Hungries (simple 4-player game)~~
-    * Asteroids (bitmap collisions and special effects)
-    * Sokoban (level loading)
+    * Rocks (bitmap collisions and special effects)
+    * Warehouse (level loading)
   * replace default romloader rom with one that is freshly compiled, announces version info / stats
   * ~~clean up releases~~
    * ~~docs folder~~
