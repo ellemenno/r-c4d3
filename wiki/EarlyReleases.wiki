@@ -1,12 +1,12 @@
 #summary Release notes from pre-v0.5 releases
 
 == Focus 002: alpha ==
-  * * framework* architecture review
-  * *romloader* ui for runtime keymapping
-  * *shared* config files for [http://www.electracode.com/4/joy2key/JoyToKey%20English%20Version.htm JoyTokey] and [http://xpadder.com/ xpadder]
-  * *all* update to flex4
-  * *framework* unit tests
-  * *framework* issue identification and resolution
+  * ~~* framework* architecture review~~
+  * ~~*romloader* ui for runtime keymapping~~
+  * ~~*shared* config files for [http://www.electracode.com/4/joy2key/JoyToKey%20English%20Version.htm JoyTokey] and [http://xpadder.com/ xpadder]~~
+  * ~~*all* update to flex4~~
+  * ~~*framework* unit tests~~
+  * ~~*framework* issue identification and resolution~~
 
 == Focus 001: barebones ==
   * ~~*framework* stabilize~~
