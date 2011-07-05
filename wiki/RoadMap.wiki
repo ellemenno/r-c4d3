@@ -1,4 +1,4 @@
-#summary Release plan (currently: v0.5.x)
+#summary Release plan (current milestone: v0.5.x)
 
   * _[v09Releases]_ - api improvement: separation and stabilization
   * _[v08Releases]_ - api improvement: separation and stabilization
