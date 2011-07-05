@@ -3,5 +3,5 @@
   * _[v0.7.x-Releases]_ - api improvement: separation and stabilization
   * _[v0.6.x-Releases]_ - documentation and examples
   * *[v0.5.x-Releases]* - api improvement: separation and stabilization
-  * (adopted [semantic versioning http://semver.org/])
+  * (adopted [http://semver.org/ semantic versioning])
   * [EarlyReleases] - bringing project under version control and organizing files
