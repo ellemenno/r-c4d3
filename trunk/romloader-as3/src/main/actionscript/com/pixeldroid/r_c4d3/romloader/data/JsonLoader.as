@@ -141,7 +141,7 @@ package com.pixeldroid.r_c4d3.romloader.data
 		protected function onComplete(e:Event):void
 		{
 			var loader:URLLoader = URLLoader(e.target);
-			dataReady.data = JSON.decode(loader.data);
+			dataReady.data = com.adobe.serialization.json.JSON.decode(loader.data);
 			dataReady.message = "json data load completed (" +_bytesTotal +")";
 			dispatchEvent(dataReady);
 		}

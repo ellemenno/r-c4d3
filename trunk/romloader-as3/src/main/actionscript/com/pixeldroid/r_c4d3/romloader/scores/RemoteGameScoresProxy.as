@@ -146,7 +146,7 @@ package com.pixeldroid.r_c4d3.romloader.scores
 		*/
 		public function toJson():String
 		{
-			return JSON.encode( {scores:scores, initials:initials} );
+			return com.adobe.serialization.json.JSON.encode( {scores:scores, initials:initials} );
 		}
 		
 		
